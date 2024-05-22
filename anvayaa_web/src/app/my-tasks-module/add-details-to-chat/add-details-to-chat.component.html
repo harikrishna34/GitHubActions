@@ -1,0 +1,81 @@
+<div class="bodycontent">
+    <div class="header">
+    </div>
+    <div class="content">
+        <div class="addInfo" *ngIf="Type!='Managers'">
+
+
+            <!-- display care Manager or Support Executive Details start Here -->
+            <div class="row" *ngIf="Type==='Care Manager'">
+                <h2> Care Manager : {{customerDetails?.DedicatedFieldEmployeeDetails?.FirstName}}
+                    {{customerDetails?.DedicatedFieldEmployeeDetails?.LastName}} </h2>
+            </div>
+            <div class="row" *ngIf="Type==='Support Executive'">
+                <h2> Support Executive : {{customerDetails?.SupportExecutiveDetails?.FirstName}}
+                    {{customerDetails?.SupportExecutiveDetails?.LastName}} </h2>
+            </div>
+
+            <div class="row" *ngIf="Type==='Back Up Care Manager'">
+                <h2> Back Up Care Manager : {{customerDetails?.BackUpFieldEmployeeDetails?.FirstName}}
+                    {{customerDetails?.BackUpFieldEmployeeDetails?.LastName}} </h2>
+            </div>
+            <!-- display care Manager or Support Executive Details End Here -->
+            <!-- Change care Manager or Support Executive Details start Here -->
+            <div class="row changeEmp">
+                <span>Do you want to change the {{Type}}? <span id='clickChange' (click)="handleChangeEmployeeeClick()">clickHere</span></span>
+            </div>
+            <div class="row">
+                <div class="col-md-4" *ngIf="changeFlag">
+                    <form>
+                        <select class="form-select" aria-label="Default select example"
+                            (change)="handleChangeEmployeee($event)">
+                            <option selected disabled value="">Please Select</option>
+                            <option *ngFor="let empList of employeeList" value='{{empList.EmployeeID}}'>
+                                {{empList.FirstName}} {{empList.LastName}}</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="col-md-2">
+                    <button class="anvayaabutton-primary" (click)="handleSubmit()">Update</button>
+                </div>
+            </div>
+            <!-- Change care Manager or Support Executive Details start Here -->
+        </div>
+        <div class="addInfo" *ngIf="Type==='Managers'">
+            <!-- display care City Manager Details Start Here -->
+            <div class="card" *ngIf="Type==='Managers'">
+                <form  class="container">
+                    <div class="row mt-4 mb-4">
+                        <div class="col-md-4">
+                            <label> Add City Manager to the Group</label>
+                            <select class="form-select" aria-label="Default select example"
+                                (change)="handleChangeEmployeee($event)">
+                                <option selected disabled value="">Please Select</option>
+                                <option *ngFor="let empList of employeeList" value='{{empList.EmployeeID}}'>
+                                    {{empList.FirstName}} {{empList.LastName}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label> Add Sales Executive</label>
+                            <select class="form-select" aria-label="Default select example"
+                                (change)="handleChangeSalesEmployeee($event)">
+                                <option selected disabled value="">Please Select</option>
+                                <option *ngFor="let empList of sales" value='{{empList.EmployeeID}}'>
+                                    {{empList.FirstName}} {{empList.LastName}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button  class="btn btn-primary mt-4" (click)="handleCityManagerSubmit()">Submit</button>
+                        </div>
+                    </div>  
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

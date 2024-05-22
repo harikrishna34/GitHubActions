@@ -1,0 +1,12 @@
+<div class="body-container">
+    <p>hexadevices works!</p>
+    <div class="row col-md-12">
+      <div class="col-md-4" *ngFor="let category of ViewHexaDetails ">
+        <img [src]="category.OtherIconFiles?.iosandweb" style="height: 300px; width: 300px; cursor: pointer;" (click)="navigateToDetailScreen(category)">
+        <div>
+          <span><b>{{ category.Name }}</b></span>  <span> Rs {{ category.Price }} /-</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  

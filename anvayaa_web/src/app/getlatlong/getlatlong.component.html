@@ -1,0 +1,11 @@
+<p>getlatlong works!</p>
+<div class="bodycontent" style="margin-top: 110px;margin-left: 221px;">
+    <input placeholder="Enter address" (input)="getAddressSuggestions()">
+    <ul *ngIf="suggestions.length > 0">  
+        <li *ngFor="let suggestion of suggestions" (click)="selectAddress(suggestion)">{{ suggestion.description }}</li></ul>
+    <button (click)="getAddressCoordinates()">Get Coordinates</button>
+    
+    <div *ngIf="latitude && longitude">
+      Latitude: {{ latitude }}<br>
+      Longitude: {{ longitude }}
+    </div></div>

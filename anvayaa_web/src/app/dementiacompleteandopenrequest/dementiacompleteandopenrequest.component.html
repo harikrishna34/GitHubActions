@@ -1,0 +1,78 @@
+<div class="maindiv">
+    <div class="body-content" *ngIf="CompletedRequestsInLastOneWeeks">
+        <div class="card" style="margin-left:20px; margin-right: 20px;">
+            <div class="card-header">
+                <div class="row mt-6">
+                    <div class="col-12 mb-4">
+                        <span class="badge bg-pastel-primary text-primary text-uppercase-bold-sm">
+                            <h4>{{Type}}</h4>
+                        </span>
+                    </div>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+
+                                <th scope="col">REQUEST ID</th>
+                                <th scope="col">REQUESTED DATE</th>
+                                <th scope="col">SPONSOR NAME</th>
+                                <th scope="col">SERVICE</th>
+                                <th scope="col">CITY</th>
+                                <th scope="col">STATUS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let lastsevendays of dementiadbcomplete?.completedRequestsInLast7Days;">
+                                <td>{{lastsevendays.RequestID}}</td>
+                                <td>{{lastsevendays.RequestedDate*1000|date:'dd-MM-yyyy'}}</td>
+                                <td>{{lastsevendays.Name}}</td>
+                                <td>{{lastsevendays.SubCategoryName}}</td>
+                                <td>{{lastsevendays.ServiceAreaName}}</td>
+                                <td>{{lastsevendays.Status}}</td>
+                                 
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="body-content" *ngIf="OpenRequest">
+        <div class="card" style="margin-left:20px; margin-right: 20px;">
+            <div class="card-header">
+                <div class="row mt-6">
+                    <div class="col-12 mb-4">
+                        <span class="badge bg-pastel-primary text-primary text-uppercase-bold-sm">
+                            <h4>{{Type}}</h4>
+                        </span>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+
+                            <th scope="col">REQUEST ID</th>
+                            <th scope="col">REQUESTED DATE</th>
+                            <th scope="col">SPONSOR NAME</th>
+                            <th scope="col">SERVICE</th>
+                            <th scope="col">CITY</th>
+                            <th scope="col">STATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let openrequests of dementiadbcomplete?.openRequests;">
+                        <td>{{openrequests.RequestID}}</td>
+                        <td>{{openrequests.RequestedDate*1000|date:'dd-MM-yyyy'}}</td>
+                        <td>{{openrequests.Name}}</td>
+                        <td>{{openrequests.SubCategoryName}}</td>
+                        <td>{{openrequests.ServiceAreaName}}</td>
+                        <td>{{openrequests.Status}}</td>
+                           
+                       </tr> 
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

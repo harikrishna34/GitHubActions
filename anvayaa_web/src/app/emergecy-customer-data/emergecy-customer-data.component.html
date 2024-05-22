@@ -1,0 +1,2891 @@
+<div class="bodycontent card">
+  <div class="row">
+    <div class="col-md-8 col-lg-8">
+      <div class="row">
+        <div class="col-md-4">
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <td class="text-start">Name</td>
+                <td>:</td>
+                <td class="text-start text-wrap"> <b>{{emergencyPersonDetails?.Name|titlecase}}</b>
+                </td>
+                <td>
+                  <img src="../../assets/images/pop up.png" (click)="CustomerHealthPlanDetailsPage()" width="20px">
+                </td>
+              </tr>
+              <tr>
+                <td class="text-start ps-1">Age|Gender </td>
+                <td>:</td>
+                <td class="text-start pt-1"><b>{{emergencyPersonDetails?.Age}} | {{emergencyPersonDetails?.Gender}}</b>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-start ps-1">Mobile</td>
+                <td>:</td>
+                <td class="text-start pt-1 text-primary grab" data-bs-toggle="modal" data-bs-target="#customer_model">
+                  <span (click)="callinInitiating(emergencyPersonDetails?.MobileNumber,emergencyPersonDetails?.Name)">
+                    <b>{{emergencyPersonDetails?.MobileNumber}}</b></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-4">
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <td class="text-start">Address</td>
+                <td>:</td>
+                <td class="text-start"> <b>{{emergencyPersonDetails?.Address}}</b></td>
+                <td>
+                  <span *ngIf="emergencyPersonDetails.Address!=''">
+                    <a class="text-primary"><i class="fa fa-clone" aria-hidden="true" ngxClipboard
+                        [cbContent]="emergencyPersonDetails?.Address"></i></a>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-start p-0">Location</td>
+                <td>:</td>
+                <td class="text-start p-0">
+                  <span class="p-1 grab" *ngIf="emergencyPersonDetails.GoogleMapAddressLink!=''">
+                    <img src="../../assets/images/placeholder (1).png"
+                      (click)="openInNewTab(emergencyPersonDetails.GoogleMapAddressLink)">
+                  </span>
+                  <span class="p-1 grab" *ngIf="emergencyPersonDetails.GoogleMapAddressLink!=''">
+                    <a class="text-primary"><i class="fa fa-clone" aria-hidden="true" ngxClipboard
+                        [cbContent]="emergencyPersonDetails?.GoogleMapAddressLink"></i></a>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-4">
+          <table class="table table-borderless">
+            <tbody>
+              <!-- <tr>
+                <td class="text-start">Incident Location</td>
+                <td>:</td>
+                <td class="text-wrap"
+                  *ngIf="IncomingIncidentLocationDetails!=null||IncomingIncidentLocationDetails!=undefined">
+                    <div class="text-wrap">
+                      {{IncomingIncidentLocationDetails?.Address}}
+                    </div>
+                  </td>
+                <td *ngIf="IncomingIncidentLocationDetails==null||IncomingIncidentLocationDetails==undefined">
+                  (Refer to Customer Address)
+                </td>
+                <td *ngIf="IncomingIncidentLocationDetails!=null||IncomingIncidentLocationDetails!=undefined">
+                  <span class="p-1 grab text-primary">
+                    <a><i class="fa fa-clone" aria-hidden="true" ngxClipboard
+                        [cbContent]="IncomingIncidentLocationDetails?.HouseNumber+', '+IncomingIncidentLocationDetails?.Street+','+IncomingIncidentLocationDetails?.Landmark+','+IncomingIncidentLocationDetails?.City+','+IncomingIncidentLocationDetails?.Pin"></i></a>
+                  </span>
+                </td>
+              </tr> -->
+              <!-- Dont remove need to show  -->
+              <!-- <tr>
+                  <td class="text-start">Location</td>
+                  <td>:</td>
+                  <td class="text-start" *ngIf="IncomingIncidentLocationDetails!=null||IncomingIncidentLocationDetails!=undefined">
+                    <span class="p-1 grab">
+                      <img src="../../assets/images/placeholder (1).png">
+                      </span>
+                      <span class="p-1 grab text-primary">
+                      <a ><i class="fa fa-clone" aria-hidden="true" ngxClipboard [cbContent]="IncomingIncidentLocationDetails?.HouseNumber+', '+IncomingIncidentLocationDetails?.Street+','+IncomingIncidentLocationDetails?.Landmark+','+IncomingIncidentLocationDetails?.City+','+IncomingIncidentLocationDetails?.Pin"></i></a>
+                      </span>
+                      <span class="p-1">
+                      </span>
+                  </td>
+                </tr>-->
+            </tbody>
+          </table>
+
+          <div class="row">
+            <div class="col-md-4">Incident Location</div>
+            <div class="col-md-1">:</div>
+            <div class="col-md-7 text-wrap">
+              <div *ngIf="IncomingIncidentLocationDetails!=null||IncomingIncidentLocationDetails!=undefined">
+                <div style="white-space: pre-wrap;">{{IncomingIncidentLocationDetails?.Address}}</div>
+                <div *ngIf="IncomingIncidentLocationDetails!=null||IncomingIncidentLocationDetails!=undefined">
+
+                  <span>
+                    <span class="p-1"
+                      *ngIf="IncomingIncidentLocationDetails.hasOwnProperty('Latitude') || IncomingIncidentLocationDetails.hasOwnProperty('Longitude')">
+                      <a [href]="'http://maps.google.com/maps?z=12&t=m&q='+IncomingIncidentLocationDetails?.Latitude+','+IncomingIncidentLocationDetails?.Longitude"
+                        target="_blank"><img src="../../assets/images/placeholder (1).png"></a>
+                    </span>
+                  </span>
+                  <span class="p-1 grab text-primary">
+                    <a><i class="fa fa-clone" aria-hidden="true" ngxClipboard
+                        [cbContent]="IncomingIncidentLocationDetails?.Address"></i></a>
+                  </span>
+                </div>
+
+              </div>
+              <div *ngIf="IncomingIncidentLocationDetails==null||IncomingIncidentLocationDetails==undefined">
+                Refer to Customer Address
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-lg-4 vl">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6">
+              <h5>Emergency Team</h5>
+            </div>
+            <div class="col-md-6">
+              <button class="btn btn-secondary rounded-3" style="width:100%" data-bs-toggle="modal"
+                data-bs-target="#EmegencyClose">Emergency Close <i class="fa fa-times" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <table class="table table-borderless">
+            <tbody>
+              <tr *ngFor="let details of EmergencyTeam">
+                <td><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
+                <td class="text-start"><b>{{details?.AcceptedPersonName |titlecase}}</b></td>
+                <td class="text-start">({{details?.Role}})</td>
+                <td class="text-primary grab"
+                  (click)="callinInitiating(details?.MobileNumber,details?.AcceptedPersonName)">
+                  <u>{{details?.MobileNumber}}</u>
+                </td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="horiz"></div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item mt-1">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+              aria-expanded="false" aria-controls="collapseOne">
+              <div class="d-flex flex-row bd-highlight">
+                <div class="p-2 flex-grow-1 bd-highlight" style="width:14rem">Customer Related Contacts</div>
+                <div class="p-2 bd-highlight">
+                  <img src="../../assets/images/phone.png" data-bs-toggle="modal" data-bs-target="#customer_model"
+                    width="25">
+                </div>
+                <div class="p-2 bd-highlight" style="width:12rem">
+                </div>
+                <div class="p-2 bd-highlight" style="width:12rem">
+                </div>
+                <div class="p-2 bd-highlight remSizeForband">
+                </div>
+                <div class="p-2 bd-highlight text-end" style="width:11rem">
+                </div>
+                <div class="p-2 bd-highlight" style="margin: auto;">
+                  <img src="../../assets/images/pop up.png" data-bs-toggle="modal" data-bs-target="#customer_model"
+                    width="20px">
+                </div>
+              </div>
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body p-0">
+              <div class="row">
+                <div class="col-md-6">
+                  <table class="table table-borderless">
+                    <thead>
+                    </thead>
+                    <tbody>
+                      <!-- <tr *ngIf="AcceptedCustomerDetails !=null||AcceptedCustomerDetails !=undefined">
+                      <td class="text-start">Customer</td>
+                      <td>:</td>
+                      <td class="text-start">
+                        <span>{{AcceptedCustomerDetails?.Name|titlecase}}</span>
+                      </td>
+                      <td class="text-primary grab" data-bs-toggle="modal" data-bs-target="#customer_model"
+                        (click)="callinInitiating(AcceptedCustomerDetails?.MobileNumber,AcceptedCustomerDetails?.Name)">
+                        <u>{{AcceptedCustomerDetails?.MobileNumber}}</u></td>
+                    </tr>
+                    <tr *ngIf="AcceptedSponsorDetails != null ||AcceptedSponsorDetails != undefined">
+                      <td class="text-start">Sponsor</td>
+                      <td>:</td>
+                      <td class="text-start">
+                        {{AcceptedSponsorDetails?.Name|titlecase}}
+                      </td>
+                      <td class="text-primary grab" data-bs-toggle="modal" data-bs-target="#customer_model"
+                        (click)="callinInitiating(AcceptedSponsorDetails?.MobileNumber,AcceptedSponsorDetails?.Name)">
+                        <u>{{AcceptedSponsorDetails?.MobileNumber}}</u></td>
+                    </tr>
+                    <tr *ngIf="AcceptedotherBenficiaryDetails != null||AcceptedotherBenficiaryDetails != undefined">
+                      <td class="text-start">Benficiary</td>
+                      <td>:</td>
+                      <td class="text-start">
+                        {{AcceptedotherBenficiaryDetails?.Name|titlecase}}
+                      </td>
+                      <td class="text-primary grab"
+                        (click)="callinInitiating(AcceptedotherBenficiaryDetails?.MobileNumber,AcceptedotherBenficiaryDetails?.Name)">
+                        <u>{{AcceptedotherBenficiaryDetails?.MobileNumber}}</u></td>
+                    </tr>
+                    <tr *ngIf="AcceptedNeighbour != null||AcceptedNeighbour != undefined">
+                      <td class="text-start">Neighbour</td>
+                      <td>:</td>
+                      <td class="text-start">
+                        {{AcceptedNeighbour?.Name|titlecase}}
+                      </td>
+                      <td class="text-primary grab" data-bs-toggle="modal" data-bs-target="#customer_model"
+                        (click)="callinInitiating(AcceptedNeighbour?.ContactNumber,AcceptedNeighbour?.Name)">
+                        <u>{{AcceptedNeighbour?.ContactNumber}}</u></td>
+                    </tr>
+                    <tr *ngIf="AcceptedEmergencyLocalContact != null||AcceptedEmergencyLocalContact != undefined">
+                      <td class="text-start">Emergency Contact Person</td>
+                      <td>:</td>
+                      <td class="text-start">
+                        {{AcceptedEmergencyLocalContact?.Name|titlecase}}
+                      </td>
+                      <td class="text-primary grab" data-bs-toggle="modal" data-bs-target="#customer_model"
+                        (click)="callinInitiating(AcceptedEmergencyLocalContact?.ContactNumber,AcceptedEmergencyLocalContact?.Name)">
+                        <u>{{AcceptedEmergencyLocalContact?.ContactNumber}}</u></td>
+                    </tr> -->
+
+                      <tr *ngFor="let customerRelation of filterByLocation(CustomerRelatedDetails, true)">
+                        <td>{{customerRelation?.Name}}</td>
+                        <td>({{customerRelation?.Relation}})</td>
+                        <td class="text-primary grab"><u
+                            (click)="callinInitiating(customerRelation?.ContactNumber,customerRelation?.Name)">{{customerRelation?.ContactNumber}}</u>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-md-6 vl">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item mt-2">
+          <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              <div class="d-flex bd-highlight">
+                <div class="flex-grow-1 d-inline-flex p-2 bd-highlight" style="width:14rem">Care Manager</div>
+                <div class="p-2 bd-highlight">
+                  <img src="../../assets/images/phone.png" data-bs-toggle="modal" data-bs-target="#care_manager"
+                    width="25">
+                </div>
+                <div class="p-2 bd-highlight" style="width:12rem">
+                  <div class="form-check text-start">
+                    <input class="form-check-input" type="checkbox" value="CareManager Reached Location"
+                      name="CareManager Reached Location" (change)="updateStatusForCheck($event,'CareManager',' ')"
+                      [(ngModel)]="CareManagerReachedLocation">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Reached Location
+                    </label>
+                  </div>
+                </div>
+                <div class="p-2 bd-highlight" style="width:12rem">
+                  <div class="form-check text-start">
+                    <input class="form-check-input" type="checkbox" value="CareManager Reached Hospital"
+                      name="CareManagerReachedHospital" [(ngModel)]="CareManagerReachedHospital"
+                      (change)="updateStatusForCheck($event,'CareManager',' ')">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Reached Hospital
+                    </label>
+                  </div>
+                </div>
+                <div class="p-2 bd-highlight remSizeForband">
+                </div>
+                <div class="p-2 bd-highlight text-end" style="width:11rem">
+                </div>
+                <div class="p-2 bd-highlight">
+                  <img src="../../assets/images/pop up.png" data-bs-toggle="modal" data-bs-target="#care_manager"
+                    width="20px">
+                </div>
+              </div>
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body p-0">
+              <div class="row">
+                <div class="col-md-6">
+                  <table class="table table-borderless">
+                    <tbody>
+                      <tr *ngFor="let details of EmergencyTeam">
+                        <td *ngIf="details?.Role!='Support'"><i class="fa fa-chevron-right" aria-hidden="true"></i></td>
+                        <td class="text-start" *ngIf="details?.Role!='Support'"><b>{{details?.AcceptedPersonName
+                            |titlecase}}</b></td>
+                        <td class="text-start" *ngIf="details?.Role!='Support'">({{details?.Role}})</td>
+                        <td class="text-primary grab" *ngIf="details?.Role!='Support'" data-bs-toggle="modal"
+                          data-bs-target="#care_manager"
+                          (click)="callinInitiating(details?.MobileNumber,details?.AcceptedPersonName)">
+                          <u>{{details?.MobileNumber}}</u>
+                        </td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-md-6 vl">
+                  <div class="form-check mt-3 text-start">
+                    <input class="form-check-input" type="checkbox" value="CareManager Reached Location"
+                      name="CareManager Reached Location" (change)="updateStatusForCheck($event,'CareManager',' ')"
+                      [(ngModel)]="CareManagerReachedLocation" [disabled]="CareManagerReachedLocation">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Reached Location
+                    </label>
+                  </div>
+                  <div class="form-check mt-3 text-start">
+                    <input class="form-check-input" type="checkbox" value="CareManager Reached Hospital"
+                      name="CareManagerReachedHospital" [(ngModel)]="CareManagerReachedHospital"
+                      (change)="updateStatusForCheck($event,'CareManager',' ')" [disabled]="CareManagerReachedHospital">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Reached Hospital
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item mt-2">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              <div class="d-flex flex-row bd-highlight">
+                <div class="p-2 flex-grow-1 bd-highlight" style="width:14rem">Contact Ambulance</div>
+                <div class="p-2 bd-highlight">
+                  <img src="../../assets/images/phone.png" data-bs-toggle="modal" data-bs-target="#ambulance"
+                    (click)="HospitalAcceptedCall()" width="25">
+                </div>
+                <div class="p-2 bd-highlight" style="width:12rem">
+                  <div class="form-check text-start">
+                    <input class="form-check-input" type="checkbox" name="Ambulance Reached Location"
+                      value="Ambulance Reached Location" (change)="updateStatusForCheck($event,'Ambulance',' ')"
+                      [(ngModel)]="AmbulanceReachedLocation">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Reached Location
+                    </label>
+                  </div>
+                </div>
+                <div class="p-2 bd-highlight" style="width:12rem">
+                  <div class="form-check text-start">
+                    <input class="form-check-input" type="checkbox" name="AmbulanceReachedHospital"
+                      value="Ambulance Reached Hospital" (change)="updateStatusForCheck($event,'Ambulance',' ')"
+                      [(ngModel)]="AmbulanceReachedHospital">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Reached Hospital
+                    </label>
+                  </div>
+                </div>
+                <div class="p-2 bd-highlight remSizeForband">
+                </div>
+                <div class="p-2 bd-highlight text-end" style="width:11rem">
+                  <span class="p-2">
+
+                    <button class="btn" [disabled]="OtherAmbulanceAccepted||AmbulanceAccepted"
+                      style="padding:0px;border: none;">
+                      <i class="fa fa-times" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#serviceCancel"
+                        (click)="notRequiredService('Ambulance')"></i>
+                    </button>
+                  </span>
+                </div>
+                <div class="p-2 bd-highlight">
+                  <img src="../../assets/images/pop up.png" data-bs-toggle="modal" data-bs-target="#ambulance"
+                    width="20px">
+                </div>
+              </div>
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body p-0">
+              <div class="row">
+                <div class="col-md-6">
+                  <table class="table table-borderless">
+                    <thead>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="text-start">Ambulance Contact Name </td>
+                        <td>:</td>
+                        <td class="text-primary"><u>{{AcceptedAmbulance?.ProviderName|titlecase}}</u></td>
+                      </tr>
+                      <tr>
+                        <td class="text-start">Contact number</td>
+                        <td>:</td>
+                        <td class="text-primary grab"
+                          (click)="callinInitiating(AcceptedAmbulance?.ContactNumber,AcceptedAmbulance?.ContactName)">
+                          <u>{{AcceptedAmbulance?.ContactNumber}}</u>
+                        </td>
+                      </tr>
+                      <tr *ngIf="ambulancType !=null ||ambulancType !=undefined">
+                        <td class="text-start">Ambulance Type</td>
+                        <td>:</td>
+                        <td>{{ambulancType?.AmbulanceType}}</td>
+                      </tr>
+                      <tr *ngIf="ambulancType !=null ||ambulancType !=undefined">
+                        <td class="text-start">Paramedic Required</td>
+                        <td>:</td>
+                        <td><span *ngIf="ambulancType?.IsParamedicRequired == true">Yes</span>
+                          <span *ngIf="ambulancType?.IsParamedicRequired != true">No</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-start">Ambulance Driver Name</td>
+                        <td>:</td>
+                        <td>{{driverDetails?.DriverName}}</td>
+                      </tr>
+                      <tr>
+                        <td>Ambulance Driver Number </td>
+                        <td>:</td>
+                        <td>{{driverDetails?.ContactNumber}}</td>
+                      </tr>
+                      <tr>
+                        <td>Ambulance Vehicle Number </td>
+                        <td>:</td>
+                        <td>{{driverDetails?.VehicalNumber}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-md-6 vl">
+                  <div class="form-check mt-3 text-start">
+                    <input class="form-check-input" type="checkbox" name="Ambulance Reached Location"
+                      value="Ambulance Reached Location" (change)="updateStatusForCheck($event,'Ambulance',' ')"
+                      [(ngModel)]="AmbulanceReachedLocation">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Reached Location
+                    </label>
+                  </div>
+                  <div class="form-check mt-3 text-start">
+                    <input class="form-check-input" type="checkbox" name="AmbulanceReachedHospital"
+                      value="Ambulance Reached Hospital" (change)="updateStatusForCheck($event,'Ambulance',' ')"
+                      [(ngModel)]="AmbulanceReachedHospital">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Reached Hospital
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item mt-2">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+              <div class="d-flex flex-row bd-highlight">
+                <div class="p-2 flex-grow-1 bd-highlight" style="width:14rem">Contact Hospital</div>
+                <div class="p-2 bd-highlight">
+                  <img src="../../assets/images/phone.png" data-bs-toggle="modal" data-bs-target="#hospital" width="25"
+                    (click)="HospitalAcceptedCall()">
+                </div>
+                <div class="p-2 bd-highlight " style="width:12rem">
+                  <div class="form-check text-start">
+                    <input class="form-check-input" type="checkbox" value="Reached Hospital" name="ReachedHospital"
+                      (change)="updateStatusForCheck($event,'Hospital',' ')" [(ngModel)]="ReachedHospital">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Reached Hospital
+                    </label>
+                  </div>
+                </div>
+                <div class="p-2 bd-highlight" style="width:12rem">
+                  <div class="form-check text-start">
+                    <input class="form-check-input" type="checkbox" value="Admited Hospital" name="Admited Hospital"
+                      (change)="updateStatusForCheck($event,'Hospital',' ')" [(ngModel)]="AdmitedHospital">
+                    <label class="form-check-label">
+                      Admitted
+                    </label>
+                  </div>
+                </div>
+                <div class="p-2 bd-highlight remSizeForband">
+                </div>
+                <div class="p-2 bd-highlight text-end" style="width:11rem">
+                  <button class="btn" [disabled]="PreferredHospitalAccepted ||OtherHospitalAccepted"
+                    style="padding:0px;border: none;">
+                    <i class="fa fa-times" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#serviceCancel"
+                      (click)="notRequiredService('Hospital')"></i>
+                  </button>
+                  <span class="p-2"></span>
+                </div>
+                <div class="p-2 bd-highlight">
+                  <img src="../../assets/images/pop up.png" data-bs-toggle="modal" data-bs-target="#hospital"
+                    width="20px">
+                </div>
+              </div>
+            </button>
+          </h2>
+          <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body p-0">
+              <div class="row">
+                <div class="col-md-8">
+                  <table class="table table-borderless"
+                    *ngIf="AcceptedPreferredEmergencyHospitalsObj !=null ||AcceptedPreferredEmergencyHospitalsObj !=undefined">
+                    <thead>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="text-start">Preferred Emergency Hospitals </td>
+                        <td>:</td>
+                        <td>{{AcceptedPreferredEmergencyHospitalsObj.Name|titlecase}}
+                          {{AcceptedPreferredEmergencyHospitalsObj?.OtherHospitalName|titlecase}}</td>
+                      </tr>
+                      <tr>
+                        <td class="text-start">Contact Number</td>
+                        <td>:</td>
+                        <td class="text-primary grab" data-bs-toggle="modal" data-bs-target="#hospital"
+                          (click)="callinInitiating(AcceptedPreferredEmergencyHospitalsObj?.ContactNumber,AcceptedPreferredEmergencyHospitalsObj?.Name)">
+                          <u>{{AcceptedPreferredEmergencyHospitalsObj?.ContactNumber}}</u>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="text-start">Address</th>
+                        <td>:</td>
+                        <td class="text-start">
+                          {{AcceptedPreferredEmergencyHospitalsObj?.Address}}
+                          <div>{{AcceptedPreferredEmergencyHospitalsObj?.HouseNumber}}</div>
+                          <div> {{AcceptedPreferredEmergencyHospitalsObj?.Street}}</div>
+                          <div>{{AcceptedPreferredEmergencyHospitalsObj?.Landmark}}</div>
+                          <div>{{AcceptedPreferredEmergencyHospitalsObj?.City}}</div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-md-4 vl">
+                  <div class="form-check mt-3 text-start">
+                    <input class="form-check-input" type="checkbox" value="Reached Hospital" name="ReachedHospital"
+                      (change)="updateStatusForCheck($event,'Hospital',' ')" [(ngModel)]="ReachedHospital">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Reached Hospital
+                    </label>
+                  </div>
+                  <div class="form-check text-start">
+                    <input class="form-check-input" type="checkbox" value="Admited Hospital" name="Admited Hospital"
+                      (change)="updateStatusForCheck($event,'Hospital',' ')" [(ngModel)]="AdmitedHospital">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Admitted
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item mt-2">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
+              <div class="d-flex flex-row bd-highlight">
+                <div class="p-2 flex-grow-1 bd-highlight" style="width:14rem">Contact Police Station</div>
+                <div class="p-2 bd-highlight">
+                  <img src="../../assets/images/phone.png" data-bs-toggle="modal" data-bs-target="#Police" width="25"
+                    (click)="policeAcceptedCall()">
+                </div>
+                <div class="p-2 bd-highlight" style="width:12rem">
+                  <div class="form-check text-start">
+                    <input class="form-check-input" type="checkbox" value="Police Reached Location"
+                      name="Police Reached Location" (change)="updateStatusForCheck($event,'Police',' ')"
+                      [(ngModel)]="PoliceReachedLocation">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Reached Location
+                    </label>
+                  </div>
+                </div>
+                <div class="p-2 bd-highlight" style="width:12rem">
+                </div>
+                <div class="p-2 bd-highlight remSizeForband">
+                </div>
+                <div class="p-2 bd-highlight text-end" style="width:11rem">
+                  <span class="p-2">
+                    <button class="btn" [disabled]="InformedPolice" style="padding:0px;border: none;">
+                      <i class="fa fa-times" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#serviceCancel"
+                        (click)="notRequiredService('Police')"></i>
+                    </button>
+                  </span>
+                </div>
+                <div class="p-2 bd-highlight">
+                  <img src="../../assets/images/pop up.png" data-bs-toggle="modal" data-bs-target="#Police"
+                    width="20px">
+                </div>
+              </div>
+            </button>
+          </h2>
+          <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingThree"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body p-0">
+              <div class="row">
+                <div class="col-md-6">
+                  <table class="table table-borderless">
+                    <thead>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Station Name</td>
+                        <td>:</td>
+                        <td class="text-start">{{PoliceAcceptedObj?.PoliceStationName|titlecase}}</td>
+                      </tr>
+                      <tr>
+                        <td>Contact Number</td>
+                        <td>:</td>
+                        <td class="text-primary grab" data-bs-toggle="modal" data-bs-target="#Police"
+                          (click)="callinInitiating(PoliceAcceptedObj?.ContactNumber,PoliceAcceptedObj?.PoliceStationName)">
+                          <u>{{PoliceAcceptedObj?.ContactNumber}}</u>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="text-start">Address</th>
+                        <td>:</td>
+                        <td class="text-start">
+                          {{PoliceAcceptedObj?.Address}}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-md-6 vl">
+                  <div class="form-check mt-3 text-start" *ngIf="InformedPolice">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="PoliceReachedLocation">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Reached Loaction
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item mt-2">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseThree">
+              <div class="d-flex flex-row bd-highlight">
+                <div class="p-2 flex-grow-1 bd-highlight" style="width:14rem">Contact Fire Station</div>
+                <div class="p-2 bd-highlight">
+                  <img src="../../assets/images/phone.png" data-bs-toggle="modal" data-bs-target="#Fire" width="25"
+                    (click)="fireAcceptedCall()">
+                </div>
+                <div class="p-2 bd-highlight" style="width:12rem">
+                  <div class="form-check text-start">
+                    <input class="form-check-input" type="checkbox" value="FireEngine Reached Location"
+                      name="FireEngineReachedLocation" (change)="updateStatusForCheck($event,'FireStation',' ')"
+                      [(ngModel)]="FireEngineReachedLocation">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Reached Location
+                    </label>
+                  </div>
+                </div>
+                <div class="p-2 bd-highlight" style="width:12rem">
+                </div>
+                <div class="p-2 bd-highlight remSizeForband">
+                </div>
+                <div class="p-2 bd-highlight text-end" style="width:11rem">
+                  <span class="p-2">
+                    <button class="btn" [disabled]="InformedFireStation" style="padding:0px;border: none;">
+                      <i class="fa fa-times" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#serviceCancel"
+                        (click)="notRequiredService('FireStation')"></i>
+                    </button>
+                  </span>
+                </div>
+                <div class="p-2 bd-highlight">
+                  <img src="../../assets/images/pop up.png" data-bs-toggle="modal" data-bs-target="#Fire" width="20px">
+                </div>
+              </div>
+            </button>
+          </h2>
+          <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingThree"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body p-0">
+              <div class="row">
+                <div class="col-md-6">
+                  <table class="table table-borderless">
+                    <thead>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="text-start">Fire Station Name</td>
+                        <td>:</td>
+                        <td>{{FireObj?.FireStationName|titlecase}}</td>
+                      </tr>
+                      <tr>
+                        <td class="text-start">Contact Number</td>
+                        <td>:</td>
+                        <td class="text-primary grab" data-bs-toggle="modal" data-bs-target="#Fire"
+                          (click)="callinInitiating(FireObj?.ContactNumber,FireObj?.Name)">
+                          <u>{{FireObj?.ContactNumber}}</u>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="text-start">Address</th>
+                        <td>:</td>
+                        <td class="text-start">
+                          {{FireObj?.Address}}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-md-6 vl">
+                  <!-- <div class="form-check mt-3 text-start">
+                  <input class="form-check-input" type="checkbox"  value="Informed FireStation"
+                    name="InformedFireStation" (change)="updateStatusForCheck($event,'FireStation',' ')"
+                    [(ngModel)]="InformedFireStation" [disabled]="InformedFireStation">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Contacted Fire Station
+                  </label>
+                </div> -->
+                  <div class="form-check mt-3 text-start">
+                    <input class="form-check-input" type="checkbox" value="FireEngine Reached Location"
+                      name="FireEngineReachedLocation" (change)="updateStatusForCheck($event,'FireStation',' ')"
+                      [(ngModel)]="FireEngineReachedLocation">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Reached Loaction
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <h4>Status Track</h4>
+      </div>
+      <div class="row">
+        <div class="col-md-3 text-end">Emergency Start Date</div>
+        <div class="col-md-1">:</div>
+        <div class="col-md-3 text-start">{{IncomingStatusMainObject?.CreatedDate*1000|date : 'dd-MM-YYYY'}}</div>
+      </div>
+      <div class="container-fluid py-5 scroll mt-5">
+        <div class="row ">
+          <div class="horizontal-timeline">
+            <ul class="list-inline items">
+              <li class="list-inline-item items-list " *ngFor="let item of StatusTrack"
+                style="border-top: 3px solid #e9ecef;">
+                <div class="px-4 card-body">
+                  <div class="event-date badge bg-info">
+                    <div>{{item?.Time*1000|date : 'hh:mm a'}}</div>
+                  </div>
+                  <div style="width:300px;">
+                    <div class="text-wrap">
+                      <div> <span *ngIf="item?.Status == 'Dedicated Support Executive Contacted'">Wellness Executive
+                          Contacted</span>
+
+                        <span
+                          *ngIf="item?.Status != 'Dedicated Support Executive Contacted'">{{item?.Status|insertSpace}}</span>
+                      </div>
+                      <div> <span
+                          *ngIf="item?.AcceptedBy != null||item?.AcceptedBy != undefined">{{item?.AcceptedBy}}</span>
+                      </div>
+                      <div> <span *ngIf="item?.AcceptedBy == null||item?.AcceptedBy == ''"> - </span></div>
+                    </div>
+                    <span *ngIf="item?.Status=='Update'">
+                      {{item?.Note}}
+                    </span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 vl">
+      <div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class=" mt-1" style="height:auto">
+              <h4>Emergency Status</h4>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="card m-1 careManagerBtn"
+                    [ngClass]="{'yellow':carmangerAccepted,'lightgreen':cmAtLocation,'darkgreen':cmAtHospital}">
+                    <div class="text-center m-2">
+                      <h5>Care Manager</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6" style="margin-top:7px">
+                  <div>
+                    <span class="text-wrap fs-5" *ngIf="carmangerAccepted">Accepted</span>
+                    <span class="text-wrap fs-5" *ngIf="cmAtLocation">Reached Location</span>
+                    <span class="text-wrap fs-5" *ngIf="cmAtHospital">Reached Hospital</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="card m-1 ambulanceBtn" [class.clicked]="isClicked"
+                    [ngClass]="{'yellow':ambAccepted,'lightgreen':ambReachedLocation,'darkgreen':ambReachedHospital}">
+                    <div class="text-center m-2">
+                      <h5>Ambulance</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6" style="margin-top:7px">
+                  <div>
+                    <span class="text-wrap fs-5" *ngIf="ambAccepted && !isClicked">Accepted</span>
+                    <span class="text-wrap fs-5" *ngIf="ambReachedLocation && !isClicked">Reached Location</span>
+                    <span class="text-wrap fs-5" *ngIf="ambReachedHospital && ! isClicked">Reached Hospital</span>
+                    <span class="text-wrap fs-5" *ngIf="isClicked">No Required </span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="card m-1 hospitalbtn" [class.disableHospitalbtn]="disableHospital"
+                    [ngClass]="{'yellow':hospitalAcceptClr,'lightgreen':hospitalReachedClr,'darkgreen':hospitalAdmitCompleteClr}">
+                    <div class="text-center m-2">
+                      <h5>Hospital</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6" style="margin-top:7px">
+                  <span class="text-wrap fs-5" *ngIf="hospitalAcceptClr && !disableHospital">Accepted</span>
+                  <span class="text-wrap fs-5" *ngIf="hospitalReachedClr && !disableHospital">Reached Hospital</span>
+                  <span class="text-wrap fs-5" *ngIf="hospitalAdmitCompleteClr && !disableHospital">Admited
+                    Hospital</span>
+                  <span class="text-wrap fs-5" *ngIf="disableHospital">Not Required</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="card m-1 policeBtn" [class.diablePoliceBtn]="disablePolice"
+                    [ngClass]="{'lightgreen':policeInformedClr,'darkgreen':policeReachedLocationClr}">
+                    <div class="text-center m-2">
+                      <h5>Police</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6" style="margin-top:7px">
+                  <span class="text-wrap fs-5" *ngIf="policeInformedClr && !disablePolice">Informed</span>
+                  <span class="text-wrap fs-5" *ngIf="policeReachedLocationClr && !disablePolice">Reached
+                    Location</span>
+                  <span class="text-wrap fs-5" *ngIf="disablePolice">Not Required</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="card m-1 fireBtn" [class.diableFireBtn]="disableFire"
+                    [ngClass]="{'lightgreen':fireInformedClr,'darkgreen':fireEngienReachedLocationClr}">
+                    <div class="text-center m-2">
+                      <h5>Fire Station</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6" style="margin-top:7px">
+                  <span class="text-wrap fs-5" *ngIf="fireInformedClr && !disableFire">Informed</span>
+                  <span class="text-wrap fs-5" *ngIf="fireEngienReachedLocationClr && !disableFire">Reached
+                    Location</span>
+                  <span class="text-wrap fs-5" *ngIf="disableFire">Not Required</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="horiz mt-2"></div>
+      <div class="mt-1" style="height:auto">
+        <div>
+          <div class="text-start">
+            <h5><u>Ambulance Type</u></h5>
+          </div>
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <td> Ambulance Type</td>
+                <td>:</td>
+                <td>{{ambulancType?.AmbulanceType}}</td>
+              </tr>
+              <tr>
+                <td>Paramedic Required</td>
+                <td>:</td>
+                <td><span *ngIf="ambulancType?.IsParamedicRequired == true">Yes</span>
+                  <span *ngIf="ambulancType?.IsParamedicRequired != true">No</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-start">
+          <h5> <u>Driver Details</u></h5>
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <td>Ambulance Driver Name</td>
+                <td>:</td>
+                <td>{{driverDetails?.DriverName}}</td>
+                <td class="text-primary" *ngIf="driverDetails !=null ||driverDetails !=undefined">
+                  <a><i class="fa fa-clone" aria-hidden="true" ngxClipboard
+                      [cbContent]="driverDetails?.DriverName+''+driverDetails?.ContactNumber"></i></a>
+                </td>
+              </tr>
+              <tr>
+                <td>Ambulance Driver Number </td>
+                <td>:</td>
+                <td>{{driverDetails?.ContactNumber}}</td>
+              </tr>
+              <tr>
+                <td>Ambulance Vehicle Number </td>
+                <td>:</td>
+                <td>{{driverDetails?.VehicalNumber}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-start">
+          <h5><u>Hospital Details</u></h5>
+        </div>
+        <table class="table table-borderless">
+          <thead>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-start"> Hospital </td>
+              <td>:</td>
+              <td>{{AcceptedPreferredEmergencyHospitalsObj?.Name|titlecase}}
+                {{AcceptedPreferredEmergencyHospitalsObj?.OtherHospitalName|titlecase}}</td>
+            </tr>
+            <tr>
+              <td class="text-start">Contact Number</td>
+              <td>:</td>
+              <td class="text-primary grab" data-bs-toggle="modal" data-bs-target="#hospital"
+                (click)="callinInitiating(AcceptedPreferredEmergencyHospitalsObj?.ContactNumber,AcceptedPreferredEmergencyHospitalsObj?.Name)">
+                <u>{{AcceptedPreferredEmergencyHospitalsObj?.ContactNumber}}</u>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-start">Address</td>
+              <td>:</td>
+              <td class="text-start">
+                {{AcceptedPreferredEmergencyHospitalsObj?.Address}}
+                <div>{{AcceptedPreferredEmergencyHospitalsObj?.HouseNumber}}</div>
+                <div> {{AcceptedPreferredEmergencyHospitalsObj?.Street}}</div>
+                <div>{{AcceptedPreferredEmergencyHospitalsObj?.Landmark}}</div>
+                <div>{{AcceptedPreferredEmergencyHospitalsObj?.City}}</div>
+              </td>
+              <td
+                *ngIf="AcceptedPreferredEmergencyHospitalsObj !=null ||AcceptedPreferredEmergencyHospitalsObj !=undefined">
+                <a class="text-primary"><i class="fa fa-clone" aria-hidden="true" ngxClipboard
+                    [cbContent]="AcceptedPreferredEmergencyHospitalsObj?.Address"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Customer Model  -->
+<div class="modal fade" id="customer_model" tabindex="-1" aria-labelledby="customer_model" aria-hidden="true"
+  data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="callingMode">Calling Details</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="insideFieldset">
+          <div class="fallandsos1">
+            <div class="row">
+              <div class="col-md-8">
+                <table class="table ">
+                  <thead>
+                    <tr>
+                      <th scope="col">Relation </th>
+                      <th scope="col">Name </th>
+                      <th scope="col">Number</th>
+                      <th scope="col">Contacted</th>
+                      <th scope="col">AT-location</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let customerRelation of CustomerRelatedDetails;let i = index">
+                      <td>{{customerRelation?.Relation}}</td>
+                      <td>{{customerRelation?.Name}}</td>
+                      <td class="text-primary grab"><u
+                          (click)="updateCustomerContacted(customerRelation,i);callinInitiating(customerRelation?.ContactNumber,customerRelation?.Name)"><i
+                            class="fa fa-phone"></i> {{customerRelation?.ContactNumber}}</u></td>
+                      <td> <input type="checkbox" style="margin-left: 20%;" class="form-check-input grab"
+                          [(ngModel)]="customerRelation.Contacted" /></td>
+                      <td><input type="checkbox" style="margin-left: 20%;" class="form-check-input grab"
+                          (click)="atLocationUpdate(customerRelation,customerRelation.AtLocation,i)"
+                          [(ngModel)]="customerRelation.AtLocation" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div>
+                </div>
+              </div>
+              <div class="col-md-4 vl">
+                <div *ngIf="CallingBox">
+                  <div class="text-center" style="height :50px">
+                    <div *ngIf="callingSvg">
+                      <img src="../../assets/images/Vanilla-1.5s-244px (1).gif" style="width: 225px;"><span
+                        class="fs-5"></span>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <h2>{{ToNumber}}</h2>
+                  </div>               
+                    <div class="row">
+                      <div class="col-md-3">
+                        <span><b>Caller</b></span><span>:</span><span>{{callStatus1}}</span>
+                      </div>
+                      <div class="col-md-3">
+                      
+                      </div>
+                      <div class="col-md-3">
+                        <span><b>Reciver</b></span><span>:</span><span>{{callStatus2}}</span>
+                      </div>
+                    </div>
+                </div>
+
+                <div>
+                  <label>Comments</label>
+                  <textarea type="text" class="form-control" [(ngModel)]="comments.box1"
+                    placeholder="Comments"></textarea>
+                </div>
+                <div class="mt-3">
+                  <button class="btn btn-primary" (click)="updateComments()" [disabled]="!comments.box1">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-2">
+            <div class="container">
+              <div class="row">
+                <div style="border: 1px solid #a09e9ef1;" class="mt-2"></div>
+                <div class="mt-2">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="fs-4">Customer Details</div>
+                        <table class="table table-borderless">
+                          <thead>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row" class="text-start">Name</th>
+                              <td>:</td>
+                              <td class="text-start">
+                                {{emergencyPersonDetails?.Name|titlecase}}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row" class="text-start">Age | Gender</th>
+                              <td>:</td>
+                              <td class="text-start">
+                                {{emergencyPersonDetails?.Age}} | {{emergencyPersonDetails?.Gender}}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row" class="text-start">Mobile</th>
+                              <td>:</td>
+                              <td class="text-start text-primary grab"
+                                (click)="callinInitiating(emergencyPersonDetails?.MobileNumber,emergencyPersonDetails?.Name)">
+                                <u>{{emergencyPersonDetails?.MobileNumber}}</u>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row" class="text-start">Address</th>
+                              <td>
+                                :
+                              </td>
+                              <td class="text-start">{{emergencyPersonDetails?.Address}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div class="row">
+                          <div class="col-md-4"><b>Incident Location</b></div>
+                          <div class="col-md-1">:</div>
+                          <div class="col-md-7 text-wrap">
+                            <div
+                              *ngIf="IncomingIncidentLocationDetails!=null||IncomingIncidentLocationDetails!=undefined">
+                              <div style="white-space: pre-wrap;">{{IncomingIncidentLocationDetails?.Address}}</div>
+                              <div>
+                                <span class="p-1"
+                                  *ngIf="IncomingIncidentLocationDetails.hasOwnProperty('Latitude') || IncomingIncidentLocationDetails.hasOwnProperty('Longitude')">
+                                  <a [href]="'http://maps.google.com/maps?z=12&t=m&q='+IncomingIncidentLocationDetails?.Latitude+','+IncomingIncidentLocationDetails?.Longitude"
+                                    target="_blank"><img src="../../assets/images/placeholder (1).png"></a>
+                                </span>
+                                <span class="p-1 grab text-primary">
+                                  <a><i class="fa fa-clone" aria-hidden="true" ngxClipboard
+                                      [cbContent]="IncomingIncidentLocationDetails?.Address"></i></a>
+                                </span>
+                              </div>
+                            </div>
+                            <div
+                              *ngIf="IncomingIncidentLocationDetails==null||IncomingIncidentLocationDetails==undefined">
+                              Refer to Customer Address
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-3 text-center vl">
+                        <div class="text-center">
+                          <h5>Property Details</h5>
+                        </div>
+                        <table class="table table-borderless">
+                          <thead>
+                          </thead>
+                          <tbody *ngFor="let item of CustomerHealthPlanDetails?.BenProperty| keyvalue">
+                            <tr>
+                              <td *ngIf="item.key!='_id'" class="text-start">{{item.key}}</td>
+                              <td *ngIf="item.key!='_id'">:</td>
+                              <td *ngIf="item.key!='_id'">{{item.value}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div class="text-center">
+                          <h5>Medical Conditions</h5>
+                        </div>
+                        <table class="table table-borderless">
+                          <thead>
+                          </thead>
+                          <tbody
+                            *ngFor="let item of CustomerHealthPlanDetails?.BenMedicalCondition?.lifestyleDiseases| keyvalue">
+                            <tr>
+                              <td *ngIf="item.key!='_id'" class="text-start">{{item.key}}</td>
+                              <td *ngIf="item.key!='_id'">:</td>
+                              <td *ngIf="item.key!='_id'">{{item.value}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="col-sm-5 vl">
+                        <div class="form-check mt-1">
+                          <input class="form-check-input" type="checkbox" [(ngModel)]="showInput">
+                          <label class="form-check-label" for="flexCheckDefault">
+                            Incident location Is Not Same As Address
+                          </label>
+                        </div>
+                        <div class="text-start" *ngIf="showInput">
+                          <form [formGroup]="incidentLocationForm">
+                            <div class="row mt-2">
+                              <div class="col-md-12"><input class="form-control" placeholder="HouseNumber"
+                                  name="HouseNumber" formControlName="HouseNumber">
+                                <div class="text-danger"
+                                  *ngIf="incidentLocationForm?.get('HouseNumber')?.invalid && (incidentLocationForm?.get('HouseNumber')?.dirty || incidentLocationForm?.get('HouseNumber')?.touched)">
+                                  required.
+                                </div>
+                              </div>
+                              <div class="col-md-12 mt-1"><input class="form-control" placeholder="Street"
+                                  [disabled]="enableIncidentKeys" formControlName="Street">
+                                <div class="text-danger"
+                                  *ngIf="incidentLocationForm?.get('Street')?.invalid && (incidentLocationForm?.get('Street')?.dirty || incidentLocationForm?.get('Street')?.touched)">
+                                  required.
+                                </div>
+                              </div>
+                              <div class="col-md-6 mt-2"><input class="form-control" placeholder="Landmark"
+                                  formControlName="Landmark">
+                                <div class="text-danger"
+                                  *ngIf="incidentLocationForm?.get('Landmark')?.invalid && (incidentLocationForm?.get('Landmark')?.dirty || incidentLocationForm?.get('Landmark')?.touched)">
+                                  required.
+                                </div>
+                              </div>
+                              <div class="col-md-6 mt-2">
+
+                                <select class="form-select" formControlName="City" name="City"
+                                  (change)="SelectedServiceArea($event)">
+                                  <option disabled value="" selected>Select City</option>
+                                  <option *ngFor="let item of cityData" value="{{item.CityName}}">{{item.CityName}}
+                                  </option>
+                                </select>
+                                <div class="text-danger"
+                                  *ngIf="incidentLocationForm?.get('City')?.invalid && (incidentLocationForm?.get('City')?.dirty || incidentLocationForm?.get('City')?.touched)">
+                                  required.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row mt-2">
+                              <div class="col-md-6">
+                              </div>
+                            </div>
+                            <div class="col-md-3 mt-2"><button class="btn btn-primary" (click)="addIncidentLocation()"
+                                [disabled]="!incidentLocationForm.valid"> <span
+                                  *ngIf="IncomingIncidentLocationDetails == undefined">Add</span><span
+                                  *ngIf="IncomingIncidentLocationDetails!=undefined">Update</span></button></div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Ambulance Model -->
+<div class="modal fade" id="ambulance" tabindex="-1" aria-labelledby="ambulance" aria-hidden="true"
+  data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="callingMode">Ambulance Details</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="insideFieldset">
+          <div class="fallandsos1">
+            <div class="row">
+              <div class="col-md-8">
+                <!-- <table class="table ">
+                    <thead>
+                      <tr>
+                        <th scope="col">Ambulance Provider </th>
+                        <th scope="col">Contact Name </th>
+                        <th scope="col">Number</th>
+                        <th scope="col">Accepted</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let otherprovider of OtherAmbulanceprovider">
+                        <td>Other Provider</td>
+                        <td>{{otherprovider?.ContactName|titlecase}}</td>
+                        <td class="text-primary">
+                          <span class="me-2"
+                            (click)="updateStatusForCheck('Other Ambulance Accepted','Ambulance','');callinInitiating(otherprovider?.ContactNumber,otherprovider?.ContactName)"><i
+                              class="fa fa-phone"></i><span class="text-primary pointer grab">
+                              {{otherprovider?.ContactNumber}}
+                            </span>
+                          </span>
+                        </td>
+                        <td>
+                          <input class="form-check-input grab" type="checkbox" 
+                            value="Other Ambulance Accepted"
+                            (change)="updateStatusForCheck($event,'Ambulance',otherprovider?.ContactName)"
+                            [(ngModel)]="otherAmbulanceMap[otherprovider?.ContactName]">
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table> -->
+                <table class="table ">
+                  <thead>
+                    <tr>
+                      <th scope="col">Ambulance Provider</th>
+                      <!-- <th scope="col">Contact Name </th> -->
+                      <th scope="col">Number</th>
+                      <th scope="col">Accepted</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let Ambulance of AmbulanceDetails">
+
+                      <td><b>{{Ambulance?.ProviderName}}</b>
+                        <div>({{Ambulance?.AmbulanceType}})</div>
+                      </td>
+                      <!-- <td>{{Ambulance?.ContactName}}</td> -->
+                      <td class="text-primary grab">
+                        <u (click)="callinInitiating(Ambulance?.ContactNumber,Ambulance?.ContactName)"><i
+                            class="fa fa-phone"></i> {{Ambulance?.ContactNumber}}</u>
+                      </td>
+                      <td>
+                        <input type="checkbox" class="form-check-input grab" style="margin-left: 20%;"
+                          value="Ambulance Accepted" [disabled]="!checkAmbulanceDisabled() && !Ambulance.IsAccepted"
+                          (change)="updateStatusForCheck($event,'AmbulanceDetails',Ambulance?.ContactName)"
+                          [(ngModel)]="Ambulance.IsAccepted" />
+                      </td>
+
+                    </tr>
+                  </tbody>
+                </table>
+                <div>
+                  <form [formGroup]="OtherAmbulanceForm">
+                    <div class="row">
+                      <label class="fs-6">Add Other Ambulance Details</label>
+                      <div class="col-md-4">
+                        <input class="form-control" placeholder="Provider" formControlName="ProviderName" required />
+                        <div class="text-danger"
+                          *ngIf="OtherAmbulanceForm?.get('ProviderName')?.invalid && (OtherAmbulanceForm?.get('ProviderName')?.dirty || OtherAmbulanceForm?.get('ProviderName')?.touched)">
+                          Provider Name is required.
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <input class="form-control" placeholder="Contact Name" (keypress)="onlyAlphabets($event)"
+                          formControlName="ContactName" required />
+                        <div class="text-danger"
+                          *ngIf="OtherAmbulanceForm?.get('ContactName')?.invalid && (OtherAmbulanceForm.get('ContactName')?.dirty || OtherAmbulanceForm?.get('ContactName')?.touched)">
+                          Contact required.
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <input class="form-control" placeholder="Number" (keypress)="onlyNumber($event)"
+                          formControlName="ContactNumber" minlength="10" required>
+                        <div class="text-danger"
+                          *ngIf="OtherAmbulanceForm?.get('ContactNumber')?.invalid && (OtherAmbulanceForm?.get('ContactNumber')?.dirty || OtherAmbulanceForm?.get('ContactNumber')?.touched)">
+                          Minimum 10 digit required.
+                        </div>
+                        <!-- <div class="text-danger" *ngIf="OtherAmbulanceForm.get('ContactNumber').errors?.minlength">
+                            The contact number must be at least 10 digits long.
+                          </div> -->
+                      </div>
+                      <div class="col-md-2">
+                        <!-- <button class="btn btn-primary" [disabled]="!OtherAmbulanceForm.valid"
+                            (click)="addAmbulanceDetails()">
+                            Add
+                          </button> -->
+                        <button class="btn btn-primary" [disabled]="!OtherAmbulanceForm.valid"
+                          (click)="newAmbulanceAdded()">
+                          Add
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="mt-3">
+                  <label class="fs-6">Ambulance Type</label>
+                  <select class="form-select grab" (change)="SelectedAmbulanceType($event)" [(ngModel)]="AmbulanceType">
+                    <option selected value="" disabled>Select Ambulance Type</option>
+                    <option value="{{amb.AmbulanceType}}" *ngFor="let amb of ambulanceList">{{amb.AmbulanceType}}
+                    </option>
+                  </select>
+                </div>
+                <div class="mt-3" *ngIf="ambulanceType">
+                  <label>
+                    <input class="form-check-input grab" type="checkbox"
+                      (change)="SelectedAmbulanceType('IsParamedicRequired')" [(ngModel)]="IsParamedicRequired"
+                      [disabled]="IsParamedicRequired">
+                    Is Paramedic Required
+                  </label>
+                </div>
+                <div class="mt-3">
+                  <span class="fs-6">Add Driver Details</span>
+                  <form [formGroup]="ambulanceDriverDetails">
+                    <div class="row">
+                      <div class="col-md-3"><input class="form-control" placeholder="Name" formControlName="DriverName"
+                          (keypress)="onlyAlphabets($event)">
+                        <div class="text-danger"
+                          *ngIf="ambulanceDriverDetails?.get('DriverName')?.invalid && (OtherAmbulanceForm?.get('DriverName')?.dirty || ambulanceDriverDetails?.get('DriverName')?.touched)">
+                          Name is required.
+                        </div>
+                      </div>
+                      <div class="col-md-3"><input class="form-control" placeholder="Number"
+                          formControlName="ContactNumber" (keypress)="onlyNumber($event)" minlength="10">
+                        <div class="text-danger"
+                          *ngIf="ambulanceDriverDetails?.get('ContactNumber')?.invalid && (OtherAmbulanceForm?.get('ContactNumber')?.dirty || ambulanceDriverDetails?.get('ContactNumber')?.touched)">
+                          Minimum 10 digits is required.
+                        </div>
+                      </div>
+                      <div class="col-md-3"><input class="form-control" placeholder="Vehicle No"
+                          formControlName="VehicalNumber">
+                        <div class="text-danger"
+                          *ngIf="ambulanceDriverDetails?.get('VehicalNumber')?.invalid && (OtherAmbulanceForm?.get('VehicalNumber')?.dirty || ambulanceDriverDetails?.get('VehicalNumber')?.touched)">
+                          Name is required.
+                        </div>
+                      </div>
+                      <div class="col-md-3"><button class="btn btn-primary" (click)="updateDriverDetails()"
+                          [disabled]="!ambulanceDriverDetails.valid">Update</button></div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="col-md-4 vl">
+                <div *ngIf="CallingBox">
+                  <div class="text-center" style="height :50px">
+                    <div *ngIf="callingSvg">
+                      <img src="../../assets/images/Vanilla-1.5s-244px (1).gif" style="width: 225px;"><span
+                        class="fs-5"></span>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <h2>{{ToNumber}}</h2>
+                  </div>               
+                    <div class="row">
+                      <div class="col-md-3">
+                        <span><b>Caller</b></span><span>:</span><span>{{callStatus1}}</span>
+                      </div>
+                      <div class="col-md-3">
+                      
+                      </div>
+                      <div class="col-md-3">
+                        <span><b>Reciver</b></span><span>:</span><span>{{callStatus2}}</span>
+                      </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                  <label>Comments</label>
+                  <textarea type="text" class="form-control" [(ngModel)]="comments.box2"
+                    placeholder="Comments"></textarea>
+                </div>
+                <div class="mt-3">
+                  <div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="Ambulance Reached Location"
+                        value="Ambulance Reached Location" (change)="updateStatusForCheck($event,'Ambulance',' ')"
+                        [(ngModel)]="AmbulanceReachedLocation"
+                        [disabled]="!(OtherAmbulanceAccepted || AmbulanceAccepted)||AmbulanceReachedLocation">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Reached location
+                      </label>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="AmbulanceReachedHospital"
+                        value="Ambulance Reached Hospital" (change)="updateStatusForCheck($event,'Ambulance',' ')"
+                        [(ngModel)]="AmbulanceReachedHospital"
+                        [disabled]="!AmbulanceReachedLocation||AmbulanceReachedHospital">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Reached Hospital
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div>
+                      <button class="btn btn-primary" (click)="updateComments()"
+                        [disabled]="!comments.box2">Submit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-2">
+              <div class="container">
+                <div class="row">
+                  <div style="border: 1px solid #a09e9ef1;" class="mt-2"></div>
+                  <div class="mt-2">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div class="fs-4">Customer Details</div>
+                          <table class="table table-borderless">
+                            <thead>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row" class="text-start">Name</th>
+                                <td>:</td>
+                                <td class="text-start">
+                                  {{emergencyPersonDetails?.Name|titlecase}}
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Age | Gender</th>
+                                <td>:</td>
+                                <td class="text-start">
+                                  {{emergencyPersonDetails?.Age}} | {{emergencyPersonDetails?.Gender}}
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Mobile</th>
+                                <td>:</td>
+                                <td class="text-start text-primary grab"
+                                  (click)="callinInitiating(emergencyPersonDetails?.MobileNumber,emergencyPersonDetails?.Name)">
+                                  <u>{{emergencyPersonDetails?.MobileNumber}}</u>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Address</th>
+                                <td>
+                                  :
+                                </td>
+                                <td class="text-start">{{emergencyPersonDetails?.Address}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <div class="row">
+                            <div class="col-md-4">Incident Location</div>
+                            <div class="col-md-1">:</div>
+                            <div class="col-md-7 text-wrap">
+                              <div
+                                *ngIf="IncomingIncidentLocationDetails!=null||IncomingIncidentLocationDetails!=undefined">
+                                <div style="white-space: pre-wrap;">{{IncomingIncidentLocationDetails?.Address}}</div>
+                                <div>
+                                  <span class="p-1"
+                                    *ngIf="IncomingIncidentLocationDetails.hasOwnProperty('Latitude') || IncomingIncidentLocationDetails.hasOwnProperty('Longitude')">
+                                    <a [href]="'http://maps.google.com/maps?z=12&t=m&q='+IncomingIncidentLocationDetails?.Latitude+','+IncomingIncidentLocationDetails?.Longitude"
+                                      target="_blank"><img src="../../assets/images/placeholder (1).png"></a>
+                                  </span>
+                                  <span class="p-1 grab text-primary">
+                                    <a><i class="fa fa-clone" aria-hidden="true" ngxClipboard
+                                        [cbContent]="IncomingIncidentLocationDetails?.Address"></i></a>
+                                  </span>
+                                </div>
+                              </div>
+                              <div
+                                *ngIf="IncomingIncidentLocationDetails==null||IncomingIncidentLocationDetails==undefined">
+                                Refer to Customer Address
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-4 vl">
+                          <div class="text-center">
+                            <h6>Hospital Details</h6>
+                          </div>
+                          <table class="table table-borderless"
+                            *ngIf="AcceptedPreferredEmergencyHospitalsObj !=null ||AcceptedPreferredEmergencyHospitalsObj !=undefined">
+                            <thead>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td class="text-start"> Hospital </td>
+                                <td>:</td>
+                                <td>
+                                  {{AcceptedPreferredEmergencyHospitalsObj?.Name|titlecase}}{{AcceptedPreferredEmergencyHospitalsObj?.OtherHospitalName|titlecase}}
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="text-start">Contact Number</td>
+                                <td>:</td>
+                                <td class="text-primary" data-bs-toggle="modal" data-bs-target="#hospital"
+                                  (click)="callinInitiating(AcceptedPreferredEmergencyHospitalsObj?.ContactNumber,AcceptedPreferredEmergencyHospitalsObj?.Name)">
+                                  <u>{{AcceptedPreferredEmergencyHospitalsObj?.ContactNumber}}</u>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Address</th>
+                                <td>:</td>
+                                <td class="text-start">
+                                  {{AcceptedPreferredEmergencyHospitalsObj?.Address}}
+                                  <div>{{AcceptedPreferredEmergencyHospitalsObj?.HouseNumber}}</div>
+                                  <div> {{AcceptedPreferredEmergencyHospitalsObj?.Street}}</div>
+                                  <div>{{AcceptedPreferredEmergencyHospitalsObj?.Landmark}}</div>
+                                  <div>{{AcceptedPreferredEmergencyHospitalsObj?.City}}</div>
+                                </td>
+                                <td>
+                                  <!-- <span class="p-1 text-primary">
+                                        <a ><i class="fa fa-clone" aria-hidden="true" ngxClipboard [cbContent]="AcceptedPreferredEmergencyHospitalsObj.Address"></i></a>
+                                      </span> -->
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Location</td>
+                                <td>:</td>
+                                <td scope="row" class="text-start"> <span class="p-1">
+                                    <a [href]="'http://maps.google.com/maps?z=12&t=m&q='+AcceptedPreferredEmergencyHospitalsObj?.LatLong?.Lat +','+AcceptedPreferredEmergencyHospitalsObj?.LatLong?.Long"
+                                      target="_blank"><img src="../../assets/images/placeholder (1).png"></a>
+                                  </span>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="col-sm-4 vl">
+                          <div class="form-check mt-3">
+                          </div>
+                          <div>
+                            <table class="table table-borderless">
+                              <thead>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td class="text-start">Ambulance Contact Name </td>
+                                  <td>:</td>
+                                  <td class="text-primary"><u>{{AcceptedAmbulance?.ProviderName|titlecase}}</u></td>
+                                </tr>
+                                <tr>
+                                  <td class="text-start">Contact number</td>
+                                  <td>:</td>
+                                  <td class="text-primary grab"
+                                    (click)="callinInitiating(AcceptedAmbulance?.ContactNumber,AcceptedAmbulance?.ContactName)">
+                                    <u>{{AcceptedAmbulance?.ContactNumber}}</u>
+                                  </td>
+                                </tr>
+                                <tr *ngIf="ambulancType !=null ||ambulancType !=undefined">
+                                  <td class="text-start">Ambulance Type</td>
+                                  <td>:</td>
+                                  <td>{{ambulancType?.AmbulanceType}}</td>
+                                </tr>
+                                <tr *ngIf="ambulancType !=null ||ambulancType !=undefined">
+                                  <td class="text-start">Paramedic Required</td>
+                                  <td>:</td>
+                                  <td><span *ngIf="ambulancType?.IsParamedicRequired == true">Yes</span>
+                                    <span *ngIf="ambulancType?.IsParamedicRequired != true">No</span>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Care manger Details -->
+<div class="modal fade" id="care_manager" tabindex="-1" aria-labelledby="care_manager" aria-hidden="true"
+  data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="callingMode">Care Manager Details</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="insideFieldset">
+          <div class="fallandsos1">
+            <div class="row">
+              <div class="col-md-8">
+                <!-- <table class="table ">
+                    <thead>
+                      <tr>
+                        <th scope="col">Person Type </th>
+                        <th scope="col">Name </th>
+                        <th scope="col">Number</th>
+                        <th scope="col">Contacted</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let detail of emergencyHealthMainOBject?.CareManagerDetails">
+                        <th scope="row" class="text-start">Care Manager</th>
+                        <td class="text-wrap"> {{detail?.FirstName|titlecase}} {{detail?.LastName|titlecase}}</td>
+                        <td><span class="me-2"
+                            (click)="updateStatusForCheck('CareManger Contacted','CareManager','');callinInitiating(detail?.ContactNumber,detail?.FirstName)"><i
+                              class="fa fa-phone"></i> <span class="text-primary pointer grab">
+                              {{detail?.ContactNumber}}
+                            </span>
+                          </span></td>
+                        <td class="text-center">
+                          <input class="form-check-input" type="checkbox" 
+                            value="CareManager Accepted"
+                            (change)="acceptedDedicatedCareManager(detail)"
+                            [(ngModel)]="CareManagerAccepted" [disabled]="CareManagerAccepted">
+                        </td>
+                      </tr>
+                      <tr *ngIf="OtherCareManagerObject != undefined">
+                        <th class="text-start">Assigned Care-Manager</th>
+                        <td>{{OtherCareManagerObject.EmployeeName}}</td>
+                        <td><span class="me-2"
+                            (click)="updateStatusForCheck('CareManger Contacted','CareManager',OtherCareManagerObject?.EmployeeName);callinInitiating(OtherCareManagerObject?.MobileNumber,OtherCareManagerObject?.EmployeeName)"><i
+                              class="fa fa-phone"></i> <span class="text-primary pointer">
+                              {{OtherCareManagerObject?.MobileNumber}}
+                            </span>
+                          </span></td>
+                        <td class="text-center">
+                          <input class="form-check-input" type="checkbox"
+                            id="{{'check_' + OtherCareManagerObject?.EmployeeName}}" value="Other CareManager Accepted"
+                            [(ngModel)]="otherCareManagerAccepted"
+                            (change)="acceptedDedicatedCareManager(OtherCareManagerObject)"
+                            [disabled]="otherCareManagerAccepted">
+                        </td>
+                      </tr>
+                      <tr *ngFor="let detail of emergencyHealthMainOBject?.BackUpCareManagerDetails">
+                        <th scope="row" class="text-start text-wrap">Backup-Care Manager</th>
+                        <td class="text-wrap">{{detail?.FirstName|titlecase}} {{detail?.LastName|titlecase}}</td>
+                        <td>
+                          <span class="me-2"><i class="fa fa-phone"></i><span class="text-primary pointer grab">
+                              {{detail?.ContactNumber}}
+                            </span></span>
+                        </td>
+                        <td class="text-center">
+                        </td>
+                      </tr>
+                      <tr *ngFor="let detail of emergencyHealthMainOBject?.SupportExecutiveDetails">
+                        <th scope="row" class="text-start text-wrap">Wellness Executive</th>
+                        <td class="text-wrap"> {{detail?.FirstName|titlecase}} {{detail?.LastName|titlecase}}</td>
+                        <td><span class="me-2"><i class="fa fa-phone"></i> <span class="text-primary pointer  grab">
+                              {{detail?.ContactNumber}}
+                            </span>
+                          </span></td>
+                        <td class="text-center">
+                        </td>
+                      </tr>
+                      <tr *ngFor="let detail of emergencyHealthMainOBject?.AreaManagerDetails">
+                        <th scope="row" class="text-start">Area Manager</th>
+                        <td class="text-wrap">{{detail?.FirstName|titlecase}} {{detail?.LastName|titlecase}}</td>
+                        <td>
+                          <span class="me-2"><i class="fa fa-phone"></i><span class="text-primary pointer grab">
+                              {{detail?.ContactNumber}}
+                            </span></span>
+                        </td>
+                        <td class="text-center">
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table> -->
+                <table class="table ">
+                  <thead>
+                    <tr>
+                      <th scope="col">Person Type </th>
+                      <th scope="col">Name </th>
+                      <th scope="col">Number</th>
+                      <th scope="col">Contacted</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let careManager of CareManager;let i = index">
+                      <td>
+                        <span *ngIf="careManager?.PersonType == 'Dedicated Support Executive'">Wellness Executive</span>
+                        <span
+                          *ngIf="careManager?.PersonType != 'Dedicated Support Executive'">{{careManager?.PersonType}}</span>
+                      </td>
+                      <td>{{careManager?.EmployeeName}}</td>
+                      <td class="text-primary"><u
+                          (click)="callinInitiating(careManager?.MobileNumber,careManager?.EmployeeName)"> <i
+                            class="fa fa-phone"></i>{{careManager?.MobileNumber}}</u></td>
+                      <td> <input type="checkbox" style="margin-left: 20%;" class="form-check-input grab"
+                          value="{{careManager?.PersonType}}" (change)="UpdateCareCordinatersStatus(careManager,i)"
+                          [(ngModel)]="careManager.Contacted" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div>
+                  <label>Assign Care Manager</label>
+                  <select class="form-select" (change)="addOtherCareManager($event)">
+                    <option disabled selected>Select Care Manager </option>
+                    <option *ngFor="let care of CareManagersList" value="{{care.EmployeeID}}">
+                      {{care.FirstName|titlecase}} {{care.LastName|titlecase}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4 vl">
+                <div *ngIf="CallingBox">
+                  <div class="text-center" style="height :50px">
+                    <div *ngIf="callingSvg">
+                      <img src="../../assets/images/Vanilla-1.5s-244px (1).gif" style="width: 225px;"><span
+                        class="fs-5"></span>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <h2>{{ToNumber}}</h2>
+                  </div>               
+                    <div class="row">
+                      <div class="col-md-3">
+                        <span><b>Caller</b></span><span>:</span><span>{{callStatus1}}</span>
+                      </div>
+                      <div class="col-md-3">
+                      
+                      </div>
+                      <div class="col-md-3">
+                        <span><b>Reciver</b></span><span>:</span><span>{{callStatus2}}</span>
+                      </div>
+                    </div>
+                </div>
+
+                <div>
+                  <label>Comments</label>
+                  <textarea type="text" class="form-control" [(ngModel)]="comments.box3"
+                    placeholder="Comments"></textarea>
+                </div>
+                <div class="text-end" style="cursor: pointer;">
+                </div>
+                <div class="mt-3 ">
+                  <button class="btn btn-primary " style="cursor: pointer;" (click)="updateComments()"
+                    [disabled]="!comments.box3">Submit</button>
+                </div>
+              </div>
+            </div>
+            <div class="mt-2">
+              <div class="container">
+                <div class="row">
+                  <div style="border: 1px solid #a09e9ef1;" class="mt-2"></div>
+                  <div class="mt-2">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div class="fs-4">Customer Details</div>
+                          <table class="table table-borderless">
+                            <thead>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row" class="text-start">Name</th>
+                                <td>:</td>
+                                <td class="text-start">
+                                  {{emergencyPersonDetails?.Name|titlecase}}
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Age | Gender</th>
+                                <td>:</td>
+                                <td class="text-start">
+                                  {{emergencyPersonDetails?.Age}} | {{emergencyPersonDetails?.Gender}}
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Mobile</th>
+                                <td>:</td>
+                                <td class="text-start text-primary grab"
+                                  (click)="callinInitiating(emergencyPersonDetails?.MobileNumber,emergencyPersonDetails?.Name)">
+                                  <u>{{emergencyPersonDetails?.MobileNumber}}</u>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Address</th>
+                                <td>
+                                  :
+                                </td>
+                                <td class="text-start">{{emergencyPersonDetails?.Address}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="col-sm-5 text-center vl">
+                          <div class="row">
+                            <div class="col-md-4">Incident Location</div>
+                            <div class="col-md-1">:</div>
+                            <div class="col-md-7 text-wrap">
+                              <div
+                                *ngIf="IncomingIncidentLocationDetails!=null||IncomingIncidentLocationDetails!=undefined">
+                                <div style="white-space: pre-wrap;">{{IncomingIncidentLocationDetails?.Address}}</div>
+                                <div>
+                                  <span class="p-1"
+                                    *ngIf="IncomingIncidentLocationDetails.hasOwnProperty('Latitude') || IncomingIncidentLocationDetails.hasOwnProperty('Longitude')">
+                                    <a [href]="'http://maps.google.com/maps?z=12&t=m&q='+IncomingIncidentLocationDetails?.Latitude+','+IncomingIncidentLocationDetails?.Longitude"
+                                      target="_blank"><img src="../../assets/images/placeholder (1).png"></a>
+                                  </span>
+                                  <span class="p-1 grab text-primary">
+                                    <a><i class="fa fa-clone" aria-hidden="true" ngxClipboard
+                                        [cbContent]="IncomingIncidentLocationDetails?.Address"></i></a>
+                                  </span>
+                                </div>
+                              </div>
+                              <div
+                                *ngIf="IncomingIncidentLocationDetails==null||IncomingIncidentLocationDetails==undefined">
+                                Refer to Customer Address
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-3 vl">
+                          <div class="form-check mt-3 text-start" *ngIf="CareManagerAccepted">
+                            <input class="form-check-input" type="checkbox" value="CareManager Reached Location"
+                              name="CareManager Reached Location"
+                              (change)="updateStatusForCheck($event,'CareManager',' ')"
+                              [(ngModel)]="CareManagerReachedLocation" [disabled]="CareManagerReachedLocation">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Reached Location
+                            </label>
+                          </div>
+                          <div class="form-check mt-3 text-start" *ngIf="CareManagerReachedLocation">
+                            <input class="form-check-input" type="checkbox" value="CareManager Reached Hospital"
+                              name="CareManagerReachedHospital" [(ngModel)]="CareManagerReachedHospital"
+                              (change)="updateStatusForCheck($event,'CareManager',' ')"
+                              [disabled]="CareManagerReachedHospital">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Reached Hospital
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Hospital model  -->
+<div class="modal fade" id="hospital" tabindex="-1" aria-labelledby="hospital" aria-hidden="true"
+  data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="callingMode">Hospital Details</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="insideFieldset">
+          <div class="fallandsos1">
+            <div class="row">
+              <div class="col-md-8">
+                <!-- <table class="table ">
+                    <thead>
+                      <tr>
+                        <th scope="col">Hospital Type </th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Name </th>
+                        <th scope="col">Number</th>
+                        <th scope="col">Accepted</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let Hospital of CustomerHealthPlanDetails?.PreferredEmergencyHospitals">
+                        <th scope="row" class="text-start">Preferd Hospital</th>
+                        <th scope="row" class="text-start"> <span class="p-1">
+                            <a [href]="'http://maps.google.com/maps?z=12&t=m&q='+Hospital?.LatLong?.Lat +','+Hospital?.LatLong?.Long"
+                              target="_blank"><img src="../../assets/images/placeholder (1).png"></a>
+                          </span>
+                          <span class="p-1 text-primary">
+                            <a><i class="fa fa-clone" aria-hidden="true"
+                                (click)="copyAddressToClipboard(Hospital)"></i></a>
+                          </span>
+                          <span class="p-1">
+                          </span>
+                        </th>
+                        <td class="text-wrap">{{Hospital?.Name|titlecase}}</td>
+                        <td>
+                          <span class="me-2" (click)="callinInitiating(Hospital?.ContactNumber,Hospital?.Name)"><i
+                              class="fa fa-phone"></i><span class="text-primary pointer grab">
+                              {{Hospital?.ContactNumber}}
+                            </span></span>
+                        </td>
+                        <td class="text-center">
+                          <input class="form-check-input" type="checkbox" 
+                            value="Preferred Hospital Accepted"
+                            (change)="updateStatusForCheck($event,'Hospital',Hospital?.Name);unCheckHospital()"
+                            [(ngModel)]="PreferdNearestHospital[Hospital?.Name]"
+                            [disabled]="(selectedHospital &&selectedHospital !=  Hospital?.Name)">
+                        </td>
+                      </tr>
+                      <tr *ngFor="let Hospital of CustomerHealthPlanDetails?.NearestSuperSpecialityHospitals">
+                        <th scope="row" class="text-start">Preferd Super Speciality</th>
+                        <th scope="row" class="text-start"> <span class="p-1">
+                            <a [href]="'http://maps.google.com/maps?z=12&t=m&q='+Hospital?.LatLong?.Lat +','+Hospital?.LatLong?.Long"
+                              target="_blank"><img src="../../assets/images/placeholder (1).png"></a>
+                          </span>
+                          <span class="p-1 text-primary">
+                            <a><i class="fa fa-clone" aria-hidden="true"
+                                (click)="copyAddressToClipboard(Hospital)"></i></a>
+                          </span>
+                        </th>
+                        <td class="text-wrap">{{Hospital?.Name|titlecase}}</td>
+                        <td>
+                          <span class="me-2" (click)="callinInitiating(Hospital?.ContactNumber,Hospital?.Name)"><i
+                              class="fa fa-phone"></i><span class="text-primary pointer grab">
+                              {{Hospital?.ContactNumber}}
+                            </span></span>
+                        </td>
+                        <td class="text-center">
+                          <input class="form-check-input" type="checkbox" 
+                            value="Preferred Speciality Hospital Accepted"
+                            (change)="updateStatusForCheck($event,'Hospital',Hospital?.Name);unCheckHospital()"
+                            [(ngModel)]="PreferdSuperSpecialityHospital[Hospital?.Name]"
+                            [disabled]="(selectedHospital &&selectedHospital !=  Hospital?.Name)">
+                        </td>
+                      </tr>
+                      <tr *ngFor=" let OtherHospital of UpdateOtherHospitalDetails">
+                        <th scope="row" class="text-start">Other Hospital Added</th>
+                        <th scope="row" class="text-start">
+                        </th>
+                        <td class="text-wrap">{{OtherHospital?.OtherHospitalName|titlecase}}</td>
+                        <td>
+                          <span class="me-2"
+                            (click)="callinInitiating(OtherHospital?.ContactNumber,OtherHospital?.OtherHospitalName)"><i
+                              class="fa fa-phone"></i><span class="text-primary pointer grab">
+                              {{OtherHospital?.ContactNumber}}
+                            </span></span>
+                        </td>
+                        <td class="text-center">
+                          <input class="form-check-input" type="checkbox"
+                            id="{{'check_' + OtherHospital?.OtherHospitalName}}" value="OtherHospital Accepted"
+                            (change)="updateStatusForCheck($event,'Hospital',OtherHospital?.OtherHospitalName);unCheckHospital()"
+                            [(ngModel)]="otherHospitalAcceptedMap[OtherHospital?.OtherHospitalName]"
+                            [disabled]="(selectedHospital &&selectedHospital !=  OtherHospital?.Name)">
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table> -->
+
+                <table class="table ">
+                  <thead>
+                    <tr>
+                      <th scope="col">Hospital Name </th>
+                      <th scope="col">Location</th>
+                      <th scope="col">Number</th>
+                      <th scope="col">Informed</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let hospital of OtherHospitalDetails">
+                      <td>
+                        <div><b>{{hospital?.OtherHospitalName}}</b></div>
+                        <div class="text-wrap">({{hospital?.HospitalType}})</div>
+                      </td>
+                      <td>
+                        <span class="p-1"
+                          *ngIf="hospital.hasOwnProperty('Latitude') || hospital.hasOwnProperty('Longitude')">
+                          <a [href]="'http://maps.google.com/maps?z=12&t=m&q='+hospital?.Latitude+','+hospital?.Longitude"
+                            target="_blank"><img src="../../assets/images/placeholder (1).png"></a>
+                        </span>
+                      </td>
+
+                      <td class="text-primary grab">
+                        <u (click)="callinInitiating(hospital?.ContactNumber,hospital?.OtherHospitalName)"><i
+                            class="fa fa-phone"></i> {{hospital?.ContactNumber}}</u>
+                      </td>
+                      <td>
+                        <input type="checkbox" value="Hospital Accepted" class="form-check-input grab"
+                          style="margin-left: 20%;" [disabled]="!checkHospitalDisabled() && !hospital.IsAccepted"
+                          (change)="updateStatusForCheck($event,'OtherHospitalDetails',hospital?.OtherHospitalName)"
+                          [(ngModel)]="hospital.IsAccepted" />
+                      </td>
+
+                    </tr>
+                  </tbody>
+                </table>
+                <div>
+                  <span class="fs-6">
+                    <div>
+                      <div class="form-check">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Add Other Hospital
+                        </label>
+                      </div>
+                    </div>
+                  </span>
+                  <form [formGroup]="OtherHospitalForm">
+                    <div class="row">
+                      <div class="col-md-6"><input class="form-control" placeholder="Hospital Name"
+                          formControlName="OtherHospitalName" required>
+                        <div class="text-danger"
+                          *ngIf="OtherHospitalForm?.get('OtherHospitalName')?.invalid && (OtherHospitalForm?.get('OtherHospitalName')?.dirty || OtherHospitalForm?.get('OtherHospitalName')?.touched)">
+                          Name is required.
+                        </div>
+                      </div>
+                      <div class="col-md-6"><input class="form-control" placeholder="Contact Number"
+                          (keypress)="onlyNumber($event)" formControlName="ContactNumber" minlength="10">
+                        <div class="text-danger"
+                          *ngIf="OtherHospitalForm?.get('ContactNumber')?.invalid && (OtherHospitalForm?.get('ContactNumber')?.dirty || OtherHospitalForm?.get('ContactNumber')?.touched)">
+                          Minimum 10 digit required.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-2">
+                      <div class="col-md-4"><input class="form-control" placeholder="Door No"
+                          formControlName="HouseNumber">
+                        <div class="text-danger"
+                          *ngIf="OtherHospitalForm?.get('HouseNumber')?.invalid && (OtherHospitalForm?.get('HouseNumber')?.dirty || OtherHospitalForm?.get('HouseNumber')?.touched)">
+                          required.
+                        </div>
+                      </div>
+                      <div class="col-md-4"><input class="form-control" placeholder="Street" formControlName="Street">
+                        <div class="text-danger"
+                          *ngIf="OtherHospitalForm?.get('Street')?.invalid && (OtherHospitalForm?.get('Street')?.dirty || OtherHospitalForm?.get('Street')?.touched)">
+                          required.
+                        </div>
+                      </div>
+                      <div class="col-md-4"><input class="form-control" placeholder="Landmark"
+                          formControlName="Landmark">
+                        <div class="text-danger"
+                          *ngIf="OtherHospitalForm?.get('Landmark')?.invalid && (OtherHospitalForm?.get('Landmark')?.dirty || OtherHospitalForm?.get('Landmark')?.touched)">
+                          required.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-2">
+                      <div class="col-md-4"><input class="form-control" placeholder="City" formControlName="City">
+                      </div>
+                      <div class="text-danger"
+                        *ngIf="OtherHospitalForm?.get('City')?.invalid && (OtherHospitalForm?.get('City')?.dirty || OtherHospitalForm?.get('City')?.touched)">
+                        required.
+                      </div>
+                    </div>
+                    <!-- <div class="col-md-3 mt-2"><button class="btn btn-primary" [disabled]="!OtherHospitalForm.valid"
+                          (click)="addOtherHospital()" >Add</button></div> -->
+                    <div class="col-md-3 mt-2"><button class="btn btn-primary" [disabled]="!OtherHospitalForm.valid"
+                        (click)="addHospital()">Add</button></div>
+                  </form>
+                </div>
+              </div>
+              <div class="col-md-4 vl" *ngIf="hideHospitalCommentBox">
+                <div>
+                  <div *ngIf="CallingBox">
+                    <div class="text-center" style="height :50px">
+                      <div *ngIf="callingSvg">
+                        <img src="../../assets/images/Vanilla-1.5s-244px (1).gif" style="width: 225px;"><span
+                          class="fs-5"></span>
+                      </div>
+                    </div>
+                    <div class="text-center">
+                      <h2>{{ToNumber}}</h2>
+                    </div>               
+                      <div class="row">
+                        <div class="col-md-3">
+                          <span><b>Caller</b></span><span>:</span><span>{{callStatus1}}</span>
+                        </div>
+                        <div class="col-md-3">
+                        
+                        </div>
+                        <div class="col-md-3">
+                          <span><b>Reciver</b></span><span>:</span><span>{{callStatus2}}</span>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div>
+                    <label>Comments</label>
+                    <textarea type="text" class="form-control" [(ngModel)]="comments.box4"
+                      placeholder="Comments"></textarea>
+                  </div>
+                  <div class="text-end" style="cursor: pointer;">
+                    <div class="mt-3">
+                      <button class="btn btn-primary" (click)="updateComments()"
+                        [disabled]="!comments.box4">Submit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 vl" *ngIf="reasonForUncheckHospital">
+                <h4>Reason For Hospital Change </h4>
+                <div>
+                  <label>Comments</label>
+                  <textarea type="text" class="form-control" placeholder="Reason For Hospital Change"></textarea>
+                </div>
+                <div class="mt-3">
+                  <button class="btn btn-primary" (click)="changeOfOperator()">Submit</button>
+                </div>
+              </div>
+            </div>
+            <div class="mt-2">
+              <div class="container">
+                <div class="row">
+                  <div style="border: 1px solid #a09e9ef1;" class="mt-2"></div>
+                  <div class="mt-2">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div class="fs-4">Customer Details</div>
+                          <table class="table table-borderless">
+                            <thead>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row" class="text-start">Name</th>
+                                <td>:</td>
+                                <td class="text-start">
+                                  {{emergencyPersonDetails?.Name|titlecase}}
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Age | Gender</th>
+                                <td>:</td>
+                                <td class="text-start">
+                                  {{emergencyPersonDetails?.Age}} | {{emergencyPersonDetails?.Gender}}
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Mobile</th>
+                                <td>:</td>
+                                <td class="text-start text-primary grab"
+                                  (click)="callinInitiating(emergencyPersonDetails?.MobileNumber,emergencyPersonDetails?.Name)">
+                                  <u>{{emergencyPersonDetails?.MobileNumber}}</u>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Address</th>
+                                <td>
+                                  :
+                                </td>
+                                <td class="text-start">{{emergencyPersonDetails?.Address}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <div class="row">
+                            <div class="col-md-4">Incident Location</div>
+                            <div class="col-md-1">:</div>
+                            <div class="col-md-7 text-wrap">
+                              <div
+                                *ngIf="IncomingIncidentLocationDetails!=null||IncomingIncidentLocationDetails!=undefined">
+                                <div style="white-space: pre-wrap;">{{IncomingIncidentLocationDetails?.Address}}</div>
+                                <div>
+                                  <span class="p-1"
+                                    *ngIf="IncomingIncidentLocationDetails.hasOwnProperty('Latitude') || IncomingIncidentLocationDetails.hasOwnProperty('Longitude')">
+                                    <a [href]="'http://maps.google.com/maps?z=12&t=m&q='+IncomingIncidentLocationDetails?.Latitude+','+IncomingIncidentLocationDetails?.Longitude"
+                                      target="_blank"><img src="../../assets/images/placeholder (1).png"></a>
+                                  </span>
+                                  <span class="p-1 grab text-primary">
+                                    <a><i class="fa fa-clone" aria-hidden="true" ngxClipboard
+                                        [cbContent]="IncomingIncidentLocationDetails?.Address"></i></a>
+                                  </span>
+                                </div>
+                              </div>
+                              <div
+                                *ngIf="IncomingIncidentLocationDetails==null||IncomingIncidentLocationDetails==undefined">
+                                Refer to Customer Address
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-4 text-center vl">
+                          <div class="text-center">
+                            <h4>Ambulance Details</h4>
+                          </div>
+                          <table class="table table-borderless">
+                            <thead>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td class="text-start">Ambulance Contact Name</td>
+                                <td>:</td>
+                                <td class="text-primary"><u>{{AcceptedAmbulance?.ProviderName|titlecase}}</u></td>
+                              </tr>
+                              <tr>
+                                <td class="text-start">Contact number</td>
+                                <td>:</td>
+                                <td class="text-primary grab"
+                                  (click)="callinInitiating(AcceptedAmbulance?.ContactNumber,AcceptedAmbulance?.ContactName)">
+                                  <u>{{AcceptedAmbulance?.ContactNumber}}</u>
+                                </td>
+                              </tr>
+                              <tr *ngIf="ambulancType !=null ||ambulancType !=undefined">
+                                <td class="text-start">Ambulance Type</td>
+                                <td>:</td>
+                                <td>{{ambulancType?.AmbulanceType}}</td>
+                              </tr>
+                              <tr *ngIf="ambulancType !=null ||ambulancType !=undefined">
+                                <td class="text-start">Paramedic Required</td>
+                                <td>:</td>
+                                <td><span *ngIf="ambulancType?.IsParamedicRequired == true">Yes</span>
+                                  <span *ngIf="ambulancType?.IsParamedicRequired != true">No</span>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="col-sm-4 vl text-start">
+                          <div class="text-center">
+                            <h4>Ambulance Driver Details</h4>
+                          </div>
+                          <table class="table table-borderless">
+                            <tr>
+                              <td class="text-start">Ambulance Driver Name</td>
+                              <td>:</td>
+                              <td>{{driverDetails?.DriverName}}</td>
+                            </tr>
+                            <tr>
+                              <td>Ambulance Driver Number </td>
+                              <td>:</td>
+                              <td>{{driverDetails?.ContactNumber}}</td>
+                            </tr>
+                            <tr>
+                              <td>Ambulance Vehicle Number</td>
+                              <td>:</td>
+                              <td>{{driverDetails?.VehicalNumber}}</td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Police Model -->
+<div class="modal fade" id="Police" tabindex="-1" aria-labelledby="Police" aria-hidden="true" data-bs-backdrop="static"
+  data-bs-keyboard="false">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="callingMode">Police Details</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="insideFieldset">
+          <div class="fallandsos1">
+            <div class="row">
+              <div class="col-md-8">
+                <table class="table ">
+                  <thead>
+                    <tr>
+                      <th scope="col">Area Police Station</th>
+                      <th scope="col">Number</th>
+                      <th scope="col">Informed</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- <tr *ngFor="let police of CustomerHealthPlanDetails?.PoliceStations">
+                        <th scope="row" class="text-start">{{police?.Name|titlecase}}</th>
+                        <td><span class="me-2" (click)="callinInitiating(police?.ContactNumber,police?.Name)"><i
+                              class="fa fa-phone"></i> <span class="text-primary pointer grab">
+                              {{police?.ContactNumber}}
+                            </span>
+                          </span></td>
+                        <td class="text-center">
+                          <input class="form-check-input" type="checkbox"  value="InformedPolice"
+                            name="InformedPolice" (change)="updateStatusForCheck($event,'Police',police?.Name)"
+                            [(ngModel)]="PoliceInformedMap[police?.Name]"
+                            [disabled]="!PoliceInformedMap||PoliceInformedMap[police?.Name]">
+                        </td>
+                      </tr> -->
+
+                    <tr *ngFor="let ps of PoliceStationDetails">
+                      <td>{{ps?.PoliceStationName}}</td>
+                      <td class="text-primary grab">
+                        <u (click)="callinInitiating(ps?.ContactNumber,ps?.PoliceStationName)"><i
+                            class="fa fa-phone"></i> {{ps?.ContactNumber}}</u>
+
+                      </td>
+                      <td>
+                        <input type="checkbox" value="InformedPolice" style="margin-left: 20%;"
+                          class="form-check-input grab" [disabled]="!checkPoliceStationDisabled() && !ps.IsAccepted"
+                          (change)="updateStatusForCheck($event,'PoliceStationDetails',ps?.PoliceStationName)"
+                          [(ngModel)]="ps.IsAccepted" />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <form [formGroup]="policeForm">
+                  <div class="row">
+                    <div class="col-md-6"><input class="form-control" placeholder="Police Station Name"
+                        formControlName="PoliceStationName" required>
+                      <div class="text-danger"
+                        *ngIf="policeForm?.get('PoliceStationName')?.invalid && (policeForm?.get('PoliceStationName')?.dirty || policeForm?.get('PoliceStationName')?.touched)">
+                        Name is required.
+                      </div>
+                    </div>
+                    <div class="col-md-6"><input class="form-control" placeholder="Contact Number"
+                        (keypress)="onlyNumber($event)" formControlName="ContactNumber" minlength="10">
+                      <div class="text-danger"
+                        *ngIf="policeForm?.get('ContactNumber')?.invalid && (policeForm?.get('ContactNumber')?.dirty || policeForm?.get('ContactNumber')?.touched)">
+                        Minimum 10 digit required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-2">
+                    <div class="col-md-4"><input class="form-control" placeholder="Plot No"
+                        formControlName="HouseNumber">
+                      <div class="text-danger"
+                        *ngIf="policeForm?.get('HouseNumber')?.invalid && (policeForm?.get('HouseNumber')?.dirty || policeForm?.get('HouseNumber')?.touched)">
+                        required.
+                      </div>
+                    </div>
+                    <div class="col-md-4"><input class="form-control" placeholder="Street" formControlName="Street">
+                      <div class="text-danger"
+                        *ngIf="policeForm?.get('Street')?.invalid && (policeForm?.get('Street')?.dirty || policeForm?.get('Street')?.touched)">
+                        required.
+                      </div>
+                    </div>
+                    <div class="col-md-4"><input class="form-control" placeholder="Landmark" formControlName="Landmark">
+                      <div class="text-danger"
+                        *ngIf="policeForm?.get('Landmark')?.invalid && (policeForm?.get('Landmark')?.dirty || policeForm?.get('Landmark')?.touched)">
+                        required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-2">
+                    <div class="col-md-4"><input class="form-control" placeholder="City" formControlName="City">
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="policeForm?.get('City')?.invalid && (policeForm?.get('City')?.dirty || policeForm?.get('City')?.touched)">
+                      required.
+                    </div>
+                  </div>
+                  <!-- <div class="col-md-3 mt-2"><button class="btn btn-primary" [disabled]="!OtherHospitalForm.valid"
+                        (click)="addOtherHospital()" >Add</button></div> -->
+                  <div class="col-md-3 mt-2"><button class="btn btn-primary" [disabled]="!policeForm.valid"
+                      (click)="addPolice()">Add</button></div>
+                </form>
+              </div>
+              <div class="col-md-4 vl">
+                <div *ngIf="CallingBox">
+                  <div class="text-center" style="height :50px">
+                    <div *ngIf="callingSvg">
+                      <img src="../../assets/images/Vanilla-1.5s-244px (1).gif" style="width: 225px;"><span
+                        class="fs-5"></span>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <h2>{{ToNumber}}</h2>
+                  </div>               
+                    <div class="row">
+                      <div class="col-md-3">
+                        <span><b>Caller</b></span><span>:</span><span>{{callStatus1}}</span>
+                      </div>
+                      <div class="col-md-3">
+                      
+                      </div>
+                      <div class="col-md-3">
+                        <span><b>Reciver</b></span><span>:</span><span>{{callStatus2}}</span>
+                      </div>
+                    </div>
+                </div>
+                <div>
+                  <label>Comments</label>
+                  <textarea type="text" class="form-control" [(ngModel)]="comments.box5"
+                    placeholder="Comments"></textarea>
+                </div>
+                <div class="text-end" style="cursor: pointer;">
+                </div>
+                <div class="mt-3">
+                  <button class="btn btn-primary" (click)="updateComments()" [disabled]="!comments.box5">Submit</button>
+                </div>
+              </div>
+            </div>
+            <div class="mt-2">
+              <div class="container">
+                <div class="row">
+                  <div style="border: 1px solid #a09e9ef1;" class="mt-2"></div>
+                  <div class="mt-2">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div class="fs-4">Customer Details</div>
+                          <table class="table table-borderless">
+                            <thead>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row" class="text-start">Name</th>
+                                <td>:</td>
+                                <td class="text-start">
+                                  {{emergencyPersonDetails?.Name|titlecase}}
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Age | Gender</th>
+                                <td>:</td>
+                                <td class="text-start">
+                                  {{emergencyPersonDetails?.Age}} | {{emergencyPersonDetails?.Gender}}
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Mobile</th>
+                                <td>:</td>
+                                <td class="text-start text-primary grab"
+                                  (click)="callinInitiating(emergencyPersonDetails?.MobileNumber,emergencyPersonDetails?.Name)">
+                                  <u>{{emergencyPersonDetails?.MobileNumber}}</u>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Address</th>
+                                <td>
+                                  :
+                                </td>
+                                <td class="text-start">{{emergencyPersonDetails?.Address}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <div class="row">
+                            <div class="col-md-4">Incident Location</div>
+                            <div class="col-md-1">:</div>
+                            <div class="col-md-7 text-wrap">
+                              <div
+                                *ngIf="IncomingIncidentLocationDetails!=null||IncomingIncidentLocationDetails!=undefined">
+                                <div style="white-space: pre-wrap;">{{IncomingIncidentLocationDetails?.Address}}</div>
+                                <div>
+                                  <span class="p-1"
+                                    *ngIf="IncomingIncidentLocationDetails.hasOwnProperty('Latitude') || IncomingIncidentLocationDetails.hasOwnProperty('Longitude')">
+                                    <a [href]="'http://maps.google.com/maps?z=12&t=m&q='+IncomingIncidentLocationDetails?.Latitude+','+IncomingIncidentLocationDetails?.Longitude"
+                                      target="_blank"><img src="../../assets/images/placeholder (1).png"></a>
+                                  </span>
+                                  <span class="p-1 grab text-primary">
+                                    <a><i class="fa fa-clone" aria-hidden="true" ngxClipboard
+                                        [cbContent]="IncomingIncidentLocationDetails?.Address"></i></a>
+                                  </span>
+                                </div>
+                              </div>
+                              <div
+                                *ngIf="IncomingIncidentLocationDetails==null||IncomingIncidentLocationDetails==undefined">
+                                Refer to Customer Address
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-4 text-center vl">
+                          <div class="text-center">
+                            <h5>Property Details</h5>
+                          </div>
+                          <table class="table table-borderless">
+                            <thead>
+                            </thead>
+                            <tbody *ngFor="let item of CustomerHealthPlanDetails?.BenProperty| keyvalue">
+                              <tr>
+                                <td *ngIf="item.key!='_id'" class="text-start">{{item.key}}</td>
+                                <td *ngIf="item.key!='_id'">:</td>
+                                <td *ngIf="item.key!='_id'">{{item.value}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="col-sm-4 vl text-start">
+                          <div class="form-check mt-3 text-start">
+                            <input class="form-check-input" type="checkbox" value="Police Reached Location"
+                              name="PoliceReachedLocation" (change)="updateStatusForCheck($event,'Police',' ')"
+                              [(ngModel)]="PoliceReachedLocation" [disabled]="!InformedPolice||PoliceReachedLocation">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Reached Location
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fire Station -->
+<div class="modal fade" id="Fire" tabindex="-1" aria-labelledby="Fire" aria-hidden="true" data-bs-backdrop="static"
+  data-bs-keyboard="false">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="callingMode">Fire Station Details</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="insideFieldset">
+          <div class="fallandsos1">
+            <div class="row">
+              <div class="col-md-8">
+                <table class="table ">
+                  <thead>
+                    <tr>
+                      <th scope="col">Area Fire Station </th>
+                      <th scope="col">Number</th>
+                      <th scope="col">Informed</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- <tr *ngFor="let fire of CustomerHealthPlanDetails?.FireStations">
+                        <th scope="row" class="text-start">{{fire?.Name|titlecase}}</th>
+                        <td><span class="me-2" (click)="callinInitiating(fire?.ContactNumber,fire?.Name)"><i
+                              class="fa fa-phone"></i> <span class="text-primary pointer grab">
+                              {{fire?.ContactNumber}}
+                            </span>
+                          </span></td>
+                        <td class="text-center">
+                          <input class="form-check-input" type="checkbox" 
+                            value="Informed FireStation"
+                            (change)="updateStatusForCheck($event,'FireStation',fire?.Name)"
+                            [(ngModel)]="fireStationInformed[fire?.Name]"
+                            [disabled]="!fireStationInformed||fireStationInformed[fire?.Name]">
+                        </td>
+                      </tr> -->
+                    <tr *ngFor="let fs of FireStationDetails" #checkboxes>
+                      <td>{{fs?.FireStationName}}</td>
+                      <td class="text-primary">
+                        <u (click)="callinInitiating(fs?.ContactNumber,fs?.FireStationName)"><i
+                            class="fa fa-phone"></i>{{fs?.ContactNumber}}</u>
+                      </td>
+                      <td>
+                        <input class="form-check-input" type="checkbox" style="margin-left: 20%;"
+                          value="Informed FireStation" [disabled]="!checkFireStationDisabled() && !fs.IsAccepted"
+                          (change)="updateStatusForCheck($event,'FireStationDetails',fs?.FireStationName)"
+                          [(ngModel)]="fs.IsAccepted" />
+
+                      </td>
+
+                    </tr>
+                  </tbody>
+                </table>
+                <form [formGroup]="fireForm">
+                  <div class="row">
+                    <div class="col-md-6"><input class="form-control" placeholder="Fire Station Name"
+                        formControlName="FireStationName" required>
+                      <div class="text-danger"
+                        *ngIf="fireForm?.get('FireStationName')?.invalid && (fireForm?.get('FireStationName')?.dirty || fireForm?.get('FireStationName')?.touched)">
+                        Name is required.
+                      </div>
+                    </div>
+                    <div class="col-md-6"><input class="form-control" placeholder="Contact Number"
+                        (keypress)="onlyNumber($event)" formControlName="ContactNumber" minlength="10">
+                      <div class="text-danger"
+                        *ngIf="fireForm?.get('ContactNumber')?.invalid && (fireForm?.get('ContactNumber')?.dirty || fireForm?.get('ContactNumber')?.touched)">
+                        Minimum 10 digit required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-2">
+                    <div class="col-md-4"><input class="form-control" placeholder="Plot No"
+                        formControlName="HouseNumber">
+                      <div class="text-danger"
+                        *ngIf="fireForm?.get('HouseNumber')?.invalid && (fireForm?.get('HouseNumber')?.dirty || fireForm?.get('HouseNumber')?.touched)">
+                        required.
+                      </div>
+                    </div>
+                    <div class="col-md-4"><input class="form-control" placeholder="Street" formControlName="Street">
+                      <div class="text-danger"
+                        *ngIf="fireForm?.get('Street')?.invalid && (fireForm?.get('Street')?.dirty || fireForm?.get('Street')?.touched)">
+                        required.
+                      </div>
+                    </div>
+                    <div class="col-md-4"><input class="form-control" placeholder="Landmark" formControlName="Landmark">
+                      <div class="text-danger"
+                        *ngIf="fireForm?.get('Landmark')?.invalid && (fireForm?.get('Landmark')?.dirty || fireForm?.get('Landmark')?.touched)">
+                        required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-2">
+                    <div class="col-md-4"><input class="form-control" placeholder="City" formControlName="City">
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="fireForm?.get('City')?.invalid && (fireForm?.get('City')?.dirty || fireForm?.get('City')?.touched)">
+                      required.
+                    </div>
+                  </div>
+                  <!-- <div class="col-md-3 mt-2"><button class="btn btn-primary" [disabled]="!OtherHospitalForm.valid"
+                        (click)="addOtherHospital()" >Add</button></div> -->
+                  <div class="col-md-3 mt-2"><button class="btn btn-primary" [disabled]="!fireForm.valid"
+                      (click)="addFireStation()">Add</button></div>
+                </form>
+              </div>
+              <div class="col-md-4 vl">
+                <div *ngIf="CallingBox">
+                  <div class="text-center" style="height :50px">
+                    <div *ngIf="callingSvg">
+                      <img src="../../assets/images/Vanilla-1.5s-244px (1).gif" style="width: 225px;"><span
+                        class="fs-5"></span>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <h2>{{ToNumber}}</h2>
+                  </div>               
+                    <div class="row">
+                      <div class="col-md-3">
+                        <span><b>Caller</b></span><span>:</span><span>{{callStatus1}}</span>
+                      </div>
+                      <div class="col-md-3">
+                      
+                      </div>
+                      <div class="col-md-3">
+                        <span><b>Reciver</b></span><span>:</span><span>{{callStatus2}}</span>
+                      </div>
+                    </div>
+                </div>
+
+                <div>
+                  <label *ngIf="hideHospitalCommentBox">Comments</label>
+                  <label *ngIf="reasonForUncheckHospital">Reason For Change Of Fire Station</label>
+                  <textarea type="text" class="form-control" [(ngModel)]="comments.box6"
+                    placeholder="Comments"></textarea>
+                </div>
+                <div class="text-end" style="cursor: pointer;"> <button class="btn btn-primary"
+                    (click)="updateComments()" [disabled]="!comments.box6">Submit</button>
+                </div>
+              </div>
+            </div>
+            <div class="mt-2">
+              <div class="container">
+                <div class="row">
+                  <div style="border: 1px solid #a09e9ef1;" class="mt-2"></div>
+                  <div class="mt-2">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div class="fs-4">Customer Details</div>
+                          <table class="table table-borderless">
+                            <thead>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row" class="text-start">Name</th>
+                                <td>:</td>
+                                <td class="text-start">
+                                  {{emergencyPersonDetails?.Name|titlecase}}
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Age | Gender</th>
+                                <td>:</td>
+                                <td class="text-start">
+                                  {{emergencyPersonDetails?.Age}} | {{emergencyPersonDetails?.Gender}}
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Mobile</th>
+                                <td>:</td>
+                                <td class="text-start text-primary grab"
+                                  (click)="callinInitiating(emergencyPersonDetails?.MobileNumber,emergencyPersonDetails?.Name)">
+                                  <u>{{emergencyPersonDetails?.MobileNumber}}</u>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Address</th>
+                                <td>
+                                  :
+                                </td>
+                                <td class="text-start">{{emergencyPersonDetails?.Address}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <div class="row">
+                            <div class="col-md-4">Incident Location</div>
+                            <div class="col-md-1">:</div>
+                            <div class="col-md-7 text-wrap">
+                              <div
+                                *ngIf="IncomingIncidentLocationDetails!=null||IncomingIncidentLocationDetails!=undefined">
+                                <div style="white-space: pre-wrap;">{{IncomingIncidentLocationDetails?.Address}}</div>
+                                <div>
+                                  <span class="p-1"
+                                    *ngIf="IncomingIncidentLocationDetails.hasOwnProperty('Latitude') || IncomingIncidentLocationDetails.hasOwnProperty('Longitude')">
+                                    <a [href]="'http://maps.google.com/maps?z=12&t=m&q='+IncomingIncidentLocationDetails?.Latitude+','+IncomingIncidentLocationDetails?.Longitude"
+                                      target="_blank"><img src="../../assets/images/placeholder (1).png"></a>
+                                  </span>
+                                  <span class="p-1 grab text-primary">
+                                    <a><i class="fa fa-clone" aria-hidden="true" ngxClipboard
+                                        [cbContent]="IncomingIncidentLocationDetails?.Address"></i></a>
+                                  </span>
+                                </div>
+                              </div>
+                              <div
+                                *ngIf="IncomingIncidentLocationDetails==null||IncomingIncidentLocationDetails==undefined">
+                                Refer to Customer Address
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-4 text-center vl">
+                          <div class="text-center">
+                            <h5>Property Details</h5>
+                          </div>
+                          <table class="table table-borderless">
+                            <thead>
+                            </thead>
+                            <tbody *ngFor="let item of CustomerHealthPlanDetails?.BenProperty| keyvalue">
+                              <tr>
+                                <td *ngIf="item.key!='_id'" class="text-start">{{item.key}}</td>
+                                <td *ngIf="item.key!='_id'">:</td>
+                                <td *ngIf="item.key!='_id'">{{item.value}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="col-sm-4 vl text-start">
+                          <!-- <div class="form-check mt-3 text-start">
+                              <input class="form-check-input" type="checkbox" 
+                                value="Informed FireStation" name="InformedFireStation"
+                                (change)="updateStatusForCheck($event,'FireStation',' ')"
+                                [(ngModel)]="InformedFireStation" [disabled]="InformedFireStation">
+                              <label class="form-check-label" for="flexCheckDefault">
+                                Contacted Fire Station
+                              </label>
+                            </div> -->
+                          <div class="form-check mt-3 text-start">
+                            <input class="form-check-input" type="checkbox" value="FireEngine Reached Location"
+                              name="FireEngineReachedLocation" (change)="updateStatusForCheck($event,'FireStation',' ')"
+                              [(ngModel)]="FireEngineReachedLocation"
+                              [disabled]="!InformedFireStation||FireEngineReachedLocation">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Reached Location
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Cancel Service Modal -->
+<div class="modal fade" id="serviceCancel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Reason For Cancel ?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label>Leave Reason</label>
+        <div class="form-floating">
+          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"
+            [(ngModel)]="comments.box7"></textarea>
+          <label for="floatingTextarea2">Comments</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="toggleButton()"
+          [disabled]="!comments.box7">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Emergency Close Modal -->
+<div class="modal fade" id="EmegencyClose" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Reason For Emergency Close</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" value="option1" [(ngModel)]="handoverToClose"
+                name="flexRadioDefault" id="flexRadioDefault1"
+                (change)="toggleInputs($event);sponcerInformedToClose('HANDOVER')">
+              <label class="form-check-label" for="flexCheckChecked">
+                Handovered To
+              </label>
+            </div>
+          </div>
+          <div class="col-md-4" *ngIf="handoverBox">
+            <input class="form-control form-control-sm" [(ngModel)]="hadoverPersonName" type="text" placeholder="Name"
+              aria-label=".form-control-sm example" required>
+          </div>
+          <div class="col-md-4 " *ngIf="handoverBox">
+            <input class="form-control form-control-sm" [(ngModel)]="handoverPersonNumber" type="phone"
+              placeholder="Number" aria-label=".form-control-sm example" required>
+          </div>
+        </div>
+
+        <div class="form-check mt-3">
+          <input class="form-check-input" type="radio" value="opt" name="flexRadioDefault" id="flexRadioDefault210"
+            [(ngModel)]="ISSponsorContacted" (change)="sponcerInformedToClose('SPONSOR')">
+          <label class="form-check-label">
+            Sponsor Contacted and Informed
+          </label>
+        </div>
+        <div class="form-check mt-3">
+          <input class="form-check-input" type="radio" value="option2" name="flexRadioDefault" id="flexRadioDefault3"
+            [(ngModel)]="IsFault" (change)="falseEmergency($event)">
+          <label class="form-check-label">
+            False Emergency
+          </label>
+        </div>
+
+        <div class="form-floating">
+          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"
+            [(ngModel)]="EmergencyCloseComment"></textarea>
+          <label for="floatingTextarea2">Comments</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="closeEmergency()"
+          [disabled]="!EmergencyCloseComment">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

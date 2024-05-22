@@ -1,0 +1,64 @@
+<div class="bodycontent">
+    <form #f="ngForm" >
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Request ID</th>
+            <th scope="col">Customer Name</th>
+            <th scope="col">Service Name</th>
+            <th scope="col">Vendor Name</th>
+            <th scope="col">Price To Anvayaa</th>
+            <th scope="col">Anvayaa Price</th>
+            <th scope="col">Vendor Price</th>
+            <th scope="col">Tariff</th>
+            <th scope="col">ReferralType</th>
+            <th scope="col">(Amount or%)</th>
+          
+            <th scope="col"x></th>
+          </tr>
+        </thead>
+        <tbody >
+            
+          <tr *ngFor=" let list of ongoinglist;let sno = index">
+            
+            <td>{{list.RequestID}}
+                <div>{{list.RequestDetails.RequestedDate*1000|date:"dd-MM-yyyy"}}</div>
+            </td>
+            <td>{{list.CustomerName}}</td>
+            <td>{{list.SubCategoryName|replaceUnderscore |titlecase}}</td>
+            <td>{{list.VendorName}}</td>
+            <td><select class="form-select" [(ngModel)]="list.IsPriceToAnvayaa"  name="IsPriceToAnvayaa"      (change)="data($event,sno)">
+                 <option>Select</option>
+                 <option value='Yes'>Yes</option>
+                 <option value='No'>No</option>
+            </select>
+        </td>
+            <td>
+                <input type="number"  class="form-control" [(ngModel)]="list.AnvayaaPrice"  name="AnvayaaPrice"  [readonly]="list.IsPriceToAnvayaa=='No'">
+            </td>
+          
+            <td><input type="number"   class="form-control" [(ngModel)]="list.VendorPrice"  name="VendorPrice"></td>
+            <td><select   class="form-select" [(ngModel)]="list.TarrifType" name="TarrifType" >
+              <option value="Daily">Daily</option>
+              <option value="Monthly">Monthly</option>
+            </select></td>
+            <td>
+              <select   class="form-select" [(ngModel)]="list.ReferralType" name="ReferralType" >
+                <option value="Percentage">Percentage</option>
+                <option value="Amount">Amount</option>
+              </select>
+            </td>
+            <td>
+              <input type="text" class="form-control" [(ngModel)]="list.AnvayaaReferralFee"  name="AnvayaaReferralFee">
+              
+            </td>
+            <td><button type="submit" class="btn btn-primary"  (click)="ongoingUpdate( f.value,list)">update</button></td>
+          </tr>
+    
+        </tbody>
+      </table>
+      <div *ngIf="nodata" class="text-center"><h3>No Data Found</h3></div>
+    </form>
+</div>
+
+

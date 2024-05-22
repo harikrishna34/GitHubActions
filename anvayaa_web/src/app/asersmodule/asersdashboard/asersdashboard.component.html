@@ -1,0 +1,78 @@
+<div class="mainDiv card" >
+
+    
+    <div class="text-center row">
+       <div class="col-md-4"></div>
+       <div class="col-md-4">
+        <h2><span class="clrorg">A</span>.<span class="clrprp">S</span>.<span class="clrorg">E</span>.<span class="clrprp">R</span>.<span class="clrorg">S</span></h2>
+        <span class="clrorg" >Anvayaa</span>.<span class="clrprp">Smart</span>.<span class="clrorg">Emergency</span>.<span class="clrprp">Response</span>.<span class="clrorg">System</span>
+       </div>
+       <div class="col-md-2 text-end" style="margin: auto;cursor: grab;"><img src="../../../assets/images/notification.png" style="width: 40px;" (click)="alaramHistory()"></div>
+       <div class="col-md-1" style="margin: auto;cursor: grab;"> <img src="../../../assets/images/plus (1).png" (click)="watchIntigration()"></div>
+       <div class="col-md-1"  style="margin: auto;cursor: grab;"><button class="btn btn-anvayaaYellow" (click)="features()"><i class="fa fa-user-plus" aria-hidden="true"></i></button></div>
+       <div class="col-md-1"  style="margin: auto;cursor: grab;"><button class="btn btn-anvayaaYellow" (click)="aserscustomers()"><i class="fa fa-users" aria-hidden="true"></i></button></div>
+      </div>
+    <div>
+         <div>
+           <h3>Asers Customers List </h3>
+         </div>
+     <div>
+
+
+
+      <table class="table table-striped">
+        <thead class="tablehead">
+          <tr>
+            <th scope="col">CustomerName</th>
+            <th scope="col">Sponser Name</th>
+            <th scope="col">Watch Model</th>
+            <th scope="col">Sim Number </th>
+            <th scope="col">IMEINumber</th>
+            <!-- <th scope="col">Status</th>
+            <th scope="col">Plan StartDate</th>
+            <th scope="col">Plan ExpiryDate</th> -->
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of Customers" >
+            <th scope="row">{{data.CustomerDetails?.Name}}</th>
+            <td>{{data.CustomerDetails?.SponsorName}}</td>
+            <td>{{data.DeviceDetails?.Model}}</td>
+            <td>{{data.DeviceDetails?.SIMNumber}}</td>
+            <td>{{data.DeviceDetails?.IMEINumber}}</td>
+            <!-- <td>{{data.Status}}</td> -->
+            <!-- <td>{{data.UserDetails.PlanStartDate*1000| date:'dd-MM-yyyy'}}</td> -->
+            <!-- <td>{{data.UserDetails.PlanExpiryDate*1000| date:'dd-MM-yyyy'}}</td> -->
+            <td><button type="button" class="btn btn-anvayaa" (click)="customerdetails(data)">View</button></td>
+          </tr>
+        </tbody>
+      </table>
+      
+     </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+

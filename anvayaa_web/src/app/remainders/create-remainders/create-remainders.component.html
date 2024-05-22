@@ -1,0 +1,365 @@
+<div class="mainDiv">
+    <div>
+        <img src="../../../assets/images/left-arrow.png" (click)="remainders()">
+    </div>
+
+    <div class="text-center">
+        <h2><u>Create Reminder</u></h2>
+    </div>
+    <form [formGroup]="SubmitRemainder" class="mt-n1">
+        <div class="row">
+            <div class="col-md-3">
+                <label>
+                    <h5>Reminder Category</h5>
+                </label>
+                <select class="form-select" (change)="frequency($event)" name="CategoryAliasName"
+                    formControlName="CategoryAliasName" required>
+                    <option value=" ">Select Category</option>
+                    <option *ngFor=" let x of remainderData">{{x.AliasName}}</option>
+                </select>
+                <div
+                    *ngIf="SubmitRemainder.controls['CategoryAliasName'].status == 'INVALID' && this.SubmitRemainder.controls['CategoryAliasName'].value==''&& this.submitRemainder==true ">
+                    <span class="errorColor">* Please Select Category</span>
+                </div>
+            </div>
+            <div class="col-md-3" *ngIf="frquencyTab">
+                <label>
+                    <h5>Reminder Frequency</h5>
+                </label>
+                <select class="form-select" (change)="frequencyType($event)" formControlName="Frequency">
+                    <option> Select Frequency</option>
+                    <option *ngFor="let frequency of reminderFrequencyDetails">{{frequency.AliasName}}</option>
+                </select>
+                <div
+                    *ngIf="SubmitRemainder.controls['Frequency'].status == 'INVALID' && this.SubmitRemainder.controls['Frequency'].value==''&& this.submitRemainder==true ">
+                    <span class="errorColor">* Please Select Frequency</span>
+                </div>
+            </div>
+            
+ 
+    <div class="col-md-3" *ngIf="templetTab">
+        <label> <h5>Templats</h5></label>
+        <select class="form-select" (change)="inputMessage($event)">
+            <option> Select templat</option>
+            <option *ngFor="let frequency of templets">{{frequency.TemplateName}}</option>
+        </select>
+    </div>
+</div>
+<div class="row mt-n1" *ngIf="templetTab">
+    <div class="col-md-3">
+        <div class="mt-n1">
+            <label>Message Templet</label>
+            <input type="text" class="form-control " value={{tempMessage}} readonly>
+        </div>
+        <div class="mt-n1">
+            <label>Final Message</label>
+            <input type="text" class="form-control " value={{Message}} readonly style="width: 800px;">
+        </div>
+
+    </div>
+    <div class="col-md-12">
+        <div class="mt-n1">
+            <table>
+                <thead>
+                    <tr>
+                        <td *ngFor="let attr of templetAttributes">{{attr}}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td *ngFor="let attr of templetAttributes">
+                            <span><input type="text" (change)="messagText($event,attr)"
+                                    class="form-control"></span>
+
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+
+                    <tr *ngIf=" templetInputErr" class="errorColor">* Please fill values</tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="col-md-3">
+        <div class="mt-n1">
+            <span>
+                <label>
+                    For Same Message To Email Check
+   
+                       </label>
+                : <input type="checkbox"
+                    (change)="$any($event.target).checked ? (emailCheck = true) : emailCheck = false;emailMessage(emailCheck)"
+                    class="custom-control-input"  style="width: 12px;height:13px">
+                  
+            </span>
+        </div>
+        <div class="mt-n1" formGroupName="RemainderSchedules">
+            <label>Email Message</label>
+            <input type="text" class="form-control " formControlName="EmailMessage"
+                [readonly]="emailCheck == true" value={{EmailMsg}} style="width: 800px;">
+        </div>
+    </div>
+</div>
+<div class="container" *ngIf="formTab">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="custom-control custom-checkbox">
+                <div class="row" *ngFor="let user of allUsersArray">
+                    <label class="custom-control-label" for="customCheckDisabled">
+                        <h4>{{user.Name}}</h4>
+                    </label>
+                    <div class="col-md-3">
+                        <input type="checkbox" class="custom-control-input" value="SMS"
+                            (change)="$any($event.target).checked ? (isfrmChecked = true) : isfrmChecked = false;messageMode($event,user,isfrmChecked)"
+                            id="customCheckDisabled">
+                        <label>SMS</label>
+                    </div>
+                    <div class="col-md-3" [hidden]="user.EmailID==''">
+                        <input type="checkbox" class="custom-control-input" value="Email"
+                            (change)="$any($event.target).checked ? (isfrmChecked = true) : isfrmChecked = false;messageMode($event,user,isfrmChecked)"
+                            id="customCheckDisabled">
+                        <label>Email</label>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="msgTypeValidation" class="errorColor"> * Please Select atleast one Persone Message Type
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="container mt-n1">
+                <div class="row" *ngIf="startEnd">
+                    <div class="col-md-5">
+                        <label> Select StartDate</label>
+                        <input type="date" class="form-control" formControlName="StartDate"  [min]="maxdate  | date:'yyyy-MM-dd'"
+                            (change)="endate($event)" [max]="(PlanExpiryDate)*1000 | date:'yyyy-MM-dd'">
+                        <div
+                            *ngIf="SubmitRemainder.controls['StartDate'].status == 'INVALID' && this.SubmitRemainder.controls['StartDate'].value==''&& this.submitRemainder==true ">
+                            <span class="errorColor">* Please Select StartDate</span>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <label>Select EndDate</label>
+                        <input type="date" class="form-control" formControlName="EndDate" [min]="startdate | date:'yyyy-MM-dd'"
+                            [max]="(PlanExpiryDate)*1000 | date:'yyyy-MM-dd'" (change)="mindate($event)">
+                        <div
+                            *ngIf="SubmitRemainder.controls['EndDate'].status == 'INVALID' && this.SubmitRemainder.controls['EndDate'].value==''&& this.submitRemainder==true ">
+                            <span class="errorColor">* Please Select EndDate</span>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="yearlydate" class="mt-n1" formGroupName="RemainderSchedules" >
+                    <label>Date</label>
+                    <input type="date" class="form-control"  [min]="startdate | date:'yyyy-MM-dd'"   [max]="midDate | date:'yyyy-MM-dd'" formControlName="Date" 
+                    >
+                </div>
+                <ng-container *ngIf="Monthly">
+                    <div class="row" formGroupName="RemainderSchedules">
+                        <h3>Monthly Date </h3>
+                        <div class="col-md-10">
+                            <div class="container">
+                                <ul class="ks-cboxtags">
+                                    <li><input type="checkbox" id="checkboxOne" value="1"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkboxOne">1</label></li>
+                                    <li><input type="checkbox" id="checkbox2" value="2"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox2">2</label></li>
+                                    <li><input type="checkbox" id="checkbox3" value="3"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox3">3</label></li>
+                                    <li><input type="checkbox" id="checkbox4" value="4"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox4">4</label></li>
+                                    <li><input type="checkbox" id="checkbox5" value="5"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox5">5</label></li>
+                                    <li><input type="checkbox" id="checkbox6" value="6"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox6">6</label></li>
+                                    <li><input type="checkbox" id="checkbox7" value="7"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox7">7</label></li>
+                                    <li><input type="checkbox" id="checkbox8" value="8"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox8">8</label></li>
+                                    <li><input type="checkbox" id="checkbox9" value="9"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox9">9</label></li>
+                                    <li><input type="checkbox" id="checkbox10" value="10"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox10">10</label></li>
+                                    <li><input type="checkbox" id="checkbox11" value="11"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox11">11</label></li>
+                                    <li><input type="checkbox" id="checkbox12" value="12"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox12">12</label></li>
+                                    <li><input type="checkbox" id="checkbox13" value="13"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox13">13</label></li>
+                                    <li><input type="checkbox" id="checkbox14" value="14"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox14">14</label></li>
+                                    <li><input type="checkbox" id="checkbox15" value="15"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox15">15</label></li>
+                                    <li><input type="checkbox" id="checkbox16" value="16"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox16">16</label></li>
+                                    <li><input type="checkbox" id="checkbox17" value="17"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox17">17</label></li>
+                                    <li><input type="checkbox" id="checkbox18" value="18"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox18">18</label></li>
+                                    <li><input type="checkbox" id="checkbox19" value="19"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox19">19</label></li>
+                                    <li><input type="checkbox" id="checkbox20" value="20"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox20">20</label></li>
+                                    <li><input type="checkbox" id="checkbox21" value="21"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox21">21</label></li>
+                                    <li><input type="checkbox" id="checkbox22" value="22"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox22">22</label></li>
+                                    <li><input type="checkbox" id="checkbox23" value="23"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox23">23</label></li>
+                                    <li><input type="checkbox" id="checkbox24" value="24"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox24">24</label></li>
+                                    <li><input type="checkbox" id="checkbox25" value="25"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox25">25</label></li>
+                                    <li><input type="checkbox" id="checkbox26" value="26"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox26">26</label></li>
+                                    <li><input type="checkbox" id="checkbox27" value="27"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox27">27</label></li>
+                                    <li><input type="checkbox" id="checkbox28" value="28"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox28">28</label></li>
+                                    <li><input type="checkbox" id="checkbox29" value="29"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox29">29</label></li>
+                                    <li><input type="checkbox" id="checkbox30" value="30"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox30">30</label></li>
+                                    <li><input type="checkbox" id="checkbox31" value="31"
+                                            (click)="$any($event.target).checked ? (datesChecked = true) : datesChecked = false;monthlydate($event,datesChecked)"><label
+                                            for="checkbox31">31</label></li>
+                                </ul>
+
+                            </div>
+                            <div *ngIf="monthlyDatesErr" class="errorColor" style="margin-top: 69px;">* Please
+                                Select atleast One Date </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <div class="container" *ngIf="weeklyTab">
+                    <h3>Weekly</h3>
+                    <div class="row">
+                        <article>
+                            <input type="checkbox" id="feature1" value="MON"
+                                (click)="$any($event.target).checked ? (weekCheck = true) : weekCheck = false;weekDays($event,weekCheck)" />
+                            <div>
+                                Monday
+                            </div>
+                        </article>
+                        <article>
+                            <input type="checkbox" id="feature2" value="TUE"
+                                (click)="$any($event.target).checked ? (weekCheck = true) : weekCheck = false;weekDays($event,weekCheck)" />
+                            <div>
+                                Tuesday
+                            </div>
+                        </article>
+                        <article>
+                            <input type="checkbox" id="feature3" value="WED"
+                                (click)="$any($event.target).checked ? (weekCheck = true) : weekCheck = false;weekDays($event,weekCheck)" />
+                            <div>
+                                Wednesday
+                            </div>
+                        </article>
+                        <article>
+                            <input type="checkbox" id="feature4" value="THU"
+                                (click)="$any($event.target).checked ? (weekCheck = true) : weekCheck = false;weekDays($event,weekCheck)" />
+                            <div>
+                                Thursday
+                            </div>
+                        </article>
+                        <article>
+                            <input type="checkbox" id="feature4" value="FRI"
+                                (click)="$any($event.target).checked ? (weekCheck = true) : weekCheck = false;weekDays($event,weekCheck)" />
+                            <div>
+                                Friday
+                            </div>
+                        </article>
+                        <article>
+                            <input type="checkbox" id="feature4" value="SAT"
+                                (click)="$any($event.target).checked ? (weekCheck = true) : weekCheck = false;weekDays($event,weekCheck)" />
+                            <div>
+                                Saturday
+                            </div>
+                        </article>
+                        <article>
+                            <input type="checkbox" id="feature4" value="SUN"
+                                (click)="$any($event.target).checked ? (weekCheck = true) : weekCheck = false;weekDays($event,weekCheck)" />
+                            <div>
+                                Sunday
+                            </div>
+                        </article>
+                    </div>
+                    <div *ngIf="weekdayserr" class="errorColor">*Please Select atleast one Day</div>
+                </div>
+                <div class="container" style="margin-top:60px">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Add Reminder Timing</h4>
+                            <div>
+                                <div class="row">
+                                    <!-- <div class="col-md-4 mt-n1">
+                                    <input type="text" class="form-control"  placeholder="message"  [(ngModel)]="value.massage" #name="ngModel" name="value{{i}}">
+                                </div> -->
+                                    <div class="col-md-5 mt-n1" formGroupName="RemainderSchedules">
+                                        <input type="time" class="form-control" placeholder="Day/time"
+                                            formControlName="Time" required>
+                                        <div
+                                            *ngIf="SubmitRemainder.value['RemainderSchedules']['Time']== ''&& this.submitRemainder==true ">
+                                            <span class="errorColor">* Please Set Time</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 mt-n1">
+                                        <!-- <button (click)="removetimevalue(i)" class="btn btn-danger">Remove</button> -->
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- <button (click)="addtimevalue()" class="btn btn-info  mt-n1">+ADD Timming </button> -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+     <button type="submit" class="anvayaabutton-primary" (click)="createremainder()" > Create Reminder</button>
+</div>
+            
+<div *ngIf="notemplet">
+    <div style="margin-top:25px" class="row">
+        <div  class="col-md-8 text-center" style="color:red;margin-top:25px" >
+            <h5> * No Templats Founds</h5>
+        </div>
+        <div class="col-md-4" style="margin:auto"> <button class="btn btn-success"(click)="navTemp()"> + Create Templet</button></div>
+
+    </div>
+</div>
+
+    </form>
+</div>

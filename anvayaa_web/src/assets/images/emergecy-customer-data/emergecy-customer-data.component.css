@@ -1,0 +1,199 @@
+/* @font-face {
+    font-family: 'Poppins', sans-serif;
+    src: url(https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap);
+    
+  } */
+
+  @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+  .bodycontent{
+    margin-top: 100px;
+    margin-left: 110px;
+
+  }
+body{
+    font-family:'Poppins', sans-serif; 
+}
+
+
+body{
+    font-family: Poppins;
+}
+ 
+.wrapper {
+ max-width: min-content;
+
+}
+
+.image--cover {
+width: 65px;
+height: 70px;
+border: 1px solid;
+
+object-position: center right;
+}
+
+.row{
+         margin-right: calc(0px * var(--bs-gutter-x));
+}
+.wrapper {
+    display: flex;
+    align-items: stretch;
+}
+
+.content{
+    background-color: #D6D4D4;
+    margin: 0%;
+}
+
+th{
+    /* height: 153px; */
+    vertical-align: middle;
+}
+
+.statustables{
+    background-color: #F2F2F2;
+    height: 250px;
+    margin: 15px;
+    border-radius: 17px;
+    overflow: overlay;
+}
+
+.contactedtables{
+        background-color: #F2F2F2;
+        height: 100px;
+        margin: 15px;
+        border-radius: 17px;
+        overflow: overlay;
+}
+
+.hospitaldiv{
+    overflow-wrap: anywhere;
+}
+.fontfour{
+    font-weight: 400;
+}
+h6{
+    text-align: -webkit-center;
+}
+
+.previousebutton{
+    text-align: initial;
+}
+
+.vl {
+    border-left: 6px solid #f1f1f1f1;
+
+  }
+
+ 
+
+
+  body {
+   background-color: #ffff;
+   height:110px
+  }
+  h3 {
+    font-family: Lato;
+    text-align: center;
+    color: #0080ff;
+  }
+  
+  .circles {
+    height: 0.938em;
+    width: 0.938em;
+    border: 0.188em solid #914572;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  
+  .active {
+    background-color: #F79122;
+  }
+  
+  .circle-desc-active {
+    font-weight: bold;
+  }
+  
+  .bar {
+    width: 100px;
+    height: 0.063em;
+    margin-bottom: 0.469em;
+    border: 0.031em solid #914572;
+    color: #914572;
+    background-color: #914572;
+    display: inline-block;
+    text-align: center;
+    margin: "0 auto";
+  }
+  
+  .container {
+    min-width: 320px;
+    margin: "0px auto";
+    text-align: center;
+  }
+  
+  .circle-desc {
+    position: absolute;
+    top: 45em;
+    font-size: 10px;
+    width: auto;
+    max-width: 9.375em;
+    margin-left: -2.75em;
+  }
+  
+  .time-desc{
+    position: absolute;
+    top: 45em;
+    font-size: 9px;
+    width: auto;
+    max-width: 11.375em;
+    margin-left: -3.75em; 
+  }
+  @media only screen and (max-width: 320px) {
+    body {
+      font-size: 20%;
+    }
+  }
+  
+  /*extra small devices*/
+  @media only screen and (max-width: 600px) {
+    body {
+      font-size: 40%;
+    }
+  }
+  
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (min-width: 600px) {
+    body {
+      font-size: 60%;
+    }
+  }
+  
+  /* Medium devices (landscape tablets, 768px and up) */
+  @media only screen and (min-width: 768px) {
+    body {
+      font-size: 80%;
+    }
+  }
+  
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+    body {
+      font-size: 100%;
+    }
+  }
+  
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 1200px) {
+    body {
+      font-size: 120%;
+    }
+  }
+  
+  
+  /* New development  */
+  .accordion-button{
+    height: 40px !important;
+
+  }

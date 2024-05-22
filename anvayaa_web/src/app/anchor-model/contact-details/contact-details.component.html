@@ -1,0 +1,114 @@
+
+ <div class="col-md-8" id="contactform" >
+ <form *ngFor="let data of anchorsContactDetails"   #userlogin = "ngForm" (ngSubmit)="updateachors()" id="anchorsdata" [formGroup]="anchorsdata">
+ <div  class="previosButton" (click)="dashboard()"><img src="../../../assets/images/previous.png"></div>
+ <div class="col-md-10 container">
+     <div class="col-md-2" id="heading">
+         <h5 >Contact Details</h5>
+     </div>
+     <br>
+     <div class="row">
+        
+
+         <!-- <div class="form-group col-md-4 inputBox" >
+             <input type="text" name="CityName" formControlName="CityName"  onkeyup="this.setAttribute('value', this.value);" value=""  ngModel="{{data.CityName}}" required>
+           
+             <label>CityName</label>
+             <div class="row" *ngIf='this.anchorsdata.controls["CityName"].status=="INVALID" && this.bankDetailsSubmitBtn==true'>
+                <p>*CityName  Mandatory && only alphabets</p>
+                </div>
+         </div> -->
+         <div class="form-group col-md-4 inputBox" >
+            <input type="text" name="Name" formControlName="Name"  onkeyup="this.setAttribute('value', this.value);" value=""  ngModel="{{data.Name}}"  required>
+          
+            <label>Name</label>
+            <div class="row" *ngIf='this.anchorsdata.controls["Name"].status=="INVALID" && this.bankDetailsSubmitBtn==true'>
+                <p>*Name  Mandatory && Only A   lphabets</p>
+                </div>
+        </div>  
+         
+
+     </div>
+ 
+     <br>
+     <div class="row">
+         <div class=" col-md-4 inputBox">
+             <input type="text" name="Email" formControlName="Email" 
+             value="" ngModel="{{data.Email}}" required>
+
+             <label>Email:</label>
+             <div class="row" *ngIf='this.anchorsdata.controls["Email"].status=="INVALID" && this.bankDetailsSubmitBtn==true' >
+                <p>*Email  Mandatory</p>
+                </div>
+         </div>
+         <div class=" col-md-4 inputBox">
+             <input type="text" name="MobileNumber" formControlName="MobileNumber" 
+                 onkeyup="this.setAttribute('value', this.value);" value="" ngModel="{{data.MobileNumber}}" maxlength="10" required>
+
+             <label>MobileNumber</label>
+             <div class="row" *ngIf='this.anchorsdata.controls["MobileNumber"].status=="INVALID" && this.bankDetailsSubmitBtn==true'>
+               
+               
+                <p>*MobileNumber  Mandatory</p>
+                </div>
+         </div>
+         
+     </div>
+     <br>
+
+
+<div class="row">
+    <div class=" col-md-4 inputBox">
+        <input type="text" name="Aadhar" formControlName="Aadhar" 
+            onkeyup="this.setAttribute('value', this.value);" value="" ngModel="{{data.Aadhar}}"  required>
+          
+        <label>Aadhar</label>
+        <div class="row" *ngIf='this.anchorsdata.controls["Aadhar"].status=="INVALID" && this.bankDetailsSubmitBtn==true'>
+            <p>*Aadhar  Mandatory && it should ne in correct formate </p>
+            </div>
+    </div>
+    <div class=" col-md-4 inputBox">
+             <input type="file" accept="img/" formControlName="adharfile"  (change)="onFileUploadAdhar($event)" >
+             <div class="row" *ngIf='this.anchorsdata.controls["adharfile"].status=="INVALID" && this.bankDetailsSubmitBtn==true'>
+                <p>*adharfile  Mandatory</p>
+                </div>
+    </div>
+</div>
+
+
+     <div class="row">
+
+         <div class=" col-md-4 inputBox">
+             <input type="text" name="PanCard" formControlName="PanCard" 
+                 onkeyup="this.setAttribute('value', this.value);" value="" ngModel="{{data.PanCard}}" required>
+                 
+             <label>PanCard</label> 
+             <div class="row" *ngIf='this.anchorsdata.controls["PanCard"].status=="INVALID" && this.bankDetailsSubmitBtn==true'>
+                <p>*PanCard  Mandatory && Should Be In Currect Sequence</p>
+                </div>
+         </div>
+         <div class=" col-md-4 inputBox">
+
+              <input type="file" accept="img/" formControlName="PanCardimg" (change)="onFileUploadPan($event)" >
+              <div class="row" *ngIf='this.anchorsdata.controls["PanCardimg"].status=="INVALID" && this.bankDetailsSubmitBtn==true'>
+                <p>*PanCard  Mandatory</p>
+                </div>
+         </div>
+       
+       <div>
+        <button type="button" class="btn btn-info" id="submitbankdata" (click)="updateachors()">SUBMIT DETAILS</button>
+       </div>  
+        
+     </div>
+  
+   
+      
+         
+       
+     
+     <br>
+     
+
+ </div>
+ </form>
+</div>

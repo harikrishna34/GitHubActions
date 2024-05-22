@@ -1,0 +1,25 @@
+.maiDiv{
+    margin-top: 90px;
+    margin-left: 110px;
+    /* margin-right: 10px; */
+}
+
+
+
+.row {
+
+    margin-right: calc(0 * var(--bs-gutter-x));
+    margin-left: calc(0 * var(--bs-gutter-x));
+}
+.sm-text{
+    font-size: smaller
+}
+
+.grey-clr{
+    color: #aaa6a6
+}
+
+.vl {
+    border-left: 6px solid #f1f1f1f1;
+    height: 500px;
+  }

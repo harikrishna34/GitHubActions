@@ -1,0 +1,125 @@
+.bodycontent{
+    margin-top: 100px;
+    margin-left: 120px;
+    margin-right: 12px;
+  }
+  .hover-lift-light {
+    transition: box-shadow .25s ease,transform .25s ease,color .25s ease,background-color .15s ease-in;
+}
+.text-decoration-none {
+    text-decoration: none!important;
+}
+.py-4 {
+    padding-top: 1.5rem!important;
+    padding-bottom: 1.5rem!important;
+}
+.align-items-center {
+    align-items: center!important;
+}
+.border-0 {
+    border: 0!important;
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(30,46,80,.09);
+    border-radius: 0.25rem;
+}
+
+.icon-circle-lg {
+    width: 4rem;
+    height: 4rem;
+}
+.icon-circle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 50%;
+}
+
+
+.mt-6 {
+    margin-top: 4rem!important;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem!important;
+}
+
+.badge {
+    padding: 0.4rem 0.65rem 0.25rem;
+}
+.text-uppercase-bold-sm {
+    text-transform: uppercase!important;
+    font-weight: 500!important;
+    letter-spacing: 2px!important;
+    font-size: .85rem!important;
+}
+
+
+.icon-circle-lg {
+    width: 4rem;
+    height: 4rem;
+}
+.icon-circle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 5.2rem;
+    height: 5.2rem;
+    border-radius: 50%;
+    font-size: 30px;
+}
+.bg-pastel-primary {
+    background-color: #F79122!important;
+}
+
+.icon-circle[class*=text-] [fill]:not([fill=none]), .icon-circle[class*=text-] svg:not([fill=none]), .svg-icon[class*=text-] [fill]:not([fill=none]), .svg-icon[class*=text-] svg:not([fill=none]) {
+    fill: currentColor!important;
+}
+.icon-circle-lg>svg {
+    width: 2rem;
+    height: 2rem;
+}
+
+.shadow-sm {
+    box-shadow: 0 .125rem .25rem rgba(35,38,45,.09)!important;
+}
+
+
+.header{
+    color:#914572
+}
+
+.list {
+    max-width: 550px;
+    margin: auto;
+  }
+  
+  li {
+    margin-bottom: 5px;
+  }
+
+  .grab {cursor: -webkit-grab; cursor: grab;}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+.RequestStyle {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s ease-in-out;
+    background-color: transparent;
+    cursor: pointer;
+}

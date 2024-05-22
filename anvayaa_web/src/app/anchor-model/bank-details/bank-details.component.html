@@ -1,0 +1,79 @@
+<div class="col-md-8" id="bankform">anchorsBankDetails
+    <form  (ngSubmit)="updateachors()" #userlogin="ngForm" id="anchorsdata"
+        [formGroup]="anchorsdata">
+        <div class="previosButton" (click)="dashboard()"><img src="../../../assets/images/previous.png"></div>
+        <div class="col-md-10 container">
+
+            <div class="col-md-3" id="heading">
+                <h5>Bank Details</h5>
+            </div>
+            <br>
+            <div class="row">
+
+
+
+                <div class="form-group col-md-4 inputBox">
+                    <input type="text" name="AccountNumber" formControlName="AccountNumber" minlength="9" maxlength="25"
+                         onkeyup="this.setAttribute('value', this.value);" value=""
+                        >
+
+                    <label>AccountNumber</label>
+                    <!-- <div class="form-group col-md-4 inputBox" >
+            </div>   -->
+                    <div class="row"
+                        *ngIf='this.anchorsdata.controls["AccountNumber"].status=="INVALID" && this.bankDetailsSubmitBtn==true'>
+                        <p>*Account Number Mandatory</p>
+                    </div>
+                </div>
+                <div class=" col-md-4 inputBox">
+                    <input type="text" name="BankName" formControlName="BankName"  value="" minlength="2"
+                        maxlength="100" >
+
+                    <label>BankName:</label>
+                    <div class="row"
+                        *ngIf='this.anchorsdata.controls["BankName"].status=="INVALID" && this.bankDetailsSubmitBtn==true'>
+                        <p>*BankName Mandatory</p>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="row">
+                <div class=" col-md-4 inputBox">
+
+                    <select class="form-select" name="Type" formControlName="Type">
+                        <option selected value="">Select Account Type</option>
+                        <option value="Saving">Saving</option>
+                        <option value="Current">Current</option>
+
+                    </select>
+                </div>
+      
+                <div class=" col-md-4 inputBox">
+                    <input type="text" name="IFSC" formControlName="IFSC" 
+                        onkeyup="this.setAttribute('value', this.value);" value="">
+
+                    <label>IFSC</label>
+                    <div class="row"
+                        *ngIf='this.anchorsdata.controls["IFSC"].status=="INVALID" && this.bankDetailsSubmitBtn==true'>
+                        <p>*IFSC Mandatory</p>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <input type="file" accept="img/" (change)="onFileUpload($event)">
+            </div>
+            <br>
+            <button type="button" class="btn btn-info" id="submitbankdata" (click)="updateachors()">SUBMIT
+                DETAILS</button>
+
+            <br>
+        </div>
+    
+    </form>
+  
+</div>
+

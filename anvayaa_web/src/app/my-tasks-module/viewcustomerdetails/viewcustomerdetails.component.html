@@ -1,0 +1,636 @@
+<!-- Modal -->
+<div class="modal fade" id="memberboarding" tabindex="-1" aria-labelledby="memberboardingLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="memberboardingLabel">{{type}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          #memberboardingclose></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="ScheduleMemberOnBoarding">
+          <div class="row">
+            <div class="col-md-6">
+              <Label> Select Date</Label>
+              <input type="date" class="form-control" formControlName="ScheduledDate"
+                [min]="startdate | date:'yyyy-MM-dd'" placeholder="Select Date" required>
+              <div *ngIf=" ScheduleMemberOnBoarding.controls['ScheduledDate'].status == 'INVALID' && mbpress == true"
+                class="errorColor">*Enter Date</div>
+            </div>
+            <div class="col-md-6">
+              <label>Select Care Manager</label>
+              <select class="form-select" formControlName="FieldEmployeeID">
+                <option selected disabled value="">Select Employee</option>
+                <option *ngFor="let employee of employees" value={{employee.EmployeeID}}>{{employee.FirstName}} {{
+                  employee.LastName}}</option>
+              </select>
+              <div *ngIf=" ScheduleMemberOnBoarding.controls['FieldEmployeeID'].status == 'INVALID' && mbpress == true"
+                class="errorColor">*Select Employee</div>
+            </div>
+            <div class="col-md-6">
+              <label>Select BackUp Care Manager</label>
+              <select class="form-select" formControlName="BackUpFieldEmployeeID">
+                <option selected disabled value="">Select Employee</option>
+                <option *ngFor="let employee of employees" value={{employee.EmployeeID}}>{{employee.FirstName}} {{
+                  employee.LastName}}</option>
+              </select>
+              <!-- <div
+                *ngIf=" ScheduleMemberOnBoarding.controls['BackUpFieldEmployeeID'].status == 'INVALID' && mbpress == true"
+                class="errorColor">*Select Employee</div> -->
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <Label>Comment</Label>
+            <textarea type="text" class="form-control" formControlName="Note" required></textarea>
+            <div *ngIf=" ScheduleMemberOnBoarding.controls['Note'].status == 'INVALID' && mbpress == true"
+              class="errorColor">*Comment</div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="anvayaabutton-primary" (click)="savememberboarding()" id="closeModal">Save</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="benficiary" tabindex="-1" aria-labelledby="benficiaryLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="benficiaryLabel">{{type}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #beneficiaryclose></button>
+      </div>
+      <div class="modal-body">
+        <div class="container" *ngIf="!visible">
+          <form [formGroup]="AddingBeneficiaryone">
+            <div class="row">
+              <u>
+                <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-primary mr-2">Primary
+                    Beneficiary</i>
+                </h6>
+              </u>
+              <div class="row">
+                <div class="col-md-6">
+                  <Label> Name</Label>
+                  <input type="text" class="form-control" placeholder="Enter Name" formControlName="Name" required>
+                  <div *ngIf=" AddingBeneficiaryone.controls['Name'].status == 'INVALID' && benpress == true"
+                    class="errorColor">*Enter Name
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <Label> Mobile Number</Label>
+                  <input type="tel" class="form-control" placeholder="Enter Number" formControlName="MobileNumber"
+                    minlength="10" maxlength="10" pattern="^[6-9]\d{9}$" required>
+                  <div *ngIf=" AddingBeneficiaryone.controls['MobileNumber'].status == 'INVALID' && benpress == true"
+                    class="errorColor">*Enter Mobile Number
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <span>Select Gender</span><b></b>
+                  <label for="requestStatus" class="field select">
+                    <select class="form-select" formControlName="Gender">
+                      <option selected="" disabled="" value="">Select Gender</option>
+                      <option value="Male">MALE</option>
+                      <option value="Female">FEMALE</option>
+                    </select>
+                    <i class="arrow double"></i>
+                  </label>
+                  <div *ngIf=" AddingBeneficiaryone.controls['Gender'].status == 'INVALID' && benpress == true"
+                    class="errorColor">*Enter Gender
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <Label> Date Of Birth</Label>
+                  <input type="date" class="form-control" [max]="startdate | date:'yyyy-MM-dd'"
+                    placeholder="Enter Date Of Birth" formControlName="DOB" (change)="dateofbirthoneben()" required>
+                  <!-- <div *ngIf=" AddingBeneficiaryone.controls['DOB'].status == 'INVALID' && benpress == true"
+                  class="errorColor">*Enter DOB
+                </div> -->
+                </div>
+                <div class="col-md-4">
+                  <Label> Age</Label>
+                  <input type="number" min="1" max="120" class="form-control" placeholder="Enter Age"
+                    formControlName="Age" readonly>
+                  <!-- <div *ngIf=" AddingBeneficiaryone.controls['Age'].status == 'INVALID' && benpress == true"
+                  class="errorColor">*Enter Age
+                </div> -->
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <Label>Address</Label>
+                  <textarea type="text" class="form-control" placeholder="Enter Address" formControlName="Address"
+                    required></textarea>
+                  <div *ngIf=" AddingBeneficiaryone.controls['Address'].status == 'INVALID' && benpress == true"
+                    class="errorColor">*Enter Address
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <Label>Landmark</Label>
+                  <textarea type="text" class="form-control" placeholder="Enter Landmark" formControlName="Landmark"
+                    required></textarea>
+                  <div *ngIf=" AddingBeneficiaryone.controls['Landmark'].status == 'INVALID' && benpress == true"
+                    class="errorColor">*Enter Landmark
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="modal-footer">
+                <button type="button" class="anvayaabutton-primary" (click)="onclick()">Next</button>
+
+
+
+              </div>
+            </div>
+          </form>
+
+        </div>
+
+        <div class="container" *ngIf="visible">
+          <form [formGroup]="AddingBeneficiarytwo">
+            <div class="row">
+              <u>
+                <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-primary mr-2">Secondary
+                    Beneficiary</i>
+                </h6>
+              </u>
+              <div class="col-md-6">
+                <Label> Name</Label>
+                <input type="text" class="form-control" placeholder="Enter Name" formControlName="Name"
+                  (change)="secondarybeneficiarycheck()" required>
+                <div *ngIf=" AddingBeneficiarytwo.controls['Name'].status == 'INVALID' && bentwopress == true"
+                  class="errorColor">*Enter Name
+                </div>
+              </div>
+              <div class="col-md-6">
+                <Label> Mobile Number</Label>
+                <input type="tel" class="form-control" placeholder="Enter Number" formControlName="MobileNumber"
+                  minlength="10" maxlength="10" pattern="^[6-9]\d{9}$" (change)="secondarybeneficiarycheck()" required>
+                <div *ngIf=" AddingBeneficiarytwo.controls['MobileNumber'].status == 'INVALID' && bentwopress == true"
+                  class="errorColor">*Enter Mobile Number
+                </div>
+              </div>
+              <div class="col-md-4">
+                <span>Select Gender</span><b></b>
+                <label for="requestStatus" class="field select">
+                  <select class="form-select" formControlName="Gender" (change)="secondarybeneficiarycheck()">
+                    <option selected="" value="">Select Gender</option>
+                    <option value="Male">MALE</option>
+                    <option value="Female">FEMALE</option>
+                  </select>
+                  <i class="arrow double"></i>
+                </label>
+                <div *ngIf=" AddingBeneficiarytwo.controls['Gender'].status == 'INVALID' && bentwopress == true"
+                  class="errorColor">*Enter Gender
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <Label> Date Of Birth</Label>
+                <input type="date" class="form-control" [max]="startdate | date:'yyyy-MM-dd'" placeholder="Enter DOB"
+                  formControlName="DOB" (change)="secondarybeneficiarycheck()" required>
+                <!-- <div *ngIf=" AddingBeneficiarytwo.controls['DOB'].status == 'INVALID' && bentwopress == true"
+                  class="errorColor">*Enter DOB
+                </div> -->
+              </div>
+              <div class="col-md-4">
+                <Label>Age</Label>
+                <input type="number" class="form-control" placeholder="Enter Age" formControlName="Age"
+                  (change)="secondarybeneficiarycheck()" min="1" max="120" readonly>
+                <!-- <div *ngIf=" AddingBeneficiarytwo.controls['Age'].status == 'INVALID' && bentwopress == true"
+                  class="errorColor">*Enter Age
+                </div> -->
+              </div>
+
+
+              <div class="modal-footer">
+                <button type="button" class="anvayaabutton-secondary" (click)="onclick()">Back</button>
+                <button type="button" class="anvayaabutton-primary" (click)="savebeneficiary()" *ngIf="skip"
+                  id="closeModal">Skip&Save</button>
+                <button type="button" class="anvayaabutton-primary-sm" (click)="savebeneficiary()" *ngIf="!skip"
+                  id="closeModal">Save</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="main-body">
+    <div class="row gutters-sm">
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <div class="mt-3">
+                <h4>{{customer?.Name}}</h4>
+                <p class="text-secondary mb-1">{{customer?.CustomerPackageObj?.AliasName}}</p>
+                <p class="text-muted font-size-sm">{{customer?.CustomerPackageObj?.ServiceAreaName}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+              <h6 class="mb-0">Care Manager</h6>
+              <span class="text-secondary">{{customer?.CareManagerObj?.FirstName}}
+                {{customer?.CareManagerObj?.LastName}}</span>
+              <span *ngIf="caremanager "><button type="button" class="anvayaabutton-primary-sm" data-bs-toggle="modal"
+                  data-bs-target="#employeedetails" (click)="getallemployeesdetails()"><i class="fa fa-edit"
+                    aria-hidden="true"></i> Edit</button></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+              <h6 class="mb-0">BackUp Care Manager</h6>
+              <span class="text-secondary">{{customer?.BackUpCareManagerObj?.FirstName}}
+                {{customer?.BackUpCareManagerObj?.LastName}}</span>
+              <span *ngIf="backcaremanager"><button type="button" class="anvayaabutton-primary-sm" data-bs-toggle="modal"
+                  data-bs-target="#employeedetails" (click)="getallemployeesdetails()"><i class="fa fa-edit"
+                    aria-hidden="true"></i> Edit</button></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+              <h6 class="mb-0">Support Executive</h6>
+              <span class="text-secondary">{{customer?.SupportExecutiveObj?.FirstName}}
+                {{customer?.SupportExecutiveObj?.LastName}}</span>
+              <span *ngIf="SupportExecutive"><button type="button" class="anvayaabutton-primary-sm"  data-bs-toggle="modal"
+                  data-bs-target="#employeedetails" (click)="getallemployeesdetails()"><i class="fa fa-edit"
+                    aria-hidden="true"></i> Edit</button></span>
+            </li>
+          </ul>
+        </div>
+        <br>
+        <!-- area care manager -->
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <div class="row" [formGroup]="areamanagerForm">
+                <div class="mt-3">
+                  <h4>Area Manager</h4>
+                  <select class="form-select" aria-label="Default select example"
+                    formControlName="DedicatedFieldEmployeeID">
+                    <option selected value="" disabled> Select Area Manager</option>
+                    <option *ngFor="let areamanager of caremanagerData" value="{{areamanager.EmployeeID}}">
+                      {{areamanager.FirstName}} {{areamanager.LastName}}</option>
+                  </select>
+                </div>
+                <div class="mt-3" style="text-align: right;"><button class="anvayaabutton-primary"
+                    (click)="submitareamanager()">submit</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- area care manager -->
+        <div class="mb-3" *ngIf="CustomerRequirements">
+          <div class="card mt-3">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <h6 class="mb-0">Type</h6>
+                <span class="text-secondary">{{customer?.CustomerRequirements?.Type}}</span>
+                <span><button type="button" class="anvayaabutton-primary" data-bs-toggle="modal"
+                    data-bs-target="#customersmodal"><i class="fa fa-edit" aria-hidden="true"> Edit</i></button></span>
+              </li>
+            </ul>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <h6 class="mb-0">Comment: </h6>
+                <p style="height: 200px; padding-right: 200px;">{{customer?.CustomerRequirements?.Comments}}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="mb-3" *ngIf="MemberOnBoarding">
+          <div class="card mt-3">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <h6 class="mb-0">Date</h6>
+                <span class="text-secondary"></span>
+                <span><button type="button" class="anvayaabutton-primary" data-bs-toggle="modal"
+                    data-bs-target="#memberboarding" (click)="getallemployeesdetails()"><i class="fa fa-edit"
+                      aria-hidden="true"></i> Edit</button></span>
+              </li>
+            </ul>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <h6 class="mb-0">Care Manager</h6>
+                <span class="text-secondary">{{customer?.CareManagerObj?.FirstName}}
+                  {{customer?.CareManagerObj?.LastName}}</span>
+              </li>
+            </ul>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <h6 class="mb-0">BackUp Care Manager</h6>
+                <span class="text-secondary">{{customer?.BackUpCareManagerObj?.FirstName}}
+                  {{customer?.BackUpCareManagerObj?.LastName}}</span>
+              </li>
+            </ul>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <h6 class="mb-0" style="height: 200px; padding-right: 200px;">Comment: </h6>
+                <p></p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card mb-3">
+          <div class="card-body">
+            <u>
+              <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-primary mr-2">Sponsor Details</i>
+              </h6>
+            </u>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Customer ID</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{customer?.CustRecID}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Full Name</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{customer?.Name}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Email</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{customer?.EmailID}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Phone</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{customer?.CountryCode}} {{customer?.MobileNumber}}
+              </div>
+            </div>
+            <hr>
+
+          </div>
+        </div>
+
+
+        <div class="row gutters-sm">
+          <div class="col-sm-6 mb-3" *ngFor="let Beneficiary of customer?.Beneficiaries">
+            <div class="card h-100">
+              <span class="card-body">
+                <u>
+                  <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-primary mr-2">Beneficiary
+                      Details</i></h6>
+                </u>
+
+                <div class="row" style="width: 400px;">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Name</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{Beneficiary?.Name}}
+                  </div>
+                </div>
+                <hr>
+                <div class="row" style="width: 400px;">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Gender</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{Beneficiary.Gender}}
+
+                  </div>
+                </div>
+                <hr>
+                <div class="row" style="width: 400px;">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">MobileNo</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{Beneficiary.MobileNumber}}
+
+                  </div>
+                </div>
+                <hr>
+                <div class="row" style="width: 400px;">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Age</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{Beneficiary.Age}}
+                  </div>
+                </div>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header" style="text-align: center;">
+            <strong>Additional Members</strong>
+          </div>
+          <div class="card-body">
+            <from #f="ngForm" [formGroup]="additionalmembers">
+              <div class="row">
+                <div class="col-md-3">
+                  <Label>First Name</Label>
+                  <input type="text" class="form-control" placeholder="Enter First Name" formControlName="FirstName"
+                    name="FirstName" required>
+                </div>
+                <div class="col-md-3">
+                  <Label>Last Name</Label>
+                  <input type="text" class="form-control" placeholder="Enter Last Name" formControlName="LastName"
+                    name="LastName" required>
+                </div>
+                <div class="col-md-3">
+                  <Label>Email ID</Label>
+                  <input type="email" class="form-control" placeholder="Enter Email ID" formControlName="EmailID"
+                    name="EmailID" required>
+                </div>
+                <div class="col-md-3">
+                  <span class="formdetails">Type</span>
+                  <select class="form-select" formControlName="Type" placeholder="Type">
+                    <option selected value="" disabled>Select Type</option>
+                    <option value="Co_Sponsor">
+                      <li><span class="dropdown-item-text">Co Sponsor</span></li>
+                    </option>
+                    <option value="Additional_Member">
+                      <li><span class="dropdown-item-text">Additional Member</span></li>
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <Label>Mobile Number</Label>
+                <div class="ng-autocomplete">
+                  <ngx-intl-tel-input [enableAutoCountrySelect]="false" [enablePlaceholder]="true"
+                    [searchCountryFlag]="true" [searchCountryField]="[SearchCountryField.Iso2,SearchCountryField.Name]"
+                    (countryChange)="onCountryChange($event)" [selectedCountryISO]="CountryISO.India"
+                    formControlName="CountryCode" [selectFirstCountry]="true" [maxLength]="15"
+                    [phoneValidation]="false" [separateDialCode]="separateDialCode"
+                    [numberFormat]="PhoneNumberFormat.National" name="CountryCode" required>
+                  </ngx-intl-tel-input>
+                </div>
+
+                <!-- <ngx-intl-tel-input
+                  [cssClass]="'custom'"
+                  [preferredCountries]="preferredCountries"
+                  [enableAutoCountrySelect]="true"
+                  [enablePlaceholder]="true"
+                  [searchCountryFlag]="true"
+                  [searchCountryField]="[
+                    SearchCountryField.Iso2,
+                    SearchCountryField.Name
+                  ]"
+                  [selectFirstCountry]="true"
+                  [selectedCountryISO]="CountryISO.India"
+                  [maxLength]="15"
+                  [phoneValidation]="true"
+                  [separateDialCode]="separateDialCode"
+                  [numberFormat]="PhoneNumberFormat.National"
+                  name="CountryCode"
+                  formControlName="CountryCode"
+                >
+                </ngx-intl-tel-input> -->
+
+              </div>
+            </from>
+
+            <div class="mt-3" style="text-align: right;"><button class="anvayaabutton-primary"
+                (click)="submitadditionalmembers()">submit</button></div>
+          </div>
+        </div>
+        <div class="mt-3">
+          <table class="table table-striped table-hover">
+            <thead class="tablehead">
+                <tr>
+                    <th scope="col"  style="text-align: center;">S.No</th>
+                    <th scope="col"  style="text-align: center;">Member ID</th>
+                    <th scope="col"  style="text-align: center;">Customer Name</th>
+                    <th scope="col"  style="text-align: center;">Mobile Number</th>
+                    <th scope="col"  style="text-align: center;">E-mail ID</th>
+                    <th scope="col"  style="text-align: center;">Member Type</th>
+                    <th scope="col"  style="text-align: center;">Country Name</th>
+                    <th scope="col"  style="text-align: center;">Action</th>
+          
+  
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="tablecur" *ngFor="let Customer of this.customer ;let i=index">
+                    <td  style="text-align: center;">{{i+1}}</td>
+                    <td  style="text-align: center;">{{Customer?.AdditionalMemberID}}</td>
+                    <td  style="text-align: center;">{{Customer?.FirstName| uppercase}} {{Customer?.LastName| uppercase}}  </td>
+                    <td  style="text-align: center;">({{Customer?.CountryCode}}) {{Customer?.MobileNumber}}</td>
+                    <td  style="text-align: center;">{{Customer?.EmailID}}</td>
+                    <td  style="text-align: center;">{{Customer?.Type}}</td>
+                    <td style="text-align: center;">{{Customer?.CountryName}}</td>
+                    <td  style="text-align: center;"><button class="anvayaabutton-primary" title="Remove" (click)="addtochat(Customer)">Add to chat</button></td>
+              
+                </tr>
+  
+            </tbody>
+        </table>
+        </div>
+        
+      </div>
+    </div>
+    <div class="mb-3" *ngIf="Benficiary && customer?.Beneficiaries?.length == 0">
+      <span><button type="button" class="anvayaabutton-primary" data-bs-toggle="modal" data-bs-target="#benficiary"><i
+            class="fa fa-edit" aria-hidden="true"></i>Add Beneficiary</button></span>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="employeedetails" tabindex="-1" aria-labelledby="employeedetailsLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="employeedetailsLabel">{{type|replaceUnderscore}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #employeeeedetails></button>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-6">
+          <strong><label>Select</label></strong>
+          <select class="form-select" name="EmployeeID" [(ngModel)]="EmployeeID" required>
+            <option selected disabled value="">Select Employee</option>
+            <option *ngFor="let employee of employees" value={{employee.EmployeeID}}>{{employee.FirstName|titlecase}} {{
+              employee.LastName|titlecase}}</option>
+          </select>
+          <div *ngIf="EmployeeID == ''" class="errorColor">*Select Employee</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="anvayaabutton-primary" (click)="saveempdetails()" id="closeModal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--customer Modal -->
+<div class="modal fade" id="customersmodal" tabindex="-1" aria-labelledby="customersmodalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="customersmodalLabel">{{type}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #customerclose></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="AddCustomerRequirements">
+          <div class="col-md-6">
+            <Label>Type</Label>
+            <input type="text" class="form-control" placeholder="Type" formControlName="Type" required>
+            <div *ngIf=" AddCustomerRequirements.controls['Type'].status == 'INVALID' && customerpress == true"
+              class="errorColor">*Enter Type</div>
+          </div>
+          <div class="col-md-12">
+            <Label>Comment</Label>
+            <textarea type="text" class="form-control" formControlName="Comments" required></textarea>
+            <div *ngIf=" AddCustomerRequirements.controls['Comments'].status == 'INVALID' && customerpress == true"
+              class="errorColor">*Enter Comment</div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="anvayaabutton-primary" (click)="savecustomerdetails()" id="closeModal">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <ngx-spinner type="ball-scale-multiple">loading...</ngx-spinner> -->

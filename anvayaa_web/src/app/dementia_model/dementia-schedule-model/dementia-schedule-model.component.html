@@ -1,0 +1,387 @@
+<div class="bodycontent">
+    <div class="row">
+        <div class="col-md-2">
+            <button class="btn anvayaaButton" id="viewAllCustomers" (click)="onAllCustomersClick()">View All Customers</button>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>CustomerID</th>
+                    <th>Sponsor</th>
+                    <th>PWD</th>
+                    <th>Employee</th>
+                    <th>Schedule Date</th>
+                    <th>Visit Per Week</th>
+                    <th>Status </th>
+                    <!-- <th>Update</th> -->
+                    <th colspan="3" class="text-center">Actions</th>
+                    <!-- <th>View</th>
+                    <th> </th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let scheduleData of AllScheduleDetails">
+                    <td style="width:10%">{{scheduleData.CustRecID}}</td>
+                    <td style="width:12%">{{scheduleData.CustomerDetails.Name |titlecase}}</td>
+                    <td style="width:13%">{{scheduleData.CustomerDetails.Beneficiaries?scheduleData.CustomerDetails.Beneficiaries?.Name :"-" |titlecase}}</td>
+                    <td style="width:13%">{{scheduleData.employeeDetails.FirstName |titlecase}} {{scheduleData.employeeDetails.LastName |titlecase}}</td>
+                    <td style="width:13%">{{scheduleData.ScheduledDate*1000 |date:"dd-MMM-yyyy"}}
+                        
+                    </td>
+                    <td *ngIf="scheduleData.VisitConfiguration==undefined" style="width:13%">
+                      --
+                    </td>
+                    <td *ngIf="scheduleData.VisitConfiguration!=undefined" class="text-center" style="width:10%">
+                      <a href="url" data-bs-toggle="modal" data-bs-target="#updateVisitsModal" (click)="onUpadteClick(scheduleData)">{{scheduleData.VisitConfiguration.Count}}</a>
+                      <!-- <div><a href="url" data-bs-toggle="modal" data-bs-target="#updateVisitsModal" (click)="onUpadteClick(scheduleData)">Update</a></div> -->
+                    </td>
+                    <td style="width:4%">{{scheduleData.Status}}</td>
+                    <!-- <td><button type="button" class="btn anvayaaButton" data-bs-toggle="modal" data-bs-target="#updateVisitsModal" (click)="onUpadteClick(scheduleData)">Update</button></td> -->
+                       <td style="width:4%"><button class="btn anvayaaButton" (click)="attachment('attachment',scheduleData)" title="Attachments"><img src="../../../assets/images/icons8-attachment-24.png"></button></td> 
+                    <td style="width:4%"><button type="button" class="btn anvayaaButton" (click)="details(scheduleData)" data-bs-toggle="modal" data-bs-target="#exampleModal" title="View"><img src="../../../assets/images/icons8-file-preview-25 (1).png"></button></td>
+                    <td style="width:4%"><button class="btn anvayaaButton" id="assessmentBtn" (click)="onInitialAssessmentClick(scheduleData)" title="Update"><img height="25" src="../../../assets/images/icons8-save-50.png"></button></td>
+                    <!-- <td style="width:4%"><button class="btn anvayaaButton" id="assessmentBtn" (click)="onInitialAssessmentClick(scheduleData)" title="WellbeingForm"><img height="25" src="../../../assets/images/icons8-form-50.png"></button></td> -->
+
+                  </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="modal fade" id="updateVisitsModal" tabindex="-1" aria-labelledby="updateVisitsModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateVisitsModalLabel">Update Visit Frequency</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <div><label for="recipient-name" class="col-form-label">Count</label></div>
+            <div class="form-group"><input  #count type="text" placeholder="Enter Count"  id="count" class="form-control" name="count"></div>
+          </div>
+          
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCEL</button>
+        <button type="button" class="btn anvayaaButton" (click)="onCountUpdate(count.value)">UPDATE</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label>Demography</label>
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+
+              <th scope="col">Name</th>
+              <th scope="col">Date Of Birth</th>
+              <th scope="col">Gender</th>
+              <th scope="col">Occupation</th>
+              <th scope="col">Languages Known</th>
+
+              
+          </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let list of viewdemography">
+              <td>{{list.Name}}</td>
+              <td>{{list.Date_of_birth}}</td>
+              <td>{{list.Gender}}</td>
+              <td>{{list.Occupation}}</td>
+              <td>{{list.Languages_known}}</td>
+            </tr>
+
+          </tbody>
+        </table>
+<div>
+  <label>Medical History</label>
+
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+          
+              <th scope="col">Date Of Diagnosis</th>
+              <th scope="col">Dementia Diagnosis</th>
+              <th scope="col">MRI CTScan</th>
+              <th scope="col">Stage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let list of viewmedicalhistory">
+              <td>{{list.Date_Of_Diagnosis}}</td>
+              <td>{{list.Dementia_Diagnosis}}</td>
+              <td>{{list.MRI_CTScan}}</td>
+              <td>{{list.Stage}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row">
+          <div class="col-md-6">
+            <h5>->Other Conditions</h5>
+
+            <table class="table table-hover">
+              <thead>
+                <tr>
+              
+                  <th scope="col">Conditons Name</th>
+                  <th scope="col">Conditons Status</th>
+                  <th scope="col">Duration</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let list of viewmedicalhistoryconditions">
+                  <td>{{list.ConditionName}}</td>
+                  <td>{{list.ConditionStatus}}</td>
+                  <td>{{list?.Duration}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-6">
+
+            <h5>->Physical Impairment</h5>
+
+            <table class="table table-hover">
+              <thead>
+                <tr>
+              
+                  <th scope="col"> Physical Conditon </th>
+                  <th scope="col">Level</th>
+                 
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let list of viewmedicalhistoryphysical">
+                  <td>{{list.PhysicalCondition}}</td>
+                  <td>{{list.MaxApplicableLevel}}</td>
+                  
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+</div>
+        
+<div>        
+  <label>Biography</label>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        
+        <th scope="col">What Does Typical Day Look Like For PWD</th>
+        <th scope="col">Other Information</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let list of viewbiography">
+        <td>{{list.What_does_typical_Day_look_like_for_PWD}}</td>
+        <td>{{list.OtherInformation}}</td>
+        
+      </tr>
+    </tbody>
+  </table>
+
+  
+    <div class="col-md-6">
+      <label>Biography(Personal Life)</label>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            
+
+            <th scope="col">Place Of Birth</th>
+            <th scope="col">Award/Archievement</th>
+            <th scope="col">Personal Information</th>
+    
+          </tr>
+        </thead>
+        <tbody>
+          <tr >
+            <td>{{viewbiographypersonal?.Personal_Life.Place_of_Birth}}</td>
+            <td>{{viewbiographypersonal?.Personal_Life.Any_award_or_achievement}}</td>
+            <td>{{viewbiographypersonal?.Personal_Life.Any_important_personal_information}}</td>
+          
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class = row>
+      <div class="col-md-6">
+        <label>Biography(Dietary Habits and Timings of Meals)</label>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              
+  
+              <th scope="col">Favorite Food</th>
+             
+      
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let list of viewbiographydiet">
+              <td>{{list}}</td>
+  
+            
+              
+            </tr>
+  
+  
+            
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <label>Biography(Dietary Habits and Timings of Meals)</label>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              
+  
+              <th scope="col">Type</th>
+              <th scope="col">Timing</th>
+              <th scope="col">Comment</th>
+             
+      
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              
+              <td>Breakfast</td>
+              <td>{{viewbiographytime?.Dietary_Habits.Timings_of_meals.Breakfast}}</td>
+              <td>{{viewbiographytime?.Dietary_Habits.Timings_of_meals.BreakfastComment}}</td>
+              
+             
+            </tr>
+            <tr >
+              <td>Lunch</td>
+              <td>{{viewbiographytime?.Dietary_Habits.Timings_of_meals.Lunch}}</td>
+              <td>{{viewbiographytime?.Dietary_Habits.Timings_of_meals.LunchComment}}</td>
+            
+              
+            </tr>
+            <tr >
+              <td>Snacks</td>
+              <td>{{viewbiographytime?.Dietary_Habits.Timings_of_meals.Snacks}}</td>
+              <td>{{viewbiographytime?.Dietary_Habits.Timings_of_meals.SnacksComment}}</td>
+            
+              
+            </tr>
+             <tr >
+              <td>Dinner</td>
+              <td>{{viewbiographytime?.Dietary_Habits.Timings_of_meals.Dinner}}</td>
+              <td>{{viewbiographytime?.Dietary_Habits.Timings_of_meals.DinnerComment}}</td>
+            
+              
+            </tr>
+  
+  
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">  <div class="col-md-6">
+      <label>Biography(likes & Dislikes)</label>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            
+
+            <th scope="col">what makes him/her happy</th>
+            <th scope="col">what are things upset him/her</th>
+            <th scope="col">what makes him/her physically</th>
+           
+    
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            
+           
+            
+            
+           
+          </tr>
+         
+
+
+          
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <label>Biography(Recrerational Activities)</label>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            
+
+            <th scope="col">Dislike Activities</th>
+            <th scope="col">Like Activities</th>
+          
+           
+    
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+           
+            
+            
+           
+          </tr>
+         
+
+
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  
+
+</div>
+
+
+
+       
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>-->
+
+<ngx-spinner type="ball-scale-multiple">loading...</ngx-spinner>
+
+

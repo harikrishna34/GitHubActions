@@ -1,0 +1,492 @@
+.searchBox {
+    margin-left: 0px;
+}
+
+.planDetails {
+    font-size: 12px;
+    color: #000000;
+    width: 100%;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 29px;
+}
+.anvayaaButtonYellow{
+    background-color: #F79122;
+    /* font-weight: bold; */
+    color: purple;
+  }
+  .anvayaaButton{
+    background-color: purple;
+    font-weight: bold;
+    color: aliceblue;
+  }
+
+.planDetailsContent {
+    /* margin-left: 120px; */
+    /* width: 100%; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.plaData {
+     /* margin-left: 5px; */
+    /* width: 10px; */
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    /* line-height: 29px; */
+    color: #000000;
+
+}
+.pms{
+         /* margin-left: 5px; */
+    /* width: 10px; */
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    /* line-height: 29px; */
+    color: #000000;
+
+}
+
+.card {
+    font-size: 20px;
+    font-family: 'Poppins' !important;
+    /* height: 1300px; */
+    /* background-color: transparent; */
+    border-radius: 20px;
+    box-shadow: #000000;
+
+}
+
+.startdate {
+    border: 2px solid #F79122;
+}
+
+.RequestType {
+    background-color: #F0F0F0;
+    ;
+    border: none;
+    width: 216px;
+    height: 39px;
+    font-size: 13px;
+    color: #000000;
+    font-family: 'poppins';
+    margin-top: 2px;
+
+
+}
+
+.AnvayaaCharges {
+    margin-top: 10px;
+}
+
+.PackageNature {
+    /* margin-left: 5px; */
+    /* width: 10px; */
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    /* line-height: 29px; */
+    color: #000000;
+
+}
+
+.reqType {
+    margin-top: 8px;
+
+}
+
+.customerDetails {
+    width: 50%;
+    background: #D9D9D9;
+    border: 1px solid #000000;
+    text-align: left;
+    margin-left: 2px;
+}
+
+.supportDetails {
+    width: 100%;
+    background: #D9D9D9;
+    text-align: left;
+    margin-top: 5px;
+    background-color: #F1F1F1;
+    margin-left: 2px;
+
+}
+
+
+.hr {
+    border: 0;
+    border-top: 2px solid #F79122 !important;
+}
+
+hr.seperator {
+    border-color: #ead2e0 !important;
+    margin: 30px 0 !important;
+}
+
+.cardBorder {
+    border: 2px solid #000000;
+}
+
+.headingStyle {
+    background: #3DEDE2;
+    border-radius: 7px;
+    text-align: center;
+    margin-left: 25px;
+    margin-top: 10px;
+    padding: 0px;
+
+    /* width: 175px; */
+}
+
+.headingStyle1 {
+    width: 146px;
+    height: 29px;
+    left: 98px;
+    top: 280px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 29px;
+
+    color: #000000;
+    border-bottom: 1px solid #000000;
+}
+
+.customerName {
+    width: 100%;
+    font-size: 12px;
+    margin-top: 18px;
+    font-family: 'poppins';
+    color: #000000;
+    width: 100%;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 29px;
+}
+
+.phNo {
+    font-weight: 200;
+    font-size: 12px;
+    color: #000000;
+}
+
+
+.supportStyle {
+    background: #3DEDE2;
+    border-radius: 7px;
+    text-align: center;
+    margin-left: 10px;
+    margin-top: 10px;
+    padding: 4px;
+    /* width: 175px; */
+
+}
+
+.backupcm {
+    background: #3DEDE2;
+    border-radius: 7px;
+    text-align: center;
+    margin-left: 25px;
+    margin-top: 10px;
+    padding: 4px;
+    /* width: 175px; */
+}
+
+.nameStyle {
+    width: 50%;
+
+    font-size: 13px;
+
+    margin-top: 18px;
+    font-family: 'poppins';
+
+
+    color: #000000;
+    width: 50%;
+    font-style: normal;
+    /* font-weight: 600; */
+    line-height: 29px;
+}
+
+
+
+
+.secondTable {
+    margin-top: 30px;
+    margin-left: 100px;
+    width: 1400px;
+    height: 100px;
+    left: 77px;
+    top: 276px;
+}
+
+.support {
+    /* position: absolute; */
+    width: 253px;
+    height: 55px;
+    left: 135px;
+    top: 488px;
+    font-size: 24px;
+
+    background: #3DEDE2;
+
+}
+
+.row {
+    margin-bottom: 10px;
+}
+
+.supportName {
+    width: 107px;
+    height: 39px;
+    left: 93px;
+    top: 582px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 39px;
+    /* identical to box height */
+
+
+    color: #000000;
+}
+
+.contactNumber {
+    width: 211px;
+    height: 30px;
+    left: 93px;
+    top: 636px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+
+    color: #000000;
+}
+
+.searchbox2 {
+    margin-top: 60px;
+    width: 100%;
+
+
+
+}
+
+.anvayaaChargeslist {
+    width: 100%;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 39px;
+    text-align: center;
+    color: #000000;
+    /* margin-left: 10px; */
+}
+
+.formDetails {
+    width: 100%;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 10px;
+    /* text-align: center; */
+    color: #000000;
+    /* margin-top: 20px; */
+}
+.formdetails {
+    width: 100%;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 10px;
+    /* text-align: center; */
+    color: #000000;
+    /* margin-top: 20px; */
+}
+
+
+.payment {
+    width: 100%;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 39px;
+
+    color: #000000;
+
+}
+
+.customerSelect {
+    width: 100%;
+    left: 0px;
+    background-color: #F0F0F0;
+    border: 4px solid #F79123;
+    background-color: red;
+}
+
+.selectCustomer {
+    background-color: red;
+}
+
+.ng-autocomplete input {
+    background-color: red;
+}
+
+
+.serviceSelect {
+    width: 100%;
+    /* height: 80px; */
+    left: 92px;
+    top: 739px;
+    background: #F0F0F0;
+    border: 4px solid #F79123;
+    /* width: 435px; */
+}
+
+.coverd {
+    width: 100%;
+    height: 29px;
+    left: 145px;
+    top: 946px;
+    /* color: green; */
+    font-size: 13px;
+
+}
+
+.NOtcoverd {
+    width: 100%;
+    height: 29px;
+    left: 145px;
+    top: 946px;
+    /* color:red; */
+    font-size: 13px;
+
+}
+
+.crossimg {
+    width: 24px;
+}
+
+.Estimated {
+    width: 100%;
+    font-size: 13px;
+    line-height: 29px;
+    font-weight: 400;
+    font-family: 'poppins';
+    color: #000000;
+
+}
+
+.createReqBtn11 {
+    width: 54px;
+    margin-left: 346px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+}
+
+.btnn {
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+.serviceName {
+    width: 100%;
+    height: 20px;
+    margin-left: 30px;
+    color: #914573;
+}
+
+.requestType {
+    width: 350px;
+    height: 46px;
+    margin-left: 108px;
+    top: 221px;
+    font-size: 13px;
+    font-family: 'poppins';
+
+    /* background: #E8E8E8; */
+}
+
+.aaa {
+    width: 243px;
+    height: 34px;
+}
+
+.requestType1 {
+    width: 250px;
+    height: 30px;
+
+
+}
+
+.reeeeeqq {
+    margin-left: 50px;
+}
+
+.paymentMode {
+    margin-top: 26px;
+}
+
+.selectDayss {
+    margin-top: 30px;
+}
+
+.createReqBtn {
+    background-color: rgba(247, 145, 35, 0.88);
+    ;
+    border: none;
+    /* margin-left: 795px; */
+    border-radius: 10px;
+    /* margin-top: 40px; */
+    width: 243px;
+  
+
+
+}
+
+/* .checkboxstyle{
+    background: url("../../assets/images/right-arrow.png") no-repeat scroll 0 0 transparent;
+    width: 30px;
+} */
+
+
+.alerts {
+    color: red;
+}
+
+.createReqq {
+    margin-top: 30px;
+    margin-bottom: 30PX;
+    border-color: rgba(255, 255, 255, 0);
+    width: 95%;
+
+}
+.Beneficiary{
+    margin-top: 2px;
+
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }

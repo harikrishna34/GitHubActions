@@ -1,0 +1,20 @@
+.mainDiv{
+    margin-top: 100px;
+    margin-left: 9%;
+}
+
+.alertBox{
+    position: absolute;
+    z-index: 2;
+    width: 50%;
+    margin-left: 15%;
+    margin-top: 4%;
+    background-color: yellow;
+}
+.btn190{
+    width: 190px;
+}
+
+.row{
+    --bs-gutter-x: 0rem !important;
+}

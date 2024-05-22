@@ -1,0 +1,33 @@
+.bodycontent{
+    margin-top: 100px;
+    margin-left: 120px;
+  }
+
+
+  agm-map {
+    height: 350px;
+}
+span{
+  font-size: medium;
+  font-weight: bolder;
+}
+.anvayaaButton{
+  background-color: purple;
+  font-weight: bold;
+  color: aliceblue;
+}
+
+.formData{
+  line-height: 2.5rem;
+}
+#equipmentText{
+  color: purple;
+}
+#equipmentText:hover{
+  color:#f79123
+
+}
+
+
+
+

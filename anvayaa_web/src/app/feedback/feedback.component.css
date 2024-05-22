@@ -1,0 +1,42 @@
+.maindiv{
+ margin-left: 110px;
+ margin-top: 105px;
+}
+.customer-tiles{
+    background-color: #EBEBEB;
+    height: 150px;
+}
+.list-group-item {
+    background-color:#EBEBEB!important  ; 
+     border: 0px !important;
+     padding: 0px;
+}
+
+.requrimentTile{
+    background-color:#EBEBEB!important  ; 
+}
+
+.table-borderless>:not(caption)>*>* {
+    border-bottom-width: 0;
+}
+.table>:not(caption)>*>* {
+    padding: .0rem .0rem;
+
+}
+
+.rating-list li {
+    float: right;
+    color: #ddd;
+    padding: 7px 7px;
+  
+  }
+  
+  .rating-list li:hover,
+  .rating-list li:hover ~ li, .rating-list li.selected {
+    color: #ffd700;
+  }
+  
+  .rating-list {
+    display: inline-block;
+    list-style: none;
+  }

@@ -1,0 +1,786 @@
+<div class="modal fade" id="WellBeingFormModal" tabindex="-1" aria-labelledby="benficiaryLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="benficiaryLabel">  Well Being Form {{WellBeingFormData.FeedbackID}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"   #WellbeingFormClose></button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card ">
+                    
+                    <table class="table table-bordered table-striped table-sm">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Question</th>
+                                <th>Answer</th>
+                                <th>Comment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let Feedback of WellBeingFormData?.Feedback">
+                                <td>{{Feedback.Question |titlecase}}</td>
+                                <td>{{Feedback.Answer |titlecase}}</td>
+                                <td>{{Feedback.Comment |titlecase}}</td>
+                              
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="row mainDiv">
+    <div class="card">
+        <div class="card-header">
+            Interviewer Details
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Name:
+                <span class="">{{Customerdata.Interviewer_Name |titlecase}} </span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Designation:
+                <span class="">{{Customerdata.Interviewer_Designation |titlecase}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Date Of Interview:
+                <span class="">{{Customerdata.Date_Of_Interview*1000|date:"dd-MM-YYYY"}}</span>
+            </li>
+
+
+        </ul>
+    </div>
+
+
+
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+                type="button" role="tab" aria-controls="nav-home" aria-selected="true">Demography & Medical
+                History</button>
+            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
+                type="button" role="tab" aria-controls="nav-profile" aria-selected="false">General Abilities &
+                Biography</button>
+                <button class="nav-link" id="nav-Request-tab" data-bs-toggle="tab" data-bs-target="#nav-Request"
+                type="button" role="tab" aria-controls="nav-profile" aria-selected="false" (click)="Requests()">Request</button>
+
+            <button class="nav-link" id="nav-WellbeingForm-tab" data-bs-toggle="tab" data-bs-target="#nav-WellbeingForm"
+                type="button" role="tab" aria-controls="nav-profile" aria-selected="false" (click)="feedback()">Feed
+                back</button>
+
+            <!-- <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button> -->
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="card">
+
+                <div class="row">
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-header">
+                                Demography
+                            </div>
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    PWD Name:
+                                    <span class="">{{Demographics.Name}} </span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Date of Birth
+                                    <span class="">{{Demographics.Date_of_birth*1000|date:"dd-MM-YYYY"}}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Gender:
+                                    <span class="">{{Demographics.Gender}}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Occupation:
+                                    <span class="">{{Demographics.Occupation}}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Languages known:
+                                    <label class=""
+                                        *ngFor="let Languages_known of Demographics.Languages_known">{{Languages_known}}</label>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Primary Caregiver Name:
+                                    <span class="">{{Demographics.Primary_Caregiver_Name}}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Current Homecare Attender:
+                                    <span class="">{{Demographics.Current_Homecare_Attender}}</span>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="card">
+                            <div class="card-header">
+                                Medical History
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="card ">
+                                            <div class="card-header">
+                                                Other Conditions
+                                            </div>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Conditions</th>
+                                                        <th scope="col">Remarks</th>
+                                                        <th scope="col">Remarks</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let Othercondition of Other_Conditions">
+                                                        <td>{{Othercondition?.ConditionName}}</td>
+                                                        <td>{{Othercondition?.ConditionStatus}}</td>
+                                                        <td>{{Othercondition?.Duration}}</td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div class="card ">
+                                            <div class="card-header">
+                                                Impairment
+                                            </div>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Conditions</th>
+                                                        <th scope="col">Stage</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let imparment of Physical_impairmentData">
+                                                        <td>{{imparment?.PhysicalCondition}}</td>
+                                                        <td>{{imparment?.Level}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <div class="card">
+                <div class="card ">
+                    <div class="card-header">
+                        General Abilities
+                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Question</th>
+                                <th scope="col">Answer</th>
+                                <th scope="col">Comment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let Generalabilities of GeneralAbilities">
+                                <td>{{Generalabilities.Question}}</td>
+                                <td>{{Generalabilities.Answer}}</td>
+                                <td>{{Generalabilities?.Comment}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        Biography
+                    </div>
+                    <div class="card-body">
+
+                        <div class="col-12">
+                            <div class="card ">
+                                <div class="card-header">
+                                    Personal Life
+                                </div>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <ul class="list-group">
+
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                    What does typical Day look like for PWD:
+                                                    <span class="">{{Biography?.What_does_typical_Day_look_like_for_PWD }}
+                                                    </span>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                    OtherInformation:
+                                                    <span class="">{{Biography?.OtherInformation}}</span>
+                                                </li>
+                                            </ul>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Place of Birth</th>
+                                                    <th scope="col">Any award or achievement</th>
+                                                    <th scope="col">Any important personal information</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>{{Personal_Life.Place_of_Birth}}</td>
+                                                    <td>{{Personal_Life?.Any_award_or_achievement}}</td>
+                                                    <td>{{Personal_Life?.Any_important_personal_information}}</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+                    </div>
+                    <div class="card-body">
+
+                        <div class="col-12">
+                            <div class="card ">
+                                <div class="card-header">
+                                    Dietary Habits and Timings of Meals
+                                </div>
+                                <div class=row>
+                                    <div class="col-md-6">
+
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+
+
+                                                    <th scope="col">Favorite Food</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let Favouritefoods of Favourite_foods">
+                                                    <td>{{Favouritefoods}}</td>
+
+
+
+                                                </tr>
+
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+
+
+                                                    <th scope="col">Type</th>
+                                                    <th scope="col">Timing</th>
+                                                    <th scope="col">Comment</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+
+                                                    <td>Breakfast</td>
+                                                    <td>{{Dietary_Habits.Breakfast}}</td>
+                                                    <td>{{Dietary_Habits.BreakfastComment}}</td>
+
+
+                                                </tr>
+                                                <tr>
+                                                    <td>Lunch</td>
+                                                    <td>{{Dietary_Habits.Lunch}}</td>
+                                                    <td>{{Dietary_Habits.LunchComment}}</td>
+
+
+                                                </tr>
+                                                <tr>
+                                                    <td>Snacks</td>
+                                                    <td>{{Dietary_Habits.Snacks}}</td>
+                                                    <td>{{Dietary_Habits.SnacksComment}}</td>
+
+
+                                                </tr>
+                                                <tr>
+                                                    <td>Dinner</td>
+                                                    <td>{{Dietary_Habits.Dinner}}</td>
+                                                    <td>{{Dietary_Habits.DinnerComment}}</td>
+
+
+                                                </tr>
+
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-12">
+                            <div class="card ">
+                                <div class="card-header">
+                                    Likes and Dislikes
+                                </div>
+                                <div class=row>
+                                    <div class="col-md-12">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+
+
+                                                    <th scope="col">What makes him/her happy?</th>
+                                                    <th scope="col">What are things upset him/her</th>
+                                                    <th scope="col">What makes him/her physically</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+
+                                                    <td> {{Biography?.Likes_And_Dislikes?.['What_makes_him/her_happy']}}
+                                                    </td>
+                                                    <td> {{Biography?.Likes_And_Dislikes?.['What_Are_things_upset_him/her']}}
+                                                    </td>
+                                                    <td>{{Biography?.Likes_And_Dislikes?.['What_makes_him/her_physically_comfortable']}}
+                                                    </td>
+
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-12">
+                            <div class="card ">
+                                <div class="card-header">
+                                    Recreational Activities
+                                </div>
+                                <div class=row>
+                                    <div class="col-md-12">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+
+
+                                                    <th scope="col">Dislike Activities</th>
+                                                    <th scope="col">like Activities</th>
+
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+
+                                                    <td> {{Biography?.Recreational_Activitie_They_Enjoy?.Past.Data[0]['ActivityName']}}
+                                                    </td>
+                                                    <td> {{Biography?.Recreational_Activitie_They_Enjoy?.Present.Data[0]['ActivityName']}}
+                                                    </td>
+
+
+
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-12">
+                            <div class="card ">
+                                <div class="card-header">
+                                    Preference of Music
+                                </div>
+                                <div class=row>
+                                    <div class="col-md-12">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+
+
+                                                    <th scope="col">Music Additional Information</th>
+                                                    <th scope="col">OtherInfo</th>
+                                                    <th scope="col">Type</th>
+
+
+
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+
+                                                    <td> {{Biography?.Preference_Of_Music?.AdditionalInfo}}</td>
+                                                    <td> {{Biography?.Preference_Of_Music?.OtherInfo}}</td>
+                                                    <td *ngFor="let Music of Biography?.Preference_Of_Music?.Data">
+                                                        {{Music.MusicName}}</td>
+
+
+
+
+
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-12">
+                            <div class="card ">
+                                <div class="card-header">
+                                    Preference of Tv or Videos
+                                </div>
+                                <div class=row>
+                                    <div class="col-md-12">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+
+
+                                                    <th scope="col">Video Additional Information</th>
+                                                    <th scope="col">OtherInfo</th>
+                                                    <th scope="col">Type</th>
+
+
+
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+
+                                                    <td> {{Biography?.Preference_Of_TV_or_Videos?.AdditionalInfo}}</td>
+                                                    <td> {{Biography?.Preference_Of_TV_or_Videos?.OtherInfo}}</td>
+                                                    <td
+                                                        *ngFor="let Video of Biography?.Preference_Of_TV_or_Videos?.Data">
+                                                        {{Video.VideoName}}</td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-12">
+                            <div class="card ">
+                                <div class="card-header">
+                                    Name of Children
+                                </div>
+                                <div class=row>
+                                    <div class="col-md-12">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+
+
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Expired</th>
+                                                    <th scope="col">Comment</th>
+
+
+
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+
+                                                    <td> {{Biography?.Personal_Life?.Name_of_Children[0]?.ChildrenName}}
+                                                    </td>
+                                                    <td> {{Biography?.Personal_Life?.Name_of_Children[0]?.Expired}}</td>
+                                                    <td> {{Biography?.Personal_Life?.Name_of_Children[0]?.ChildrenComment}}
+                                                    </td>
+
+
+
+
+
+
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-12">
+                            <div class="card ">
+                                <div class="card-header">
+                                    Name of Spouse
+                                </div>
+                                <div class=row>
+                                    <div class="col-md-12">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+
+
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Marital Status</th>
+                                                    <th scope="col">Expired</th>
+                                                    <th scope="col">Comment</th>
+
+
+
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+
+                                                    <td> {{Biography?.Personal_Life?.Name_of_Spouses[0]?.SpouseName}}</td>
+                                                    <td> {{Biography?.Personal_Life?.Name_of_Spouses[0]?.Marital_Status}}
+                                                    </td>
+                                                    <td> {{Biography?.Personal_Life?.Name_of_Spouses[0]?.Expired}}</td>
+                                                    <td> {{Biography?.Personal_Life?.Name_of_Spouses[0]?.SpouseComment}}
+                                                    </td>
+
+
+
+
+
+
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                Close Friends
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="card ">
+                                            <div class="card-header">
+                                                Past Close Friends
+                                            </div>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col">Type</th>
+                                                        <th scope="col">Comment</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr
+                                                        *ngFor="let Pastfriend of Biography?.Closest_Friends?.Past_friends ">
+                                                        <td>{{Pastfriend.Name}}</td>
+                                                        <td>{{Pastfriend.FriendType}}</td>
+                                                        <td>{{Pastfriend.PastFriendsComment}}</td>
+
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div class="card ">
+                                            <div class="card-header">
+                                                Present Close Friends
+                                            </div>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col">Type</th>
+                                                        <th scope="col">Comment</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr
+                                                        *ngFor="let Presentfriend of Biography?.Closest_Friends?.Present_friends ">
+                                                        <td>{{Presentfriend.Name}}</td>
+                                                        <td>{{Presentfriend.FriendType}}</td>
+                                                        <td>{{Presentfriend.PresentFriendsComment}}</td>
+
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+        <div class="tab-pane fade" id="nav-Request" role="tabpanel" aria-labelledby="nav-Request-tab">
+            <div class="card">
+                <div class="card ">
+                    <div class="card-header">
+                        Requests
+                    </div>
+                    <table class="table table-bordered table-striped table-sm">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>RequestID</th>
+                                <th>Date</th>
+                                <th>Care Specialist</th>
+                                <th>Status</th>
+                                <th>Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let ComletedRequest of ComletedRequests">
+                                <td>{{ComletedRequest?.RequestID}}</td>
+                              
+                                <td>{{ComletedRequest?.RequestedDate *1000 |date:"dd-MM-YYYY"}}</td>
+                                <td>{{ComletedRequest?.CareSpecialist?.FirstName |titlecase}} {{ComletedRequest?.CareSpecialist?.LastName |titlecase}}</td>
+
+                                <td>{{ComletedRequest?.Status}}</td>
+                                <td style="width:4%"><button type="button" class="btn btn-warning"
+                                         title="View" (click)="ViewRequest(ComletedRequest?.RequestID,ComletedRequest.CustID)" ><img
+                                            src="../../../assets/images/icons8-file-preview-25 (1).png"></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-WellbeingForm" role="tabpanel" aria-labelledby="nav-WellbeingForm-tab">
+            <div class="card">
+                <div class="card ">
+                    <div class="card-header">
+                        Well Being Forms
+                    </div>
+                    <table class="table table-bordered table-striped table-sm">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>FeedbackID</th>
+                                <th>Care Specialist</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let WellBeingForm of WellBeingForms">
+                                <td>{{WellBeingForm?.FeedbackID}}</td>
+                                <td>{{WellBeingForm?.EmployeeDetails?.FirstName |titlecase}}
+                                    {{WellBeingForm?.EmployeeDetails?.LastName|titlecase}}</td>
+                                <td>{{WellBeingForm?.UpdatedDateTime *1000 |date:"dd-MM-YYYY"}}</td>
+                                <td>{{WellBeingForm?.Status}}</td>
+                                <td style="width:4%"><button type="button" class="btn btn-warning"
+                                         title="View" (click)="viewfeedback(WellBeingForm?.FeedbackID)" data-bs-toggle="modal" data-bs-target="#WellBeingFormModal"><img
+                                            src="../../../assets/images/icons8-file-preview-25 (1).png"></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

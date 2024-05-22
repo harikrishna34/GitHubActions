@@ -1,0 +1,226 @@
+<div class="bodycontent">
+  <div class="row">
+    <div class="col-md-4 createButton">
+      <!-- Create escalation -->
+    </div>
+  </div>
+  <div class="card">
+    <div class="row">
+      <div class="col-md-12 header" style="text-align: center">
+        <h3 (click)="reloadScreen()">Service Requests</h3>
+      </div>
+      <!-- <div class="col-md-4 imgicon " (click)="ToCreate()">
+                <img title="Create Escalation" class="createescalationimage " src="../../assets/images/plus.png"
+                    alt="Crete Escalation">
+
+            </div> -->
+    </div>
+
+    <section class="pt-8 pt-md-9">
+      <div class="container">
+        <!-- Open -->
+        <div class="row">
+          <!-- Open -->
+          <div
+            class="col-md-2 mb-4 grab"
+            (click)="CustomerEscalationByStatus('Open')"
+          >
+            <a
+              class="card align-items-center text-decoration-none border-0 hover-lift-light py-4"
+            >
+              <span
+                class="icon-circle icon-circle-lg bg-pastel-primary"
+                style="color: #914572"
+              >
+                {{
+                  customerEscalationsData && customerEscalationsData.OpenIssues
+                    ? customerEscalationsData.OpenIssues
+                    : 0
+                }}
+              </span>
+              <span class="text-dark mt-3">
+                <b>Open</b>
+              </span>
+            </a>
+          </div>
+          <!-- InProgress -->
+          <div
+            class="col-md-2 mb-4 grab"
+            (click)="CustomerEscalationByStatus('InProgress')"
+          >
+            <a
+              class="card align-items-center text-decoration-none border-0 hover-lift-light py-4"
+            >
+              <span
+                class="icon-circle icon-circle-lg bg-pastel-primary"
+                style="color: #914572"
+              >
+                {{
+                  customerEscalationsData &&
+                  customerEscalationsData.InProgressIssues
+                    ? customerEscalationsData.InProgressIssues
+                    : 0
+                }}
+              </span>
+              <span class="text-dark mt-3">
+                <b>InProgress</b>
+              </span>
+            </a>
+          </div>
+
+          <!-- Resolved -->
+          <div
+            class="col-md-2 mb-4 grab"
+            (click)="CustomerEscalationByStatus('Resolved')"
+          >
+            <a
+              class="card align-items-center text-decoration-none border-0 hover-lift-light py-4"
+            >
+              <span
+                class="icon-circle icon-circle-lg bg-pastel-primary"
+                style="color: #914572"
+              >
+                {{
+                  customerEscalationsData &&
+                  customerEscalationsData.ResolvedIssues
+                    ? customerEscalationsData.ResolvedIssues
+                    : 0
+                }}
+              </span>
+              <span class="text-dark mt-3">
+                <b>Resolved</b>
+              </span>
+            </a>
+          </div>
+          <!-- Closed -->
+          <div
+            class="col-md-2 mb-4 grab"
+            (click)="CustomerEscalationByStatus('Closed')"
+          >
+            <a
+              class="card align-items-center text-decoration-none border-0 hover-lift-light py-4"
+            >
+              <span
+                class="icon-circle icon-circle-lg bg-pastel-primary"
+                style="color: #914572"
+              >
+                {{
+                  customerEscalationsData &&
+                  customerEscalationsData.ClosedIssues
+                    ? customerEscalationsData.ClosedIssues
+                    : 0
+                }}
+              </span>
+              <span class="text-dark mt-3">
+                <b>Closed</b>
+              </span>
+            </a>
+          </div>
+          <!-- Category -->
+
+          <Button
+            class="anvayaabutton-primary"
+            style="
+              width: fit-content;
+              height: fit-content;
+              margin-top: 50px;
+              margin-left: 60px;
+            "
+            (click)="ToCreate()"
+            >Create Service Requests</Button
+          >
+          <button
+            class="anvayaabutton-secondary"
+            style="
+              width: fit-content;
+              height: fit-content;
+              margin-top: 50px;
+              margin-left: 100px;
+            "
+            (click)="onCancelButtonClick()"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="container card" *ngIf="showtable">
+    <div class="text-center" style="color: #f79122">
+      <h2 [hidden]="DashboardDataType == 'All'">{{ DashboardDataType }}</h2>
+    </div>
+    <form [formGroup]="escalationDataBasedOnDate">
+      <div class="row">
+        <div class="col-md-2">
+          <label>Start Date</label>
+          <input type="date" class="form-control" formControlName="StartDate" />
+        </div>
+        <div class="col-md-2">
+          <label>End Date</label>
+          <input type="date" class="form-control" formControlName="EndDate" />
+        </div>
+        <!-- <div class="col-md-2">
+                    <label>Select City</label>
+                    <select class="form-select" name="CityID">
+                        <option value='' selected> Select </option>
+                        <option>ddd</option>
+                    </select>
+                </div> -->
+        <div class="col-md-2 mt-3">
+          <button
+            type="button"
+            class="anvayaabutton-primary"
+            (click)="escaltionDataBasedOnDate()"
+          >
+            Search
+          </button>
+        </div>
+        <!-- <div class="col-md-2 mt-3"><button type="button" [disabled]=""
+                        class="anvayaabutton-secondary">Download</button></div> -->
+      </div>
+    </form>
+    <div>
+      <table class="table table-striped text-start card-body mt-6">
+        <thead class="tablehead">
+          <tr class="table-header">
+            <th (click)="sortData('RequestID')" >Request ID <i class="fa fa-sort" aria-hidden="true"></i></th>
+            <th (click)="sortData('CustomerName')" >Customer Name <i class="fa fa-sort" aria-hidden="true"></i></th>
+            <th (click)="sortData('Department')" >Department <i class="fa fa-sort" aria-hidden="true"></i></th>
+            <th (click)="sortData('ServiceName')" >Service Type <i class="fa fa-sort" aria-hidden="true"></i></th>
+            <th (click)="sortData('RequestedDate')" >Request Date <i class="fa fa-sort" aria-hidden="true"></i></th>
+            <th (click)="sortData('ServiceAreaName')" >City <i class="fa fa-sort" aria-hidden="true"></i></th>
+            <th (click)="sortData('AgentName')" >Agent <i class="fa fa-sort" aria-hidden="true"></i></th>
+            <th (click)="sortData('Status')">Status <i class="fa fa-sort" aria-hidden="true"></i></th>
+          </tr>
+        </thead>
+      
+        <tbody *ngIf="escalationDetailsBasedOnType.length > 0">
+          <tr *ngFor="let escalationsDetails of escalationDetailsBasedOnType">
+            <td class="RequestStyle"  (click)="ToUpdatePage(escalationsDetails)">{{ escalationsDetails?.RequestID }}</td>
+            <td>
+              <div>{{ escalationsDetails?.CustomerName | titlecase }}</div>
+              <b>{{ escalationsDetails?.CustRecID }}</b>
+            </td>
+            <td >{{ escalationsDetails?.Department }}</td>
+            <td style="width: 10%" >{{ escalationsDetails?.ServiceName }}</td>
+            <td style="width: 10%">
+              {{ escalationsDetails?.RequestedDate * 1000 | date: "dd-MMM-yyyy" }}
+            </td>
+            <td >
+              {{ escalationsDetails?.ServiceAreaName ? escalationsDetails?.ServiceAreaName : "--" }}
+            </td>
+            <td >{{ escalationsDetails?.AgentName | titlecase }}</td>
+            <td >
+              {{ escalationsDetails?.Status === "In_Progress" ? "InProgress" : escalationsDetails?.Status }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      
+    </div>
+  </div>
+</div>
+
+<ngx-spinner type="ball-scale-multiple">loading...</ngx-spinner>

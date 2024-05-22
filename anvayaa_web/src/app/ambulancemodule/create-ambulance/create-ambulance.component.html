@@ -1,0 +1,163 @@
+<div class="bodycontent">
+    <div class="header">
+        <div class="row container">
+        </div>
+    </div>
+    <div class="content">
+        <div class="row formData">
+            <!-- Map Start Here -->
+            <div class="col-md-6">
+                <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()"
+                    placeholder="Enter Source Location" autocorrect="off" autocapitalize="off" spellcheck="off"
+                    type="text" [value]="locations.sourceAddress?locations.sourceAddress:''" #source>
+                    <span class="text-danger"  *ngIf="submitBtn && !locations.sourceAddress ">* Source Address required</span>
+                    <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()"
+                    placeholder="Enter Destination Location" autocorrect="off" autocapitalize="off" spellcheck="off"
+                    type="text" [value]="locations.destinationAddress?locations.destinationAddress:''" #destination>
+                    <span class="text-danger"  *ngIf="submitBtn && !locations.destinationAddress ">* Destination required</span>
+
+                <!-- <agm-map [latitude]="locations.sourceLat" [longitude]="locations.sourceLong" [zoom]="zoom">
+                    <div>
+                        <agm-marker [latitude]="locations.sourceLat" [longitude]="locations.sourceLong"
+                            [markerDraggable]="true" (dragEnd)="sourceLocationData($event)"></agm-marker>
+                        <agm-marker [latitude]="locations.destinationLat" [longitude]="locations.destinationLong"
+                            [markerDraggable]="true" (dragEnd)="destinationLocationData($event)"></agm-marker>
+                    </div>
+                    <div *ngIf="dir" >
+                        <agm-direction [origin]="directions.origin" [destination]="directions.destination" ></agm-direction>
+                    </div>
+                    
+
+                    
+             
+
+                </agm-map> -->
+            </div>
+            <!-- Map Ends Here -->
+            <!-- Form Start Here -->
+            <div class="col-md-5">
+                <!-- <form [formGroup]="ambulanceCreateForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div>
+                                <label for="ambulance_type">Ambulance Type</label>
+                            </div>
+                            <div>
+                                <select class="form-select" aria-label="Default select example"
+                                    formControlName="ambulance_type" (change)="onAmbulanceChange($event)">
+                                    <option selected disabled value="" >Please Select</option>
+                                    <option *ngFor="let amblist of ambulanceList" value="{{amblist.type}}">
+                                        {{amblist.type}}
+                                    </option>
+                                </select>
+                                <span class="text-danger"  *ngIf="submitBtn && (this.ambulanceCreateForm.controls['ambulance_type'].touched && this.ambulanceCreateForm.controls['ambulance_type'].status==='INVALID')">* required</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div>
+                                <label for="journey_type">Journey Type</label>
+                            </div>
+                            <div>
+                                <select class="form-select" aria-label="Default select example"
+                                    formControlName="journey_type">
+                                    <option selected disabled value="">Please Select</option>
+                                    <option value="One Way">OneWay</option>
+                                    <option value="return">Return</option>
+                                </select>
+                                <span class="text-danger"  *ngIf="submitBtn && (this.ambulanceCreateForm.controls['journey_type'].touched && this.ambulanceCreateForm.controls['journey_type'].status==='INVALID') ">* required</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div>
+                                <label for="doctor_required">Doctor Required</label>
+                            </div>
+                            <div>
+                                <select class="form-select" aria-label="Default select example"
+                                    formControlName="doctor_required">
+                                    <option selected disabled value="">Please Select</option>
+                                    <option value=1>Yes</option>
+                                    <option value=0>No</option>
+                                </select>
+                                <span class="text-danger"  *ngIf="submitBtn && (this.ambulanceCreateForm.controls['doctor_required'].touched && this.ambulanceCreateForm.controls['doctor_required'].status==='INVALID') ">* required</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div>
+                                <label for="ac_required">AC Required</label>
+                            </div>
+                            <div>
+                                <select class="form-select" aria-label="Default select example"
+                                    formControlName="ac_required">
+                                    <option selected disabled value="">Please Select</option>
+                                    <option value=1>Yes</option>
+                                    <option value=0>No</option>
+                                </select>
+                                <span class="text-danger"  *ngIf="submitBtn && (this.ambulanceCreateForm.controls['ac_required'].touched && this.ambulanceCreateForm.controls['ac_required'].status==='INVALID')">* required</span>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div>
+                                <label for="payment_method">Payment Method</label>
+                            </div>
+                            <div>
+                                <select class="form-select" aria-label="Default select example"
+                                    formControlName="payment_method">
+                                    <option selected disabled value="">Please Select</option>
+                                    <option value="cash">Cash</option>
+                                    <option value="card">Card</option>
+                                    <option value="cheque">Cheque</option>
+
+                                </select>
+                                <span class="text-danger"  *ngIf="submitBtn && (this.ambulanceCreateForm.controls['payment_method'].touched && this.ambulanceCreateForm.controls['payment_method'].status==='INVALID') ">* required</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="mobile_no">Mobile Number</label>
+                            <input type="number" class="form-control" formControlName="mobile_no"/>
+                            <span class="text-danger"  *ngIf="submitBtn && (this.ambulanceCreateForm.controls['mobile_no'].touched && this.ambulanceCreateForm.controls['mobile_no'].status==='INVALID') ">* required</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="addresssource">Source Address</label>
+                            <textarea type="text" id="addresssource" name="addresssource"
+                                formControlName="addresssource" class="form-control">
+                            </textarea>
+                            <span class="text-danger"  *ngIf="submitBtn && (this.ambulanceCreateForm.controls['addresssource'].touched && this.ambulanceCreateForm.controls['addresssource'].status==='INVALID') ">* required</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="addressdest">Destination Address</label>
+                            <textarea type="text" id="addressdest" name="addressdest" formControlName="addressdest"
+                                class="form-control">
+                            </textarea>
+                            <span class="text-danger"  *ngIf="submitBtn && (this.ambulanceCreateForm.controls['addressdest'].touched && this.ambulanceCreateForm.controls['addressdest'].status==='INVALID') ">* required</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label></label>
+                            <div>
+                                <span id="equipmentText" (click)="onEquipment()">Need Equipment?</span>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6" *ngIf="equipmentFlag">
+                            <div>
+                                <label for="equipment">EquipmentList</label>
+                            </div>
+                            <div>
+                                <ng-multiselect-dropdown class="form-control" [settings]="equipmentDropdownSettings" [data]="equipementlist" formControlName="equipment"></ng-multiselect-dropdown>
+                                                           </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label></label>
+                            <div>
+                                <button class="btn anvayaaButton" (click)="handleSubmit()">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form> -->
+
+            </div>
+            <!-- Form End Here -->
+        </div>
+    </div>
+</div>
+<!-- <ngx-spinner type="ball-scale-multiple">loading...</ngx-spinner> -->

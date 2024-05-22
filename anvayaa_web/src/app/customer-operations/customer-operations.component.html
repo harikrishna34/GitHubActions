@@ -1,0 +1,44 @@
+<div class="main">
+
+    <div class="card panel-default">
+        <div class="card-body">
+            <h3 class="reuestHeading">Package subscription Details</h3>
+            <table class="table  table-bordered">
+
+                <thead>
+                    <tr>
+                        <th scope="col">CUSTOMER ID </th>
+                        <th scope="col">CUSTOMER Name</th>
+                        <th scope="col">PACKAGE Name</th>
+                        <th scope="col">CITY</th>
+                        <th scope="col">PACKAGE START DATE</th>
+                        <th scope="col">PACKAGE EXPIRY DATE</th>
+                        <th scope="col">PAYMENT STATUS </th>
+                        <th scope="col">STATUS </th>
+                        <th scope="col">FREEZ </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of customerPackageDetailsData">
+                        <td class="custrecid">{{data.CustRecID}}</td>
+                        <td>{{data.CustomerData.Name}}</td>
+                        <td>{{data.AliasName}}</td>
+                        <td>{{data.ServiceAreaName}}</td>
+                        <td>{{(data.PackageCreatedDate)*1000}}</td>
+                        <td>{{(data.PackageExpiryDate)*1000}}</td>
+                        <td>{{data.PaymentStatus}}</td>
+                        <td>{{data.Status}}</td>
+                        <td>
+                       <button class="anvayaabutton-primary">FREEZ</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div *ngIf="" style="text-align: center;font-size: x-large;">No Data Found !</div>
+    </div>
+
+
+</div>

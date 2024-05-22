@@ -1,0 +1,25 @@
+.anvayaaButton{
+    background-color: purple;
+    font-weight: bold;
+    color: aliceblue;
+}
+label{
+    font-weight: bold;
+}
+input{
+    width: 150px;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid;
+    border-radius: 10px;
+}
+.bodycontent{
+    margin-top: 100px;
+    margin-left: 120px;
+  }
+
+  .row {
+
+    margin-right: calc(0 * var(--bs-gutter-x));
+   
+}

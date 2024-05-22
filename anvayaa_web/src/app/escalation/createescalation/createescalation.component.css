@@ -1,0 +1,100 @@
+.bodycontent {
+    margin-top: 100px;
+    margin-left: 120px;
+    margin-right: 12px;
+}
+
+.customerSelect {
+    width: 100%;
+    left: 0px;
+    background-color: #F0F0F0;
+    /* background-color: red; */
+}
+
+.IssueSelect {
+
+    width: 30%;
+    height: 20%;
+    left: 0px;
+    background-color: #F0F0F0;
+}
+
+
+
+
+
+/* Style for form details */
+.formdetails {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Style for select inputs */
+.form-select {
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    border: 1px solid #ced4da;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/* Style for the Save button */
+.savebutton {
+    display: flex;
+    /* justify-content: flex-end; */
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.corner-button {
+
+    border: none;
+    border-radius: 10px;
+    background-color: purple;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 100px;
+    margin-left: 50px;
+    width: 73px;
+    height: 41px;
+
+
+}
+
+.cancel-button {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: purple;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 100px;
+    margin-left: 70px;
+}
+
+p {
+    color: red
+}
+
+.custom-info {
+    font-family: Arial, sans-serif;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.info-label {
+
+    margin-right: 5px;
+}
+
+.info-value {
+    font-weight: bold;
+    color: #555;
+}

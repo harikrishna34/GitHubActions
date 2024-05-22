@@ -1,0 +1,124 @@
+<div class="body-container">
+    <div class="row col-md-12">
+        <div class="col-md-6">
+            <div class="card mb-3" style="max-width: 540px;" *ngFor="let new of ViewHexaDetails" >
+                <div class="row g-0" *ngIf="new.Name === 'STRIPS' || this.CategoryID === 'AKCST000211'">
+                    <div class="col-md-4">
+                      <img [src]="new.OtherIconFiles?.iosandweb"
+                           class="img-fluid rounded-start" alt="..." style="height: 200px; width: 200px;">
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ new.Name }}</h5>
+                        <p class="card-text" *ngIf="new.Name == 'HEXA'">Quantity: {{quantities}}</p>
+                        <p class="card-text" *ngIf="new.Name === 'STRIPS'">Quantity: {{ quantity }}</p>
+                        <p class="card-text">Rs {{ new.Price }}/-</p>
+                        <div class="order-container" *ngIf="new.Name !== 'HEXA'">
+                          <button id="remove-button" (click)="removeItem(new.Name)">-</button>
+                         <span id="quantity" *ngIf="new.Name=='STRIPS'">{{quantity}}</span>
+                         <span id="quantity" *ngIf="new.Name=='HEXA'">{{quantities}}</span>
+                          <button id="add-button" (click)="addItem(new.Name)">+</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+            </div>
+        </div>
+        <div class="col-md-6">
+            <span style="font-size: larger;">Order Summary</span>
+            <div style="margin-top: 10px;">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Product Price</td>
+                            <td>Rs {{ViewPriceDetails?.totalDeviceprice}}/-</td>
+                        </tr>
+                        <tr>
+                            <td>GST</td>
+                            <td>Rs {{ViewPriceDetails?.Gst}}/-</td>
+                        </tr>
+                        <tr>
+                            <td><b>Total Payment</b></td>
+                            <td><b>Rs {{ViewPriceDetails?.TotalPricewithGst}}/-</b></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-top: 20px;font-size: larger;">
+                <div class="row col-md-12">
+                    <div class="col-md-4">
+                        Delivery Address
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn-anvayaaPurple">+ Add Address</button>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 10px;font-size: large;">
+                <form [formGroup]="shippingAddressForm">
+                    <div class="form-floating">
+                        <textarea class="form-control" placeholder="Address" id="floatingTextarea2" formControlName="Address"
+                            style="height: 100px"></textarea>
+                        <label for="floatingTextarea2">Address</label>
+                    </div>
+                    <div *ngIf="shippingAddressForm.controls['Address'].status == 'INVALID' && addAddressPress == true"
+                                    class="errorColor">*Address Required
+                     </div>
+                </form>
+            </div>
+            <div style="margin-top: 20px;font-size: larger;">
+                Payment Method
+            </div>
+            <div class="row col-md-12" style="margin-top: 20px;">
+                <div class="col-md-3 payment-method" id="cash-payment" [ngClass]="{'highlighted': dataOnly === 'Link'}"
+                    (click)="cashFunction('Link')" *ngIf="true" style="height: fit-content; width: fit-content; margin-right: 50px; border-radius: 10px;">
+                    <div class="card" style="height: 50px; width: 50px; cursor: pointer;">
+                        <img src="../../assets/images/customerComprehinsivePageIcons/mobile-payment.png"
+                            style="height: 50px; width: 50px;">
+                    </div>
+                    Link
+                </div>
+                <div class="col-md-3 payment-method" id="cash-payment" [ngClass]="{'highlighted': dataOnly === 'QR'}"
+                    (click)="cashFunction('QR')" *ngIf="true" style="height: fit-content; width: fit-content; margin-right: 50px; border-radius: 10px;">
+                    <div class="card" style="height: 50px; width: 50px; cursor: pointer;">
+                        <img src="../../assets/images/customerComprehinsivePageIcons/QR_code_for_mobile_English_Wikipedia.svg (1) 1.png"
+                            style="height: 50px; width: 50px;">
+                    </div>
+                    QR
+                </div>
+                <div class="col-md-3 payment-method" id="cash-payment" [ngClass]="{'highlighted': dataOnly === 'PMS'}"
+                    (click)="cashFunction('PMS')" *ngIf="true" style="height: fit-content; width: fit-content; margin-right: 50px; border-radius: 10px;">
+                    <div class="card" style="height: 50px; width: 50px; cursor: pointer;">
+                        <img src="../../assets/images/customerComprehinsivePageIcons/payment-services.png"
+                            style="height: 50px; width: 50px;">
+                    </div>
+                    PMS
+                </div>
+                <div class="col-md-3 payment-method" id="cash-payment" [ngClass]="{'highlighted': dataOnly === 'Cash'}"
+                    (click)="cashFunction('Cash')" *ngIf="true" style="height: fit-content; width: fit-content; margin-right: 50px; border-radius: 10px;">
+                    <div class="card" style="height: 50px; width: 50px; cursor: pointer;">
+                        <img src="../../assets/images/customerComprehinsivePageIcons/money 2.png"
+                            style="height: 50px; width: 50px;">
+                    </div>
+                    Cash
+                </div>
+            </div>
+            <div style="margin-top: 20px; align-items: end;">
+                <div class="row col-md-12">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                        <button class="anvayaabutton-secondary-lg" (click)="placeOrder()">Place Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

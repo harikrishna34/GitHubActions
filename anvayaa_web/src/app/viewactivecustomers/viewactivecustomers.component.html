@@ -1,0 +1,266 @@
+<div class="bodycontent">
+    <nav>
+      
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+                type="button" role="tab" aria-controls="nav-home" aria-selected="true" (click)="cleardata()">Active Customers
+          </button>
+          <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
+          type="button" role="tab" aria-controls="nav-profile" aria-selected="false"
+          (click)="cleardatas()">My Family</button>
+            
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="card panel-default">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-10">
+                        <h3 class="reuestHeading">Active Cutomers</h3>   
+                        </div>
+                        <div class="col-md-2" style="text-align: right;">
+                            <span class="formDetails">&nbsp;</span>
+                                <button (click)="activecustomerRequests()" class="btn btn-cta" style="margin-top: auto;">Search</button>
+                    </div>
+                    
+                    <div class="row" [formGroup]="SearchForm">
+                        <div class="col-md-3">
+                            <span class="formdetails">City</span>
+                            <select class="form-select" aria-label="Default select example" formControlName="CityID">
+                              <option selected value="" disabled> Select City </option>
+                              <option *ngFor="let city of cityData" value="{{city.CityID}}">{{city.CityName}}</option>
+                            </select>
+                          </div>
+                          <div class="col-md-3">
+                            <span class="formdetails">Care Manager</span>
+                            <select class="form-select" aria-label="Default select example" formControlName="DedicatedFieldEmployeeID">
+                              <option selected value="" disabled> Select Care Manager</option>
+                              <option *ngFor="let caremanager of caremanagerData" value="{{caremanager.EmployeeID}}">{{caremanager.FirstName}} {{caremanager.LastName}}</option>
+                            </select>
+                          </div>
+                          <div class="col-md-3">
+                            <span class="formdetails">Support Executive Name</span>
+                            <select class="form-select" aria-label="Default select example" formControlName="SupportExecutiveID">
+                              <option selected value="" disabled>Select Support Executive Name</option>
+                              <option *ngFor="let Support of supportData" value="{{Support.EmployeeID}}">{{Support.FirstName}} {{Support.LastName}}</option>
+                            </select>
+                          </div>
+                          <div class="col-md-3">
+                            <span class="formdetails">Status</span>
+                            <select class="form-select" formControlName="Status" placeholder="Select Status">
+                              <option selected value="" disabled>Select Status</option>
+                              <option value="Active">
+                                <li><span class="dropdown-item-text">Active</span></li>
+                              </option>
+                              <option value="Refunded">
+                                <li><span class="dropdown-item-text">Refunded</span></li>
+                              </option>
+                              <option value="Expired">
+                                <li><span class="dropdown-item-text">Expired</span></li>
+                              </option>
+                              <option value="Cancelled">
+                                <li><span class="dropdown-item-text">Cancelled</span></li>
+                              </option>
+                            </select>
+                          </div>
+                          
+                     
+
+                        </div>
+                        <!-- <div class="col-md-3" style="margin-top: 1%">
+                            <input type="text" [(ngModel)]="searchText" placeholder="search">
+                          </div>
+                    </div> -->
+                    
+
+                  
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <form #form="ngForm">
+                        <table class="table table-striped table-hover">
+                            <thead class="tablehead">
+                                <tr>
+                                    <th scope="col">S.No</th>
+                                    <th scope="col">CustRecID</th>
+                                    <th scope="col">Customer Name</th>
+                                    <th scope="col">Package Name</th>
+                                    <th scope="col">City</th>
+                                    <th scope="col">Start Date</th>
+                                    <th scope="col">End Date</th>
+                                    <th scope="col">PMS Balance</th>
+                                    <th scope="col">Care Manager Name</th>
+                                    <th scope="col">Support Executive Name</th>
+                                    <th scope="col">Status </th>
+                                    <th scope="col">Chat</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="tablecur" *ngFor="let profiledetails of profileData| paginate: { itemsPerPage: 10, currentPage: p };let i=index">
+                                    <!-- |datafilter:searchText -->
+                                    <!-- |paginate: { itemsPerPage: 10, currentPage: p } -->
+                                    <td>{{i+1}}</td>
+                                    <td>{{profiledetails?.CustRecID}}</td>
+                                    <td>{{profiledetails?.CustomerDetails?.Name}}</td>
+                                    <td>{{profiledetails?.AliasName}}</td>
+                                    <td>{{profiledetails?.ServiceAreaName}}</td>
+                                    <td>{{profiledetails?.PackageCreatedDate*1000|date:'dd MMM YY'}}</td>
+                                    <td>{{profiledetails?.PackageExpiryDate*1000|date:'dd MMM YY'}}</td>
+                                    <td>{{profiledetails?.PMSDetails?.ClosingBalance}}</td>
+                                    <td>{{profiledetails?.CustomerDetails?.DedicatedFieldEmployeeDetails?.FirstName}} {{profiledetails?.CustomerDetails?.DedicatedFieldEmployeeDetails?.LastName}}</td>
+                                    <td>{{profiledetails?.CustomerDetails?.supportExecutiveDetails?.FirstName}} {{profiledetails?.CustomerDetails?.supportExecutiveDetails?.LastName}}</td>
+                                    <td>{{profiledetails?.Status}}</td>
+                                    <td><button class="btn btn-primary" (click)="details(profiledetails,'Add_Area_Manager')"><i class="fa fa-comments" aria-hidden="true"></i></button></td>
+                                </tr>
+                                <!-- viewcustomer(new,"Add_Care_Coordinator") -->
+                            </tbody>
+                        </table>
+                    </form>
+
+                </div>
+                <div *ngIf="NodataTable" style="text-align: center;font-size: x-large;">No Data Found !</div>
+            </div>
+        </div>
+     
+
+
+    </div>
+    <div class="tab-pane fade show" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+      <div class="card panel-default">
+        <div class="card-body">
+          <div class="row">
+              <div class="col-md-10">
+              <h3 class="reuestHeading">My Family</h3>   
+              </div>
+              <div class="col-md-2" style="text-align: right;">
+                  <span class="formDetails">&nbsp;</span>
+                      <button (click)="myfamilyRequests(10)" class="btn btn-cta" style="margin-top: auto;">Search</button>
+          </div>
+          
+          <div class="row" [formGroup]="SearchForm">
+              <div class="col-md-3">
+                  <span class="formdetails">City</span>
+                  <select class="form-select" aria-label="Default select example" formControlName="CityID">
+                    <option selected value="" disabled> Select City </option>
+                    <option *ngFor="let city of cityData" value="{{city.CityID}}">{{city.CityName}}</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <span class="formdetails">Care Manager</span>
+                  <select class="form-select" aria-label="Default select example" formControlName="DedicatedFieldEmployeeID">
+                    <option selected value="" disabled> Select Care Manager</option>
+                    <option *ngFor="let caremanager of caremanagerData" value="{{caremanager.EmployeeID}}">{{caremanager.FirstName}} {{caremanager.LastName}}</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <span class="formdetails">Support Executive Name</span>
+                  <select class="form-select" aria-label="Default select example" formControlName="SupportExecutiveID">
+                    <option selected value="" disabled>Select Support Executive Name</option>
+                    <option *ngFor="let Support of supportData" value="{{Support.EmployeeID}}">{{Support.FirstName}} {{Support.LastName}}</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <span class="formdetails">Status</span>
+                  <select class="form-select" formControlName="Status" placeholder="Select Status">
+                    <option selected value="" disabled>Select Status</option>
+                    <option value="Active">
+                      <li><span class="dropdown-item-text">Active</span></li>
+                    </option>
+                    <option value="Refunded">
+                      <li><span class="dropdown-item-text">Refunded</span></li>
+                    </option>
+                    <option value="Expired">
+                      <li><span class="dropdown-item-text">Expired</span></li>
+                    </option>
+                    <option value="Cancelled">
+                      <li><span class="dropdown-item-text">Cancelled</span></li>
+                    </option>
+                  </select>
+                </div>
+                
+           
+
+              </div>
+              <!-- <div class="col-md-3" style="margin-top: 1%">
+                  <input type="text" [(ngModel)]="searchText" placeholder="search">
+                </div>
+          </div> -->
+          
+
+        
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <form #form="ngForm">
+              <table class="table table-striped table-hover">
+                  <thead class="tablehead">
+                      <tr>
+                          <th scope="col">S.No</th>
+                          <th scope="col">CustRecID</th>
+                          <th scope="col">Customer Name</th>
+                          <th scope="col">Package Name</th>
+                          <th scope="col">City</th>
+                          <th scope="col">Start Date</th>
+                          <th scope="col">End Date</th>
+                          <th scope="col">PMS Balance</th>
+                          <th scope="col">Care Manager Name</th>
+                          <th scope="col">Beneficiaries</th>
+                          <th scope="col">Status </th>
+
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr class="tablecur" *ngFor="let profiledetaiil of profileDatas| paginate: { itemsPerPage: 10, currentPage: p } ;let i=index">
+                        <!-- | paginate: { itemsPerPage: 10, currentPage: p } -->
+                          <td>{{i+1}}</td>
+                          <td>{{profiledetaiil?.CustRecID}}</td>
+                          <td>{{profiledetaiil?.CustomerDetails?.Name}}</td>
+                          <td>{{profiledetaiil?.AliasName}}</td>
+                          <td>{{profiledetaiil?.ServiceAreaName}}</td>
+                          <td>{{profiledetaiil?.PackageCreatedDate*1000|date:'dd MMM YY'}}</td>
+                          <td>{{profiledetaiil?.PackageExpiryDate*1000|date:'dd MMM YY'}}</td>
+                          <td>{{profiledetaiil?.PMSDetails?.ClosingBalance}}</td>
+                          <td>{{profiledetaiil?.CustomerDetails?.DedicatedFieldEmployeeDetails?.FirstName}} {{profiledetaiil?.CustomerDetails?.DedicatedFieldEmployeeDetails?.LastName}}</td>
+                          <td>{{profiledetaiil?.CustomerDetails?.Beneficiaries[0]?.Name}}</td>
+                          <td>{{profiledetaiil?.Status}}</td>
+                      </tr>
+
+                  </tbody>
+              </table>
+          </form> 
+
+
+
+ 
+
+      </div>
+  </div>
+          <div *ngIf="NodataTable" style="text-align: center;font-size: x-large;">No Data Found !</div>
+      </div>
+  </div>
+
+
+</div>
+<!-- <div class="list"> -->
+  <!--             
+              <ul>
+                <li *ngFor="let item of profileDatas | paginate: { itemsPerPage: 10, currentPage: p }">{{ item?.CustRecID}}</li>
+              </ul>
+           -->
+              <pagination-controls (pageChange)="p = $event" style="text-align: center;" (pageChange)="handlePageNumber($event)"></pagination-controls>
+          <!-- </div> -->
+
+
+          <!-- <div class="pagination">
+            <button (click)="prevPage()" [disabled]="this.FormObjs.pageNumber === 1">Previous</button>
+            <span>Page {{ this.FormObjs.pageNumber }}</span>
+            <button (click)="nextPage()" [disabled]="this.profileDatas.length < this.FormObjs.Limit">Next</button>
+          </div> -->
+
+<ngx-spinner type="ball-scale-multiple">loading...</ngx-spinner>

@@ -1,0 +1,459 @@
+<div *ngIf='false' style="overflow-x:auto;margin-left: 111px;margin-top: 87px;">
+	<div class="createAmbUser">
+	</div>
+	<table class="table gfg table-striped">
+		<thead>
+			<tr>
+				<td scope="col" class="leftborder fontseven">PROFILE</td>
+				<td scope="col"></td>
+				<td scope="col" class="fontseven">NAME</td>
+				<td scope="col" class="fontseven">LOCATION</td>
+				<td scope="col" class="fontseven">CAREMANAGER</td>
+				<!-- <td scope="col" class="fontseven">Assigned</td> -->
+				<td scope="col" class="fontseven">IDENTIFIED</td>
+				<td scope="col" class="fontseven">STATUS</td>
+				<td scope="col" class="fontseven">TRIGGERED TIME</td>
+				<td scope="col"></td>
+				<td scope="col" class="rightborder"></td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="smallFont">
+				<td class="leftborder" scope="row"><img
+						src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHx8&w=1000&q=80"
+						class="image--cover"></td>
+				<td><img src="https://img.icons8.com/flat-round/64/000000/phone.png"
+						style="width:23px;    margin-top: 83px;"></td>
+				<td class="fontseven mediumFont">NAME
+					<div></div>
+				</td>
+				<td>City</td>
+				<td>CareManager</td>
+				<td>SupportCenterExecutive<img
+						src="https://img.icons8.com/external-those-icons-fill-those-icons/10/000000/external-down-arrows-those-icons-fill-those-icons-7.png"
+						class="downarrow" /></td>
+				<td>RequestFrom</td>
+				<td>Status</td>
+				<td>RequestDateTime</td>
+				<td id="emergencyconfirmationData" style="color: rgb(22, 189, 22);">
+					<span><img src="../../assets/images/icons8-checkmark-80.png" style="width: 50px;">
+					</span><ng-template #cnd>Accepted</ng-template>
+				</td>
+				<td class="rightborder"><span><img src="../../assets/images/icons8-close-64.png"
+							style="width: 50px;"></span></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<!--  New Screen As per My way Start Herer-->
+
+<div *ngIf="true" class="bodycontent">
+	<div class="viewclosedemergency-btn">
+		<button class="anvayaaButton" (click)="handleClosedEmergencyList()">Closed Emergency List</button>
+	</div>
+	<table class="table table-striped table-hover EmergencyTableList">
+		<thead class="listHead">
+			<tr>
+				<th scope="col" class="EmergencyTableList-th-td">Request Details</th>
+				<!-- <span><i class="fa fa-sort" aria-hidden="true"></i></span> -->
+				<!-- <th scope="col">CustRecID</th> -->
+				<th scope="col" class="EmergencyTableList-th-td">Raised By</th>
+				<th scope="col" class="EmergencyTableList-th-td">Customer Details</th>
+				<th scope="col" class="EmergencyTableList-th-td">Source <span><i class="fa fa-sort" aria-hidden="true"
+							(click)="sortdetails('AliasAlarmType')"></i></span></th>
+				<th scope="col" class="EmergencyTableList-th-td">Status <span><i class="fa fa-sort" aria-hidden="true"
+							(click)="sortdetails('Status')"></i></span></th>
+				<th scope="col" class="EmergencyTableList-th-td">Location</th>
+				<th scope="col" class="EmergencyTableList-th-td">Call</th>
+				<th scope="col" class="EmergencyTableList-th-td">Accept/Reject</th>
+				<th scope="col" class="EmergencyTableList-th-td">View</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let emeList of emergencyDataList" >
+				<td class="EmergencyTableList-th-td" id="requestID" (click)="handleRequestViewClick(emeList)">
+					<div class="fs-6">{{emeList?.CreatedDate*1000|date : 'dd-MMM-yyyy'}}</div>
+					<div>{{emeList?.CreatedDate*1000|date : 'hh:mm a'}}</div>
+					<span style="font-size: 13px;">{{emeList?.RequestID}}</span>
+				</td>
+				<!-- <td>{{emeList.CustRecID}}</td> -->
+				<td class="EmergencyTableList-th-td">
+					<div>{{emeList?.CreatedPersonJob|titlecase}}</div>
+					<div *ngIf="emeList?.CreatedPersonJob=='Kin'">
+						{{emeList?.CreatedPersonJob==="Kin"?emeList.CreatedPersonName:emeList?.CreatedPersonData?.FirstName
+						+"
+						"+
+						emeList?.CreatedPersonData?.LastName |titlecase}}
+					</div>
+					<div *ngIf="emeList?.CreatedPersonJob!='Kin'">
+                          {{emeList?.CreatedPersonName}}
+					</div>
+				</td>
+				<td class="EmergencyTableList-th-td"><span class="fs-6">{{emeList?.CustomerDetails?.Name|titlecase}}</span>
+					<div style="font-size: 13px;"><a>{{emeList?.CustomerDetails?.MobileNumber}}</a></div>
+				</td>
+				<td class="EmergencyTableList-th-td">{{emeList?.AliasAlarmType|titlecase}}</td>
+				<td class="EmergencyTableList-th-td"><span *ngIf="emeList?.Status == 'EmergencyTrigger'">
+					Emergency Trigger                                
+				</span>
+				<span *ngIf="emeList?.Status != 'EmergencyTrigger'">
+					{{emeList?.Status}}
+				</span> </td>
+				<td class="EmergencyTableList-th-td">
+					<a [href]="'http://maps.google.com/maps?z=12&t=m&q=' +emeList?.EmergencyLatitude + ',' + emeList?.Emergencylongitude"
+						target="_blank"><img src="../../assets/images/placeholder.png" style="width: 20px;"></a>
+				</td>
+				<!-- <td class="EmergencyTableList-th-td" [hidden]="emeList.Status=='EmergencyTrigger'" ></td> -->
+				<!-- <img src="../../assets/images/phone.png" style="width: 20px;">Can't Call -->
+				<!-- [hidden]="emeList.Status!='EmergencyTrigger'" -->
+				<td class="EmergencyTableList-th-td"><img src="../../assets/images/phone.png" style="width: 20px;cursor: pointer;" 
+					data-bs-toggle="modal" data-bs-target="#callingMode" (click)="calliModel(emeList)"></td>
+				<td class="EmergencyTableList-th-td">
+					<div class="actionImg" *ngIf="emeList.displayAccept != true">
+						<span style="margin: 10px;"
+							(click)="acceptRequest(emeList)" >
+							<!-- <img src="../../assets/images/icons8-checkmark-80.png" style="width: 30px;" > -->
+							<i class="fa fa-check blink_me" aria-hidden="true" style="cursor: pointer;"></i>
+
+						</span>
+						<span class="vl  text-danger fs-5" >
+							<!-- <img src="../../assets/images/icons8-close-64.png" style="width: 30px;"  data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="RequestStatusUpdate(emeList)"> -->
+							<i class="fa fa-times ms-3" aria-hidden="true" data-bs-toggle="modal"
+								data-bs-target="#exampleModal" (click)="RequestStatusUpdate(emeList)" style="cursor: pointer;"></i>
+						</span>
+					</div>
+					<div class="actionImg" *ngIf="emeList.displayAccept != false">
+						Already Accepted
+					</div>
+				</td>
+				<td class="EmergencyTableList-th-td"> 
+					<span 
+					(click)="handleRequestViewClick(emeList)">
+					<img src="../../assets/images/view.png" style="width: 30px;cursor: pointer;">
+				</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog ">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Comment For Cancel Request ?</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<form [formGroup]="CancelRequest">
+				<div class="modal-body">
+					<label>Reason :</label>
+					<textarea formControlName="note" name="note" class="form-control">
+			  </textarea>
+				</div>
+			</form>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+					(click)="UpdateRequest('Cancel')">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+	<!-- Modal -->
+	<div class="modal fade" id="callingtwoModal" tabindex="-1" aria-labelledby="callingtwoModalLabels"
+		aria-hidden="true">
+		<div class="modal-dialog ">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="callingtwoModalLabels">Comment For Cancel Request ?</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<form [formGroup]="CancelRequest">
+					<div class="modal-body">
+						<label>Reason :</label>
+						<textarea formControlName="note" name="note" class="form-control">
+			  </textarea>
+					</div>
+				</form>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+						(click)="UpdatesRequests('Cancel')">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--  New Screen As per My way Ends Herer-->
+	<!--  Model for Emergrncy Calling  -->
+	<!-- Modal -->
+	<div class="modal fade" id="callingMode" tabindex="-1" aria-labelledby="callingMode" aria-hidden="true">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="callingMode">Calling Details</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="insideFieldset">
+						<div class="fallandsos1">
+							<div class="row">
+								<div class="col-md-6">
+									<!-- <table class="table table-bordered">
+										<thead>
+											<tr class="text-center">
+												<th scope="col">Relation </th>
+												<th scope="col">Name </th>
+												<th scope="col">Number</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th scope="row" class="text-start">Customer</th>
+												<td>{{callingDetails?.CustomerRequest?.Name|titlecase}}</td>
+												<td class="text-end"><span class="me-2"
+														(click)="callNumber(callingDetails?.CustomerRequest?.MobileNumber)"><i
+															class="fa fa-phone"></i> <span class="text-primary pointer grab">
+															{{callingDetails?.CustomerRequest?.MobileNumber}}</span>
+													</span></td>
+											</tr>
+											<tr>
+												<th scope="row" class="text-start">Neighbour</th>
+												<td>{{callingDetails?.HealthPlanDetails[0]?.Neighbours[0].Name|titlecase}}</td>
+												<td class="text-end">
+													<span class="me-2"
+														(click)="callNumber(callingDetails?.HealthPlanDetails[0]?.Neighbours[0].ContactNumber)"><i
+															class="fa fa-phone"></i><span class="text-primary pointer grab">
+															{{callingDetails?.HealthPlanDetails[0]?.Neighbours[0].ContactNumber}}</span></span>
+
+												</td>
+											</tr>
+											<tr>
+												<th scope="row" class="text-start">Care Manger</th>
+												<td>{{callingDetails?.CareManagerDetails[0]?.FirstName|titlecase}}
+													{{callingDetails?.CareManagerDetails[0]?.LastName|titlecase}}
+												</td>
+												<td class="text-end"><span class="me-2"
+														(click)="callNumber(callingDetails?.CareManagerDetails[0]?.PrimaryMobileNumber)"><i
+															class="fa fa-phone"></i> <span class="text-primary pointer grab">
+															{{callingDetails?.CareManagerDetails[0]?.PrimaryMobileNumber}}</span>
+													</span>
+												</td>
+											</tr>
+										</tbody>
+									</table> -->
+									<table class="table ">
+										<thead>
+										  <tr>
+											<th scope="col">Relation </th>
+											<th scope="col">Name </th>
+											<th scope="col">Number</th>
+											
+										  </tr>
+										</thead>
+										<tbody>
+										  <tr *ngFor="let customerRelation of CustomerRelatedDetails;let i = index">
+											<td>{{customerRelation?.Relation}}</td>
+											<td>{{customerRelation?.Name}}</td>
+											<td class="text-primary grab"><u (click)="callinInitiating(customerRelation?.ContactNumber,customerRelation?.Name)"
+												><i
+												  class="fa fa-phone"></i> {{customerRelation?.ContactNumber}}</u></td>
+										
+										
+										  </tr>
+										</tbody>
+									  </table>
+									<div>
+									</div>
+								</div>
+								<div class="col-md-6 vl">
+									<div *ngIf="CallingBox">
+										<div class="text-center" style="height :50px">
+										  <div *ngIf="callingSvg">
+											<img src="../../assets/images/Vanilla-1.5s-244px (1).gif" style="width: 225px;"><span
+											  class="fs-5"></span>
+										  </div>
+										</div>
+										<div class="text-center">
+										  <h2>{{ToNumber}}</h2>
+										</div>               
+										  <div class="row">
+											<div class="col-md-3">
+											  <span><b>Caller</b></span><span>:</span><span>{{callStatus1}}</span>
+											</div>
+											<div class="col-md-3">
+											
+											</div>
+											<div class="col-md-3">
+											  <span><b>Reciver</b></span><span>:</span><span>{{callStatus2}}</span>
+											</div>
+										  </div>
+									  </div>
+								<div class="text-end" style="cursor: pointer;"
+									[hidden]="callingDetails?.Status == 'Call Initiated'">
+									<!-- <div class="actionImg">
+										<span class="text-success fs-5 me-3" (click)="acceptRequest(callingDetails)">
+											<i class="fa fa-check" aria-hidden="true">Accept</i>
+										</span>
+										<span class="vl  text-danger fs-5">
+											<i class="fa fa-times ms-3" aria-hidden="true" data-bs-toggle="modal"
+												data-bs-target="#callingtwoModal"></i>
+										</span>
+									</div> -->
+								</div>
+
+							</div>
+							
+							<div class="mt-2">
+								<div class="container">
+									<div class="row">
+										<!-- <div class="col-sm-4">
+											<div class="fs-4">Customer Details</div>
+											<table class="table table-borderless">
+												<thead>
+												</thead>
+												<tbody>
+													<tr>
+														<th scope="row" class="text-start">Name</th>
+														<td>:</td>
+														<td class="text-start">{{callingDetails?.CustomerRequest?.Name}}
+														</td>
+													</tr>
+													<tr>
+														<th scope="row" class="text-start">Status</th>
+														<td>:</td>
+														<td class="text-start">{{callingDetails?.Status}}</td>
+													</tr>
+													<tr>
+														<th scope="row" class="text-start">Age</th>
+														<td>:</td>
+														<td class="text-start">{{callingDetails?.CustomerRequest?.Age}}
+														</td>
+													</tr>
+													<tr>
+														<th scope="row" class="text-start">Mobile</th>
+														<td>:</td>
+														<td class="text-start">
+															{{callingDetails?.CustomerRequest?.MobileNumber}}</td>
+													</tr>
+													<tr>
+														<th scope="row" class="text-start">Address</th>
+														<td>
+															:
+														</td>
+														<td class="text-start">-</td>
+													</tr>
+												</tbody>
+											</table>
+										</div> -->
+										<div style="border: 1px solid #a09e9ef1;" class="mt-2"></div>
+										<div class="mt-2">
+											<div class="container">
+												<div class="row">
+													<div class="col-sm-4">
+														<div class="fs-4">Customer Details</div>
+														<table class="table table-borderless">
+															<thead>
+															</thead>
+															<tbody>
+																<tr>
+																	<th scope="row" class="text-start">Name</th>
+																	<td>:</td>
+																	<td class="text-start">
+																		{{callingDetails?.CustomerRequest?.Name |titlecase}}
+																	</td>
+																</tr>
+																<tr>
+																	<th scope="row" class="text-start">Age</th>
+																	<td>:</td>
+																	<td class="text-start">
+																		{{callingDetails?.CustomerRequest?.Age}}</td>
+																</tr>
+																<tr>
+																	<th scope="row" class="text-start">Mobile</th>
+																	<td>:</td>
+																	<td class="text-start">
+																		{{callingDetails?.CustomerRequest?.MobileNumber}}
+																	</td>
+																</tr>
+																<tr>
+																	<th scope="row" class="text-start">Address</th>
+																	<td>
+																		:
+																	</td>
+																	<td class="text-start">-</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+													<div class="col-sm-4 text-center vl">
+														<div class="fs-4">Care Manger Details</div>
+														<table class="table table-borderless ">
+															<thead>
+															</thead>
+															<tbody>
+																<tr>
+																	<th scope="row" class="text-start">Name</th>
+																	<td>:</td>
+																	<td class="text-start">
+																		{{callingDetails?.CareManagerDetails[0]?.FirstName|titlecase}}
+																		{{callingDetails?.CareManagerDetails[0]?.LastName|titlecase}}
+																	</td>
+																</tr>
+																<tr>
+																	<th scope="row" class="text-start">Primary Number
+																	</th>
+																	<td>:</td>
+																	<td class="text-start grab">
+																		{{callingDetails?.CareManagerDetails[0]?.PrimaryMobileNumber}}
+																	</td>
+																</tr>
+																<tr>
+																	<th scope="row" class="text-start">Secondary Number
+																	</th>
+																	<td>:</td>
+																	<td class="text-start grab">
+																		{{callingDetails?.CareManagerDetails[0]?.SecondryMobileNumber}}
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+													<div class="col-sm-4 vl">
+														<div class="fs-4">Emergency Local Details</div>
+														<table class="table table-borderless ">
+															<thead>
+															</thead>
+															<tbody>
+																<tr>
+																	<th scope="row" class="text-start">Name</th>
+																	<td>:</td>
+																	<td class="text-start">
+																		{{callingDetails?.HealthPlanDetails[0]?.EmergencyLocalContactDetails[0]?.Name |titlecase}}
+																	</td>
+																</tr>
+																<tr>
+																	<th scope="row" class="text-start">Mobile</th>
+																	<td>:</td>
+																	<td class="text-star grab">
+																		{{callingDetails?.HealthPlanDetails[0]?.EmergencyLocalContactDetails[0]?.ContactNumber}}
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+							<div class="modal-footer">
+
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>
+				</div>
+	</div>

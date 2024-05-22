@@ -1,0 +1,475 @@
+<router-outlet>
+
+  <div class="modal" id="tarrifmodal" tabindex="0" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Service Fee </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+
+            <div class="col-md-3">
+              <label>Select City</label>
+              <select class="form-select" [(ngModel)]="CityID" name="CityID" (change)="CitySelection()">
+                <option value="" disabled selected>Select City</option>
+                <option value="{{City.CityID}}" *ngFor="let City of CitiesData">{{City.CityName}}</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label>Select Category</label>
+              <select class="form-select" [(ngModel)]="SubCategoryID" name="CategoryID"
+                (change)="CategorySelection($event)">
+                <option value="" disabled selected>Select Category</option>
+                <option value="{{SubCategorie.SubCategoryID}}" *ngFor="let SubCategorie of SubCategoriesData">
+                  {{SubCategorie.AliasName}}</option>
+              </select>
+            </div>
+            <div class="col-md-5">
+              <label>Select Service Name</label>
+              <select class="form-select" [(ngModel)]="ServiceID" name="CategoryID"
+                (change)="SubCategorySelection($event)">
+                <option value="" disabled selected>Select Service Name</option>
+                <option value="{{SubSubCategorie.ServiceID}}" *ngFor="let SubSubCategorie of SubSubCategories">
+                  {{SubSubCategorie.AliasName}}</option>
+              </select>
+            </div>
+            <!-- <div class="col-md-3">
+              <label>Select Tarrif</label>
+              <select class="form-select" [(ngModel)]="TarrifID" name="Tarrif" (change)="TarrifSelection()">
+                <option value="" disabled selected>Select TariffType</option>
+                <option value="{{TarrifType.TariffTypeID}}" *ngFor="let TarrifType of TarrifTypes">{{TarrifType.TariffTypeName}}</option>
+              </select>
+            </div> -->
+          </div>
+          <div class="row">
+
+            <div class="row" style="padding-bottom: 35px;">
+              <div class="col-md-1 col-sm-1 col-xs-1">
+
+              </div>
+              <div class="col-md-10 col-sm-10 col-xs-10">
+                <br>
+                <table *ngIf="PriceRange && PriceRange.length>0">
+                  <tr>
+                    <th>Tariff Type</th>
+                    <th>Minimum Amount</th>
+                    <th>Maximum Amount</th>
+                  </tr>
+
+                  <tr *ngFor="let Range of PriceRange">
+                    <td>{{Range.Tariff}}</td>
+                    <td>&#x20B9; {{Range.MinValue}}</td>
+                    <td>&#x20B9; {{Range.MaxValue}}</td>
+                  </tr>
+                </table>
+                <label *ngIf="ServiceID && PriceRange && PriceRange.length ==0">
+                  <b>No Partner Found With This Service </b>
+                </label>
+              </div>
+
+              <div class="col-md-1 col-sm-1 col-xs-1">
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="navbar" style="z-index: 10; background-color: white;">
+    <a class="navbar-brand" href="#">
+      <img src="../../assets/images/images.png" width="100" alt="Anvayaa" title="Anvayaa" class="logoimg">
+    </a>
+
+    <a (click)="plus()" data-toggle="modal" title="Create Request"> <img class="createRequest"
+        src="../../assets/images/add.png" alt=""> </a>
+    <a (click)="CitiesInfo()" class="" data-bs-toggle="modal" data-bs-target="#tarrifmodal" title="Service Tarrif">
+      <img class="createRequest" src="../../assets/images/math.png" alt="">
+    </a>
+
+    <a (click)="watchMonitoring()"  title="Vital Monitoring">
+      <div class="row">
+        <div class="col-md-6">
+      <img class="createRequest" src="../../assets/images/smartwatch.png" alt="Monitoring" style="margin-left: 10%;margin-top: 20px;">
+        </div>
+        <div class="col-md-6">
+      <span class="badge">{{count}}</span>
+        </div>
+      </div>
+    </a>
+    <!-- <a (click)="ConfiguraWatch()"  title="Watch Configuration">
+      <img class="createRequest" src="../../assets/images/smartwatch (2).png" alt="">
+    </a> -->
+    <a   title="Watch Configuration" (click)="emergencyList()">
+      
+      <div class="row">
+        <div class="col-md-6">
+          <img src="../../assets/images/icons8-ambulance-50 (1).png" alt="Emergency" style="margin-left: 36%;margin-top: 20px;width:34px" />
+        </div>
+        <div class="col-md-6">
+      <span class="badge" style="top: 10px;">{{EmergencyCount}}</span>
+        </div>
+      </div>
+    </a>
+    <a   title="Watch Configuration" class="mt-3">
+      <div class="row">
+        <label class="switch">
+          <input type="checkbox" id="togBtn" [(ngModel)]="isChecked" (ngModelChange)="checkStatu($event)" >
+          <div class="slider round">
+           <!--ADDED HTML -->
+           <span class="on" >IN</span>
+           <span class="off">Out</span>
+           <!--END-->
+          </div>
+         </label>
+      </div>
+    </a>
+
+
+    <a style="margin-right: 40px;">
+      <select class="form-select" (change)="modo($event)" style="border:0px;text-decoration: underline;">
+        <option selected>{{idFirstName+idLastName}}</option>
+        <option value="mod1">Settings</option>
+        <option value="mod2">LogOut </option>
+      </select>
+    </a>
+  </nav>
+  <div class="row">
+    <div class="leftCol text-center" *ngIf="token !=null">
+
+      <div (click)="CustomerList();listBtnColor()" > <img
+          src="../../assets/images/customer.png" class="imgheight" />
+        <div>Customers</div>
+      </div>
+      <div (click)="support();supportBtnColor()"> <img
+          src="../../assets/images/support (1).png" class="imgheight" />
+        <div>Support</div>
+      </div>
+
+      <!-- <div (click)="PermissionsClick();permissionColor()"
+        [ngStyle]="{'background-color': permissionDivColor ? '#d1cfcf' :''}"><img src="../../assets/images/privacy.png"
+          class="imgheight" />
+        <div class="accordion-body">Permission</div>
+      </div> -->
+      <div (click)="onDementiaClick();demintiaColor()"><img
+          src="../../assets/images/dementiaSymbol.png" class="imgheight" />
+        <div class="accordion-body">Dementia</div>
+      </div>
+      <div (click)="myTask();mytaskColor()" ><img
+          src="../../assets/images/task.png" class="imgheight" />
+        <div class="accordion-body">My-Task</div>
+      </div>
+
+
+      <!-- <div (click)="revenue();revenueColor()" ><img
+          src="../../assets/images/money.png" class="imgheight" />
+        <div>Revenue</div>
+      </div> -->
+      <div (click)="onMyRequests();revenueColor() " >
+        <img src="../../assets/images/daily-tasks.png" class="imgheight" />
+        <div>My Requests</div>
+      </div>
+      <div (click)="Operations();operationsColor()" >
+        <img src="../../assets/images/gear (2).png" class="imgheight" />
+        <div>Operations</div>
+      </div>
+      <!-- <div (click)=" ongoingJobs();ongoingColor()" [ngStyle]="{'background-color': ongoingDivColor ? '#d1cfcf' :''}">
+        <img src="../../assets/images/system-update.png" class="imgheight" />
+        <div>Ongoing Requests</div>
+      </div> -->
+      <div (click)="asers()" >
+        <img src="../../assets/images/smart-watch.png" style="width: 35px;" class="imgheight" />
+        <div>ASERS</div>
+      </div>
+      <!-- <div  (click)="escalations()"   [ngStyle]="{'background-color': ongoingDivColor ? '#d1cfcf' :''}">
+        <img src="../../assets/images/report (2).png" class="imgheight" />
+        <div>Escalation</div>
+      </div> -->
+      <!-- <div>
+        <div class="dropdown-toggle"  (click)="chatcolor()"    type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"
+          [ngStyle]="{'background-color': chatdivcolor ? '#d1cfcf' :''}">
+          <img src="../../assets/images/live-chat.png" class="imgheight" />
+          <div>Chats</div>
+        </div>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <li><button class="dropdown-item" type="button" (click)="chatroles()">view Roles</button></li>
+          <li><button class="dropdown-item" type="button" (click)="allUsers()">All Users</button></li>
+          <li><button class="dropdown-item" type="button" (click)="createchatgroup()">Create Chat Group</button></li>
+        </ul>
+      </div> -->
+      <div (click)="emergencyList()"><img src="../../assets/images/icons8-ambulance-50.png" class="imgheight" />
+        <div>Emergency</div>
+      </div>
+      <div (click)="HHC()" ><img
+          src="../../assets/images/basic-needs.png" style="width: 32px;" />
+        <div>HHC</div>
+      </div>
+      <div *ngIf="isChatUserLoggedIn" (click)="navigateToChat()" ><img
+          src="../../assets/images/cChat.png" style="width: 32px;" />
+        <div>Chat</div>
+      </div>
+      <!-- <div (click)="navigateToChat()">commet chat</div> -->
+      <div (click)="escalation()"><img src="../../assets/images/escalation.jpg" class="imgheight" />
+        <div>Service Requests</div>
+      </div>
+      <div (click)="onRequestManagementClick()"><img src="../../assets/images/requestmanagement.png" class="imgheight" />
+        <div>Requests</div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <!-- <div class="container-fluid text-center">
+    <div class="row">
+        <div class="col-3 col-md-2 col-sm-2 col-lg-1" >
+            <div class="leftCol" *ngIf="token !=null">
+
+                <div (click)="onProfile()"> <img src="../../assets/images/icons8-user-48.png" class="imgheight" />
+                    <div>Profile</div>
+                </div>
+                <div (click)="emergencyList()"><img src="../../assets/images/icons8-ambulance-50.png" class="imgheight" />
+                    <div>Emergency</div>
+                </div>
+                <div (click)=" CustomerList()"> <img src="../../assets/images/icons8-users-64.png" class="imgheight" />
+                    <div>Customers</div>
+                </div>
+                <a> <img src="../../assets/images/icons8-money-bag-30.png" class="imgheight" />
+                    <div>Finance</div>
+                </a>
+                <div (click)=" AnchorDashBoard() "><img src="../../assets/images/icons8-list-view-50.png" class="imgheight" />
+                    <div>Anchor</div>
+                </div>
+                <a><img src="../../assets/images/icons8-master-26.png" class="imgheight" />
+                    <div>Masters</div>
+                </a>
+                <div (click)="onDementiaClick()"><img src="../../assets/images/dementiaSymbol.png" class="imgheight" />
+                    <div class="accordion-body">Dementia</div>
+                </div>
+             
+                <div (click)="Insurance()"><img src="../../assets/images/healthcare (1).png" class="imgheight" />
+                    <div>insurance</div>
+                </div>
+                <div (click)="onOneTimeUser()"><img src="../../assets/images/OneTimeUser/PayPerUse.png" class="imgheight" />
+                    <div>One Time User</div>
+                </div>
+            
+                <div (click)="partner()"><img src="../../assets/images/OneTimeUser/PayPerUse.png" class="imgheight" />
+                    <div>partners</div>
+                </div>
+            
+            
+            </div>
+        </div>
+        <div class="col-9 col-md-10 col-sm-10 col-lg-11 bodycontent ">
+        </div>
+    </div>
+</div>  -->
+  <!-- <div class="leftCol" *ngIf="token !=null">
+
+        <div (click)="onProfile()"> <img src="../../assets/images/icons8-user-48.png" class="imgheight" />
+            <div>Profile</div>
+        </div>
+        <div (click)="emergencyList()"><img src="../../assets/images/icons8-ambulance-50.png" class="imgheight" />
+            <div>Emergency</div>
+        </div>
+        <div (click)=" CustomerList()"> <img src="../../assets/images/icons8-users-64.png" class="imgheight" />
+            <div>Customers</div>
+        </div>
+        <a> <img src="../../assets/images/icons8-money-bag-30.png" class="imgheight" />
+            <div>Finance</div>
+        </a>
+        <div (click)=" AnchorDashBoard() "><img src="../../assets/images/icons8-list-view-50.png" class="imgheight" />
+            <div>Anchor</div>
+        </div>
+        <a><img src="../../assets/images/icons8-master-26.png" class="imgheight" />
+            <div>Masters</div>
+        </a>
+        <div (click)="onDementiaClick()"><img src="../../assets/images/dementiaSymbol.png" class="imgheight" />
+            <div class="accordion-body">Dementia</div>
+        </div>
+
+        <div (click)="Insurance()"><img src="../../assets/images/healthcare (1).png" class="imgheight" />
+            <div>insurance</div>
+        </div>
+        <div (click)="onOneTimeUser()"><img src="../../assets/images/OneTimeUser/PayPerUse.png" class="imgheight" />
+            <div>One Time User</div>
+        </div>
+
+        <div (click)="partner()"><img src="../../assets/images/OneTimeUser/PayPerUse.png" class="imgheight" />
+            <div>partners</div>
+        </div>
+
+
+    </div> -->
+
+  <!-- <div class="modal fade " id="CreateRequest" role="dialog " aria-hidden="true " data-backdrop="static "
+    data-keyboard="false " aria-labelledby="fieldEmployeeModalLabel ">
+    <div class="modal-dialog modal-xl  " role="document">
+      <div class="modal-content">
+        <form name="">
+
+          <div class="header modal-header model">
+
+          </div>
+          <div class="modal-body">
+            <div class=" allcp-form ">
+              <div class=" row">
+                <div class="  col-md-4">
+                  <div class="searchBox ng-autocomplete">
+                    <ng-autocomplete [data]="data" [searchKeyword]="keyword" placeholder="Select Customer"
+                      (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)'
+                      (inputCleared)='onFocused($event)' historyIdentifier="data" [itemTemplate]="itemTemplate"
+                      [notFoundTemplate]="notFoundTemplate">
+                    </ng-autocomplete>
+
+
+                    <ng-template #itemTemplate let-item>
+                      <a [innerHTML]="item.Name"></a>
+                    </ng-template>
+
+                    <ng-template #notFoundTemplate let-notFound>
+                      <div [innerHTML]="notFound"></div>
+                    </ng-template>
+                  </div>
+                </div>
+                <div class="planData col-md-4" [hidden]="!planDetails">
+
+                  <span class="planDetails">Plan Type:</span><span class="plaDetails"> {{planType}}</span>
+                  <br>
+                  <span class="planDetails"> Package Nature: </span><span class="PackageNature">{{PackageNature}}</span>
+                  <br>
+                  <span class="planDetails"> PMS Balance:</span> <span class=""> </span>
+
+                </div>
+              </div>
+              <div class="customerData row" *ngIf="userDetails.length>0">
+                <div class="  row" *ngFor="let data of userDetails">
+                  <div class="sponserDetails border border-dark col-sm-4">
+                    <span>
+                      <span class="nameBorder">Sponsor</span>
+                    </span>
+                    <h4>{{data.Name}}</h4>
+                    <span class="validationNames"> Ph NO:{{data.MobileNumber}}</span>
+                   
+                  </div>
+                  <div class=" sponserDetails border border-dark col-sm-4">
+                    <span class="nameBorder">Beneficiary 1</span>
+                    <h4>{{data.Beneficiaries[0].Name}}</h4>
+                    <span class="validationNames"> Ph NO:{{data.Beneficiaries[0].MobileNumber}}</span>
+                  </div>
+                  <div class="sponserDetails border border-dark col-sm-4" *ngIf="data.Beneficiaries.length>=2">
+                    <span class="nameBorder">Beneficiary 2</span>
+                    <h4>{{data.Beneficiaries[1].Name}}</h4>
+                    <span class="validationNames"> Ph NO:{{data.Beneficiaries[1].MobileNumber}}</span>
+                  </div>
+                </div>
+                <div class="cmspdetails row" *ngFor="let data of userDetails">
+                  <div class="bgcolors border border-dark col-md-4" *ngIf="data.SupportExecutiveObj!=null">
+                    <span class="support">Support Executive</span>
+
+                    <h4>Name: {{data.SupportExecutiveObj.FirstName}}</h4>
+                    <span class="validationNames"> Contact Number:{{data.SupportExecutiveObj.ContactNumber}}</span>
+                  </div>
+                  <div class="bgcolors border border-dark col-md-4" *ngIf="data.CareManagerObj!=null">
+                    <span class="support">Care Manager</span>
+                    <h4> <span>Name:</span> {{data.CareManagerObj.FirstName}}</h4>
+                    <span class="validationNames"> Contact Number:{{data.CareManagerObj.ContactNumber}}</span>
+                  </div>
+                  <div class="bgcolors border border-dark col-md-4" *ngIf="data.BackUpCareManagerObj!=null">
+                    <span class="support">Backup Care Manager</span>
+                    <h4>Name: {{data.BackUpCareManagerObj.FirstName}}</h4>
+                    <span class="validationNames" *ngIf="data.BackUpCareManagerObj!=null"> Contact
+                      Number:{{data.BackUpCareManagerObj.ContactNumber}}</span>
+                  </div>
+                </div>
+                <div class="row" [formGroup]="createRequestData">
+                  <div class="searchbox col-sm-4">
+                    <div class="serviceSelect ng-autocomplete">
+                      <ng-autocomplete [data]="categaryDetails" [searchKeyword]="keyword1" placeholder="Select Service"
+                        (inputChanged)='onChangePlan($event)' (selected)='selectCategory($event)'
+                        (inputCleared)='onFocuse($event)' historyIdentifier="categaryDetails"
+                        [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+                      </ng-autocomplete>
+                      <ng-template #itemTemplate let-item>
+                        <a [innerHTML]="item.AliasName"></a>
+                      </ng-template>
+                      <ng-template #notFoundTemplate let-notFound>
+                        <div [innerHTML]="notFound"></div>
+                      </ng-template>
+                    </div>
+                  </div>
+                  <div class="anvayaaCharges col-md-4" [hidden]="formDetails==false">
+                    <h2 class="anvayaaChargeslist">Anvayaa Charges:</h2>
+                    <span class="coverd"> {{Covered}}</span>
+                    <h6 class="notcoverd"> {{NotCovered}}</h6>
+                    <p><span>Estimated Range:</span> /-</p>
+                    <span class="anvayaaFee">Anvayaa Charges:</span> <span>{{TotalPrice}} /-</span>
+                  </div>
+                  <div class="nxtbtn col-md-2" [hidden]="formDetails==false">
+                    <button class="createReqBtn" data-bs-toggle="modal" data-bs-target="#newRequest">NEXT</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="modal-footer">
+
+          <button type="button" (click)="close()" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+        <div>
+          <div class="dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"
+            [ngStyle]="{'background-color': ongoingDivColor ? '#adadac' :''}">
+            <img src="../../assets/images/live-chat.png" class="imgheight" />
+            <div>Chats</div>
+          </div>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <li><button class="dropdown-item" type="button" (click)="chatroles()">view Roles</button></li>
+            <li><button class="dropdown-item" type="button" (click)="allUsers()">All Users</button></li>
+            <li><button class="dropdown-item" type="button" (click)="createchatgroup()">Create Chat Group</button></li>
+          </ul>
+        </div>
+      </div>
+  </div>
+  </div> -->
+
+
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Check Out Status</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeTrack()"></button>
+        </div>
+        <div class="modal-body">
+          <label>Select Checkout  Status</label>
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="clockInStatus"  (change)="changeStatus($event)">
+            <option value="" disabled selected>Select Status</option>
+            <option value="Check-Out">Shift Ended</option>
+            <option value="Smoke">Smoke</option>
+            <option value="Break">Break</option>
+            <option value="Meeting">Meeting</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeTrack()" >Close</button>
+          <button type="button" class="anvayaabutton-primary" (click)="submitStatusTime()">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</router-outlet>
+
+<ngx-spinner type="ball-scale-multiple">loading...</ngx-spinner>

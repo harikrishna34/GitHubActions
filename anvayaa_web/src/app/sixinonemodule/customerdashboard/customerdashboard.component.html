@@ -1,0 +1,1116 @@
+<div class="mainDiv">
+  <div class=" row col-md-3 mt-2" style="margin-left: auto;">
+    <form [formGroup]="beneficiarysixinone">
+      <select class="form-select" formControlName="beneficiaries" (change)="beneficiaryselect($event)">
+        <option value="" selected disabled>Select Beneficiary</option>
+        <option *ngFor="let ben of beneficiariesArray" value="{{ben.CustID}}">{{ben.Name}}</option>
+      </select>
+    </form>
+  </div>
+
+  <div class="row card-body">
+    <div>
+      <div class="card mb-4">
+
+        <div class="card-body row">
+
+          <div class="row col-md-4">
+
+            <div class="col-sm-3">
+
+              <p class="mb-0 fw-bolder">Name</p>
+
+            </div>
+
+            <div class="col-sm-9">
+
+              <p class="text-muted mb-0">{{customerObj?.Name}}</p>
+
+            </div>
+
+          </div>
+
+          <div class="row col-md-4">
+
+            <div class="col-sm-3">
+
+              <p class="mb-0 fw-bolder">DOB</p>
+
+            </div>
+
+            <div class="col-sm-9">
+
+              <p class="text-muted mb-0">{{customerObj?.DOB*1000|date:'dd-MMM-yyyy'}}</p>
+
+            </div>
+
+          </div>
+
+          <div class="row col-md-4">
+
+            <div class="col-sm-3">
+
+              <p class="mb-0 fw-bolder">Contact</p>
+
+            </div>
+
+            <div class="col-sm-9">
+
+              <p class="text-muted mb-0">{{customerObj?.MobileNumber}}</p>
+
+            </div>
+
+          </div>
+
+          <div class="row col-md-4">
+
+            <div class="col-sm-3">
+
+              <p class="mb-0 fw-bolder">Age</p>
+
+            </div>
+
+            <div class="col-sm-9">
+
+              <p class="text-muted mb-0">{{customerObj?.Age}}</p>
+
+            </div>
+
+          </div>
+
+          <div class="row col-md-4">
+
+            <div class="col-sm-3">
+
+              <p class="mb-0 fw-bolder">E-Mail</p>
+
+            </div>
+
+            <div class="col-sm-9">
+
+              <p class="text-muted mb-0">{{customerObj?.EmailID}}</p>
+
+            </div>
+
+          </div>
+
+          <div class="row col-md-4">
+
+            <div class="col-sm-3">
+
+              <p class="mb-0 fw-bolder">Gender</p>
+
+            </div>
+
+            <div class="col-sm-9">
+
+              <p class="text-muted mb-0">{{customerObj?.Gender}}</p>
+
+            </div>
+
+          </div>
+
+          <div class="row col-md-4">
+
+            <div class="col-sm-3">
+
+              <p class="mb-0 fw-bolder">Address</p>
+
+            </div>
+
+            <div class="col-sm-9">
+
+              <p class="text-muted mb-0">{{customerObj?.LandMark}}</p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+  <!-- dashboards  start      -->
+  <div class="mt-2">
+
+    <!-- Categories -->
+    <div class="row mt-6">
+      <!-- <div class="col-12 mb-4">
+              <span class="badge bg-pastel-primary text-primary text-uppercase-bold-sm">
+                VITAL TYPES
+              </span>
+            </div> -->
+
+
+
+      <!-- Category -->
+      <div class="col-md-2 mb-4" (click)="viewsixinonedashboards('HeartRate')" style="cursor: pointer;">
+        <div [hidden]="viewsixinonedb?.HeartRate[0]?.vital?.vitalData?.HeartRate ==null ">
+
+          <a class="card align-items-center text-decoration-none border-0 hover-lift-light py-4 fs-1">
+            <!-- <span class="icon-circle icon-circle-lg bg-pastel-primary text-primary"> -->
+            {{viewsixinonedb?.HeartRate[0]?.vital?.vitalData?.HeartRate|number: '1.1-2'}}
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><title>ionicons-v5-e</title><rect x="48" y="80" width="416" height="384" rx="48" ry="48" style="fill:none;stroke:#000;stroke-linejoin:round;stroke-width:32px"></rect><path d="M397.82,80H114.18C77.69,80,48,110.15,48,147.2V208H64c0-16,16-32,32-32H416c16,0,32,16,32,32h16V147.2C464,110.15,434.31,80,397.82,80Z"></path><circle cx="296" cy="232" r="24"></circle><circle cx="376" cy="232" r="24"></circle><circle cx="296" cy="312" r="24"></circle><circle cx="376" cy="312" r="24"></circle><circle cx="136" cy="312" r="24"></circle><circle cx="216" cy="312" r="24"></circle><circle cx="136" cy="392" r="24"></circle><circle cx="216" cy="392" r="24"></circle><circle cx="296" cy="392" r="24"></circle><line x1="128" y1="48" x2="128" y2="80" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></line><line x1="384" y1="48" x2="384" y2="80" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></line></svg> -->
+            <!-- </span> -->
+          </a>
+        </div>
+        <div [hidden]="viewsixinonedb?.HeartRate[0]?.vital?.vitalData?.HeartRate !=null ">
+          <a class="card align-items-center text-decoration-none border-0 hover-lift-light py-12 fs-1">
+            <h5>No Data</h5>
+          </a>
+        </div>
+
+        <div class="card-body" style="text-align: center;background-color: #914572;">
+          <div
+          [hidden]="viewsixinonedb?.HeartRate[0]?.CreatedDate == null && viewsixinonedb?.HeartRate[0]?.CreatedDate == null ">
+          <span class="text-white mt-3">
+            <p class="card-text">Heart Rate</p>
+            {{viewsixinonedb?.HeartRate[0]?.CreatedDate*1000|date :'dd-MMM-YYYY'}}
+            {{viewsixinonedb?.HeartRate[0]?.CreatedDate*1000|date :'hh:mm a'}}
+          </span>
+          </div>
+          <div
+          [hidden]="viewsixinonedb?.HeartRate[0]?.CreatedDate != null && viewsixinonedb?.HeartRate[0]?.CreatedDate != null ">
+          <span class="text-white mt-3">
+            <p class="card-text">Heart Rate</p>
+            -NO DATA-
+          </span>
+        </div>
+        </div>
+      </div>
+
+      <!-- Category -->
+      <div class="col-md-2 mb-4" (click)="viewsixinonedashboards('BloodPressure')" style="cursor: pointer;">
+        <div
+          [hidden]="viewsixinonedb?.BloodPressure[0]?.vital?.vitalData?.SystolicPressure == null && viewsixinonedb?.BloodPressure[0]?.vital?.vitalData?.DiastolicPressure ==null ">
+          <a class="card align-items-center text-decoration-none border-0 hover-lift-light py-4 fs-1">
+            <!-- <span class="icon-circle icon-circle-lg bg-pastel-primary text-primary"> -->
+            {{viewsixinonedb?.BloodPressure[0]?.vital?.vitalData?.SystolicPressure}}/{{viewsixinonedb?.BloodPressure[0]?.vital?.vitalData?.DiastolicPressure}}
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><title>ionicons-v5-l</title><path d="M431,320.6c-1-3.6,1.2-8.6,3.3-12.2a33.68,33.68,0,0,1,2.1-3.1A162,162,0,0,0,464,215c.3-92.2-77.5-167-173.7-167C206.4,48,136.4,105.1,120,180.9a160.7,160.7,0,0,0-3.7,34.2c0,92.3,74.8,169.1,171,169.1,15.3,0,35.9-4.6,47.2-7.7s22.5-7.2,25.4-8.3a26.44,26.44,0,0,1,9.3-1.7,26,26,0,0,1,10.1,2L436,388.6a13.52,13.52,0,0,0,3.9,1,8,8,0,0,0,8-8,12.85,12.85,0,0,0-.5-2.7Z" style="fill:none;stroke:#000;stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"></path><path d="M66.46,232a146.23,146.23,0,0,0,6.39,152.67c2.31,3.49,3.61,6.19,3.21,8s-11.93,61.87-11.93,61.87a8,8,0,0,0,2.71,7.68A8.17,8.17,0,0,0,72,464a7.26,7.26,0,0,0,2.91-.6l56.21-22a15.7,15.7,0,0,1,12,.2c18.94,7.38,39.88,12,60.83,12A159.21,159.21,0,0,0,284,432.11" style="fill:none;stroke:#000;stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"></path></svg> -->
+            <!-- </span> -->
+          </a>
+        </div>
+        <div
+          [hidden]="viewsixinonedb?.BloodPressure[0]?.vital?.vitalData?.SystolicPressure!=null && viewsixinonedb?.BloodPressure[0]?.vital?.vitalData?.DiastolicPressure !=null ">
+          <a class="card align-items-center text-decoration-none border-0 hover-lift-light py-12 fs-1">
+            <h5>No Data</h5>
+          </a>
+        </div>
+
+        <div class="card-body" style="text-align: center;background-color: #F79122;">
+          <div
+            [hidden]="viewsixinonedb?.BloodPressure[0]?.CreatedDate == null && viewsixinonedb?.BloodPressure[0]?.CreatedDate == null ">
+
+            <span class="text-white mt-3">
+              <p class="card-text">Blood Pressure</p>
+              {{viewsixinonedb?.BloodPressure[0]?.CreatedDate*1000|date :'dd-MMM-YYYY'}}
+              {{viewsixinonedb?.BloodPressure[0]?.CreatedDate*1000|date :'hh:mm a'}}
+            </span>
+          </div>
+          <div
+            [hidden]="viewsixinonedb?.BloodPressure[0]?.CreatedDate != null && viewsixinonedb?.BloodPressure[0]?.CreatedDate != null ">
+            <span class="text-white mt-3">
+              <p class="card-text">Blood Pressure</p>
+              -NO DATA-
+            </span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Category -->
+      <div class="col-md-2 mb-4" (click)="viewsixinonedashboards('Oxygen')" style="cursor: pointer;">
+        <div [hidden]="viewsixinonedb?.Oxygen[0]?.vital?.vitalData?.Oxygen ==null ">
+
+          <a class="card align-items-center text-decoration-none border-0 hover-lift-light py-4 fs-1">
+            <!-- <span class="icon-circle icon-circle-lg bg-pastel-primary text-primary"> -->
+            {{viewsixinonedb?.Oxygen[0]?.vital?.vitalData?.Oxygen|number: '1.1-2'}}
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><title>ionicons-v5-i</title><path d="M277.42,247a24.68,24.68,0,0,0-4.08-5.47L255,223.44a21.63,21.63,0,0,0-6.56-4.57,20.93,20.93,0,0,0-23.28,4.27c-6.36,6.26-18,17.68-39,38.43C146,301.3,71.43,367.89,37.71,396.29a16,16,0,0,0-1.09,23.54l39,39.43a16.13,16.13,0,0,0,23.67-.89c29.24-34.37,96.3-109,136-148.23,20.39-20.06,31.82-31.58,38.29-37.94A21.76,21.76,0,0,0,277.42,247Z" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></path><path d="M478.43,201l-34.31-34a5.44,5.44,0,0,0-4-1.59,5.59,5.59,0,0,0-4,1.59h0a11.41,11.41,0,0,1-9.55,3.27c-4.48-.49-9.25-1.88-12.33-4.86-7-6.86,1.09-20.36-5.07-29a242.88,242.88,0,0,0-23.08-26.72c-7.06-7-34.81-33.47-81.55-52.53a123.79,123.79,0,0,0-47-9.24c-26.35,0-46.61,11.76-54,18.51-5.88,5.32-12,13.77-12,13.77A91.29,91.29,0,0,1,202.35,77a79.53,79.53,0,0,1,23.28-1.49C241.19,76.8,259.94,84.1,270,92c16.21,13,23.18,30.39,24.27,52.83.8,16.69-15.23,37.76-30.44,54.94a7.85,7.85,0,0,0,.4,10.83l21.24,21.23a8,8,0,0,0,11.14.1c13.93-13.51,31.09-28.47,40.82-34.46s17.58-7.68,21.35-8.09A35.71,35.71,0,0,1,380.08,194a13.65,13.65,0,0,1,3.08,2.38c6.46,6.56,6.07,17.28-.5,23.74l-2,1.89a5.5,5.5,0,0,0,0,7.84l34.31,34a5.5,5.5,0,0,0,4,1.58,5.65,5.65,0,0,0,4-1.58L478.43,209A5.82,5.82,0,0,0,478.43,201Z" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></path></svg> -->
+            <!-- </span> -->
+          </a>
+        </div>
+        <div [hidden]="viewsixinonedb?.Oxygen[0]?.vital?.vitalData?.Oxygen !=null ">
+          <a class="card align-items-center text-decoration-none border-0 hover-lift-light py-12 fs-1">
+            <h5>No Data</h5>
+          </a>
+        </div>
+        <div class="card-body" style="text-align: center;background-color: #2FC3D1;">
+          <div
+            [hidden]="viewsixinonedb?.Oxygen[0]?.CreatedDate == null && viewsixinonedb?.Oxygen[0]?.CreatedDate == null ">
+            <span class="text-white mt-3">
+              <p class="card-text">Oxygen</p>
+              {{viewsixinonedb?.Oxygen[0]?.CreatedDate*1000|date :'dd-MMM-YYYY'}}
+              {{viewsixinonedb?.Oxygen[0]?.CreatedDate*1000|date :'hh:mm a'}}
+            </span>
+          </div>
+          <div
+            [hidden]="viewsixinonedb?.Oxygen[0]?.CreatedDate != null && viewsixinonedb?.Oxygen[0]?.CreatedDate != null ">
+            <span class="text-white mt-3">
+              <p class="card-text">Oxygen</p>
+              -NO DATA-
+            </span>
+          </div>
+
+
+        </div>
+
+      </div>
+
+      <!-- Category -->
+      <div class="col-md-2 mb-4" (click)="viewsixinonedashboards('Temperature')" style="cursor: pointer;">
+        <div [hidden]="viewsixinonedb?.Temperature[0]?.vital?.vitalData?.Temperature ==null ">
+
+          <a class="card align-items-center text-decoration-none border-0 hover-lift-light py-4 fs-1">
+            <!-- <span class="icon-circle icon-circle-lg bg-pastel-primary text-primary"> -->
+            {{viewsixinonedb?.Temperature[0]?.vital?.vitalData?.Temperature|number: '1.1-2'}}
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><title>ionicons-v5-p</title><path d="M403.29,32H280.36a14.46,14.46,0,0,0-10.2,4.2L24.4,281.9a28.85,28.85,0,0,0,0,40.7l117,117a28.86,28.86,0,0,0,40.71,0L427.8,194a14.46,14.46,0,0,0,4.2-10.2V60.8A28.66,28.66,0,0,0,403.29,32Z" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></path><path d="M352,144a32,32,0,1,1,32-32A32,32,0,0,1,352,144Z"></path><path d="M230,480,492,218a13.81,13.81,0,0,0,4-10V80" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></path></svg> -->
+            <!-- </span> -->
+          </a>
+        </div>
+        <div [hidden]="viewsixinonedb?.Temperature[0]?.vital?.vitalData?.Temperature !=null ">
+          <a class="card align-items-center text-decoration-none border-0 hover-lift-light py-12 fs-1">
+            <h5>No Data</h5>
+          </a>
+        </div>
+
+        <div class="card-body" style="text-align: center;background-color: #914572;">
+          <div
+            [hidden]="viewsixinonedb?.Temperature[0]?.CreatedDate == null && viewsixinonedb?.Temperature[0]?.CreatedDate == null ">
+            <span class="text-white mt-3">
+              <p class="card-text">Temperature</p>
+              {{viewsixinonedb?.Temperature[0]?.CreatedDate*1000|date :'dd-MMM-YYYY'}}
+              {{viewsixinonedb?.Temperature[0]?.CreatedDate*1000|date :'hh:mm a'}}
+            </span>
+          </div>
+          <div
+            [hidden]="viewsixinonedb?.Temperature[0]?.CreatedDate != null && viewsixinonedb?.Temperature[0]?.CreatedDate != null ">
+            <span class="text-white mt-3">
+              <p class="card-text">Temperature</p>
+              -NO DATA-
+            </span>
+          </div>
+
+
+        </div>
+      </div>
+
+      <!-- Category -->
+      <div class="col-md-2 mb-4" (click)="viewsixinonedashboards('Glucose')" style="cursor: pointer;">
+        <div [hidden]="viewsixinonedb?.Glucose[0]?.vital?.vitalData?.Glucose == null">
+          <a class="card align-items-center text-decoration-none border-0 hover-lift-light py-4 fs-1">
+            <!-- <span class="icon-circle icon-circle-lg bg-pastel-primary text-primary"> -->
+            {{viewsixinonedb?.Glucose[0]?.vital?.vitalData?.Glucose}}
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><title>ionicons-v5-n</title><path d="M53.12,199.94l400-151.39a8,8,0,0,1,10.33,10.33l-151.39,400a8,8,0,0,1-15-.34L229.66,292.45a16,16,0,0,0-10.11-10.11L53.46,215A8,8,0,0,1,53.12,199.94Z" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></path><line x1="460" y1="52" x2="227" y2="285" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></line></svg> -->
+            <!-- </span> -->
+          </a>
+        </div>
+        <div [hidden]="viewsixinonedb?.Glucose[0]?.vital?.vitalData?.Glucose !=null ">
+          <a class="card align-items-center text-decoration-none border-0 hover-lift-light py-12 fs-1">
+            <h5>No Data</h5>
+          </a>
+        </div>
+
+        <div class="card-body " style="text-align: center;background-color: #F79122;">
+         <div [hidden]="viewsixinonedb?.Glucose[0]?.CreatedDate == null && viewsixinonedb?.Glucose[0]?.CreatedDate == null ">
+
+          <span class="text-white mt-3">
+            <p class="card-text">Glucose</p>
+            {{viewsixinonedb?.Glucose[0]?.CreatedDate*1000|date :'dd-MMM-YYYY'}}
+            {{viewsixinonedb?.Glucose[0]?.CreatedDate*1000|date :'hh:mm a'}}
+          </span>
+         </div>
+          <div
+          [hidden]="viewsixinonedb?.Glucose[0]?.CreatedDate != null && viewsixinonedb?.Glucose[0]?.CreatedDate != null ">
+          <span class="text-white mt-3">
+            <p class="card-text">Glucose</p>
+            -NO DATA-
+          </span>
+        </div>
+        </div>
+        
+      </div>
+      <!-- Category -->
+      <div class="col-md-2 mb-1" (click)="viewsixinonedashboards('Ecgdata')" style="cursor: pointer;">
+        <a class="card-body   hover-lift-light py-1">
+          <!-- <span class="icon-circle icon-circle-lg bg-pastel-primary text-primary"> -->
+          <!-- <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><title>ionicons-v5-c</title><polyline points="352 144 464 144 464 256" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></polyline><path d="M48,368,169.37,246.63a32,32,0,0,1,45.26,0l50.74,50.74a32,32,0,0,0,45.26,0L448,160" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></path></svg> -->
+
+          <div class="Ecgtable-wrapper-scroll-y ecgdata-scrollbar">
+
+            <table class="table table-bordered table-striped mb-0">
+
+              <tbody>
+                <tr>
+
+                  <td>RRMax</td>
+                  <td>{{viewsixinonedb?.ECG[0]?.vital?.vitalData?.RRMax}}</td>
+
+                </tr>
+                <tr>
+
+                  <td>RRMin</td>
+                  <td>{{viewsixinonedb?.ECG[0]?.vital?.vitalData?.RRMin}}</td>
+
+                </tr>
+                <tr>
+
+                  <td>BR</td>
+                  <td>{{viewsixinonedb?.ECG[0]?.vital?.vitalData?.BR}}</td>
+
+                </tr>
+                <tr>
+
+                  <td>AvgHR</td>
+                  <td>{{viewsixinonedb?.ECG[0]?.vital?.vitalData?.AvgHR}}</td>
+
+                </tr>
+                <tr>
+
+                  <td>HRV</td>
+                  <td>{{viewsixinonedb?.ECG[0]?.vital?.vitalData?.HRV}}</td>
+
+                </tr>
+                <tr>
+
+                  <td>Mood</td>
+                  <td>{{viewsixinonedb?.ECG[0]?.vital?.vitalData?.Mood}}</td>
+
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+
+        </a>
+
+        <div class="card-body " style="text-align: center;background-color: #2FC3D1;">
+         <div [hidden]="viewsixinonedb?.ECG[0]?.CreatedDate == null && viewsixinonedb?.ECG[0]?.CreatedDate == null ">
+
+          <span class="text-white mt-3">
+            <p class="card-text">Ecg</p>
+            {{viewsixinonedb?.ECG[0]?.CreatedDate*1000|date :'dd-MMM-YYYY'}}
+            {{viewsixinonedb?.ECG[0]?.CreatedDate*1000|date :'hh:mm a'}}
+          </span>
+         </div>
+          <div
+          [hidden]="viewsixinonedb?.ECG[0]?.CreatedDate != null && viewsixinonedb?.ECG[0]?.CreatedDate != null ">
+          <span class="text-white mt-3">
+            <p class="card-text">ECG</p>
+            -NO DATA-
+          </span>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- dashboards  End      -->
+
+
+
+
+
+
+
+
+
+  <!--graphs-->
+  <div class="container" style="margin-left: 18px;">
+    <div class="row">
+      <div class="col-md-12 card" *ngIf='Ecgdata'>
+        <!-- <div class="card-header"></div> -->
+        <nav class="navbar navbar-expand-sm  navbar-light" style="background-color: #e3f2fd;">
+          <div class="container-fluid">
+            <a class="navbar-brand">
+              <h4>Ecg</h4>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="collapsibleNavbar">
+              <ul class="navbar-nav ">
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Hour');hrhourBtnColor()">Hour</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Day');hrhourBtnColor()">Day</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Week');hrhourBtnColor()">Week</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Month');hrhourBtnColor()">Month</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link " role="button" class="btn btn-anvayaayellow" data-bs-toggle="modal"
+                    data-bs-target="#ecgmodal">Custom</a>
+
+                  <!-- <ul class="dropdown-menu"> -->
+
+                  <!-- <li><a class="dropdown-item" href="Custom">Link</a></li>
+                      <li><a class="dropdown-item" href="Custom">Another link</a></li>
+                      <li><a class="dropdown-item" href="Custom">A third link</a></li> -->
+                  <!-- </ul> -->
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <div class="card-header" style="text-align: center;">{{intervaltype}} HEALTH DATA</div>
+        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+              <tr>
+
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">RRMAx</th>
+                <th scope="col">RRMin</th>
+                <th scope="col">BR</th>
+                <th scope="col">AvgHR</th>
+                <th scope="col">HRV</th>
+                <th scope="col">Mood</th>
+                <th scope="col">PDFFile</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let hr of EcgList">
+
+                <td>{{hr.CreatedDate * 1000|date:'dd-MM-yyyy'}}</td>
+                <td>{{hr.CreatedDate * 1000|date:'hh:mm a'}}</td>
+                <td>{{hr.RRMax|number: '1.1-2'}}</td>
+                <td>{{hr.RRMin|number: '1.1-2'}}</td>
+                <td>{{hr.BR|number: '1.1-2'}}</td>
+                <td>{{hr.AvgHR}}</td>
+                <td>{{hr.HRV|number: '1.1-2'}}</td>
+                <td>{{hr.Mood|number: '1.1-2'}}</td>
+                <td><Button class="btn  btn-anvayaayellow" (click)="openlink(hr)">View</Button></td>
+              </tr>
+
+
+            </tbody>
+          </table>
+
+        </div>
+
+        <strong style="text-align: center;"><label>{{intervaltype}}</label></strong>
+      </div>
+      <!-- <div class="col-md-4 card" *ngIf='Ecgdata'>
+        
+      </div> -->
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-8 card" *ngIf='HeartRate'>
+        <!-- <div class="card-header"></div> -->
+        <nav class="navbar navbar-expand-sm  navbar-light" style="background-color: #e3f2fd;">
+          <div class="container-fluid">
+            <a class="navbar-brand">
+              <h3>Heart Rate</h3>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="collapsibleNavbar">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Hour');hrhourBtnColor()">Hour</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Day');hrhourBtnColor()">Day</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Week');hrhourBtnColor()">Week</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Month');hrhourBtnColor()">Month</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link text-white " role="button" class="btn  btn-anvayaayellow" data-bs-toggle="modal"
+                    data-bs-target="#hrmodal">Custom</a>
+
+                  <!-- <ul class="dropdown-menu"> -->
+
+                  <!-- <li><a class="dropdown-item" href="Custom">Link</a></li>
+                        <li><a class="dropdown-item" href="Custom">Another link</a></li>
+                        <li><a class="dropdown-item" href="Custom">A third link</a></li> -->
+                  <!-- </ul> -->
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+
+        <apx-chart [series]="[{data:serisData}]" [chart]="{
+                    height: 300,
+                    width:700,
+                    type: 'line',
+                    zoom: {
+                      enabled: true
+                    }
+                  }" [xaxis]="{categories:xaxisdata}" [yaxis]="{max:200 , min:10}" [dataLabels]="{ enabled: true }"
+          [grid]="{
+                    row: {
+                      colors: ['#f3f3f3', 'transparent'],
+                      opacity: 0.5
+                    }
+                  }" [stroke]="{ curve: 'straight' }"></apx-chart><strong
+          style="text-align: center;"><label>{{intervaltype}}</label></strong>
+      </div>
+      <div class="col-md-4 card" *ngIf='HeartRate'>
+        <div class="card-header" style="text-align: center;">{{intervaltype}} HEALTH DATA</div>
+        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+              <tr>
+
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">HeartRate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let hr of heartList">
+
+                <td>{{hr.CreatedDate * 1000|date:'dd-MM-yyyy'}}</td>
+                <td>{{hr.CreatedDate * 1000|date:'hh:mm a'}}</td>
+                <td>{{hr.HeartRate|number: '1.1-2'}}</td>
+              </tr>
+
+
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-8 card" *ngIf='BloodPressure'>
+        <nav class="navbar navbar-expand-sm  navbar-light" style="background-color: #e3f2fd;  cursor: pointer;">
+          <div class="container-fluid">
+            <a class="navbar-brand">
+              <h4>Blood Pressure</h4>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Hour');hrhourBtnColor()">Hour</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Day');hrhourBtnColor()">Day</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Week');hrhourBtnColor()">Week</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Month');hrhourBtnColor()">Month</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link text-white " role="button" class="btn  btn-anvayaayellow" data-bs-toggle="modal"
+                    data-bs-target="#bpmodal">Custom</a>
+
+                  <!-- <ul class="dropdown-menu"> -->
+
+                  <!-- <li><a class="dropdown-item" href="Custom">Link</a></li>
+                    <li><a class="dropdown-item" href="Custom">Another link</a></li>
+                    <li><a class="dropdown-item" href="Custom">A third link</a></li> -->
+                  <!-- </ul> -->
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <apx-chart [series]="[{name:'Systolic',data:bpseries},{name:'Diastolic',data:bpseries2}]" [chart]="{
+                height: 300,
+                width:700,
+                type: 'line',
+                zoom: {
+                  enabled: true
+                }
+              }" [xaxis]="{categories:bpxaxis}" [yaxis]="{max:200 , min:10}" [dataLabels]="{ enabled: true }" [grid]="{
+                row: {
+                  colors: ['#f3f3f3', 'transparent'],
+                  opacity: 0.5
+                }
+              }" [stroke]="{ curve: 'straight' }"></apx-chart><strong
+          style="text-align: center;"><label>{{intervaltype}}</label></strong>
+      </div>
+      <div class="col-md-4 card" *ngIf='BloodPressure'>
+        <div class="card-header" style="text-align: center;"> {{intervaltype}} HEALTH DATA</div>
+
+        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+              <tr>
+
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">Blood Pressure</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let bp of bpList">
+
+                <td>{{bp.CreatedDate * 1000|date:'dd-MM-yyyy'}}</td>
+                <td>{{bp.CreatedDate * 1000|date:'hh:mm a'}}</td>
+                <td>{{bp.SystolicPressure}}/{{bp.DiastolicPressure}}</td>
+              </tr>
+
+
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+
+      <div class="col-md-8 card" *ngIf='Glucose'>
+        <nav class="navbar navbar-expand-sm  navbar-light" style="background-color: #e3f2fd;">
+          <div class="container-fluid">
+            <a class="navbar-brand">
+              <h4>Glucose</h4>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Hour');hrhourBtnColor()">Hour</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Day');hrhourBtnColor()">Day</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Week');hrhourBtnColor()">Week</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Month');hrhourBtnColor()">Month</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link text-white" role="button" class="btn  btn-anvayaayellow" data-bs-toggle="modal"
+                    data-bs-target="#glucosemodal">Custom</a>
+                  <!-- <ul class="dropdown-menu"> -->
+
+                  <!-- <li><a class="dropdown-item" href="Custom">Link</a></li>
+                    <li><a class="dropdown-item" href="Custom">Another link</a></li>
+                    <li><a class="dropdown-item" href="Custom">A third link</a></li> -->
+                  <!-- </ul> -->
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <apx-chart [series]="[{data:Glucoseseries}]" [chart]="{
+                height: 300,
+                width:700,
+                type: 'line',
+                zoom: {
+                  enabled: true
+                }
+              }" [xaxis]="{categories:GlucoseXaxis}" [yaxis]="{max:200 , min:10}" [dataLabels]="{ enabled: true }"
+          [grid]="{
+                row: {
+                  colors: ['#f3f3f3', 'transparent'],
+                  opacity: 0.5
+                }
+              }" [stroke]="{ curve: 'straight' }"></apx-chart><strong
+          style="text-align: center;"><label>{{intervaltype}}</label></strong>
+      </div>
+      <div class="col-md-4 card" *ngIf='Glucose'>
+        <div class="card-header" style="text-align: center;"> {{intervaltype}} HEALTH DATA</div>
+        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+              <tr>
+
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">Glucose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let glu of glucoseList">
+
+                <td>{{glu.CreatedDate * 1000|date:'dd-MM-yyyy'}}</td>
+                <td>{{glu.CreatedDate * 1000|date:'hh:mm a'}}</td>
+                <td>{{glu.Glucose}}</td>
+              </tr>
+
+
+            </tbody>
+          </table>
+
+        </div>
+
+      </div>
+    </div>
+    <div class="row">
+
+      <div class="col-md-8 card" *ngIf='Temperature'>
+        <nav class="navbar navbar-expand-sm  navbar-light" style="background-color: #e3f2fd;">
+          <div class="container-fluid">
+            <a class="navbar-brand">
+              <h4>Temperature</h4>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Hour');hrhourBtnColor()">Hour</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Day');hrhourBtnColor()">Day</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Week');hrhourBtnColor()">Week</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Month');hrhourBtnColor()">Month</a>
+
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link " role="button" class="btn  btn-anvayaayellow" data-bs-toggle="modal"
+                    data-bs-target="#tempmodal">Custom</a>
+
+                  <!-- <ul class="dropdown-menu">
+                      <form [formGroup]="Customtemperatureform">
+
+                        <label>Start Date</label>
+                        <input type="date" class="form-control" formControlName="StartDate" required>
+                        <label>End Date</label>
+                        <input type="date" class="form-control" formControlName="EndDate" required>
+                      </form>
+                      <button class="btn btn-primary me-2" style="width: 75px;"
+                        (click)="viewgraph('Temperature','Customize')"> <i class="fa fa-check-square-o"
+                          aria-hidden="true">SAVE</i></button> -->
+                  <!-- <li><a class="dropdown-item" href="Custom">Link</a></li>
+                    <li><a class="dropdown-item" href="Custom">Another link</a></li>
+                    <li><a class="dropdown-item" href="Custom">A third link</a></li> -->
+                  <!-- </ul> -->
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <apx-chart [series]="[{data:tempratureseries}]" [chart]="{
+                height: 300,
+                width:700,
+                type: 'line',
+                zoom: {
+                  enabled: true                }
+              }" [xaxis]="{categories:tempratureXaxis}" [yaxis]="{max:200 , min:10}" [dataLabels]="{ enabled: true }"
+          [grid]="{
+                row: {
+                  colors: ['#f3f3f3', 'transparent'],
+                  opacity: 0.5
+                }
+              }" [stroke]="{ curve: 'straight' }"></apx-chart><strong
+          style="text-align: center;"><label>{{intervaltype}}</label></strong>
+      </div>
+      <div class="col-md-4 card" *ngIf='Temperature'>
+        <div class="card-header" style="text-align: center;">{{intervaltype}} HEALTH DATA</div>
+        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+              <tr>
+
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">Temperature</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let temp of tempList">
+
+                <td>{{temp.CreatedDate * 1000|date:'dd-MM-yyyy'}}</td>
+                <td>{{temp.CreatedDate * 1000|date:'hh:mm a'}}</td>
+                <td>{{temp.Temperature}}</td>
+              </tr>
+
+
+            </tbody>
+          </table>
+
+        </div>
+
+
+      </div>
+    </div>
+    <div class="row">
+
+      <div class="col-md-8 card" *ngIf='Oxygen'>
+
+        <nav class="navbar navbar-expand-sm  navbar-light" style="background-color: #e3f2fd;">
+          <div class="container-fluid">
+            <a class="navbar-brand">
+              <h4>Oxygen</h4>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Hour');hrhourBtnColor()">Hour</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Day');hrhourBtnColor()">Day</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Week');hrhourBtnColor()">Week</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-black" (click)="viewgraph('HeartRate','Month');hrhourBtnColor()">Month</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link text-white " role="button" class="btn  btn-anvayaayellow" data-bs-toggle="modal"
+                    data-bs-target="#oxymodal">Custom</a>
+
+                  <!-- <ul class="dropdown-menu"> -->
+
+                  <!-- <li><a class="dropdown-item" href="Custom">Link</a></li>
+                    <li><a class="dropdown-item" href="Custom">Another link</a></li>
+                    <li><a class="dropdown-item" href="Custom">A third link</a></li> -->
+                  <!-- </ul> -->
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <apx-chart [series]="[{data:spo2seris}]" [chart]="{
+                height: 300,
+                width:700,
+                type: 'line',
+                zoom: {
+                  enabled: true
+                }
+              }" [xaxis]="{categories:spo2Xaxis}" [yaxis]="{max:200 , min:10}" [dataLabels]="{ enabled: true }" [grid]="{
+                row: {
+                  colors: ['#f3f3f3', 'transparent'],
+                  opacity: 0.5
+                }
+              }" [stroke]="{ curve: 'straight' }"></apx-chart><strong
+          style="text-align: center;"><label>{{intervaltype}}</label></strong>
+      </div>
+      <div class="col-md-4 card" *ngIf='Oxygen'>
+        <div class="card-header" style="text-align: center;">{{intervaltype}} HEALTH DATA</div>
+        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+              <tr>
+
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">Oxygen</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let oxy of oxyList">
+
+                <td>{{oxy.CreatedDate * 1000|date:'dd-MM-yyyy'}}</td>
+                <td>{{oxy.CreatedDate * 1000|date:'hh:mm a'}}</td>
+                <td>{{oxy.Oxygen|number: '1.1-2'}}</td>
+              </tr>
+
+
+            </tbody>
+          </table>
+
+        </div>
+
+      </div>
+      <!-- <div class="col-md-12 card" *ngIf='Oxygen'  [hidden]="spo2Series.length=0">
+      <Label >no data found</Label>      
+    </div> -->
+
+    </div>
+
+    <!-- Button trigger modal -->
+    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Launch static backdrop modal
+</button> -->
+    <!--HR Modal -->
+    <div class="modal" id="hrmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="hrmodalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="hrmodalLabel">Pick your dates for Heart Rate</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #customclose></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="CustomHeartrateform">
+
+              <label>Start Date</label>
+              <input type="date" class="form-control" formControlName="StartDate" required>
+              <label>End Date</label>
+              <input type="date" class="form-control" formControlName="EndDate" required>
+            </form>
+
+
+          </div>
+          <div class="modal-footer">
+            <button class="btn  btn-anvayaayellow me-2" style="width: 75px;"
+              (click)="viewgraph('HeartRate','Customize')" id="closeModal"> <i class="fa fa-check-square-o"
+                aria-hidden="true">SAVE</i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--BP Modal -->
+    <div class="modal" id="bpmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="bpmodalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="bpmodalLabel">Pick your dates for Blood Pressure</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #custombpclose></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="Custombpform">
+
+              <label>Start Date</label>
+              <input type="date" class="form-control" formControlName="StartDate" required>
+              <label>End Date</label>
+              <input type="date" class="form-control" formControlName="EndDate" required>
+            </form>
+
+
+          </div>
+          <div class="modal-footer">
+            <button class="btn  btn-anvayaayellow me-2" style="width: 75px;"
+              (click)="viewgraph('BloodPressure','Customize')" id="closeModal"> <i class="fa fa-check-square-o"
+                aria-hidden="true">SAVE</i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Temp Modal -->
+    <div class="modal" id="tempmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="tempmodalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="tempmodalLabel">Pick your dates for Temperature</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+              #customtempclose></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="Customtemperatureform">
+
+              <label>Start Date</label>
+              <input type="date" class="form-control" formControlName="StartDate" required>
+              <label>End Date</label>
+              <input type="date" class="form-control" formControlName="EndDate" required>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button class="btn  btn-anvayaayellow me-2" style="width: 75px;"
+              (click)="viewgraph('Temperature','Customize')" id="closeModal"> <i class="fa fa-check-square-o"
+                aria-hidden="true">SAVE</i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Oxy Modal -->
+    <div class="modal" id="oxymodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="oxymodalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="oxymodalLabel">Pick your dates for Oxygen</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #customoxyclose></button>
+          </div>
+          <form [formGroup]="Customoxygenform">
+
+            <label>Start Date</label>
+            <input type="date" class="form-control" formControlName="StartDate" required>
+            <label>End Date</label>
+            <input type="date" class="form-control" formControlName="EndDate" required>
+          </form>
+
+          <div class="modal-footer">
+            <button class="btn  btn-anvayaayellow me-2" style="width: 75px;" (click)="viewgraph('Oxygen','Customize')"
+              id="closeModal"> <i class="fa fa-check-square-o" aria-hidden="true">SAVE</i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--glucose Modal -->
+    <div class="modal" id="glucosemodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="glucosemodalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="glucosemodalLabel">Pick your dates for glucose</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #customgluclose></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="Customglucoseform">
+
+              <label>Start Date</label>
+              <input type="date" class="form-control" formControlName="StartDate" required>
+              <label>End Date</label>
+              <input type="date" class="form-control" formControlName="EndDate" required>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button class="btn  btn-anvayaayellow me-2" style="width: 75px;" (click)="viewgraph('Glucose','Customize')"
+              id="closeModal"> <i class="fa fa-check-square-o" aria-hidden="true">SAVE</i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--ECG Modal -->
+    <div class="modal" id="ecgmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="ecgmodalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ecgmodalLabel">Pick your dates for ECG</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #customecgclose></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="Customecgform">
+
+              <label>Start Date</label>
+              <input type="date" class="form-control" formControlName="StartDate" required>
+              <label>End Date</label>
+              <input type="date" class="form-control" formControlName="EndDate" required>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button class="btn  btn-anvayaayellow me-2" style="width: 75px;" (click)="viewgraph('Ecgdata','Customize')"
+              id="closeModal"> <i class="fa fa-check-square-o" aria-hidden="true">SAVE</i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>

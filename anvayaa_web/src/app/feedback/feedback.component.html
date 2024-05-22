@@ -1,0 +1,236 @@
+<div class="maindiv">
+    <div class="card">
+        <div class="mt-1">
+            <div class="m-3">
+                <div class="row">
+                    <div class="col-md-4 mt-2">
+                        <div class="customer-tiles">
+                            <div class="text-center">
+                                <span class="fs-4">Sponsor</span>
+                            </div>
+                            <ul class="list-group mt-1 ">
+                                <li class="list-group-item">
+                                    <span class="badge"><img src="../../assets/images/user (2).png"
+                                            width="30px"></span>{{sponserDetils?.Name}}
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge"><img src="../../assets/images/telephone-call.png"
+                                            width="30px"></span>{{sponserDetils?.MobileNumber}}
+                                </li>
+                                <li class="list-group-item ">
+                                    <span class="badge"><img src="../../assets/images/mail (1).png"
+                                            width="30px"></span>{{sponserDetils?.EmailID}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-2" *ngFor="let ben of benficiaries">
+                        <div class="customer-tiles">
+                            <div class="text-center">
+                                <span class="fs-4">Benficiary</span>
+                            </div>
+                            <ul class="list-group mt-1 ">
+                                <li class="list-group-item">
+                                    <span class="badge"><img src="../../assets/images/user (2).png"
+                                            width="30px"></span>{{ben.Name}}
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge"><img src="../../assets/images/telephone-call.png"
+                                            width="30px"></span>{{ben.MobileNumber}}
+                                </li>
+                                <li class="list-group-item ">
+                                    <span class="badge"><img src="../../assets/images/mail (1).png"
+                                            width="30px"></span>{{ben.EmailID}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="requrimentTile mt-3 m-3">
+            <div class="fs-3 ms-3"><u>Requirment</u></div>
+            <div class="m-4">
+                <div class="row">
+                    <div class="col col-md-4 col-lg-4">
+                        <table class="table  table-borderless p-0">
+                            <tbody>
+                              <tr>
+                                <th >City</th>
+                                <td>:</td>
+                                <td>Otto</td>
+                              </tr>
+                              <tr>
+                                <th >Mobile Number</th>
+                                <td>:</td>
+                                <td>Thornton</td>
+                              </tr>
+                              <tr>
+                                <th >Area</th>
+                                <td>:</td>
+                                <td>the Bird</td>
+                              </tr>
+                              <tr>
+                                <th >Age</th>
+                                <td>:</td>
+                                <td>the Bird</td>
+                              </tr>
+                              <tr>
+                                <th >Mobility</th>
+                                <td>:</td>
+                                <td>the Bird</td>
+                              </tr>
+                              <tr>
+                                <th >Weight</th>
+                                <td>:</td>
+                                <td>the Bird</td>
+                              </tr>
+                              <tr>
+                                <th >Duty Hours</th>
+                                <td>:</td>
+                                <td>the Bird</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+                    <div class="col col-md-4 col-lg-4">
+                        <table class="table caption-top  table-borderless">
+                            <tbody>
+                              <tr>
+                                <th >Medication</th>
+                                <td>:</td>
+                                <td>Otto</td>
+                              </tr>
+                              <tr>
+                                <th >Exercise Activity</th>
+                                <td>:</td>
+                                <td>Thornton</td>
+                              </tr>
+                              <tr>
+                                <th >Medical Equipment Assistance</th>
+                                <td>:</td>
+                                <td>the Bird</td>
+                              </tr>
+                              <tr>
+                                <th >Service Required</th>
+                                <td>:</td>
+                                <td>the Bird</td>
+                              </tr>
+                              <tr>
+                                <th >Pricing Quoted</th>
+                                <td>:</td>
+                                <td>the Bird</td>
+                              </tr>
+                              <tr>
+                                <th >Price Informed</th>
+                                <td>:</td>
+                                <td>the Bird</td>
+                              </tr>
+                              <tr>
+                                <th >Food In Take</th>
+                                <td>:</td>
+                                <td>the Bird</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+                    <div class="col col-md-4 col-lg-4">
+                        <table class="table caption-top  table-borderless">
+                            <tbody>
+                              <tr>
+                                <th >House Service Duration Requested </th>
+                                <td>:</td>
+                                <td>Otto</td>
+                              </tr>
+                              <tr>
+                                <th >Insulin</th>
+                                <td>:</td>
+                                <td>Thornton</td>
+                              </tr>
+                              <tr>
+                                <th >Do You Want Cook</th>
+                                <td>:</td>
+                                <td>the Bird</td>
+                              </tr>
+                              <tr>
+                                <th >Do You Want Maid</th>
+                                <td>:</td>
+                                <td>the Bird</td>
+                              </tr>
+                              <tr>
+                                <th >Note</th>
+                                <td>:</td>
+                                <td>the Bird</td>
+                              </tr>
+                              <tr>
+                                <th >Washroom Usage</th>
+                                <td>:</td>
+                                <td>the Bird</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+                  </div>
+            </div>
+            
+        </div> -->
+        <div class="row m-3">
+            <div class="fs-3"><u>CSAT Calls for request</u></div>
+          <div class="col-md-6">
+            <div class="card rounded-0 mb-3 border-0">
+                <div class="row"> 
+                  <div class="col-md-4">
+                    <img src="..." class="img-fluid rounded-start" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="card-text"><span style="color: purple;">Staff Name</span><span>:</span><span></span></p>
+                      <p class="card-text"><span style="color: purple;">Partner Name</span><span>:</span><span></span></p>
+                      <p class="card-text"><span style="color: purple;">Date</span><span>:</span><span></span></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="col-md-6">
+            <table>
+                <tbody>
+                    <tr>
+                        <td style="color: purple;">Partner Rating</td>
+                        <td>:</td>
+                        <td>
+                            <ul class="list-inline rating-list" 
+                            *ngFor="let star of stars" style="display: inline-block;margin-top: 24px" >
+                              <li (click)="partnerRating(star)"
+                                  [ngClass]="{'selected': (star <= selectedValue)}">
+                                <i class="fa fa-star"></i>
+                              </li> 
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: purple;">Staff Rating</td>
+                        <td>:</td>
+                        <td>
+                            <ul class="list-inline rating-list" 
+                            *ngFor="let stars of stars" style="display: inline-block;margin-top: 24px" >
+                              <li (click)="staffRating(stars)"
+                                  [ngClass]="{'selected': (stars <= staffSelectedValue)}">
+                                <i class="fa fa-star"></i>
+                              </li> 
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-floating">
+                <textarea class="form-control rounded-0" [(ngModel)]="comments"  placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                <label for="floatingTextarea">Comments</label>
+              </div>
+          </div>
+        </div>
+        <div class="text-end">
+            <button class="anvayaabutton-secondary rounded-0 m-3" (click)="submitFeedback()">Save</button>
+        </div>
+    </div>
+</div>

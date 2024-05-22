@@ -1,0 +1,76 @@
+<div class="maindiv">
+    <div class="body-content" *ngIf="MyFamiliestype">
+        <div class="card" style="margin-left:20px; margin-right: 20px;">
+            <div class="card-header">
+                <div class="row mt-6">
+                    <div class="col-12 mb-4">
+                        <span class="badge bg-pastel-primary text-primary text-uppercase-bold-sm">
+                            <h4>{{Type}}</h4>
+                        </span>
+                    </div>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+
+                                <th scope="col">CUSTOMER ID</th>
+                                <th scope="col">CUSTOMER NAME</th>
+                                <th scope="col">PACKAGE NAME</th>
+                                <th scope="col">CITY</th>
+                                <th scope="col">PACKAGE START DATE</th>
+                                <th scope="col">PACKAGE EXPIRY DATE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let myfamilies of dementiadb?.myFamilies;">
+                                <td>{{myfamilies.CustRecID}}</td>
+                                <td>{{myfamilies.Name}}</td>
+                                <td>{{myfamilies.AliasName}}</td>
+                                <td>{{myfamilies.ServiceAreaName}}</td>
+                                <td>{{myfamilies.PackageCreatedDate*1000|date:'dd-MM-yyyy'}}</td>
+                                <td>{{myfamilies.PackageExpiryDate*1000|date:'dd-MM-yyyy'}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="body-content" *ngIf="Activeplans">
+        <div class="card" style="margin-left:20px; margin-right: 20px;">
+            <div class="card-header">
+                <div class="row mt-6">
+                    <div class="col-12 mb-4">
+                        <span class="badge bg-pastel-primary text-primary text-uppercase-bold-sm">
+                            <h4>{{Type}}</h4>
+                        </span>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+
+                            <th scope="col">CUSTOMER ID</th>
+                            <th scope="col">CUSTOMER NAME</th>
+                            <th scope="col">PACKAGE NAME</th>
+                            <th scope="col">CITY</th>
+                            <th scope="col">PACKAGE START DATE</th>
+                            <th scope="col">PACKAGE EXPIRY DATE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let Activeplans of dementiadb?.activePlans;">
+                            <td>{{Activeplans.CustRecID}}</td>
+                            <td>{{Activeplans.Name}}</td>
+                            <td>{{Activeplans.AliasName}}</td>
+                            <td>{{Activeplans.ServiceAreaName}}</td>
+                            <td>{{Activeplans.PackageCreatedDate*1000|date:'dd-MM-yyyy'}}</td>
+                            <td>{{Activeplans.PackageExpiryDate*1000|date:'dd-MM-yyyy'}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

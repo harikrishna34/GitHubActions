@@ -1,0 +1,391 @@
+<div class="bodycontent" style="margin-top: 90px; margin-left: 120px;">
+  <div class="row">
+    <div class="col-md-12 col-md-offset-3" id="msform">
+      
+      <fieldset class="shadowBox">
+        <div class="fallandsos1">
+          <form [formGroup]="personalDetails" id="tabSteps">
+            <div><span style="color: purple;"
+              class="fs-3"><strong><u>{{stepmonitoringdata?.AliasAlarmType}}</u></strong></span></div>
+              <!-- <div class="row"> -->
+                <!-- <div class="col-md-5"> -->
+                 
+                <!-- </div> -->
+                <!-- <div class="col-md-6" style="text-align: end;"> -->
+                  <div class="menu-nav">
+                    <div class="menu-item"></div>
+                    <div class="dropdown-container" tabindex="-1">
+                      <div class="three-dots" (click)="toOpen()"></div>
+                      <!-- <div class="dropdown"> -->
+                        <div class="list-group" *ngIf="dropDownsThreeDotes">
+                          <button type="button" class="list-group-item list-group-item-action text-start"
+                            (click)="Ajustthresholds(stepmonitoringdata)"
+                            *ngIf="stepmonitoringdata?.AlarmType === 'ThresholdAlarm'">
+                            <span style="color: blue;"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Adjust Thresholds</span>
+                          </button>
+                  
+                          <button type="button" class="list-group-item list-group-item-action text-start"
+                            (click)="release('CallBack')"
+                            *ngIf="stepmonitoringdata?.AlarmType === 'FallAlarm' || stepmonitoringdata?.AlarmType === 'SOSAlarm' || stepmonitoringdata?.AlarmType === 'ThresholdAlarm' || stepmonitoringdata?.AlarmType === 'GeoFenceAlarm'">
+                            <span style="color: blue;"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Check Back</span>
+                          </button>
+                  
+                          <button type="button" class="list-group-item list-group-item-action text-start"
+                            (click)="release('Release')"
+                            *ngIf="stepmonitoringdata?.AlarmType === 'FallAlarm' || stepmonitoringdata?.AlarmType === 'SOSAlarm' || stepmonitoringdata?.AlarmType === 'ThresholdAlarm' || stepmonitoringdata?.AlarmType === 'GeoFenceAlarm'">
+                            <span style="color: blue;"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Release</span>
+                          </button>
+                  
+                          <button type="button" class="list-group-item list-group-item-action text-start"
+                            (click)="navigatetoviewcustomerscreen(stepmonitoringdata)"
+                            *ngIf="stepmonitoringdata?.AlarmType === 'ThresholdAlarm'">
+                            <span style="color: blue;"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Re-Check Thresholds</span>
+                          </button>
+                        </div>
+                      <!-- </div> -->
+                    </div>
+                  </div>
+                <!-- </div> -->
+              <!-- </div> -->
+             
+             
+              
+            <div class="insideFieldset" *ngIf="step == 1">
+              <div class="fallandsos1">  
+                <div class="row">
+                  <div class="col-md-5 fs-3">
+                    {{stepmonitoringdata?.Type}}
+                    <label *ngIf="stepmonitoringdata?.AlarmType=='ThresholdAlarm'&& stepmonitoringdata?.Type=='BloodPressure'">
+                      <h3>{{stepmonitoringdata?.Hypertension}}/{{stepmonitoringdata?.Hypotension}}</h3>Reading(Expected Reading
+                      :{{stepmonitoringdata?.Actualmaxvalue}})
+                    </label>
+                    <label *ngIf="stepmonitoringdata?.AlarmType=='ThresholdAlarm'&& stepmonitoringdata?.Type=='Stepcount'">
+                      <h3>{{stepmonitoringdata?.Data?.Stepcount}}</h3>
+                    </label>
+                    <label *ngIf="stepmonitoringdata?.AlarmType=='ThresholdAlarm'&& stepmonitoringdata?.Type=='Oxygen'">
+                      <h3>{{stepmonitoringdata?.Data?.Oxygen}}</h3>
+                    </label>
+                    <label *ngIf="stepmonitoringdata?.AlarmType=='ThresholdAlarm'&& stepmonitoringdata?.Type=='HeartRate'">
+                      <h3>{{stepmonitoringdata?.Data?.HeartRate}}</h3>
+                    </label>
+                    <label *ngIf="stepmonitoringdata?.AlarmType=='ThresholdAlarm'&& stepmonitoringdata?.Type=='Temperature'">
+                      <h3>{{stepmonitoringdata?.Data?.Temperature}}</h3>
+                    </label> 
+                    <br>
+                      {{stepmonitoringdata?.CreatedDate*1000|date:"dd-MMM-yyyy"}}
+                     <br>
+                  </div> 
+               
+
+                  <div class="col-md-7 vl" *ngIf="forcalling">
+                    <div  class="text-center" style="height :97px">
+                      <img src="../../assets/images/Vanilla-1.5s-244px (1).gif" style="width: 300px;"><span class="fs-5">{{callingNumber}}</span>
+                      </div>
+                  </div>  
+                </div>
+                        
+                <div class="row">
+                  <div class="col-md-5">
+                    <table class="table table-bordered" >
+                      <thead>
+                        <tr>
+                          <th scope="col">Relation </th>
+                          <th scope="col">Name </th>
+                          <th scope="col">Number</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row" class="text-start">Customer</th>
+                          <td>{{stepmonitoringdata?.CustomerDetails?.Name| titlecase}}</td>
+                          <td (click)="phoneconfirmation('CallConfirmation');callingnumber(stepmonitoringdata?.CustomerDetails?.MobileNumber);toOpenup()" style="cursor: pointer;"><span class="me-2" ><i
+                                class="fa fa-phone"></i> <u style="color: blue;">{{stepmonitoringdata?.CustomerDetails?.MobileNumber}}</u></span></td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="text-start">Neighbour</th>
+                          <td ><span>{{stepmonitoringdata?.CustomerHealthPlanDetails[0]?.Neighbours[0]?.Name|titlecase}}</span></td>
+                          <td (click)="neighbourphoneconfirmation('CallConfirmation');callingnumber(stepmonitoringdata?.CustomerHealthPlanDetails[0]?.Neighbours[0]?.ContactNumber);toOpenup()" style="cursor: pointer;">
+                             <span class="me-2" *ngIf="stepmonitoringdata?.CustomerHealthPlanDetails[0]?.Neighbours[0]?.ContactNumber"><i
+                                class="fa fa-phone"></i> <u style="color: blue;">{{stepmonitoringdata?.CustomerHealthPlanDetails[0]?.Neighbours[0]?.ContactNumber}}</u></span>
+                                <span *ngIf="!stepmonitoringdata?.CustomerHealthPlanDetails[0]?.Neighbours[0]?.ContactNumber">-</span>
+                          </td>
+                        </tr>
+                        <tr> 
+                          <th scope="row" class="text-start">Care Manager</th>
+                          <td>{{stepmonitoringdata?.CareManagerDetails[0]?.FirstName| titlecase}}
+                            {{stepmonitoringdata?.CareManagerDetails[0]?.LastName| titlecase}}</td>
+                          <td (click)="caremanagerphoneconfirmation('CallConfirmation');callingnumber(stepmonitoringdata?.CareManagerDetails[0]?.ContactNumber);toOpenup()" style="cursor: pointer;"><span class="me-2"><i
+                                class="fa fa-phone"></i> <u style="color: blue;">{{stepmonitoringdata?.CareManagerDetails[0]?.ContactNumber}}</u></span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div>
+                      <div class="row">
+                        <div class="col-md-4">Location :</div>
+                        <div class="col-md-4">Map<a [href]="stepmonitoringdata?.CustomerDetails?.GoogleMapAddressLink" target="_blank"><img src="../../assets/images/placeholder.png"></a></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-7 vl">
+                    <div class="text-start">
+                      <label style="margin-left: 10px;">Feedback</label>
+                      <textarea type="text" class="form-control" formControlName="Note" placeholder="FeedBack" style="margin-left: 10px;height: 130px;"
+                        [ngClass]="{ 'is-invalid': personal_step && personal['Note'].errors }">{{callingNumber}}</textarea>
+                    </div>
+                    <!-- <span *ngIf="this.stepmonitoringdata?.AlarmType == 'ThresholdAlarm'"><button type="button"
+                      style="width: fit-content;" class="previous action-button-previous"
+                      (click)="navigatetoviewcustomerscreen(stepmonitoringdata)">Re-Check Details Of Thresholds</button></span>
+                  <button type="button" class="previous action-button-previous" (click)="release('Release')">Release</button> -->
+                  <div class="text-end">
+                    <button type="button" class="previous action-button-previous" (click)="release('Close')">Close</button>
+                    <input (click)="next()" type="button" name="next" class="next action-button" value="Next" />
+                  </div>
+                
+                  </div>
+                </div>
+              </div>
+              </div>
+          </form>
+          <form [formGroup]="addressDetails" >
+            <fieldset style="width: 100%;margin: 0px;" *ngIf="step == 2">
+              
+              <div class="fallandsos2">
+               <div class="row">
+                <div class="col-md-5">
+                  <div class="row">
+                    <label class="fs-4"><u>Raise The Request</u></label> 
+                   <div class="col-md-6 text-start"><span class="fs-6">If Emergency :</span></div>
+                   <div class="col-md-6"><button type="button" style="width: 90%;" 
+                    class="btn btn-anvayaaYellow" (click)="release('RaiseEmergency')"><span  style="font-size: smaller">Raise Emergency Reqest</span></button></div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-md-6 text-start"><span class="fs-6">If <span style="color: purple;">NOT</span> An Emergency :</span></div>
+                    <div class="col-md-6"><button style="width: 90%;" 
+                      type="button" class="btn btn-anvayaaYellow " (click)="release('RaiseRequest')"><span  style="font-size: smaller">Raise Service Reqest</span>
+                      </button></div>
+                  </div>
+                  <!-- <div class="mt-5">
+                    <span class="fs-4">If Not Emergency :</span>
+                    <button style="width: 50%;"
+                          type="button" class="btn btn-anvayaaYellow ms-3" (click)="release('RaiseRequest')">Raise Service
+                          Reqest</button>
+                  </div> -->
+                </div>
+                <div class="col-md-7 vl">
+                  <div  class="text-start">
+                    <label style="margin-left: 10px;">FeedBack</label>
+                    <textarea type="text" class="form-control" formControlName="Note" placeholder="FeedBack" style="margin-left: 10px;height: 130px;"
+                    [ngClass]="{ 'is-invalid': personal_step && personal['Note'].errors }"></textarea>
+                  </div>
+                 
+                  <div class="text-end" >
+                    <input (click)="previous()" type="button" name="previous" class="previous action-button-previous"
+                    value="Previous" />
+                    <button type="button" class="next action-button" (click)="release('Close')">Close</button>
+                  </div>
+      
+                </div>
+               </div>
+
+                <div class="row">
+                  <!-- <div class="col-md-4 col-xl-4">
+                    <button type="button" style="margin-left: 50px;"
+                          class="btn btn-anvayaaYellow" (click)="release('RaiseEmergency')">Raise Emergency Reqest</button>
+                  </div>
+                  <div class="col-md-4 col-xl-4 ">
+                    <button
+                          type="button" class="btn btn-anvayaaYellow" (click)="release('RaiseRequest')">Raise Service
+                          Reqest</button>
+                  </div> -->
+                  <!-- <div class="col-md-4 col-xl-4 vl">
+                    <button type="button" class="previous action-button-previous" (click)="release('Close')">Close</button>
+                  </div> -->
+                  <!-- <span>
+                    
+                    <div class="row col-md-12 text-start">
+                      <div class="col-md-6"><strong>If Emergency</strong> <button type="button" style="margin-left: 50px;"
+                          class="btn btn-anvayaaYellow" (click)="release('RaiseEmergency')">Raise Emergency Reqest</button>
+                      </div>
+                      <div class="col-md-6 text-end"><strong>If NO Action Is Required</strong><button type="button"
+                          class="previous action-button-previous" (click)="release('Close')">Close</button></div>
+                    </div>
+                    <div class="col-md-12" style="text-align: justify;">
+                      <div class="col-md-6"><strong>If <span style="color: purple;">NOT</span> An Emergency </strong><button
+                          type="button" class="btn btn-anvayaaYellow" (click)="release('RaiseRequest')">Raise Service
+                          Reqest</button></div>
+                    </div>
+                  </span> -->
+                  <!-- <div class="col-md-8" >
+                                    <i class="fa fa-phone"></i><strong>Calling to Customer</strong>
+                                </div>
+                                <div class="col-md-4" style="text-align: right;">
+                                    <button type="button" class="btn btn-anvayaaYellow">Confirmed</button>
+                                </div> -->
+                </div>
+              </div>
+              <!-- <div class="thersholdantarababu2" *ngIf="this.stepmonitoringdata?.AlarmType == 'ThresholdAlarm'">
+                <div class="row col-md-12">
+                  <span>
+                    <div class="row col-md-12 text-start">
+                      <div class="col-md-6 "><strong>If Emergency</strong> <button type="button"
+                          class="btn btn-anvayaaYellow" style="margin-left: 50px;" (click)="release('RaiseEmergency')">Raise
+                          Emergency Reqest</button></div>
+                      <div class="col-md-6 text-end"><strong>If NO Action Is Required </strong><button type="button"
+                          class="previous action-button-previous" (click)="release('Close')">Close</button></div>
+                    </div>
+                    <div class="col-md-12" style=" text-align: justify;">
+                      <div class="col-md-6"><strong>If <span style="color: purple;">NOT</span> An Emergency </strong><button
+                          type="button" class="btn btn-anvayaaYellow" (click)="release('RaiseRequest')">Raise Service
+                          Reqest</button></div>
+                    </div>
+                  </span>
+                </div>
+              </div> -->
+              <div class="geofensingantarababu2" *ngIf="stepmonitoringdata?.AlarmType == 'GeoFenceAlarm'">
+                <h2 class="fs-title">Respond</h2>
+                <div class="row col-md-12">
+                  <span style="color: purple;text-align: center;"><strong><u> {{stepmonitoringdata?.AlarmType}}
+                      </u></strong></span>
+                  <br>
+                  <span>
+                    <div class="row col-md-12 text-start">
+                      <div class="col-md-6"><strong>If <span style="color: purple;">NOT</span> An Emergency</strong><button
+                          type="button" class="btn btn-anvayaaYellow" (click)="release('RaiseRequest')">Raise Service
+                          Reqest</button></div>
+                      <div class="col-md-6 text-end"><strong>If NO Action Is Required </strong><button type="button"
+                          class="previous action-button-previous" (click)="release('Close')">Close</button></div>
+                    </div>
+
+                  </span>
+                </div>
+              </div>
+              <!-- <button type="button" class="previous action-button-previous" (click)="release('CallBack')"
+                *ngIf="this.stepmonitoringdata?.AlarmType == 'FallAlarm'||this.stepmonitoringdata.AlarmType == 'SOSAlarm'||this.stepmonitoringdata.AlarmType == 'ThresholdAlarm'||this.stepmonitoringdata?.AlarmType == 'GeoFenceAlarm'">Check
+                Back</button>
+              <button type="button" class="previous action-button-previous" (click)="release('Release')"
+                *ngIf="this.stepmonitoringdata?.AlarmType == 'FallAlarm'||this.stepmonitoringdata.AlarmType == 'SOSAlarm'||this.stepmonitoringdata.AlarmType == 'ThresholdAlarm'||this.stepmonitoringdata?.AlarmType == 'GeoFenceAlarm'">Realse</button>
+              <button type="button" class="previous action-button-previous" style="width: fit-content;"
+                (click)="Ajustthresholds(stepmonitoringdata)"
+                *ngIf="this.stepmonitoringdata.AlarmType == 'ThresholdAlarm'">Adjust Thresholds</button> -->
+              
+              <!-- <input (click)="next2()" type="button" name="next" class="next action-button" value="Next" /> -->
+            </fieldset>
+          </form>
+          <form [formGroup]="addressDetails" id="tabSteps">
+            <fieldset class="insideFieldset" *ngIf="step == 3">
+              <div class="fallandsos3"
+                *ngIf="stepmonitoringdata?.AlarmType == 'FallAlarm'||stepmonitoringdata.AlarmType == 'SOSAlarm'">
+                <h2 class="fs-title">Close</h2>
+                <div class="row col-md-12">
+                  <span style="text-align: center;">
+                    <h4>{{updatingsteplevel}}</h4>
+                  </span>
+                </div>
+              </div>
+              <div class="thersholdantarababu3" *ngIf="stepmonitoringdata?.AlarmType == 'ThresholdAlarm'">
+                <h2 class="fs-title">Close</h2>
+                <div class="row col-md-12">
+                  <span style="text-align: center;">
+                    <h4>{{updatingsteplevel}}</h4>
+                  </span>
+                </div>
+              </div>
+              <div class="geofensingantarababu3" *ngIf="stepmonitoringdata?.AlarmType == 'GeoFenceAlarm'">
+                <h2 class="fs-title">Close</h2>
+                <div class="row col-md-12">
+                  <span style="text-align: center;">
+                    <h4>{{updatingsteplevel}}</h4>
+                  </span>
+                </div>
+              </div>
+              <input (click)="previous()" type="button" name="previous" class="previous action-button-previous"
+                value="Previous" />
+              <button (click)="submit()" class="btn btn-anvayaaYellow" type="button"> <i class="fa fa-home">Go Back to
+                  Monitoring</i></button>
+            </fieldset>
+          </form>
+          <hr>
+        <div class="container" style="background-color: rgb(236, 236, 236);">
+          <div class="row">
+            <div class="col-sm-4">
+             <div class="fs-5">Customer Details</div>
+             <table class="table table-borderless ">
+              <thead>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row" class="text-start">Name</th>
+                  <td>:</td>
+                  <td class="text-start">{{stepmonitoringdata?.CustomerDetails?.Name|titlecase}}</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-start">Age</th>
+                  <td>:</td>
+                  <td class="text-start">{{stepmonitoringdata?.CustomerDetails?.Age}}</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-start">Mobile</th>
+                  <td>:</td>
+                  <td class="text-start">{{stepmonitoringdata?.CustomerDetails?.MobileNumber}}</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-start">Address</th>
+                  <td>
+                    :
+                  </td>
+                  <td class="text-start">{{stepmonitoringdata?.CustomerDetails?.Address}}</td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+            <div class="col-sm-4 text-center vl">
+              <div class="fs-5">Care Manger Details</div>
+              <table class="table table-borderless ">
+               <thead>
+               </thead>
+               <tbody>
+                 <tr>
+                   <th scope="row" class="text-start">Name</th>
+                   <td>:</td>
+                   <td class="text-start">{{stepmonitoringdata?.CareManagerDetails[0]?.FirstName|titlecase}}
+                    {{stepmonitoringdata?.CareManagerDetails[0]?.LastName|titlecase}}</td>
+                 </tr>
+                 <tr>
+                   <th scope="row" class="text-start">Primary  Number</th>
+                   <td>:</td>
+                   <td class="text-start">{{stepmonitoringdata?.CareManagerDetails[0]?.ContactNumber}}</td>
+                 </tr>
+                 <tr>
+                   <th scope="row" class="text-start">Secondary Number</th>
+                   <td>:</td>
+                   <td class="text-start">{{stepmonitoringdata?.CareManagerDetails[0]?.SecondryMobileNumber}}</td>
+                 </tr>
+               </tbody>
+             </table>
+            </div>
+            <div class="col-sm-4 vl">
+              <div class="fs-5">Emergency Local Contact Details</div>
+              <table class="table table-borderless ">
+               <thead>
+               </thead>
+               <tbody>
+                 <tr>
+                   <th scope="row" class="text-start">Name</th>
+                   <td>:</td>
+                   <td class="text-start">{{stepmonitoringdata?.CustomerHealthPlanDetails[0]?.EmergencyLocalContactDetails[0]?.Name|titlecase}}</td>
+                 </tr>
+                 <tr>
+                   <th scope="row" class="text-start">Mobile</th>
+                   <td>:</td>
+                   <td class="text-start">{{stepmonitoringdata?.CustomerHealthPlanDetails[0]?.EmergencyLocalContactDetails[0]?.ContactNumber}}</td>
+                 </tr>
+               </tbody>
+             </table>
+            </div>
+          </div>
+        </div>
+       
+      <!-- </fieldset> -->
+    </div>
+  <!-- </div> -->
+<!-- </div> -->

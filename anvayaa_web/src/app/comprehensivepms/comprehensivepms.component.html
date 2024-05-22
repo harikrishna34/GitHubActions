@@ -1,0 +1,146 @@
+<div class=body-content style="margin-top: 110px;margin-left: 110px;">
+    <div class="card panel-default">
+      <div class="heading">
+          <div>
+              <h3>Payment Management Details</h3>
+          </div>
+          <div>
+              <button class="anvayaabutton-secondary" (click)="onAddMoneyFormLoad()"   data-bs-toggle="modal" data-bs-target="#addMoneyForm">Add Money</button>
+          </div>
+      </div>
+      <div class="card-header" style="background-color:D9D9D9;"><h3>BALANCE DETAILS()</h3></div>
+      <div class="card-body" style="background-color: EFEFEF;">
+        <div class="row">
+            <div class="col-md-6">
+                <tbody>
+                    <tr>
+                      <th scope="row" class="text-start">Available Balance</th>
+                      <td>:</td>
+                      <td class="text-start"> &#8377; {{pmsData['BalanceAmount']}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="text-start">Emergency Balance</th>
+                      <td>:</td>
+                      <td class="text-start"> &#8377; {{pmsData['EmergencyAmount']}}</td>
+                    </tr>
+                  </tbody>
+            </div>
+            <div class="col-md-6">
+                <tbody>
+                    <tr>
+                      <th scope="row" class="text-start">Hold Amount</th>
+                      <td>:</td>
+                      <td class="text-start"> &#8377; {{pmsData['HoldAmount']}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="text-start">Effective Avaiable Balance</th>
+                      <td>:</td>
+                      <td class="text-start"> &#8377; {{pmsData['BalanceAmount'] - pmsData['EmergencyAmount'] + pmsData['HoldAmount']| number : '1.2-2'}}</td>
+                    </tr>
+                  </tbody>
+            </div>
+        </div>
+      </div>      
+      <div class="card-body">
+          <table class="table  table-striped table-hover table-bordered">
+              <thead>
+                  <tr>
+                      <th scope="col" style="text-align: center;" >S.NO</th>
+                      <th scope="col" style="text-align: center;" >Transaction Date</th>
+                      <th scope="col" style="text-align: center;" >Payment ID</th>
+                      <th scope="col" style="text-align: center;">Transaction Re-mark</th>
+                      <th scope="col" style="text-align: center;">CR/DR</th>
+                      <th scope="col" style="text-align: center;">Amount</th>
+                      <th scope="col" style="text-align: center;">Closing Balance</th>
+                      <th scope="col" style="text-align: center;">Status</th>               
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let row of pmsData['Transactions']?.slice(0, rowsToShow);let i=index" (click)="navigatetoTransactiondetails(pmsData)">
+                    <td style="text-align: center;">{{ i+1 }}</td>
+                    <td style="text-align: center;">{{ row['UpdatedDate']*1000|date:'dd-MM-yyyy' }}</td>
+                    <td style="text-align: center;">{{ row['AnvayaaPaymentID'] }}</td>
+                    <td style="text-align: center;">{{ row['PaymentFor'] }}</td>
+                    <td style="text-align: center;">{{ row['TransactionType'] }}</td>
+                    <td style="text-align: center;"> &#8377; {{ row['Amount']| number:'':'en-IN' }}</td>
+                    <td style="text-align: center;"> &#8377; {{ row['ClosingBalance']| number:'':'en-IN' }}</td>
+                    <td style="text-align: center;" [ngStyle]="{'color': getColorForRow(row['PaymentStatus'])}">         
+                      <div style="border-radius: 30%;">
+                        {{ row['PaymentStatus'] }}
+                      </div>           
+                    </td>
+                   
+
+<!-- 
+                    <td style="text-align: center;">{{ row['PMSRequestDetails']?.RequestDetails?.RequestID }}</td>
+                    <td style="text-align: center;"> &#8377; {{ row['Amount']| number:'':'en-IN' }}</td>
+                    <td style="text-align: center;">{{ row['Credit'] }}</td>
+                    <td style="text-align: center;">{{ row['Debit']}}</td>
+                    <td style="text-align: center;" > &#8377; {{ row['OpeningBalance']| number:'':'en-IN' }}</td>
+                    <td style="text-align: center;"> &#8377; {{ row['ClosingBalance']| number:'':'en-IN' }}</td>
+                    <td style="text-align: center;">{{ row['CreatedDate']*1000|date:'dd-MM-yyyy' }}</td>
+                    <td style="text-align: center;">{{ row['UpdatedDate']*1000|date:'dd-MM-yyyy' }}</td>
+                    <td style="text-align: center;">{{ row['PaymentStatus'] }}</td> -->
+                  </tr>
+                </tbody>    
+          </table>
+      </div>
+      
+      <div *ngIf="pmsData['Transactions'] && pmsData['Transactions'].length >0">
+        <!-- <p>Total {{ rowsToShow }} / {{ transactionLength }}</p> -->
+        <div style="text-align: center;">
+          <button class="anvayaabutton-primary" (click)="showMore()">Show More</button>
+        </div>
+      </div>
+      
+
+<!-- Add money modal start here-->
+<div class="modal fade" id="addMoneyForm" tabindex="-1"  aria-hidden="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" >Add Money</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #addMoneyModal></button>
+      </div>
+      <div class="modal-body">
+          <form [formGroup]="addMoneyForm" class="row addMoneyForm">
+              <div class="col-md-5">
+                  <label for="Amount">Amount</label>
+                  <input type="number" class="form-control" formControlName="Amount"
+                  [ngClass]="{ 'is-invalid': addMoneySubmit && addMoneyFormValues['Amount'].errors }"/>
+                  <div *ngIf="addMoneySubmit && addMoneyFormValues['Amount'].errors" class="invalid-feedback">
+                      <div *ngIf="addMoneyFormValues['Amount'].errors['required']">Amount is required</div>
+                  </div>
+              </div>
+              <div class="col-md-5">
+                  <label for="Amount">EmergencyAmount</label>
+                  <input type="number" class="form-control" formControlName="EmergencyAmount" 
+                  [ngClass]="{ 'is-invalid': addMoneySubmit && addMoneyFormValues['EmergencyAmount'].errors }"/>
+                  <div *ngIf="addMoneySubmit && addMoneyFormValues['EmergencyAmount'].errors" class="invalid-feedback">
+                      <div *ngIf="addMoneyFormValues['EmergencyAmount'].errors['required']">EmergencyAmount is required</div>
+                  </div>
+              </div>
+              <div class="col-md-12">
+                  <label for="PaymentMode">PaymentMode</label>
+                  <div class="paymentMode">
+                      <div *ngFor="let payments of paymentMode">
+                          <div class="form-check">
+                              <input class="form-check-input" type="radio" name="PaymentMode" id="cash" [value]='payments' formControlName="PaymentMode"
+                              [ngClass]="{ 'is-invalid': addMoneySubmit && addMoneyFormValues['PaymentMode'].errors }">
+                              <label class="form-check-label" for="cash">
+                                {{payments}}
+                              </label>
+                          </div>
+                      </div>
+                  </div>
+              </div>               
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="anvayaabutton-primary" (click)="onAddMoneySubmit()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add modal End here -->

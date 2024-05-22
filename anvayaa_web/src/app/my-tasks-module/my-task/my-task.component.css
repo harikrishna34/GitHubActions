@@ -1,0 +1,50 @@
+.bodycontent{
+    margin-top: 100px;
+    margin-left: 120px;
+    margin-right: 12px;
+  }
+  .rows{
+      background-color:#F79123;
+      pointer-events: all;
+      cursor: pointer;
+      border-radius: 10px;
+      
+
+  }
+  .imgss{
+      width: 30px;
+
+
+  }
+
+  .marginright{
+    margin-right: calc(0 * var(--bs-gutter-x))
+  }
+ .arrowposition{
+  text-align: right;
+ }  
+ .blacktext{
+   color: black;
+   font-weight: 700;
+ }
+
+ .marginTopTenpx{
+  margin-top: 10px;
+ }
+
+ .spacingDiv{
+  height:5px
+ }
+ .pointer {cursor: pointer;}
+
+ .empty{
+  text-align: center;
+  font-size: xx-large;
+ }
+
+ td{
+   font-size: smaller;
+ }
+.card{
+  cursor: pointer;
+}

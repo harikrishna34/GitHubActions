@@ -1,0 +1,192 @@
+<div class="mainDiv">
+    <div class="card" style="margin-left:20px; margin-right: 20px;">
+
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header">
+                        ASERS SETTINGS
+                    </div>
+                    <!-- <form [formGroup]="AssersSettings"> -->
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SOS">
+                                Set SOS Numbers
+                            </button>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <button type="button" class="btn btn-primary" (click)="watchupdate('FactoryReset',{})">
+                                Factory Reset
+                            </button>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Working Mode
+                            <label for="requestStatus" class="field select">
+                                <select class="form-select" (change)="workmode($event)">
+                                    <!-- ([ngModel])=""  -->
+                                    <option selected="" disabled="" value="">Select Mode</option>
+                                    <option value="1">Normal Mode</option>
+                                    <option value="2">Power Saving Mode</option>
+                                    <option value="3">Emergency Mode</option>
+                                    <option value="8">Customize Mode</option>
+                                </select>
+                                <i class="arrow double"></i>
+                            </label>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Fall Alert Sensitive
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" 
+                                    id="flexSwitchCheckChecked" [(ngModel)]="fall" (change)="fallsensitive()" checked >
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Switch For White List
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" value="" role="switch"
+                                    id="flexSwitchCheckChecked" [(ngModel)]="switchwhitelist" (change)="swhitelist()"   checked>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Set Health Data Interval
+                            
+                                <input type="number" min="1" max="60"  [(ngModel)]="healthdata" (change)="datainterval($event)">
+                           
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#whitelist">
+                                Set White List
+                            </button>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Fall Alaram Sensitivity
+                            <label for="requestStatus" class="field select">
+                                <select class="form-select" (change)="fallalaram($event)">
+                                    <option disabled="" value="" selected>Select Fall Sensitivity</option>
+                                    <option value="1">Low</option>
+                                    <option value="2">Medium</option>
+                                    <option value="3">High</option>
+                                </select>
+                                <i class="arrow double"></i>
+                            </label>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header">
+                        ASERS GET INSTANT DATA
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+
+                            <button type="button" class="btn btn-primary" (click)="watchupdate('Location',{})">
+                                GET Location
+                            </button>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <button type="button" class="btn btn-primary" (click)="watchupdate('HeartRate',{})">
+                                GET Heart
+                            </button>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <button type="button" class="btn btn-primary" (click)="watchupdate('BloodPressure',{})">
+                                GET B.P
+                            </button>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <button type="button" class="btn btn-primary" (click)="watchupdate('Temperature',{})">
+                                GET Temperature
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+    </div>
+
+</div>
+
+
+
+<!-- SOS Modal -->
+<div class="modal fade" id="SOS" tabindex="-1" aria-labelledby="SOSLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="SOSLabel">SOS</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <Label>1st SOS Mobile Number</Label>
+                        <input type="tel" class="form-control" placeholder="Enter Number" [(ngModel)]="sos1"
+                            minlength="10" maxlength="10" pattern="^[6-9]\d{9}$" required>
+                    </div>
+                    <div class="col-md-6">
+                        <Label>2nd SOS Mobile Number</Label>
+                        <input type="tel" class="form-control" placeholder="Enter Number" [(ngModel)]="sos2"
+                            minlength="10" maxlength="10" pattern="^[6-9]\d{9}$" required>
+                    </div>
+                    <div class="col-md-6">
+                        <Label>3rd SOS Mobile Number</Label>
+                        <input type="tel" class="form-control" placeholder="Enter Number" [(ngModel)]="sos3"
+                            minlength="10" maxlength="10" pattern="^[6-9]\d{9}$" required>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="sosnumber()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- whitelist-->
+<div class="modal fade" id="whitelist" tabindex="-1" aria-labelledby="whitelistLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="whitelistLabel">White List</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <Label>1st Mobile Number</Label>
+                        <input type="tel" class="form-control" placeholder="Enter Number" [(ngModel)]="wlist1"
+                            minlength="10" maxlength="10" pattern="^[6-9]\d{9}$" required>
+                    </div>
+                    <div class="col-md-6">
+                        <Label>2nd Mobile Number</Label>
+                        <input type="tel" class="form-control" placeholder="Enter Number" [(ngModel)]="wlist2"
+                            minlength="10" maxlength="10" pattern="^[6-9]\d{9}$" required>
+                    </div>
+                    <div class="col-md-6">
+                        <Label>3rd Mobile Number</Label>
+                        <input type="tel" class="form-control" placeholder="Enter Number" [(ngModel)]="wlist3"
+                            minlength="10" maxlength="10" pattern="^[6-9]\d{9}$" required>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="whitelist()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

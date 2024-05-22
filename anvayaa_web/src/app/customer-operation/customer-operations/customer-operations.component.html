@@ -1,0 +1,46 @@
+<div class="main">
+
+    <div class="card panel-default">
+        <div class="card-body">
+            <h3 class="reuestHeading" style="color: purple;text-align: center;">Package Subscription Details</h3>
+            <table class="table  table-striped table-hover">
+
+                <thead>
+                    <tr>
+                        <th scope="col" style="text-align: center;" >Customer ID </th>
+                        <th scope="col" style="text-align: center;">Customer Name</th>
+                        <th scope="col" style="text-align: center;">Package Name</th>
+                        <th scope="col" style="text-align: center;">City</th>
+                        <th scope="col" style="text-align: center;">Membership Start Date</th>
+                        <th scope="col" style="text-align: center;">Membership Expire Date</th>
+                        <th scope="col" style="text-align: center;">Payment Status</th>
+                        <th scope="col" style="text-align: center;">Status</th>
+                        <th scope="col" style="text-align: center;">Package Status</th>
+                        <th scope="col" style="text-align: center;">Action</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of customerPackageDetailsData" style="text-align: center;">
+                        <td>{{data.CustRecID}}</td>
+                        <td>{{data.CustomerData.Name |titlecase}}</td>
+                        <td>{{data.AliasName}}</td>
+                        <td>{{data.ServiceAreaName}}</td>
+                        <td>{{(data.PackageCreatedDate)*1000|date:'dd MMM YYYY'}}</td>
+                        <td>{{(data.PackageExpiryDate)*1000|date:'dd MMM YYYY'}}</td>
+                        <td>{{data.PaymentStatus}}</td>
+                        <td>{{data.Status}}</td>
+                        <td>{{data.PackageStatus?data.PackageStatus:'-'}}</td>
+                        <td (click)="detailsPage(data)" style="cursor: pointer;"><img src="../../assets/images/view.png" style="width: 30px;"></td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="" style="text-align: center;font-size: x-large;">No Data Found !</div>
+    </div>
+
+
+</div>
+<ngx-spinner type="ball-scale-multiple">loading...</ngx-spinner>

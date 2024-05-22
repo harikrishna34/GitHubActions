@@ -1,0 +1,1260 @@
+<div class="maindiv card">
+  <div class="row card-body">
+    <div>
+      <div class="card">
+        <div class="card-body row">
+          <div class="col-md-3">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <td>:</td>
+
+                  <td scope="col">{{CustomerObj?.CustomerDetails[0]?.Name}}</td>
+                </tr>
+              </thead>
+              <!-- <tbody>
+                <tr>
+                  <th scope="row">DOB</th>
+                  <td>{{CustomerObj?.UserDetails?.DOB|date:'dd-MMM-yyyy'}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Plan Start</th>
+                  <td>{{CustomerObj?.UserDetails?.PlanStartDate*1000|date : 'dd-MMM-YYYY'}}</td>
+                </tr>
+              </tbody> -->
+            </table>
+          </div>
+          <div class="col-md-3">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col">Contact</th>
+                  <td>:</td>
+
+                  <td scope="col">{{CustomerObj?.CustomerDetails[0]?.MobileNumber}}</td>
+                </tr>
+              </thead>
+              <!-- <tbody>
+                <tr>
+                  <th scope="row">IMEI</th>
+                  <td>{{CustomerObj?.DeviceDetails?.IMEINumber}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Plan End</th>
+                  <td>{{CustomerObj?.UserDetails?.PlanExpiryDate*1000|date : 'dd-MMM-yyyy'}}</td>
+                </tr>
+              </tbody> -->
+            </table>
+          </div>
+          <div class="col-md-3">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col">Model</th>
+                  <td>:</td>
+                  <td scope="col">{{CustomerObj?.DeviceDetails?.Model}}</td>
+                </tr>
+              </thead>
+              <!-- <tbody>
+                <tr class="m-4">
+                  <th scope="row">Status</th>
+                  <td>{{CustomerObj?.UserDetails?.Status}}</td>
+                </tr>
+              </tbody> -->
+            </table>
+          </div>
+          <!-- <div class="col-md-3">
+            <table class="table table-borderless">
+              <thead>
+                <tr class="m-2">
+                  <th scope="col" class="text-end"><img src="../../../assets/images/charging.png" style="width:40px">
+                  </th>
+                  <th scope="col" style="font-size: 26px;">{{dashboarddata?.Battery?.Battery}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="col" class="text-end"><img src="../../../assets/images/cellular.png" style="width:40px">
+                  </th>
+                  <th scope="col" style="font-size: 26px;">{{dashboarddata?.SignalStrength?.SignalStrength}}</th>
+                </tr>
+              </tbody>
+            </table>
+          </div> -->
+          <div class="col-md-3">
+            <div class="dropdown">
+              <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown button
+              </button> -->
+              <!-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" (change)="Selectedfeatures($event)">
+                <li><a class="dropdown-item" *ngFor="let feature of Devices">{{feature.Feature}}</a></li> -->
+                <!-- <li><a class="dropdown-item" href="#">AlarmData</a></li>
+                <li><a class="dropdown-item" href="#">ThresholdLimits</a></li>
+                <li><a class="dropdown-item" href="#">InstantData</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li> -->
+              <!-- </ul> -->
+              <!-- <button (click)="openModal('WhiteListModalBox')">Open modal</button> -->
+              <!-- <select class="form-select">
+                <option disabled selected>Select Feature</option>
+                <option *ngFor="let feature of Devices">{{feature.Feature}}</option>
+              </select> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container text-center mb-4">
+    <!-- <div class="m-3" *ngIf="EcgBtn" ><button class="btn btn-primary" (click)="ecgfunction()">Download ECG</button></div> -->
+    <div class="row" >
+      <div class="col-md-1 col-lg-2 col" *ngFor="let type of  dashboarddata">
+        <div class="card" style="height: 100px;"  (click)="selectedWatchVitals(type.key,'Hour')">
+          <div class="row">
+            <div class="col-md-6 m-auto text-end">
+              <div>
+                <img src='type.image' style="width:40px">
+              </div>
+            </div>
+            <div class="col-md-6 text-start">
+              <div style="font-size: 20px;" class="text-danger" *ngIf="type.value!= null">
+                <div *ngFor="let dataItem of getDataKeys(type?.value?.Data)" ><span>{{type?.value?.Data[dataItem]}}</span></div>
+              </div>
+              <div style="font-size: 20px;" class="text-danger" *ngIf="type.value== null">No data </div>
+            </div>
+          </div>
+          <div>
+            <div>
+              {{type?.key}}
+            </div>
+            <!-- <div>{{dashboarddata?.Heartrate?.CreatedDate*1000|date:' dd-MMM-YYYY hh:mm:ss a'}}</div> -->
+          </div>
+        </div>
+      </div>
+   
+      <div class="col-md-1 col-lg-2 col" *ngIf="EcgBtn" >
+        <div class="card" style="height: 100px;"  (click)="ecgfunction()" >
+          <div class="row">
+            <div class="col-md-6 m-auto text-end">
+              <div>
+                <img src="../../../assets/images/heart.png" style="width:40px">
+              </div>
+            </div>
+            <div class="col-md-6 text-start">
+              <div style="font-size: 20px;" class="text-danger" >
+                <div></div>
+              </div>
+              <div style="font-size: 20px;" class="text-danger" >ECG </div>
+            </div>
+          </div>
+          <div>
+            <div>
+              
+            </div>
+            <!-- <div>{{dashboarddata?.Heartrate?.CreatedDate*1000|date:' dd-MMM-YYYY hh:mm:ss a'}}</div> -->
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="col-md-1 col-lg-2 col">
+        <div class="card" (click)="selectedWatchVitals('HEARTRATE','Hour')">
+          <div class="row">
+            <div class="col-md-6 m-auto text-end">
+              <div>
+                <img src="../../../assets/images/heart.png" style="width:40px">
+              </div>
+            </div>
+            <div class="col-md-6 text-start">
+              <div style="font-size: 40px;" class="text-danger">
+                {{dashboarddata?.Heartrate?.Heartrate}}
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>
+              Heart Beat
+            </div>
+            <div>{{dashboarddata?.Heartrate?.CreatedDate*1000|date:' dd-MMM-YYYY hh:mm:ss a'}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-lg-2 col">
+        <div class="card" (click)="selectedWatchVitals('TEMPERATURE','Hour')">
+          <div class="row">
+            <div class="col-md-3 m-auto text-end">
+              <img src="../../../assets/images/temprature.png" style="width:40px">
+            </div>
+            <div class="col-md-9">
+              <div style="font-size: 40px;">
+                {{dashboarddata?.Temperature?.Temperature|number: '1.1-2'}}
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>Temperature</div>
+            <div>{{dashboarddata?.Temperature?.CreatedDate*1000|date:'dd-MMM-YYYY hh:mm:ss a'}}</div>
+          </div>
+          <div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-lg-2 col">
+        <div class="card" (click)="selectedWatchVitals('BP','Hour')">
+          <div class="row">
+            <div class="col-md-2 m-auto">
+              <img src="../../../assets/images/arm.png" style="width:40px">
+            </div>
+            <div class="col-md-10">
+              <div style="font-size: 40px;">
+                {{dashboarddata?.BloodPressure?.Hypertension}}/{{dashboarddata?.BloodPressure?.Hypotension}}
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>B.P</div>
+            <div>{{dashboarddata?.BloodPressure?.CreatedDate*1000|date:'dd-MMM-YYYY hh:mm:ss a'}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 col-lg-2 col">
+        <div class="card" (click)="selectedWatchVitals('SPO2','Hour')">
+          <div class="row">
+            <div class="col-md-6 m-auto text-end">
+              <img src="../../../assets/images/oxygen.png" style="width:40px">
+            </div>
+            <div class="col-md-6 text-start">
+              <div style="font-size: 40px;">
+                {{dashboarddata?.SPO2?.SPO2}}
+              </div>
+            </div>
+            <div>
+              <div>Spo2</div>
+              <div>{{dashboarddata?.SPO2?.CreatedDate*1000|date:'dd-MMM-YYYY hh:mm:ss a'}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 col-lg-2   col">
+        <div class="card" (click)="selectedWatchVitals('Stepcount','Hour')">
+          <div class="row">
+            <div class="col-md-4 m-auto">
+              <img src="../../../assets/images/footsteps.png" style="width:40px">
+            </div>
+            <div class="col-md-8">
+              <div style="font-size: 40px;">
+                {{dashboarddata?.Steps?.Steps}}
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>Steps Count</div>
+            <div>{{dashboarddata?.Steps?.CreatedDate*1000|date:'dd-MMM-YYYY hh:mm a'}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 col-lg-2   col">
+        <div class="card" (click)="SleepDataContainer();">
+          <div class="row">
+            <div class="col-md-4 m-auto">
+              <img src="../../../assets/images/sleeping.png" style="width: 78px;">
+            </div>
+          </div>
+          <div>
+            <div>Sleep Data</div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation" *ngIf="hasFeature('Settings')" >
+      <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button"
+        role="tab" aria-controls="home" aria-selected="false">Settings</button>
+    </li>
+    <li class="nav-item" role="presentation" *ngIf="hasFeature('InstantData')">
+      <button class="nav-link" id="Instatnt-tab" data-bs-toggle="tab" data-bs-target="#Instatnt" type="button"
+        role="tab" aria-controls="Instatnt" aria-selected="false">Instant Data</button>
+    </li>
+    <li class="nav-item" role="presentation" *ngIf="hasFeature('ThresholdLimits')">
+      <button class="nav-link" id="Threshold-tab" data-bs-toggle="tab" #btn data-bs-toggle="tab" data-bs-toggle="modal"
+        type="button" role="tab" data-bs-target="#ThreesholdModalBox" aria-selected="false">Threshold Limits</button>
+    </li>
+    <li class="nav-item" role="presentation" *ngIf="hasFeature('WhitelistContacts')">
+      <button class="nav-link" id="WhiteList-tab" data-bs-toggle="tab" data-bs-toggle="modal"
+        data-bs-target="#WhiteListModalBox" aria-selected="false">WhiteList Contacts</button>
+    </li>
+    <li class="nav-item" role="presentation" *ngIf="hasFeature('Reminder')">
+      <button class="nav-link" id="Remainder-tab" data-bs-toggle="tab" data-bs-toggle="modal"
+        data-bs-target="#Remainders">Reminders</button>
+    </li>
+    <li class="nav-item" role="presentation" *ngIf="hasFeature('AlarmData')">
+      <button class="nav-link" id="Remainder-tab" data-bs-toggle="tab" data-bs-toggle="modal"
+        data-bs-target="#AlaramData">Alaram Data</button>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+      <div class="card">
+        <div class="card-header">
+          SETTINGS
+        </div>
+        <form [formGroup]="viewaserssettings">
+          <ul class="list-group">
+            <li class="list-group-item d-flex  align-items-center">
+              <div class="col-md-1 text-center"><img src="../../../assets/images/work-time.png"></div>
+              <div class="col-md-8">
+                <h5 class="mb-0"> Working Mode</h5>
+                <span class="text-danger">Note :for normal mode every 15 min and for Power save mode every 60 we get
+                  position using macaddresses
+                  for emergency mode we get every 1 min gps.for customized mode need to set interval for position and
+                  whether gps is required or not.</span>
+              </div>
+              <div class="col-md-3">
+                <label for="requestStatus" class="field select">
+                  <select class="form-select" formControlName="WorkMode" (change)="watchupdate('WorkingMode')">
+                    <option selected="" disabled="" value="">Select Mode</option>
+                    <option value="1">Normal Mode</option>
+                    <option value="2">Power Saving Mode</option>
+                    <option value="3">Emergency Mode</option>
+                    <option value="8">Customize Mode</option>
+                  </select>
+                  <i class="arrow double"></i>
+                </label>
+                <div *ngIf="customizeSettingsTab">
+                  <div formGroupName="CustomizeSettinsForm">
+                    <div class="row">
+                      <div class=" col-md-3 mt-4">
+                        <div class="form-check form-switch">
+                          <label class="ml-0">GPS</label>
+                          <input class="form-check-input"  type="checkbox" role="switch" id="flexSwitchCheckChecked"
+                            formControlName="IsGpsOn" style="width: 45px; height: 25px;margin:auto" checked>
+                        </div>
+                      </div>
+                      <div class="col-md-4 justify-content-between mt-4">
+                        <label>Time</label>
+                        <input type="text" class="form-control" formControlName="Time" placeholder="sec">
+                        <span>*Seconds</span>
+                      </div>
+                      <div class="col-md-3 mt-4">
+                        <button class="btn btn-primary mt-4" (click)="saveCustomizedMode('WorkingMode')"
+                          style="width: 75px;"> <i class="fa fa-check-square-o" aria-hidden="true">SAVE</i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item d-flex align-items-center">
+              <div class="col-md-1 text-center">
+                <img src="../../../assets/images/wet-floor.png">
+              </div>
+              <div class="col-md-8">
+                <h5 class="mb-0">Fall Alert Sensitive</h5>
+                <span class="text-danger">*Note : when fall occurs whether you require alert or not</span>
+              </div>
+              <div class="form-check form-switch text-danger" style="margin-left: auto;">
+                <input class="form-check-input" type="checkbox" role="switch" style="width: 45px; height: 25px;"
+                  id="flexSwitchCheckChecked" formControlName="FallAlertSensitivity"
+                  (click)="watchupdate('FallAlertSensitivity')" checked>
+              </div>
+            </li>
+            <li class="list-group-item d-flex align-items-center">
+              <div class="col-md-1 text-center">
+                <img src="../../../assets/images/contacts.png" style="width: 40px;">
+              </div>
+              <div class="col-md-8">
+                <h5 class="mb-0">Switch For White List</h5>
+                <span class="text-danger">*Note : whether white list to be shown or not</span>
+              </div>
+              <div class="col-md-3">
+                <div class="form-check form-switch" style="margin-left: auto;   width:32px;padding-left: 1.5em;">
+                  <input class="form-check-input" type="checkbox" formControlName="SwitchForWhitelist" value=""
+                    role="switch" id="flexSwitchCheckChecked" style="width: 45px; height: 25px;"
+                    (change)="watchupdate('SwitchForWhiteList')" checked>
+                  <!-- <input type="number" min="1" max="60"  formControlName="WhiteList"
+                            (change)="watchupdate('SwitchForWhiteList')"> -->
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item d-flex  align-items-center">
+              <div class="col-md-1 text-center">
+                <img src="../../../assets/images/updating.png" style="width:40px">
+              </div>
+              <div class="col-md-8">
+                <h5 class="mb-0">Set Health Data Interval</h5>
+                <span class="text-danger">*Note:whether automeasurement to be take or not and set time interval for
+                  health vitals measurement(if given 1 measures only heartrate and sends every hour data if given 3 and
+                  more all the vitals are measured according to interval and send every hour).</span>
+              </div>
+              <div class="col-md-3">
+                <div class="row">
+                  <div class="col-md-2 form-check form-switch" style="margin-left: auto">
+                    <input class="form-check-input" type="checkbox" value="" role="switch" id="flexSwitchCheckChecked"
+                      formControlName="IsAutoMeasurementOn" style="width: 45px; height: 25px;" checked>
+                  </div>
+                  <div class="col-md-3">
+                    <input class="form-control" type="number" min="1" max="60" formControlName="Minutes">
+                    <label>*Minutes</label>
+                  </div>
+                  <div class="col-md-3">
+                    <button class="btn btn-primary" (click)="watchupdate('SetHealthData')">Save</button>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item d-flex  align-items-center">
+              <div class="col-md-1 text-center">
+                <img src="../../../assets/images/location.png" style="width: 40px;">
+              </div>
+              <div class="col-md-9">
+                <h5 class="mb-0"> Get Location Mac</h5>
+                <span class="text-danger">*Note : whether to get MAC addressesor not for specific interval.</span>
+              </div>
+              <div class="col-md-2">
+                <div formGroupName="LocationMacForm">
+                  <div class="row">
+                    <div class="col-md-3  form-check form-switch">
+                      <input class="form-check-input" type="checkbox"  role="switch" id="flexSwitchCheckChecked"
+                        formControlName="IsGpsOn" style="width: 45px; height: 25px;" checked>
+                    </div>
+                    <div class="col-md-5">
+                      <input class="form-control" type="number" min="1" max="60" formControlName="Seconds"
+                        placeholder="Seconds">
+                      <label>*seconds</label>
+                    </div>
+                    <div class="col-md-3">
+                      <button class="btn btn-primary" (click)="macLocation('LocationMAC')">Save</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item d-flex  align-items-center">
+              <div class="col-md-1 text-center">
+                <img src="../../../assets/images/notification.png" style="width: 40px;">
+              </div>
+              <div class="col-md-8">
+                <h5 class="mb-0">Fall Alarm Sensitivity</h5>
+                <span class="text-danger">*Note : how sensitive fall detection to be (the more the value the more will
+                  be sensitivity)</span>
+              </div>
+              <div class="col-md-3">
+                <label for="requestStatus" class="field select" style="margin-left: auto">
+                  <select class="form-select" formControlName="FallAlarmSensitivity"
+                    (change)="watchupdate('FallAlarmSensitivity')">
+                    <option disabled="" value="" selected>Select Fall Sensitivity</option>
+                    <option value="1">Low</option>
+                    <option value="2">Medium</option>
+                    <option value="3">High</option>
+                  </select>
+                  <i class="arrow double"></i>
+                </label>
+              </div>
+            </li>
+            <li class="list-group-item d-flex  align-items-center">
+              <div class="col-md-1 text-center">
+                <img src="../../../assets/images/sleeping.png" style="width: 40px;">
+              </div>
+              <div class="col-md-6">
+                <h5 class="mb-0"> Sleep Time </h5>
+                <span class="text-danger">*Note : whether to get MAC addressesor not for specific interval.</span>
+              </div>
+              <div class="col-md-5">
+                <div formGroupName="sleepForm">
+                  <div class="row">
+                    <div class="col-md-2  form-check form-switch  mt-4">
+                      <input class="form-check-input" type="checkbox" value="" role="switch" id="flexSwitchCheckChecked"
+                        formControlName="SleepSwitch" name="SleepSwitch" style="width: 45px; height: 25px;" checked>
+                    </div>
+                    <div class="col-md-4">
+                      <label>Start Time</label>
+                      <input class="form-control" type="time" min="1" max="60" formControlName="SleepStartTime"
+                        placeholder="Seconds">
+                    </div>
+                    <div class="col-md-4">
+                      <label>End Time</label>
+                      <input class="form-control" type="time" min="1" max="60" formControlName="SleepEndTime"
+                        placeholder="Seconds">
+                    </div>
+                    <div class="col-md-1 mt-4">
+                      <button class="btn btn-primary" (click)="SleepSettings()">Save</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <div class="col-md-1 text-center">
+                <img src="../../../assets/images/recovery.png" style="width: 40px;">
+              </div>
+              <div class="col-md-8">
+                <h5 class="mb-0"> Update Settings</h5>
+                <span class="text-danger">*Note : To set the default settings for the watch.</span>
+              </div>
+              <button type="button" style="margin-left: auto;" class="btn btn-primary" data-bs-toggle="modal"
+                data-bs-target="#updateSettings">
+                Update Watch Settingss
+              </button>
+            </li>
+          </ul>
+        </form>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="Instatnt" role="tabpanel" aria-labelledby="Instatnt-tab">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              ASERS GET INSTANT DATA
+            </div>
+            <ul class="list-group">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+              
+                <div class="row">
+                  <span class="col">
+                    <button type="button" class="btn btn-primary" (click)="instantUpdateGet('Location')">
+                      GET Location
+                    </button>
+                  </span>
+                  <span class="col">
+                    <button type="button" class="btn btn-primary" (click)="instantUpdateGet('HeartRate')">
+                      GET Heart
+                    </button>
+                  </span>
+                  <span class="col">
+                    <button type="button" class="btn btn-primary" (click)="instantUpdateGet('BloodPressure')">
+                      GET B.P
+                    </button>
+                  </span>
+                  <span class="col">
+                    <button type="button" class="btn btn-primary" (click)="instantUpdateGet('Temperature')">
+                      GET Temperature
+                    </button>
+                  </span>
+                  <span class="col">
+                    <button type="button" class="btn btn-primary" (click)="instantUpdateGet('Oxygen')">
+                      Oxygen
+                    </button>
+                  </span>
+                  <span class="col">
+                    <button type="button" class="btn btn-primary" (click)="instantUpdateGet('Restart')">
+                      Restart
+                    </button>
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="Remainder" role="tabpanel" aria-labelledby="Remainder-tab">
+      <div class="card">
+        <div>
+          <h3>Create Remainder</h3>
+        </div>
+        <div class="card">
+          <div class="container">
+            <div class="row">
+              <form>
+                <div class="col-md-2">
+                  <label><b>AlarmSwitch</b></label>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" formControlName="AlarmSwitch" value="" role="switch"
+                      checked>
+                  </div>
+                </div>
+              </form>
+              <div class="container">
+                <div class="row card  m-2">
+                  <div class="row" style="height: 68px;">
+                    <form [formGroup]="alarmObj">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label><b>Alarm For</b></label>
+                          <select class="form-select" formControlName="AlarmType" name="AlarmType" required>
+                            <option value="" selected>Select</option>
+                            <option value="1">Medicine</option>
+                            <option value="2">Drinking Water</option>
+                            <option value="3">Sedentary </option>
+                          </select>
+                          <div class="text-danger"
+                            *ngIf="alarmObj.controls['AlarmType'].value==''&& alarmObjSubmit == true">*Select Alaram
+                            Type</div>
+                        </div>
+                        <div class="col-md-2">
+                          <label><b>Time</b></label>
+                          <input type="time" class="form-control" formControlName="Time" required>
+                          <div class="text-danger" *ngIf="alarmObj.controls['Time'].value==''&& alarmObjSubmit == true">
+                            *Select Alaram Type</div>
+                        </div>
+                        <div class="col-md-3">
+                          <label> <b>Select WeekDays</b></label>
+                          <ng-multiselect-dropdown value="Value" formControlName="Days"
+                            [placeholder]="'Select WeekDays'" [settings]="dropdownSettings" [data]="WeekDays"
+                            (onSelect)="onItemSelect($event)" (onDeSelect)="onDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
+                          </ng-multiselect-dropdown>
+                          <div *ngIf="daysEmptyArray">*Select Week Days </div>
+                        </div>
+                        <div class="col-md-2">
+                          <label><b>This Alarm Switch</b></label>
+                          <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" value="" formControlName="IsAlarmOn"
+                              role="switch" checked>
+                          </div>
+                        </div>
+                        <div class="col-md-2" *ngIf="remainderAddBtn">
+                          <button type="button" class="btn btn-primary mt-3" (click)="addAlaramType()">Add Alarm
+                            Type</button>
+                        </div>
+                        <div class="col-md-2 " *ngIf="remainderUpdBtn">
+                          <button type="button" class="btn btn-primary mt-3"
+                            (click)="UpdateRemainders()">Update</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Alarm Type</th>
+                <th scope="col">Time</th>
+                <th scope="col">Days</th>
+                <th scope="col">Alaram On/Off</th>
+                <th scope="col">Edit</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="alarms.length>0">
+              <tr *ngFor="let alarm of alarms;let i = index">
+                <td><span *ngIf="alarm.AlarmType == '1'">{{"Medicine"}}</span><span
+                    *ngIf="alarm.AlarmType == '2'">{{"Drink Water"}}</span><span
+                    *ngIf="alarm.AlarmType == '3'">{{"Sedentary"}}</span></td>
+                <td>{{alarm.Time}}</td>
+                <td>
+                  <div *ngFor="let a of alarm.Days"><span *ngIf="a=='1'">{{"Monday"}}</span><span
+                      *ngIf="a=='2'">{{"Tuesday"}}</span><span *ngIf="a=='3'">{{"Wednesday"}}</span><span
+                      *ngIf="a=='4'">{{"Thursday"}}</span><span *ngIf="a=='5'">{{"Friday"}}</span><span
+                      *ngIf="a=='6'">{{"Saturday"}}</span><span *ngIf="a=='7'">{{"Sunday"}}</span></div>
+                </td>
+                <td>{{alarm.IsAlarmOn}}</td>
+                <td><img src="../../../assets/images/edit.png" style="width: 25px;" (click)="editRemainder(alarm,i)">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="m-3"><button class="btn btn-primary" (click)="SaveRemainder()">Save Remainder</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card mt-5" *ngIf="heartrategraph">
+    <div class="card-body">
+      <div class="row">
+        <div class="text-center">
+          <h3>{{WatchVitalKey}}</h3>
+          <h5>({{IntervelType}})</h5>
+        </div>
+        <div class="col col-md-8 col-lg-8">
+          <div class="row">
+            <div class="col-md-5">
+              <div class="btn-group shadow-0" role="group">
+                <div class="row">
+                  <div class="col">
+                    <button type="button" class="btn btn-light" data-mdb-color="dark"
+                  (click)="selectedWatchVitals(WatchVitalKey,'Hour')">Hour</button>
+                  </div>
+                  <div class="col">
+                    <button type="button" class="btn btn-light" data-mdb-color="dark"
+                  (click)="selectedWatchVitals(WatchVitalKey,'Day')">Day</button>
+                  </div>
+                  <div class="col">
+                    <button type="button" class="btn btn-light" data-mdb-color="dark"
+                    (click)="selectedWatchVitals(WatchVitalKey,'Week')">Week</button>
+                  </div>
+                  <div class="col">
+                    <button type="button" class="btn btn-light" data-mdb-color="dark"
+                  (click)="selectedWatchVitals(WatchVitalKey,'Month')">Month</button>
+                  </div>
+                  <div class="col">
+                    <button type="button" class="btn btn-light" data-mdb-color="dark"
+                  (click)="CustomizeModeGraph()">Customize</button>
+                  </div>
+                </div>
+                
+                
+              
+                
+                
+                <div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <form [formGroup]="watchIncomingData" *ngIf="Customizetab">
+            <div class="row mt-4">
+              <div class="col-md-3">
+                <label>Start Date</label>
+                <input type="date" class="form-control" formControlName="StartDate" name="StartDate">
+                <span
+                  *ngIf="(watchIncomingData.controls['StartDate'].value==null||watchIncomingData.controls['EndDate'].value=='') && watchIfoBtn == true"
+                  class="text-danger">*Required</span>
+              </div>
+              <div class="col-md-3">
+                <label>End Date </label>
+                <input type="date" class="form-control" formControlName="EndDate">
+                <span
+                  *ngIf="(watchIncomingData.controls['EndDate'].value==null||watchIncomingData.controls['EndDate'].value==null) && watchIfoBtn == true"
+                  class="text-danger">*Required</span>
+              </div>
+              <div class="col-md-3 mt-4">
+                <button class="btn btn-secondary"
+                  (click)="selectedWatchVitals(WatchVitalKey,'Customize')">Submit</button>
+              </div>
+            </div>
+          </form>
+          <div class="text-center mt-3" *ngIf="nodatafound">
+            <h4><span>{{IntervelType}}</span> Data is Not Found </h4>
+          </div>
+          <div *ngIf="graphblock">
+            <apx-chart [series]="[{name :WatchVitalKey,data:serisData},{name:'Hypertension',data:bpseries2}]" [chart]="{
+                          height: 400,
+                          type: 'line',
+                          zoom: {
+                            enabled: true
+                          }
+                        }" [xaxis]="{categories:xaxisdata}" [yaxis]="{max:200 , min:10}"
+              [dataLabels]="{ enabled: false }" [grid]="{
+                          row: {
+                            colors: ['#f3f3f3', 'transparent'],
+                            opacity: 0.5
+                          }
+                        }" [stroke]="{ curve: 'straight',width:1.5 }"></apx-chart>
+          </div>
+          <div class="text-center">
+          </div>
+        </div>
+        <div class="col col-md-4 col-lg-4">
+          <div class="table-wrapper-scroll-y my-custom-scrollbar">
+            <table class="table table-bordered table-striped mb-0">
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">{{WatchVitalKey}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let heartdata of VitalDataArray">
+                  <th *ngIf="heartdata.CreatedDate">{{heartdata.CreatedDate*1000|date:'dd-MM-yyyy'}}</th>
+                  <td *ngIf="heartdata.CreatedDate">{{heartdata.CreatedDate*1000|date:'hh:mm a':'GMT'}}</td>
+                  <td *ngIf="heartdata.Date">{{heartdata.Date}}</td>
+                  <td *ngIf="heartdata.Date"> - </td>
+                  <td><span>{{heartdata.Heartrate|number: '1.1-2'}}</span><span
+                      *ngIf="heartdata.Hypertension">{{heartdata.Hypertension}}</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div *ngIf="mapstab" class="col col-md-12 col-lg-12">
+          <div>
+            <!-- <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="true">
+              <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.Latitude" [longitude]="m.Longitude"
+                [markerDraggable]="false" [label]="m.label">
+              
+              </agm-marker>
+            
+            </agm-map> -->
+          </div>
+          <h3>Locations</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card mt-5" *ngIf="StepsGraph">
+    <div class="card-body">
+      <div class="row">
+        <div class="text-center">
+          <h3>{{WatchVitalKey}}</h3>
+          <h5>({{IntervelType}})</h5>
+        </div>
+        <div class="col col-md-8 col-lg-8">
+          <div class="row">
+            <div class="col-md-5">
+              <div class="btn-group shadow-0" role="group">
+                <button type="button" class="btn btn-light" data-mdb-color="dark"
+                  (click)="selectedWatchVitals(WatchVitalKey,'Hour')">Hour</button>
+                <button type="button" class="btn btn-light" data-mdb-color="dark"
+                  (click)="selectedWatchVitals(WatchVitalKey,'Day')">Day</button>
+                <button type="button" class="btn btn-light" data-mdb-color="dark"
+                  (click)="selectedWatchVitals(WatchVitalKey,'Week')">Week</button>
+                <button type="button" class="btn btn-light" data-mdb-color="dark"
+                  (click)="selectedWatchVitals(WatchVitalKey,'Month')">Month</button>
+                <button type="button" class="btn btn-light" data-mdb-color="dark"
+                  (click)="CustomizeModeGraph()">Customize</button>
+                <div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <form [formGroup]="watchIncomingData" *ngIf="Customizetab">
+            <div class="row mt-4">
+              <div class="col-md-3">
+                <label>Start Date</label>
+                <input type="date" class="form-control" formControlName="StartDate" name="StartDate">
+                <span
+                  *ngIf="(watchIncomingData.controls['StartDate'].value==null||watchIncomingData.controls['EndDate'].value=='') && watchIfoBtn == true"
+                  class="text-danger">*Required</span>
+              </div>
+              <div class="col-md-3">
+                <label>End Date </label>
+                <input type="date" class="form-control" formControlName="EndDate">
+                <span
+                  *ngIf="(watchIncomingData.controls['EndDate'].value==null||watchIncomingData.controls['EndDate'].value==null) && watchIfoBtn == true"
+                  class="text-danger">*Required</span>
+              </div>
+              <div class="col-md-3 mt-4">
+                <button class="btn btn-secondary"
+                  (click)="selectedWatchVitals(WatchVitalKey,'Customize')">Submit</button>
+              </div>
+            </div>
+          </form>
+          <div class="text-center mt-3" *ngIf="nodatafound">
+            <h4><span>{{IntervelType}}</span> Data is Not Found </h4>
+          </div>
+          <div *ngIf="graphblock">
+            <apx-chart [series]="[{name :WatchVitalKey,data:serisData},{name:'Hypertension',data:bpseries2}]" [chart]="{
+                        height: 400,
+                        type: 'line',
+                        zoom: {
+                          enabled: true
+                        }
+                      }" [xaxis]="{categories:xaxisdata}" [yaxis]="{max:15000 , min:100}"
+              [dataLabels]="{ enabled: false }" [grid]="{
+                        row: {
+                          colors: ['#f3f3f3', 'transparent'],
+                          opacity: 0.5
+                        }
+                      }" [stroke]="{ curve: 'straight',width:1.5 }"></apx-chart>
+          </div>
+          <div class="text-center">
+          </div>
+        </div>
+        <div class="col col-md-4 col-lg-4">
+          <div class="table-wrapper-scroll-y my-custom-scrollbar">
+            <table class="table table-bordered table-striped mb-0">
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">{{WatchVitalKey}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let heartdata of VitalDataArray">
+                  <th *ngIf="heartdata.Created">{{heartdata.Created*1000|date:'dd-MM-yyyy'}}</th>
+                  <td>{{heartdata.Created*1000|date:'hh:mm a':'GMT'}}</td>
+                  <td>{{heartdata.Heartrate}}</td>
+                  <td *ngIf="heartdata.Date"> - </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card mt-5" *ngIf="sleepGraphContainer">
+    <h3>Sleep Data</h3>
+    <div class="row m-3">
+      <div class="col-md-6">
+        <form [formGroup]="CustomisSleepDates">
+          <div class="row ">
+            <div class="col-md-4">
+              <label>Start Date</label>
+              <input class="form-control" type="date" formControlName="StartDate">
+            </div>
+            <div class="col-md-4">
+              <label>End Date</label>
+              <input class="form-control" type="date" formControlName="EndDate">
+            </div>
+            <div class="col-md-4 mt-3">
+              <button class="btn btn-primary" type="button" (click)="getSleepData('custom')">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <div>
+          <p>Note :</p>
+        </div>
+        <span>(0-Wake)</span>
+        <span>(1-LightSleep)</span>
+        <span>(2-DeepSleep)</span>
+        <span>(3-WatchNotWear)</span>
+      </div>
+    </div>
+    <div>
+      <div class="text-center" *ngIf="nodatafound">
+        <h4><span>Sleep</span> Data is Not Found </h4>
+      </div>
+      <div *ngIf="graphblock">
+        <apx-chart [series]="[{data:Sleep_Seriase}]" [chart]="{
+      height: 400,
+      type: 'line',
+      zoom: {
+        enabled: true
+      }
+    }" [xaxis]="{categories:Sleep_x_Axis}" [yaxis]="{max:5 , min:-5 }" [dataLabels]="{ enabled:false}" [grid]="{
+      row: {
+        colors: ['#f3f3f3', 'transparent'],
+        opacity: 0.5
+      }
+    }" [stroke]="{ curve: 'straight',width:1.5 }"></apx-chart>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row" >
+          <div class="col-md-3 card " *ngFor="let a of arrayOfArrays">
+            <div *ngFor="let b of a">
+              <div><button type="button" (click)="sleepDynamicGraph(b)">Graph</button></div>
+              <div class="tableFixHead">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col"><span>Start Time</span><span>:</span><span>{{b.Data.StartTime}}</span></th>
+                      <th scope="col"><span>End Time</span><span>:</span><span>{{b.Data.EndTime}}</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let c of b.Data.sleep_stages">
+                      <td>{{c.sleeptime}}</td>
+                      <td><span *ngIf="c.sleep=='0'">{{'Wake'}}</span><span *ngIf="c.sleep=='1'">{{'LightSleep'}}</span>
+                        <span *ngIf="c.sleep=='2'">{{'Deep Sleep'}}</span>
+                        <span *ngIf="c.sleep=='3'">{{'Watch Not Wear'}}</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+          
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ThresholdModal -->
+  <div class="modal fade" id="ThreesholdModalBox" tabindex="-1" aria-labelledby="Threeshold" aria-hidden="true">
+    <div class="modal-dialog  modal-xl modal-dialog-scrollable ">
+      <div class="modal-content">
+        <div class=" modal-header anvayaaPurple-backgroundColor">
+          <h5 class="modal-title" id="Threeshold">Threshold Limits</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="m-3"><button class="btn btn-anvayaaPurple" (click)="EditConfiguration()"> EDIT</button></div>
+          <form [formGroup]="thersholdform">
+            <div formArrayName="ThresholdLimits">
+              <div class="row">
+                <div class="col-md-5 text-Yellow">
+                  <h3>Vital Type</h3>
+                </div>
+                <div class="col-md-3 text-Yellow">
+                  <h3>MinValue</h3>
+                </div>
+                <div class="col-md-3 text-Yellow">
+                  <h3>MaxValue</h3>
+                </div>
+              </div>
+              <div *ngFor="let limits of ThresholdLimit().controls; let ti=index">
+                <div [formGroupName]="ti" class="row">
+                  <div class="col-md-5">
+                    <input type="text" class="form-control" formControlName="VitalType" required>
+                  </div>
+                  <div class="col-md-3"><input type="text" class="form-control" formControlName="MinValue"
+                      [maxlength]="3" [min]="70" required>
+                    <span *ngIf="ThresholdLimit().controls[ti].get('MinValue')!.value ==''&&SubmitVitalValidation==true"
+                      class="text-danger">*Required </span>
+                    <div
+                      *ngIf="ThresholdLimit().controls[ti].get('MinValue')!.dirty||ThresholdLimit().controls[ti].get('MinValue')!.touched&&SubmitVitalValidation==true ">
+                      {{ThresholdLimit().controls[ti].get('MinValue')!.errors?.['min']}}
+                      <div *ngIf="ThresholdLimit().controls[ti].get('MinValue')!.value < 70" class="text-danger"
+                        style="font-size: 9px;">
+                        *Minimum Value Greater than 70.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <input type="text" class="form-control" formControlName="MaxValue" [maxlength]="3" required>
+                    <span *ngIf="ThresholdLimit().controls[ti].get('MaxValue')!.value ==''&&SubmitVitalValidation==true"
+                      class="text-danger">*Required </span>
+                    <div
+                      *ngIf="ThresholdLimit().controls[ti].get('MaxValue')!.dirty||ThresholdLimit().controls[ti].get('MaxValue')!.touched&&SubmitVitalValidation==true ">
+                      {{ThresholdLimit().controls[ti].get('MaxValue')!.errors?.['min']}}
+                      <div *ngIf="ThresholdLimit().controls[ti].get('MaxValue')!.value < 70" class="text-danger"
+                        style="font-size: 9px;">
+                        *Maxvalue Value Greater than 70.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="text-end"><button class="btn btn-anvayaaPurple" data-bs-dismiss="modal" title="SAVE"
+                (click)="updateConfiguration()">SAVE</button></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="WhiteListModalBox" tabindex="-1" aria-labelledby="WhiteList" aria-hidden="true">
+    <div class="modal-dialog  modal-xl modal-dialog-scrollable ">
+      <div class="modal-content">
+        <div class=" modal-header anvayaaPurple-backgroundColor">
+          <h5 class="modal-title" id="Threeshold">WhiteList</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="card">
+            <div class="card-header">
+              CONTACTS
+            </div>
+            <form [formGroup]="Contactsform">
+              <div class="row">
+                <div class="col-md-4 ">
+                  <input type="text" class="form-control m-1" formControlName="Name"
+                    (keypress)="($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 97 && $event.charCode <= 122"
+                    placeholder="Name" required>
+                  <span *ngIf="Contactsform.controls['Name'].value==''&&ContactAdded == true"> * Name Required</span>
+                </div>
+                <div class="col-md-4 ">
+                  <input type="text" class="form-control m-1" formControlName="Number" [maxlength]="10"
+                    (keypress)="($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57"
+                    placeholder="ContactNumber" required>
+                  <span *ngIf="Contactsform.controls['Number'].value==''&&ContactAdded == true"> * Name Required</span>
+                  <div *ngIf="Contactsform.controls['Number'].dirty||Contactsform.controls['Number'].touched ">
+                    <div *ngIf="Contactsform.controls['Number'].errors?.['minlength']" class="text-danger">
+                      *Number Requird Minimum 10 digits.
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2 m-1">
+                  <div class="text-end"><button class="btn btn-anvayaaPurple" title="ADD"
+                      [disabled]="Contactsform.status=='INVALID'" *ngIf="addingwhitelistbtn"
+                      (click)="addwhitelist()">Add</button></div>
+                  <div class="text-end"><button class="btn btn-anvayaaPurple" title="UPDATE" *ngIf="updatewhitelistbtn"
+                      (click)="updatewhitelist()"> <i class="fa fa-cloud-upload" aria-hidden="true"></i></button></div>
+                </div>
+              </div>
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">NAME</th>
+                    <th scope="col">NUMBER</th>
+                    <th scope="col">ACTION</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let contacts of WhitlistedContacts; let i = index">
+                    <td class="mx-auto">{{contacts.Name}}</td>
+                    <td class="mx-auto">{{contacts.Number}}</td>
+                    <td class="mx-auto"><button class="btn btn-anvayaaYellow" (click)="patchcontactdetails(i)"
+                        title="EDIT">EDIT</button></td>
+                    <td class="mx-auto"><img src="../../../assets/images/delete.png" style="width: 30px;"
+                        (click)="deleteContactDetails(i)"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </form>
+            <div class="text-end m-3"><button class="btn btn-primary" title="SAVE"
+                (click)="watchupdate('WhiteList')">SAVE</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="Remainders" tabindex="-1" aria-labelledby="Remainders" aria-hidden="true">
+    <div class="modal-dialog  modal-xl modal-dialog-scrollable ">
+      <div class="modal-content">
+        <div class=" modal-header anvayaaPurple-backgroundColor">
+          <h5 class="modal-title" id="Threeshold">Reminders</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="card">
+            <div>
+              <h3>Create Reminder</h3>
+            </div>
+            <div class="card">
+              <div class="container">
+                <div class="row">
+                  <form>
+                    <div class="col-md-2">
+                      <label><b>AlarmSwitch</b></label>
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" formControlName="AlarmSwitch" value=""
+                          role="switch" checked>
+                      </div>
+                    </div>
+                  </form>
+                  <div class="container">
+                    <div class="row card  m-2">
+                      <div class="row" style="height: 68px;">
+                        <form [formGroup]="alarmObj">
+                          <div class="row">
+                            <div class="col-md-3">
+                              <label><b>Alarm For</b></label>
+                              <select class="form-select" formControlName="AlarmType" name="AlarmType" required>
+                                <option value="" selected>Select</option>
+                                <option value="1">Medicine</option>
+                                <option value="2">Drinking Water</option>
+                                <option value="3">Sedentary </option>
+                              </select>
+                              <div class="text-danger"
+                                *ngIf="alarmObj.controls['AlarmType'].value==''&& alarmObjSubmit == true">*Select Alaram
+                                Type</div>
+                            </div>
+                            <div class="col-md-2">
+                              <label><b>Time</b></label>
+                              <input type="time" class="form-control" formControlName="Time" required>
+                              <div class="text-danger"
+                                *ngIf="alarmObj.controls['Time'].value==''&& alarmObjSubmit == true">*Select Alaram Type
+                              </div>
+                            </div>
+                            <div class="col-md-3">
+                              <label> <b>Select WeekDays</b></label>
+                              <ng-multiselect-dropdown value="Value" formControlName="Days"
+                                [placeholder]="'Select WeekDays'" [settings]="dropdownSettings" [data]="WeekDays"
+                                (onSelect)="onItemSelect($event)" (onDeSelect)="onDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
+                              </ng-multiselect-dropdown>
+                              <div *ngIf="daysEmptyArray">*Select Week Days </div>
+                            </div>
+                            <div class="col-md-2">
+                              <label><b>This Alarm Switch</b></label>
+                              <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" value="" formControlName="IsAlarmOn"
+                                  role="switch" checked>
+                              </div>
+                            </div>
+                            <div class="col-md-2" *ngIf="remainderAddBtn">
+                              <button type="button" class="btn anvayaaPurple-backgroundColor mt-3"
+                                (click)="addAlaramType()">Add Alarm</button>
+                            </div>
+                            <div class="col-md-2 " *ngIf="remainderUpdBtn">
+                              <button type="button" class="btn anvayaaPurple-backgroundColor mt-3"
+                                (click)="UpdateRemainders()">Update</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Alarm Type</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Days</th>
+                    <th scope="col">Alaram On/Off</th>
+                    <th scope="col">Edit</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="alarms.length>0">
+                  <tr *ngFor="let alarm of alarms;let i = index">
+                    <td><span *ngIf="alarm.AlarmType == '1'">{{"Medicine"}}</span><span
+                        *ngIf="alarm.AlarmType == '2'">{{"Drink Water"}}</span><span
+                        *ngIf="alarm.AlarmType == '3'">{{"Sedentary"}}</span></td>
+                    <td>{{alarm.Time}}</td>
+                    <td>
+                      <div *ngFor="let a of alarm.Days"><span *ngIf="a=='1'">{{"Monday"}}</span><span
+                          *ngIf="a=='2'">{{"Tuesday"}}</span><span *ngIf="a=='3'">{{"Wednesday"}}</span><span
+                          *ngIf="a=='4'">{{"Thursday"}}</span><span *ngIf="a=='5'">{{"Friday"}}</span><span
+                          *ngIf="a=='6'">{{"Saturday"}}</span><span *ngIf="a=='7'">{{"Sunday"}}</span></div>
+                    </td>
+                    <td>{{alarm.IsAlarmOn}}</td>
+                    <td><img src="../../../assets/images/edit.png" style="width: 25px;"
+                        (click)="editRemainder(alarm,i)"></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="m-3"><button class="btn anvayaaPurple-backgroundColor" (click)="SaveRemainder()">Save
+                  Reminder</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="updateSettings" tabindex="-1" aria-labelledby="updateSettings" aria-hidden="true">
+    <div class="modal-dialog   modal-dialog-scrollable ">
+      <div class="modal-content">
+        <div class=" modal-header anvayaaPurple-backgroundColor">
+          <h5 class="modal-title" id="Threeshold">updateSettings</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h4>Are You Sure to Update Default Settings?</h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn anvayaaPurple-backgroundColor mt-3"
+            (click)="instantUpdateGet('UpdateWatchSettings')">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div   class="modal fade" id="AlaramData"  tabindex="-1" aria-labelledby="WhiteList" aria-hidden="true">
+    <div class="modal-dialog  modal-xl modal-dialog-scrollable ">
+      <div class="modal-content">
+        <div class=" modal-header anvayaaPurple-backgroundColor">
+          <h5 class="modal-title" id="Threeshold">Alarm Records</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <input type="text" [(ngModel)]="searchText" placeholder="search">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Record ID</th>
+                <th scope="col">DeviceID</th>
+                <th scope="col">AlarmType</th>
+                <th scope="col">CreatedDate</th>
+                <th scope="col">AlarmStatus</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let alaram of AlaramRecords|datafilter:searchText">
+                <td>{{alaram.RecordID}}</td>
+                <td>{{alaram.DeviceID}}</td>
+                <td>{{alaram.AlarmType}}</td>
+                <td>{{alaram.CreatedDate*1000|date : 'dd-MMM-YYYY'}}</td>
+                <td>{{alaram.AlarmStatus}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+ 
+</div>

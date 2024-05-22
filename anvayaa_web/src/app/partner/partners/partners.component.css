@@ -1,0 +1,169 @@
+.bodycontent {
+  margin-top: 100px;
+  margin-left: 120px;
+  font-size: 16px;
+  font-family: 'Poppins' !important;
+
+}
+th {
+
+  background-color: #ccc;
+  width: 172px;
+  height: 20px;
+  left: 123px;
+  top: 635px;
+  font-size: 18px;
+
+
+}
+
+.textdata :hover {
+  background-color: white;
+  /* position: absolute; */
+  ;
+  cursor: pointer;
+
+
+}
+
+.details {
+  color: #000000;
+  width: 200px;
+  height: 60px;
+  line-height: 15px;
+}
+
+
+
+
+.memberTableMaindiv {
+  overflow-x: auto;
+
+}
+
+.tablerequest {
+  margin-top: 10px;
+}
+
+.select {
+  margin-left: 900px;
+  margin-top: 20px;
+}
+
+.textleft {
+  text-align: left;
+}
+
+
+
+
+
+
+/*hover for source */
+.wrap {
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.btn {
+  border-radius: 0px !important;
+  width: 100%;
+  font-size: 22px;
+  text-decoration: none;
+
+  color: #fff;
+  position: relative;
+  display: inline-block;
+}
+
+/* .btn:active {
+  transform: translate(0px, 5px);
+  -webkit-transform: translate(0px, 5px);
+  box-shadow: 0px 1px 0px 0px;
+} */
+
+.pad {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+.green {
+  color: black;
+  background-color: rgba(202, 197, 197, 0.199);
+  transform: scale(1.0) perspective(1px);
+  border-radius: 10px !important;
+  /* background-color: #f0f0f0; */
+  /* box-shadow: 3px 5px 5px #888888; */
+  /* border-radius: 10px; */
+  /* padding-left: 0px!important; */
+  /* padding-right: 0px !important; */
+  border: 1px purple;
+  /* transition: all 1s ease; */
+  /* transform: scale(1); */
+  /* font: bold; */
+  font-weight: 500;
+}
+
+.rocolor {
+  border-radius: 10px;
+}
+
+.green_selected {
+  /* background-color: rgb(250, 246, 246); */
+
+  /* color: purple; */
+  transform: scale(1.0) perspective(1px);
+  border-radius: 10px !important;
+  color: purple;
+  background-color: rgba(107, 107, 107, 0.199);
+}
+
+.border {
+  border: 0px !important;
+}
+
+.form-check-input:checked {
+  background-color: purple;
+  border-color: purple;
+}
+
+.labelemargin {
+  margin-left: 10px;
+}
+
+
+.heading{
+  text-decoration: underline;
+  font-weight: 100;
+}
+.heading-main{
+color: #914573;
+}
+
+
+hr.seperator {
+  border-color: #ed1191;
+  margin: 30px 0;
+  border-top: 3px solid #eee;
+}
+label.inputtext{
+  font-size: 16px;
+  font-weight: 500;
+}
+table thead tr th  td{
+  font-size: 13px;
+  font-weight: 300;
+}
+button{
+  background-color : #f89e3d;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+
+
+}

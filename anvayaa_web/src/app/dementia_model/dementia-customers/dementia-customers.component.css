@@ -1,0 +1,18 @@
+.content{
+    cursor: default;
+}
+#CustomerId{
+    cursor: pointer;
+    color: purple;
+    font-weight: bold;
+}
+
+.anvayaaButton{
+    background-color: purple;
+    font-weight: bold;
+    color: aliceblue;
+}
+.bodycontent{
+    margin-top: 100px;
+    margin-left: 120px;
+  }

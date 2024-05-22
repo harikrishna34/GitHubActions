@@ -1,0 +1,52 @@
+<div class="bodycontent">
+    <div style="text-align: center;">
+        <h2>Visits Utilised</h2>
+    </div>
+    <div>
+        <div class="row">
+          <div class="col-md-2"><label>Start Date</label> <input type="date" class="form-control" [(ngModel)]="startDate"></div>
+          <div class="col-md-2"><label>End Date</label> <input type="date" class="form-control" [(ngModel)]="endDate"></div>
+          <div class="col-md-2 mt-3"><button type="button" class="anvayaabutton-primary" (click)="dashBoardevent()">Search</button></div>
+        </div>
+      </div>
+    <div>
+        <table class="table table-striped text-start card-body">
+            <thead class="tablehead">
+                <tr>
+                    <th (click)="sortData('RequestID')">Request Details<i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th (click)="sortData('Name')">Customer Details <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <!-- <th (click)="sortData('CreatedPersonName')">Requested Name <i class="fa fa-sort" aria-hidden="true"></i></th> -->
+                    <th (click)="sortData('ServiceName')">Agent Name <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th (click)="sortData('CreatedDate')">Created Date <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th (click)="sortData('RequestedDate')">Requested Date <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th (click)="sortData('UpdatedDate')">Updated Date <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th (click)="sortData('Status')">Status <i class="fa fa-sort" aria-hidden="true"></i></th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let data of ViewCCdbArray">
+                <tr>
+                    <td>
+                        <div>
+                          {{data?.AliasName |titlecase}}
+                        </div><b>{{data?.RequestID}}</b>
+                              
+                        <div style="color:#914572">{{data?.CustomerType}}</div>
+                      </td>
+                    <td>{{data?.Name}}
+                        <div>
+                            <b>{{data?.CustRecID}}</b>
+                        </div>
+                    </td>
+                    <!-- <td>{{data?.}}</td> -->
+                    <td>{{data?.EmployeeDetails?.FirstName}} {{data?.EmployeeDetails?.LastName}}</td>
+                    <td>{{data?.CreatedDate*1000 |date: 'dd-MMM-yyyy'}}</td>
+                    <td>{{data?.RequestedDate*1000 |date: 'dd-MMM-yyyy'}}</td>
+                    <td>{{data?.UpdatedDate*1000 |date: 'dd-MMM-yyyy'}}</td>
+                    <td>{{data?.Status}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

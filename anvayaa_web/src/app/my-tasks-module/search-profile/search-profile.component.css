@@ -1,0 +1,111 @@
+/*  */
+.container{
+    display: flex;
+    flex-direction: column;
+    align-content:space-around
+}
+.bodycontent{
+    margin-top: 100px;
+    margin-left: 120px;
+    margin-right: 12px;
+  }
+.anvayaaButton{
+    background-color: purple;
+    font-weight: bold;
+    color: aliceblue;
+}
+
+.details{
+    display: flex;
+    justify-content: space-between;
+    line-height: 2.5rem;
+}
+label{
+    font-size: medium;
+    font-weight: bolder;
+}
+.card-title{
+    font-weight: bolder;
+}
+
+span{
+  font-weight: bolder;
+  color: #914573;
+}
+.anvayaaButtonYelow{
+    background-color: #f79123;
+    font-weight: bold;
+    color: aliceblue;
+}
+.actionButtons{
+    display: flex;
+    justify-content: space-around;
+}
+.profiles-card,.addPartnersList-card{
+    height: fit-content;
+}
+
+.partnerName{
+    color: #914573;
+    /* cursor: pointer; */
+}
+
+/* tables css  */
+h1, p, .td {
+    /* font-family: Lato; */
+  }
+  
+  .table {
+    font-size: 15px;
+    border: 1px solid lightgray;
+  }
+  
+  .table, .td {
+    text-align: left;
+  }
+  
+  .table-header {
+    font-weight: bold;
+  }
+  
+  .table-header.table-row {
+    border-bottom: 2px solid gray;
+  }
+  
+  .table-row {
+    display: block;
+    white-space: nowrap;
+    border-bottom: 1px solid lightgray;
+    overflow: hidden;
+  }
+  .table-row:last-child {
+    border: none
+  }
+  .td {
+    display: inline-block;
+    padding: 8px;
+  }
+  
+  .td:nth-child(0) {
+    width: calc(10vw);
+  }
+  
+  .td:nth-child(1) {
+    width: calc(10vw);
+  }
+  .td:nth-child(2) {
+    width: calc(20vw);
+  }
+  .td:nth-child(3) {
+    width: calc(20vw);
+  }
+  
+  .clickable {
+    cursor: pointer;
+  }
+  
+
+  
+  .child-row {
+    background-color: #e8e8e8;
+  }

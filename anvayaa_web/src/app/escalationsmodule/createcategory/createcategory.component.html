@@ -1,0 +1,119 @@
+<div class="mainDiv">
+<div class="card">
+  <div><img src="../../../assets/images/left-arrow.png" (click)="back()"></div>
+
+    <div class="card-body">
+
+        <h2>Creating Category </h2>
+    <div class="card">
+        <div class="card-body">
+          <div>
+            <form [formGroup]="categoryForm">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Type</label>
+                        <select class="form-select" formControlName="Type" (change)="subcategories($event)" >
+                            <option  value="" selected disabled>Select Type</option>
+                            <option value="Category">Category</option>
+                            <option value="SubCategory" >SubCategory</option>
+                        </select>
+                        <span  class="errorColor"   *ngIf="categoryForm.controls['Type'].value=='' &&categoryForm.controls['Type'].status=='INVALID'&& submit==true">* Required</span>
+                    </div>
+                    <div class="col-md-3" *ngIf="subCat">
+                        <label>SubCategory Type</label>
+                        <select class="form-select" formControlName="TypeID" >
+                            <option value=""  selected disabled>Select Type</option>
+                            <option value="Category" *ngFor="let category of CategoriesList" value="{{category.ID}}">{{category.Name}}</option>
+                        </select>
+                         <div  class="errorColor" *ngIf="subcatogery">* Required</div>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Name</label>
+                      <input type="text" class="form-control" formControlName="Name" placeholder="Enter Name" >
+                      <span  class="errorColor" *ngIf="categoryForm.controls['Name'].value=='' && submit==true">* Required</span>
+                    </div>
+                    <div class="col-md-3" formGroupName="TAT">
+
+                      <label>TAT Type</label>
+                      <select class="form-select" formControlName="Type" >
+                          <option value=""  selected disabled>Select Type</option>
+                          <option value="Hours">Hours</option>
+                      </select>
+                      <span  class="errorColor" *ngIf="categoryForm.get('TAT')?.get('Type')?.value==''&&submit==true">* Required</span>
+
+                    </div>
+                    <div class="col-md-3" formGroupName="TAT">
+                      <label>TAT Time</label> 
+                      <input type="number"  class="form-control" formControlName="Time" min="0"  max ="99" placeholder="Select Time" (keypress)="($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57" (keydown)="checkNumberFieldLength($event)"  >
+                    <span class="errorColor" *ngIf="categoryForm.get('TAT')?.get('Time')?.value==''&&categoryForm.get('TAT')?.get('Time')?.status=='INVALID'&&submit==true">* Required</span>
+
+
+                    </div>
+                    </div>
+                    
+                <div class="text-end" *ngIf="submitbutton" > <button class="btn btn-primary" type="button" (click)="creatmaster()">Submit</button></div>
+                <div class="text-end" *ngIf="updateButton"> <button class="btn btn-primary" type="button" (click)="updatemaster()">update</button></div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-5" >
+        <div>
+            <h3>Category and SubCategory List</h3>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+            <div class="card-title text-center"><h5>Category</h5></div>
+
+                <div class="card-body text-center">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">TAT(Type)</th>
+                            <th scope="col">TAT(Time)</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let category of CategoriesList">
+                            <td>{{category.Name}}</td>
+                            <td>{{category.TAT.Type}}</td>
+                            <td>{{category.TAT.Time}}</td>
+                            <td><img src="../../../assets/images/edit.png" style="width:25px" (click)="editCategory(category)"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+            <div class="card-title text-center"><h5>SubCategory</h5></div>
+                <div class="card-body text-center">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">TAT(Type)</th>
+                            <th scope="col">TAT(Time)</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let subcategory of SubCategoriesList">
+                            <td>{{subcategory.Name}}</td>
+                            <td>{{subcategory.TAT.Type}}</td>
+                            <td>{{subcategory.TAT.Time}}</td>
+                            <td><img src="../../../assets/images/edit.png" style="width:25px"  (click)="editCategory(subcategory)"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+            </div>  
+        </div>
+      </div>
+    </div>
+</div>
+
+</div>

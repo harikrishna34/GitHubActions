@@ -1,0 +1,11 @@
+.mainDiv{
+    margin-top: 112px;
+    margin-left: 112px;
+}
+
+
+
+.row {
+
+    margin-right: calc(0* var(--bs-gutter-x));
+}

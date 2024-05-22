@@ -1,0 +1,97 @@
+<div class="main">
+   <span style="text-align: center;"><h5><u><b>Update Customer Experiance</b></u></h5></span> 
+    <!-- <div class="col-md-12" >
+            <div class="card col-md-12">
+                <div class="card-header">Benificary deatils</div>
+                <div class="card-body">
+                    <span>Name:</span><span>{{ViewCCdbArray?.Beneficiaries[0]?.Name}}</span><br>
+                    <span>age:</span><span>{{ViewCCdbArray?.Beneficiaries[0]?.Age}}</span><br>
+                    Ph.No: {{ViewCCdbArray?.Beneficiaries[0]?.MobileNumber}}
+                </div>
+            </div>
+            <div class="card col-md-12">
+                <div class="card-header">Care Manager Details</div>
+                <div class="card-body"> 
+                    <span>Name:</span><span>{{ViewCCdbArray?.CareManagerObj?.FirstName}} {{ViewCCdbArray?.CareManagerObj?.LastName}}</span><br>
+                    Ph.No: {{ViewCCdbArray?.CareManagerObj?.ContactNumber}}
+                </div>
+            </div>
+    </div> -->
+    <div class="col-md-12" style="margin-bottom: 10px;" [formGroup]="updateForm">
+        <div class="col-md-12">
+            <label>Select Member:</label>
+            <select class="form-select" aria-label="Default select example" formControlName="SpokeWithWhom">
+                <option value="" disabled selected>Select Member</option>
+               <option *ngFor="let detail of activeBeneficiaries" value="{{detail?.CustID}}">{{detail?.Name|titlecase}}</option>
+               <option value="{{ViewCCdbArray?.CustRecID}}">{{ViewCCdbArray?.Name|titlecase}}</option>
+            </select>
+            <div *ngIf=" updateForm.controls['SpokeWithWhom'].value == '' && fpress == true"
+                        class="text-danger">*Required</div>
+        </div>
+        <div class="col-md-12">
+            <label>FeedBack Status </label>
+            <select class="form-select" aria-label="Default select example" formControlName="StatusID" (change)="updateStatusName($event)">
+                <option value="" disabled selected>Status</option>
+                <option value="AKCAFBD000000">ISSUE</option>
+                <option value="AKCE0000">ALL OK</option>
+            </select>
+            <div *ngIf=" updateForm.controls['StatusID'].value == '' && fpress == true"
+            class="text-danger">*Required</div>
+        </div>
+        <div class="col-md-12">
+            <label>Comments</label>
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" formControlName="Message"></textarea>
+                <!-- <label for="floatingTextarea">Comments</label> -->
+                <div *ngIf=" updateForm.controls['Message'].value == '' && fpress == true"
+                class="text-danger">*Required</div>
+            </div> 
+        </div>
+        <div>
+            <button class="anvayaabutton-primary-sm" (click)="saveChanges()" style="margin-left: 400px;">Save</button>
+        </div>
+    </div>
+    <div class="card col-md-12">
+        <span class="lastinteraction" style="text-align: center;"><b>Last Interaction</b></span>
+            <table class="table table-striped text-start card-body mt-6">
+                <thead class="tablehead">
+                    <tr>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Message</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ViewCCdbArray?.LastInteraction?.StatusName}}</td>
+                        <td>{{ViewCCdbArray?.LastInteraction?.UpdatedDate*1000 |date: 'dd-MMM-yyyy' }}</td>
+                        <td>{{ViewCCdbArray?.LastInteraction?.Message}}</td>                
+                    </tr>
+                </tbody>
+            </table>
+       
+    </div>
+    <div class="card col-md-12 mt-4">
+        <span class="followupinfo" style="text-align: center;"><b>Follow Up Information</b></span>
+        <table class="table table-striped text-start card-body mt-6">
+            <thead class="tablehead">
+                <tr>
+                    <th>Status</th>
+                    <th>Message</th>
+                    <th>FeedBack Status</th>
+                    <th>Follow Up Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let FollowUp of ViewCCdbArray?.FollowUpCustomer">
+                <tr>
+                    <td>{{FollowUp?.StatusName}}</td>
+                    <td>{{FollowUp?.Message}}</td>
+                    <td>{{FollowUp?.FeedBackStatus}}</td>
+                    <td>{{FollowUp?.FollowUpDateTime}}</td>
+                    <td><button class="anvayaabutton-secondary-sm" (click)="closeInteraction()">Close</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

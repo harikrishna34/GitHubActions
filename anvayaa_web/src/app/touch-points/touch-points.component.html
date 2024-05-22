@@ -1,0 +1,61 @@
+<div class="bodycontent">
+    <div>
+        <h1 style="text-align: center;">Touch Points Settings</h1>
+        <form [formGroup]="TouchpointsForm">
+            <div class="col-md-6">
+                <span>Do you want to make Call</span>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="CallOption" id="flexRadioDefault1" formControlName="CallOption" value="true" >
+                    <label class="form-check-label" for="flexRadioDefault1" >
+                      Yes
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="CallOption" id="flexRadioDefault2" formControlName="CallOption" value="false">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      No
+                    </label>
+                  </div>
+            </div>
+            <div class="col-md-3" [hidden]="TouchpointsForm.controls['CallOption'].value!='true'">
+                <label for="frequency">Frequency Number:</label>
+                <input type="number" class="form-control" id="Frequency" min="1" max="7" formControlName="Frequency" name="Frequency">
+                
+            </div>
+            <div class="col-md-3" [hidden]="TouchpointsForm.controls['CallOption'].value!='false'">
+                <label for="message">Message:</label>
+                <textarea id="Message" formControlName="Message" name="Message" ></textarea>
+            </div>
+            <div>
+                <button class="anvayaabutton-primary" (click)="customerConfigurtaion()">Save</button>
+            </div>
+        </form>
+    </div>
+    <div>
+      <table class="table table-striped text-start card-body mt-6" >
+        <thead class="tablehead">
+          <tr>
+            <th>Customer Details</th>    
+            <th>Assigned Date</th>
+            <th>Frequency</th>
+            <th>Service Area</th>
+            <td>Status</td>
+          </tr>
+        </thead>
+        <tbody *ngFor="let newData of viewData">
+          <tr>
+            <td>{{newData?.CreatedPersonName}}
+              <div>
+                <b>{{newData?.CustRecID}}</b>
+              </div></td>
+            <td>{{newData?.AssinedDateTime*1000| date: 'dd-MMM-yyyy'}}</td>
+            <td>{{newData?.CustomerconfigurationData[0]?.Frequency}}</td>
+            <td>{{newData?.ServiceAreaName}}</td>
+            <td>{{newData?.Status}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+
+

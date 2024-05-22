@@ -1,0 +1,97 @@
+.card{
+    text-align: left;
+    /* font-size: large; */
+    height: 150px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+.card-medium{
+    text-align: left;
+    /* font-size: large; */
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+.card:hover {
+    transform: scale(1.05);
+    color: #000;
+  }
+.boxcontent{
+    text-align: center;
+    margin-top: 10px; 
+    margin-right: 30px;
+    /* padding-right: 180px; */
+    /* padding-top: 40px;  */
+    font-size: x-large;
+}
+.cardcontent{
+    margin-top: 1px;
+    margin-bottom: 1px;
+    /* font-size: large; */
+}
+.pmsBalance{
+    padding-top: 10px; 
+    font-size: large; 
+    padding-left: 5px;
+}
+img{
+    cursor: pointer;
+    
+}
+.img-call{
+    height: 15px;
+    width: 20px;
+    margin-bottom: 10px;
+}
+.img-mail{
+    height: 15px;
+    width: 20px;
+    margin-bottom: 10px;
+}
+.img-plan{
+    height: 15px;
+    width: 20px;
+    margin-bottom: 10px;
+}
+.img-planning{
+    height: 15px;
+    width: 20px;
+    margin-bottom: 10px;
+}
+.active {
+    color: green;
+  }
+  
+  .inactive {
+    color: orange;
+  }
+  
+  .dead {
+    color: red;
+  }
+  
+  /* Apply the variable to your offcanvas element */
+  .offcanvas.offcanvas-end {
+    width:35%;
+  }
+  .ratio-16x9 {
+    --bs-aspect-ratio: 100vh
+}
+.highlight-row {
+    background-color: rgb(175, 175, 175);
+  }
+  .badge {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    background-color: #f79122; /* Set the background color of the badge */
+    color: white; /* Set the text color of the badge */
+    border-radius: 50%; /* Optional: Makes the badge circular */
+    height: 20px;
+  }

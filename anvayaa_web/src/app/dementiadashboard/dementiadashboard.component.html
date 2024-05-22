@@ -1,0 +1,111 @@
+
+<div class="maindiv">
+   
+    <section class="pt-8 pt-md-9">
+        <div class="container">
+          
+    <!-- Categories -->
+          <div class="row mt-6">
+            <div class="col-12 mb-4">
+              <span class="badge bg-pastel-primary text-primary text-uppercase-bold-sm">
+                Dementia Dashboard
+              </span>
+            </div>
+    
+            <!-- Category -->
+            <div class="col-md-3 mb-4"  (click)="details('ActivePlans')"> 
+              <a  class="card align-items-center text-decoration-none border-0 hover-lift-light py-4">
+                <span class="icon-circle icon-circle-lg bg-pastel-primary text-primary">
+                 {{dementiadb?.ActivePlans}}
+                </span>
+                <span class="text-dark mt-3">
+                    Active Plans
+                </span>
+              </a>
+            </div>
+    
+            <!-- Category -->
+            <div class="col-md-3 mb-4"  (click)="detailspending('PendingInitialAssessments')">
+              <a  class="card align-items-center text-decoration-none border-0 hover-lift-light py-4">
+                <span class="icon-circle icon-circle-lg bg-pastel-primary text-primary">
+                    {{dementiadb?.PendingInitialAssessments}}
+
+                </span>
+                <span class="text-dark mt-3">
+                    Pending Initial Assessments
+                </span>
+              </a>
+            </div>
+    
+            <!-- Category -->
+            <div class="col-md-3 mb-4"  (click)="detailscompleteopenreq('CompletedRequestsInLastOneWeek')">
+              <a  class="card align-items-center text-decoration-none border-0 hover-lift-light py-4">
+                <span class="icon-circle icon-circle-lg bg-pastel-primary text-primary">
+                    {{dementiadb?.CompletedRequestsInLastOneWeek}}
+
+                </span>
+                <span class="text-dark mt-3">
+                    Completed Requests In Last One Week
+                </span>
+              </a>
+            </div>
+    
+            <!-- Category -->
+            <div class="col-md-3 mb-4"  (click)="detailscompleteopenreq('OpenRequests')">
+              <a class="card align-items-center text-decoration-none border-0 hover-lift-light py-4">
+                <span class="icon-circle icon-circle-lg bg-pastel-primary text-primary">
+                    {{dementiadb?.OpenRequests}}
+
+                </span>
+                <span class="text-dark mt-3">
+                    Open Requests
+                </span>
+              </a>
+            </div>
+    
+            <!-- Category -->
+            <div class="col-md-3 mb-4"  (click)="detailsfeedbacks('CompletedFeedBackInLastOneWeek')">
+              <a  class="card align-items-center text-decoration-none border-0 hover-lift-light py-4">
+                <span class="icon-circle icon-circle-lg bg-pastel-primary text-primary">
+                    {{dementiadb?.CompletedFeedBackInLastOneWeek}}
+
+                </span>
+                <span class="text-dark mt-3">
+                    Completed FeedBack In Last One Week
+                </span>
+              </a>
+            </div>
+    
+            <!-- Category -->
+            <div class="col-md-3 mb-4"  (click)="detailsfeedbacks('OpenFeedBacks')">
+              <a  class="card align-items-center text-decoration-none border-0 hover-lift-light py-4">
+                <span class="icon-circle icon-circle-lg bg-pastel-primary text-primary">
+                    {{dementiadb?.OpenFeedBacks}}
+
+                </span>
+                <span class="text-dark mt-3" >
+                    Open FeedBacks
+                </span>
+              </a>
+            </div>
+    
+            
+    
+            <!-- Category -->
+            <div class="col-md-3 mb-4" (click)="details('MyFamilies')">
+              <a  class="card align-items-center text-decoration-none border-0 hover-lift-light py-4">
+                <span class="icon-circle icon-circle-lg bg-pastel-primary text-primary">
+                    {{dementiadb?.MyFamilies}}
+
+                </span>
+                <span class="text-dark mt-3">
+                    MyFamilies
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+</div>
+

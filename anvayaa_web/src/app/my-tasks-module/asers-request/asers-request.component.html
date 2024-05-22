@@ -1,0 +1,130 @@
+<p>asers-request works!</p>
+<div class="bodycontent">
+    <img class="backArrow" src="../../../assets/images/left-arrow.png" (click)="myTasks()">
+    <div>
+        <div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h5><u class="textDecration">Details</u></h5>
+                    <table>
+                        <tr>
+                            <td class="serviceNames">Sponser</td>
+                            <td>:</td>
+                            <td *ngIf="requestDetailsObj.CustomerDetails && requestDetailsObj.CustomerDetails.Name">
+                                {{requestDetailsObj.CustomerDetails.Name}}</td>
+                        </tr>
+                        <tr *ngIf="BeneficiaryName">
+                            <td class="serviceNames">Beneficiary</td>
+                            <td>:</td>
+                            <td *ngIf="BeneficiaryName">{{BeneficiaryName}}</td>
+                        </tr>
+                        <tr>
+                            <td class="serviceNames"> PMS </td>
+                            <td>:</td>
+                            <td *ngIf="requestDetailsObj.PmsTransaction&&requestDetailsObj.PmsTransaction.ClosingBalance">
+                                {{requestDetailsObj.PmsTransaction.ClosingBalance}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-4">
+                    <h5><u class="textDecration">Services</u></h5>
+                    <table>
+                        <tr>
+                            <td class="serviceNames">Name</td>
+                            <td>:</td>
+                            <td *ngIf="requestDetailsObj.RequestDetails&&requestDetailsObj.RequestDetails.AliasName!=null">
+                                {{requestDetailsObj.RequestDetails.AliasName| replaceUnderscore| titlecase}}</td>
+                        </tr>
+                        <tr>
+                            <td class="serviceNames">Service Name</td>
+                            <td>:</td>
+                            <td
+                                *ngIf="requestDetailsObj.RequestDetails && requestDetailsObj.RequestDetails.SubSubCategoryName!=null">
+                                {{requestDetailsObj.RequestDetails.SubSubCategoryName| replaceUnderscore| titlecase}}</td>
+                        </tr>
+                        <tr>
+                            <td class="serviceNames">RequestedDate</td>
+                            <td>:</td>
+                            <td
+                                *ngIf="requestDetailsObj.RequestDetails&&requestDetailsObj.RequestDetails.RequestedDate!=null">
+                                {{(requestDetailsObj.RequestDetails.RequestedDate)*1000|date:'dd MMM yyyy'}}</td>
+                        </tr>
+                        <tr>
+                            <td class="serviceNames">Budget</td>
+                            <td>:</td>
+                            <td *ngIf="requestDetailsObj.RequestDetails && requestDetailsObj.RequestDetails.Budget">
+                                {{requestDetailsObj.RequestDetails.Budget}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="serviceNames"> Vendor</td>
+                            <td>:</td>
+                            <td *ngIf="ActiveVendorObj && ActiveVendorObj.VendorName">
+                                {{ActiveVendorObj.VendorName}}
+                            </td>
+                        </tr>
+    
+                    </table>
+                </div>
+                <div class="col-md-4">
+                    <h5><u class="textDecration">Status</u></h5>
+                    <table>
+                        <tr>
+                            <td class="serviceNames">Request</td>
+                            <td>:</td>
+                            <td *ngIf="requestDetailsObj.RequestDetails&&requestDetailsObj.RequestDetails.Status">
+                                {{requestDetailsObj.RequestDetails.Status | replaceUnderscore| titlecase}}</td>
+                        </tr>
+                        <tr>
+                            <td class="serviceNames">Job</td>
+                            <td>:</td>
+                            <td *ngIf="ActiveVendorObj&&ActiveVendorObj.Status">
+                                {{this.requestObjData[0].Status}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="serviceNames">Bill</td>
+                            <td>:</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <hr style="height:3px;">
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <h6>Status</h6>
+                <table>
+                    <tr>
+                        <td>
+                            <select style="width: 100%;" [(ngModel)]="selectedStatus" class="form-select" placeholder="Select Gender">
+                              <option selected value="" disabled>Select</option>
+                              <option value="Processing">Processing</option>
+                              <option value="Completed">Completed</option>
+                              <option value="Cancelled">Cancelled</option>
+                            </select>
+                          </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-4">
+                <h6>Comments</h6>
+                <table>
+                    <tr>
+                        <td style="width:100%">
+                            <textarea type='text' [(ngModel)]="comments" class="form-control" style="width: 300px; height: 100px; resize: none;"
+                              placeholder="Enter Comment">
+                          </textarea>
+                          </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="updatebuttonclass" style="padding: 10px;">
+            <button type="button" data-toggle="modal" data-target="#myModal" class="anvayaabutton-primary"
+            (click)="updateAserRequest()"  >Update</button>
+        </div>
+    </div>
+</div>

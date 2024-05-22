@@ -1,0 +1,46 @@
+.maindiv{
+    margin-top: 111px;
+    margin-left: 125px;
+}
+
+.map-container {
+    height: 400px; /* Adjust the height as needed */
+  }
+
+  agm-map {
+    height: 300px;
+    width: 600px;
+  }
+
+  .row{
+        margin-right: calc(-.0 * var(--bs-gutter-x));
+  }
+
+  /* @media (min-width:768px){
+    .col-md-2 {
+    flex: 0 0 auto;
+    width: 32.666667%;
+} 
+
+}*/
+
+/* .btn {
+  border-radius: 10px !important ;
+} */
+
+.checkboxheight{
+  width: 50px;
+  height: 25px;
+}
+
+.my-custom-scrollbar {
+  position: relative;
+  height: 400px;
+  overflow: auto;
+  }
+  .table-wrapper-scroll-y {
+  display: block;
+  }
+
+  .tableFixHead    { overflow: auto; height: 300px; }
+  .tableFixHead th { position: sticky; top: 0; }

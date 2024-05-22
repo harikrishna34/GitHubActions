@@ -1,0 +1,187 @@
+
+.inputBox {
+    position: relative;
+  }
+  
+ .inputBox input {
+    width: 93%;
+    padding: 0.625rem 10px;
+    font-size: 1rem;
+    letter-spacing: 0.062rem;
+    margin-bottom: 1.875rem;
+    border: 1px solid #ccc;
+    background: transparent;
+    border-radius: 4px;
+    
+  }
+  
+   .inputBox label {
+    position: absolute;
+    top: 0;
+    left: 37px;
+    padding: 0.625rem 0;
+    font-size: 1rem;
+    color: grey;
+    pointer-events: none;
+    transition: 0.5s;
+  }
+  
+   .inputBox input:focus ~ label,
+   .inputBox input:valid ~ label,
+   .inputBox input:not([value=""]) ~ label {
+    top: -1.125rem;
+    left: 36px;
+    color: #F79122;
+    font-size: 1rem;
+    background-color: white;
+    height: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+   .inputBox input:focus {
+    outline: none;
+    /* border: 2px solid #1a73e8; */
+  }
+
+  .textColor{
+    color:#F79122
+  }
+  .sponserdetailsplate{
+    padding: 10px;
+    width: 180px;
+    border:1px solid #ccc;
+   border-radius: 10px;
+   background-color: rgba(59, 178, 186, 0.83);
+   margin-left: -345px;
+   color: white;
+
+  }
+ .uploadBox{
+   border:1px solid #ccc;
+   border-radius: 10px;
+    padding: 10px;
+    width: 182px;
+ }
+
+ .previosButton{
+  text-align: initial;
+ }
+
+ .imgSize{
+    width: 45px;
+ }
+ .bodycontent{
+  margin-top: 100px;
+  margin-left: 120px;
+}
+ 
+   
+.row {
+
+  margin-left: calc(0 * var(--bs-gutter-x)) !important;
+  margin-right: calc(0 * var(--bs-gutter-x)) !important;
+}
+  
+ #bankform{
+
+   height: auto;
+   background-color: white;
+   /* width: auto; */
+   /* width: 100%; */
+ }
+ #submitbankdata{
+   background-color: #51b3d1;
+   /* margin-left: 100px;
+    */
+   float: right;
+ }
+ p{
+  color: red
+ }
+ #heading{
+  background-color: aqua;
+    margin-left: 170px;
+    }
+
+#previous{
+    margin-left: 100px;
+    }
+    #next{
+        margin-left:84%;
+    }
+
+    #radiobtn{
+      margin-left: 200px;
+      margin-top: -10x;
+    }
+    #radiobtn1{
+      width: 20%;
+      margin-left: 100px;
+      /* padding: 0.625rem 10px; */
+      font-size: 1rem;
+      /* letter-spacing: 0.062rem; */
+      margin-bottom: 1.875rem;
+      border: 1px solid #ccc;
+      background: transparent;
+      border-radius: 4px;
+    }
+    #qstdata{
+      width: 20%;
+      padding: 0.625rem 10px;
+      font-size: 1rem;
+      margin-left: 100px;
+      letter-spacing: 0.062rem;
+      margin-bottom: 1.875rem;
+      border: 1px solid #ccc;
+      background: transparent;
+ 
+    }
+    #inputdata{
+      width: 20%;
+    margin-left: 100px;
+      font-size: 1rem;
+    
+      margin-bottom: 1.875rem;
+   
+      background: transparent;
+     
+    }
+    h4{
+      /* margin-left: -76px; */
+      color: #717171;
+    }
+ #inputboxdesign{
+  width: 20%;
+    margin-left: 200px;
+      font-size: 1rem;
+    
+      margin-bottom: 1.875rem;
+      background: transparent;
+ }
+#radiobtns{
+  border: 10px;
+  width: 20%;
+  font-size: 1rem;
+  background: transparent;
+}
+#backbtn{
+  float: left;
+  /* margin-top: -36px; */
+}
+#tabledata{
+  border-radius: 100px;
+}
+
+
+.y-nlabels{
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.m-t20{
+  margin-top:20px
+}
+
+.labelColor{
+   color:#F79122
+}

@@ -1,0 +1,1085 @@
+<div class="bodycontent" id="bankform">
+    <form [formGroup]="dementiaAssesmentForm">
+
+        <div class="" *ngIf="Type=='Demographics'">
+
+            <div class="col-md-12 text-center">
+                <h3>Demography</h3>
+            </div>
+            <br>
+            <div class="row">
+                <div class=" col-md-4 inputBox">
+                    <input type="text" name="Responder_Name" formControlName="Responder_Name" minlength="2"
+                        onkeyup="this.setAttribute('value', this.value);" id="responderName" maxlength="100"
+                        minlength="3" value="" required>
+
+                    <label>ResponderName</label>
+                    <div class="row"
+                        *ngIf='this.dementiaAssesmentForm.controls["Responder_Name"].status=="INVALID" && this.Demographicsbtn==true'>
+                        <p>*Responder_Name Mandatory</p>
+                    </div>
+                </div>
+                <div class=" col-md-4 inputBox">
+                    <input type="text" name="Relationship_With_PWD" formControlName="Relationship_With_PWD"
+                        onkeyup="this.setAttribute('value', this.value);" value="" minlength="3" maxlength="100"
+                        required>
+                    <label>ResponderRelation</label>
+                    <div class="row"
+                        *ngIf='this.dementiaAssesmentForm.controls["Relationship_With_PWD"].status=="INVALID" && this.Demographicsbtn==true'>
+                        <p>*Relationship_With_PWD Mandatory</p>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row" formGroupName="Demographics">
+
+                <div class=" col-md-3 inputBox">
+                    <input type="text" formControlName="Name" minlength="3" maxlength="100" minlength="3"
+                        onkeyup="this.setAttribute('value', this.value);" value="" required>
+
+                    <label>PWDName</label>
+                    <div class="row"
+                        *ngIf="this.dementiaAssesmentForm.get('Demographics')?.get('Name')?.status=='INVALID'    && this.Demographicsbtn==true">
+                        <p>*PWDName Mandatory</p>
+                    </div>
+                </div>
+                <div class=" col-md-3 inputBox">
+                    <input type="date" class="form-control empty-date" formControlName="Date_of_birth"
+                        max="{{maxdate | date:'yyyy-MM-dd'}}" onkeyup="this.setAttribute('value', this.value);"
+                        value="">
+
+                    <label>Date of birth</label>
+                    <div class="row"
+                        *ngIf="this.dementiaAssesmentForm.get('Demographics')?.get('Date_of_birth')?.status=='INVALID'    && this.Demographicsbtn==true">
+                        <p>*Date_of_birth Mandatory</p>
+                    </div>
+                </div>
+                <div class=" col-md-3 inputBox">
+                    <input type="text" formControlName="Occupation" minlength="3"
+                        onkeyup="this.setAttribute('value', this.value);" value="" required>
+
+                    <label>Occupation</label>
+                    <div class="row"
+                        *ngIf="this.dementiaAssesmentForm.get('Demographics')?.get('Occupation')?.status=='INVALID'    && this.Demographicsbtn==true">
+                        <p>*Occupation Mandatory</p>
+                    </div>
+                </div>
+                <div class=" col-md-3 inputBox">
+                    <input type="text" formControlName="Primary_Caregiver_Name" minlength="3"
+                        onkeyup="this.setAttribute('value', this.value);" value="">
+
+                    <label>PrimaryCaregiverName </label>
+                </div>
+                <div class=" col-md-3 inputBox">
+                    <input type="text" name="Current_Homecare_Attender" formControlName="Current_Homecare_Attender"
+                        minlength="3" onkeyup="this.setAttribute('value', this.value);" value="">
+                    <label>CurrentHomecareAttender</label>
+                </div>
+                <div class="col-md-3">
+                    <div class="textColor"> Select Gender :</div>
+                    <input class="col-md-2" type="radio" id="html" name="Gender" value="Male" formControlName="Gender">
+                    <label for="html">Male</label>
+                    <input class="col-md-2" type="radio" id="css" name="Gender" value="Female" formControlName="Gender">
+                    <label for="css">Female</label><br>
+                    <div class="row"
+                        *ngIf="this.dementiaAssesmentForm.get('Demographics')?.get('Gender')?.status=='INVALID'    && this.Demographicsbtn==true">
+                        <p>*Gender Mandatory</p>
+                    </div>
+                </div>
+                <div class=" col-md-3 inputBox" name="Languages_known">
+                    <div class="textColor">Select Language</div>
+                    <ng-multiselect-dropdown value="dropdownList" formControlName="Languages_known"
+                        [placeholder]="'select Languages '" [settings]="dropdownSettings" [data]="dropdownList"
+                        [(ngModel)]="selectedItems">
+                    </ng-multiselect-dropdown>
+                    <div class="row"
+                        *ngIf="this.dementiaAssesmentForm.get('Demographics')?.get('Languages_known')?.status=='INVALID'    && this.Demographicsbtn==true">
+                        <p>*Languages_known Mandatory</p>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <button id="next" type="button" class="anvayaabutton-primary" (click)="dementiaCreateAssesment()">Save &
+                Next</button>
+        </div>
+    </form>
+    <div *ngIf="Type==='MedicalHistory'">
+        <div class="text-center">
+            <h3>Medical History</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Other Conditions</h4>
+                <table class="table table-secondary">
+                    <thead>
+                        <tr>
+                            <td>
+                                <h5>Conditions</h5>
+                            </td>
+                            <td>
+                                <h5>Remarks</h5>
+                            </td>
+                            <td>
+                                <h5>Duration</h5>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let x of Conditions ;let i=index">
+                            <td><label for=""> {{x.ConditionName}}</label></td>
+                            <td> <label class="radio-inline y-nlabels">
+                                    <input type="radio" id="inlineRadio1" [(ngModel)]="x.ConditionStatus"
+                                        name="{{x.ConditionName}}" ng-model="x.ConditionStatus" value="Yes" required>Yes
+                                </label>
+                                <label class="radio-inline y-nlabels">
+                                    <input type="radio" id="inlineRadio2" [(ngModel)]="x.ConditionStatus"
+                                        name="{{x.ConditionName}}" ng-model="x.ConditionStatus" value="No" required>No
+                                </label>
+
+                                <!-- <input type="radio" id="inlineRadio3" [(ngModel)]="x.ConditionStatus"
+                                    name="{{x.ConditionName}}" ng-model="x.ConditionStatus" value="Unsure"
+                                    required>Unsure
+                                <div class="row" *ngIf="x.ConditionStatus==''   && this.MedicalHistorybtn==true">
+                                    <p>*{{x.ConditionName}} Mandatory</p>
+                                </div> -->
+                            </td>
+
+                            <td>
+                                <label class="radio-inline" *ngIf="x.ConditionStatus=='Yes'">
+                                    <input type="text" id="inlineRadio3" [(ngModel)]="x.Duration"
+                                        name="{{x.ConditionName}}" ng-model="x.ConditionStatus"
+                                        placeholder="Enter Duration" required>
+                                </label>
+                                <div class="row"
+                                    *ngIf="x.Duration== ''&& this.MedicalHistorybtn==true && x.ConditionStatus=='Yes'">
+                                    <p>*{{x.ConditionName}} Mandatory</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <div>
+                    <h4>Impairment</h4>
+                </div>
+                <table class="table table-secondary">
+                    <thead>
+                        <tr>
+                            <td>
+                                <h5>Physical Conditions</h5>
+                            </td>
+                            <td>
+                                <h5>Stages</h5>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let y of dropdownphysnd ;let i=index">
+                            <td><label for=""> {{y.PhysicalCondition}}</label></td>
+                            <td>
+                                <label class="radio-inline">
+                                    <select [(ngModel)]="y.MaxApplicableLevel">
+                                        <option value="0">Not Impaired</option>
+                                        <option value="1">Low</option>
+                                        <option value="2">Medium</option>
+                                        <option value="3">High</option>
+                                    </select>
+
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <form [formGroup]="dementiaAssesmentFormMedicalHistory" style="margin-top: 30px;">
+                <div class="row" formGroupName="MedicalHistory">
+                    <div class=" col-md-3 inputBox" style="margin-top: 20px">
+                        <input type="text" name="Dementia_Diagnosis:" formControlName="Dementia_Diagnosis" value=""
+                            minlength="2" maxlength="100" required>
+
+                        <label>Dementia Diagnosis:</label>
+                        <div class="row"
+                            *ngIf="this.dementiaAssesmentFormMedicalHistory.get('MedicalHistory')?.get('Dementia_Diagnosis')?.status=='INVALID'    && this.MedicalHistorybtn==true">
+                            <p>*Dementia_Diagnosis Mandatory</p>
+                        </div>
+                    </div>
+                    <div class=" col-md-3 inputBox" style="margin-top: 20px">
+
+                        <input formControlName="Date_Of_Diagnosis" class="form-control" id="date" name="date"
+                            max="{{maxdate | date:'yyyy-MM-dd'}}" onkeyup="this.setAttribute('value', this.value);"
+                            type="date" required="">
+
+                        <label>Date Of Diagnosis:</label>
+                        <div class="row"
+                            *ngIf="this.dementiaAssesmentFormMedicalHistory.get('MedicalHistory')?.get('Date_Of_Diagnosis')?.status=='INVALID'    && this.MedicalHistorybtn==true">
+                            <p>*Date_Of_Diagnosis Mandatory</p>
+                        </div>
+                    </div>
+                    <div class=" col-md-3 inputBox">
+                        <div class="textColor">MRI CTScan</div>
+                        <select class="form-select" name="MRI_CTScan" formControlName="MRI_CTScan" required="">
+                            <option selected value="">Select MRI CTScan</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                        <div class="row"
+                            *ngIf="this.dementiaAssesmentFormMedicalHistory.get('MedicalHistory')?.get('MRI_CTScan')?.status=='INVALID'    && this.MedicalHistorybtn==true">
+                            <p>*MRI_CTScan Mandatory</p>
+                        </div>
+                    </div>
+                    <div class=" col-md-3 inputBox">
+                        <div class="textColor">Stage</div>
+                        <select class="form-select" name="StageID" formControlName="Stage"
+                            (change)="stageSelection($event)" required="">
+                            <option selected value="" disabled>Select Stage</option>
+                            <option value="Saving" *ngFor="let data of stagedata" value="{{data.StageLevel}}">
+                                {{data.StageLevel}}</option>
+                        </select>
+                        <div class="row"
+                            *ngIf="this.dementiaAssesmentFormMedicalHistory.get('MedicalHistory')?.get('StageID')?.status=='INVALID'    && this.MedicalHistorybtn==true">
+                            <p>*selectStage Mandatory</p>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <button id="next" type="button" style="margin-left: 85%;" class="anvayaabutton-primary "
+                    (click)="dementiaCreateAssesment()" [disabled]="step==4">Save &
+                    Next</button>
+
+
+            </form>
+        </div>
+
+    </div>
+    <div class="col-md-10 container" *ngIf="Type=='GeneralAbilities'">
+        <div class="text-center">
+            <h3>General Abilities</h3>
+        </div>
+        <br>
+        <div class="row" *ngFor="let data of dementiaQuestion;let i=index">
+            <div class="col-md-4">
+                <h6>{{data.Question}}</h6>
+                <br>
+            </div>
+            <div class="col-md-4" id="radiobtns">
+                <input type="radio" id="inlineRadio1" [(ngModel)]="dementiaQuestion[i].Answer"
+                    name="{{data.QuestionID}}" value="Yes" required>Yes
+                    <label style="margin:12px">
+                <input  type="radio" id="inlineRadio2" [(ngModel)]="dementiaQuestion[i].Answer"
+                    name="{{data.QuestionID}}" value="No" required>No
+                </label>
+                <input type="radio" id="inlineRadio3" [(ngModel)]="dementiaQuestion[i].Answer"
+                    name="{{data.QuestionID}}" value="Unsure" required>Unsure
+                <div class="row" *ngIf="data.Answer=='' && this.genbtn==true">
+                    <p>**Answer mandatory </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <input type="text" placeholder="Enter The Comment" [(ngModel)]="dementiaQuestion[i].Comment">
+            </div>
+        </div>
+        <button id="next" type="button" class="anvayaabutton-primary " (click)="dementiaCreateAssesment()">Save &
+                Next</button>
+        <br>
+    </div>
+    <form [formGroup]="dementiaAssesmentBiography">
+        <div class=" container" *ngIf="Type=='Biography'">
+            <div class="text-center">
+                <h3>Biography</h3>
+            </div>
+            <br>
+            <h4>Personal Life</h4>
+            <br>
+            <ng-container class="row" formGroupName="Biography">
+                <div class="row">
+                    <div class=" col-md-5 inputBox">
+                        <input type="text" name="What_does_typical_Day_look_like_for_PWD"
+                            formControlName="What_does_typical_Day_look_like_for_PWD" value="" minlength="2"
+                            maxlength="100" required>
+                        <label>*What does typical Day look like for PWD</label>
+                        <div class="row"
+                            *ngIf="this.dementiaAssesmentBiography.get('Biography')?.get('What_does_typical_Day_look_like_for_PWD')?.status=='INVALID'    && this.Biographysbtn==true">
+                            <p>*What does typical Day look like for PWD Mandatory</p>
+                        </div>
+                    </div>
+                    <div class=" col-md-3 inputBox">
+                        <input type="text" name="OtherInformation" formControlName="OtherInformation" value=""
+                            minlength="2" maxlength="100" required>
+
+                        <label>*OtherInformation</label>
+                        <div class="row"
+                            *ngIf="this.dementiaAssesmentBiography.get('Biography')?.get('OtherInformation')?.status=='INVALID'    && this.Biographysbtn==true">
+                            <p>**OtherInformation Mandatory</p>
+                        </div>
+                    </div>
+                </div>
+                <ng-container formGroupName="Personal_Life">
+                    <div class="row">
+                        <div class=" col-md-3 inputBox">
+                            <input type="text" name="Place_of_Birth" formControlName="Place_of_Birth" value=""
+                                minlength="2" maxlength="100" required>
+                            <label>*Place Of Birth</label>
+                            <div class="row"
+                                *ngIf="this.dementiaAssesmentBiography.get('Biography')?.get('Personal_Life')?.get('Place_of_Birth')?.status=='INVALID'    && this.Biographysbtn==true">
+                                <p>*Place of Birth Mandatory</p>
+                            </div>
+                        </div>
+                        <div class=" col-md-4 inputBox">
+                            <input type="text" name="Any_award_or_achievement"
+                                formControlName="Any_award_or_achievement" value="" minlength="2" maxlength="100"
+                                required>
+
+                            <label>*Any award or achievement</label>
+                            <div class="row"
+                                *ngIf="this.dementiaAssesmentBiography.get('Biography')?.get('Personal_Life')?.get('Any_award_or_achievement')?.status=='INVALID'    && this.Biographysbtn==true">
+                                <p>*Any award or achievement Mandatory</p>
+                            </div>
+                        </div>
+                        <div class=" col-md-5 inputBox">
+                            <input type="text" name="Any_important_personal_information"
+                                formControlName="Any_important_personal_information" value="" minlength="2"
+                                maxlength="100" required>
+
+                            <label>*Any important personal information</label>
+                            <div class="row"
+                                *ngIf="this.dementiaAssesmentBiography.get('Biography')?.get('Personal_Life')?.get('Any_important_personal_information')?.status=='INVALID'    && this.Biographysbtn==true">
+                                <p>*Any_important_personal_information Mandatory</p>
+                            </div>
+                        </div>
+                    </div>
+                  
+                </ng-container>
+
+                <div class="row">
+                    <h4>Dietary Habits and Timings of Meals</h4>
+                </div>
+                <br>
+                <ng-container formGroupName="Dietary_Habits">
+                    <ng-container formGroupName="Timings_of_meals">
+                        <ng-container>
+                            <div class="row">
+                                <div class=" col-md-2 inputBox">
+                                    <input type="time" name="Breakfast" formControlName="Breakfast" value=""
+                                        minlength="2" maxlength="100" required>
+                                    <label>Breakfast</label>
+                                    <div class="row"
+                                *ngIf="this.dementiaAssesmentBiography.get('Biography')?.get('Dietary_Habits')?.get('Timings_of_meals')?.get('Breakfast')?.value=='' && this.Biographysbtn==true">
+                                <p>*Time Required</p>
+                            </div>
+                                </div>
+                                <div class=" col-md-6 inputBox">
+                                    <input type="text" name="BreakfastComment" formControlName="BreakfastComment"
+                                        minlength="2" maxlength="100" value="" required>
+                                    <label>Breakfast additional information</label>
+
+                                    <div class="row"
+                                    *ngIf="this.dementiaAssesmentBiography.get('Biography')?.get('Dietary_Habits')?.get('Timings_of_meals')?.get('BreakfastComment')?.value=='' && this.Biographysbtn==true">
+                                    <p>* Required</p>
+                                </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-container>
+                            <div class="row">
+                                <div class=" col-md-2 inputBox">
+                                    <input type="time" name="Lunch" formControlName="Lunch" minlength="2"
+                                        maxlength="100">
+                                    <label>Lunch</label>
+                                    <div class="row"
+                                        *ngIf="this.dementiaAssesmentBiography.get('Biography')?.get('Dietary_Habits')?.get('Timings_of_meals')?.get('Lunch')?.value=='' && this.Biographysbtn==true">
+                                        <p>* Time Required</p>
+                                    </div>
+                                </div>
+                                <div class=" col-md-6 inputBox">
+                                    <input type="text" name="LunchComment" formControlName="LunchComment" value=""
+                                        minlength="2" maxlength="100" >
+                                    <label>Lunch additional information</label>
+                                    <div class="row"
+                                        *ngIf="this.dementiaAssesmentBiography.get('Biography')?.get('Dietary_Habits')?.get('Timings_of_meals')?.get('LunchComment')?.value=='' && this.Biographysbtn==true">
+                                        <p>*Required</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-container>
+                            <div class="row">
+                                <div class=" col-md-2 inputBox">
+                                    <input type="time" name="Snacks" formControlName="Snacks" value="" minlength="2"
+                                        maxlength="100">
+                                    <label>Snacks</label>
+                                    <div class="row"
+                                        *ngIf="this.dementiaAssesmentBiography.get('Biography')?.get('Dietary_Habits')?.get('Timings_of_meals')?.get('Snacks')?.value=='' && this.Biographysbtn==true">
+                                        <p>* Time Required</p>
+                                    </div>
+                                </div>
+                                <div class=" col-md-6 inputBox">
+                                    <input type="text" name="SnacksComment" formControlName="SnacksComment" value=""
+                                        minlength="2" maxlength="100" >
+                                    <label>Snacks additional Information</label>
+
+                                    <div class="row"
+                                        *ngIf="this.dementiaAssesmentBiography.get('Biography')?.get('Dietary_Habits')?.get('Timings_of_meals')?.get('SnacksComment')?.value=='' && this.Biographysbtn==true">
+                                        <p>*  Required</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <div class="row">
+                            <div class=" col-md-2 inputBox">
+                                <input type="time" name="Dinner" formControlName="Dinner" value="" minlength="2"
+                                    maxlength="100">
+                                <label>Dinner </label>
+
+                                <div class="row"
+                                    *ngIf="this.dementiaAssesmentBiography.get('Biography')?.get('Dietary_Habits')?.get('Timings_of_meals')?.get('Dinner')?.value=='' && this.Biographysbtn==true">
+                                    <p>* Time Required</p>
+                                </div>
+                            </div>
+                            <div class=" col-md-6 inputBox">
+                                <input type="text" name="DinnerComment" formControlName="DinnerComment" value=""
+                                    minlength="2" maxlength="100" >
+
+                                <label>Dinner additional Information</label>
+
+                                <div class="row"
+                                    *ngIf="this.dementiaAssesmentBiography.get('Biography')?.get('Dietary_Habits')?.get('Timings_of_meals')?.get('Dinner')?.value=='' && this.Biographysbtn==true">
+                                    <p>*  Required</p>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <div class=" col-md-4 inputBox">
+
+                        <input type="text" name="Favourite_foods" formControlName="Favourite_foods" value=""
+                            minlength="2" maxlength="100" >
+
+                        <label>favorite foods</label>
+                        <div class="row"
+                        *ngIf="this.dementiaAssesmentBiography.get('Biography')?.get('Dietary_Habits')?.get('Favourite_foods')?.value=='' && this.Biographysbtn==true">
+                        <p>* favorite foods Required</p>
+                    </div>
+                    </div>
+                </ng-container>
+                <div class="row">
+                    <h4>Likes and Dislikes</h4>
+                </div>
+                <ng-container formGroupName="Likes_And_Dislikes">
+                    <div class="row">
+                        <div class=" col-md-4 inputBox m-t20">
+                            <input type="text" name="What_makes_him/her_happy"
+                                formControlName="What_makes_him/her_happy" value="" minlength="2" maxlength="100"
+                                required>
+                            <label>what makes him/her happy?</label>
+                            <div class="row"
+                                *ngIf="this.dementiaAssesmentBiography.get('Biography')?.get('Likes_And_Dislikes')?.get('What_makes_him/her_happy')?.status=='INVALID'    && this.Biographysbtn==true">
+                                <p>*What makes him/her happy Mandatory</p>
+                            </div>
+                        </div>
+                        <div class=" col-md-4 inputBox m-t20">
+                            <input type="text" name="What_Are_things_upset_him/her"
+                                formControlName="What_Are_things_upset_him/her" value="" minlength="2" maxlength="100"
+                                required>
+                            <label>What are things upset him/her</label>
+                            <div class="row"
+                                *ngIf="this.dementiaAssesmentBiography.get('Biography')?.get('Likes_And_Dislikes')?.get('What_Are_things_upset_him/her')?.status=='INVALID'    && this.Biographysbtn==true">
+                                <p>*What are things upset him/her</p>
+                            </div>
+                        </div>
+                        <div class=" col-md-4 inputBox m-t20">
+                            <input type="text" name="What_makes_him/her_physically_comfortable"
+                                formControlName="What_makes_him/her_physically_comfortable" value="" minlength="2"
+                                maxlength="100" required>
+
+                            <label>what makes him/her physically </label>
+                            <div class="row"
+                                *ngIf="this.dementiaAssesmentBiography.get('Biography')?.get('Likes_And_Dislikes')?.get('What_makes_him/her_physically_comfortable')?.status=='INVALID'    && this.Biographysbtn==true">
+                                <p>*What_makes_him/her_physically_comfortable</p>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <div class="row">
+                    <h4>Recreational Activities</h4>
+                    <br>
+                    <ng-container formGroupName="Recreational_Activitie_They_Enjoy">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <ng-container formGroupName="Past">
+                                    <!-- <div class=" col-md-4 inputBox">
+                                        <input type="text" name="AdditionalInfo" formControlName="AdditionalInfo" value=""
+                                            minlength="2" maxlength="100" required>
+    
+                                        <label>Other information </label>
+                                        <div class="row"
+                                            *ngIf="this.dementiaAssesmentBiography.get('Biography')?.get('Recreational_Activitie_They_Enjoy')?.get('Past')?.get('AdditionalInfo')?.status=='INVALID'    && this.Biographysbtn==true">
+                                            <p>*AdditionalInfo data mandotary</p>
+                                        </div>
+                                    </div> -->
+    
+                                    <div >
+                                        <label>DisLiked Activities </label>
+    
+                                        <ng-multiselect-dropdown value="dementiaActivity" formControlName="Data" [placeholder]="'Select activity'"
+                                        (onSelect)="onActivitySelct($event)"  [settings]="dropdownActivitysetting" [data]="dementiaActivity"
+                                             (onDeSelect)="onDeSelectActivity($event)" required>
+                                        </ng-multiselect-dropdown>
+                                        <div class="row" *ngIf="this.activity==false  && this.Biographysbtn==true">
+                                            <p>*Activity data mandotary</p>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div class="col-md-5">
+                                <ng-container formGroupName="Present">
+                                    <div class="row">
+                                        <!-- <div class=" col-md-4 inputBox">
+                                            <input type="text" name="AdditionalInfo" formControlName="AdditionalInfo" value=""
+                                                minlength="2" maxlength="100" required>
+        
+                                            <label>Other information </label>
+                                            <div class="row"
+                                                *ngIf="this.dementiaAssesmentBiography.get('Biography')?.get('Recreational_Activitie_They_Enjoy')?.get('Past')?.get('AdditionalInfo')?.status=='INVALID'    && this.Biographysbtn==true">
+                                                <p>*AdditionalInfo data mandotary</p>
+                                            </div>
+                                        </div> -->
+        
+                                        <div >
+                                            <label>liked Activities </label>
+                                                    <ng-multiselect-dropdown value="dementiaActivity" formControlName="Data" [placeholder]="'Select activity'"
+                                            (onSelect)="onActivitySelct($event)"  [settings]="dropdownActivitysetting" [data]="dementiaActivity"
+                                                 (onDeSelect)="onDeSelectActivity($event)" required>
+                                            </ng-multiselect-dropdown>
+                                            <div class="row"
+                                                *ngIf="this.activity==false  && this.Biographysbtn==true">
+                                                <p>*Activity data mandotary</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="row">
+                    <h4>Preference of Music</h4>
+                </div><br>
+                <ng-container formGroupName="Preference_Of_Music">
+                    <div class="row">
+                        <div class=" col-md-4 inputBox">
+                            <input type="text" name="AdditionalInfo" formControlName="AdditionalInfo" value=""
+                                minlength="2" maxlength="100" >
+
+                            <label>music additional information </label>
+                            <!-- <div class="row"
+                                *ngIf="this.dementiaAssesmentBiography.get('Biography')?.get('Preference_Of_Music')?.get('AdditionalInfo')?.status=='INVALID'    && this.Biographysbtn==true">
+                                <p>*AdditionalInfo data mandotary</p>
+                            </div> -->
+                        </div>
+                        <div class=" col-md-4 inputBox">
+                            <input type="text" name="OtherInfo" formControlName="OtherInfo" minlength="2"
+                                maxlength="100" value="" >
+
+                            <label>OtherInfo </label>
+                            <!-- <div class="row"
+                                *ngIf="this.dementiaAssesmentBiography.get('Biography')?.get('Preference_Of_Music')?.get('OtherInfo')?.status=='INVALID'&& this.Biographysbtn==true">
+                                <p>*OtherInfo data mandotary</p>
+                            </div> -->
+                        </div>
+                        <div class=" col-md-4 inputBox">
+                            <ng-multiselect-dropdown value="dementiamusic"  formControlName="Data" name="Data" [placeholder]="'select music'"
+                                [settings]="dropdownmusicSetting" [data]="dementiamusic"
+                                (onSelect)="onmusicselect($event)" (onDeSelect)="onmusicDeselect($event)" (onSelectAll)="onmusicselectAll($event)" (onDeSelectAll)="onmusicDeselectAll($event)" >
+                            </ng-multiselect-dropdown>
+                        </div>
+                        <div>
+                            <!-- <div class="table table-secondary  table-bordered">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <td colspan="2">
+                                                <b>MusicName</b>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let spouseData of musicData;let i=index">
+                                        <td colspan="2">{{spouseData.MusicName}}</td>
+                                    </tbody>
+                                </table>
+                            </div> -->
+                        </div>
+                    </div>
+                </ng-container>
+                <div class="row">
+                    <h4>Preference of Tv or Videos</h4>
+                </div><br>
+                <ng-container formGroupName="Preference_Of_TV_or_Videos">
+                    <div class="row">
+                        <div class=" col-md-4 inputBox">
+                            <input type="text" name="AdditionalInfo" formControlName="AdditionalInfo" value=""
+                                minlength="2" maxlength="100">
+
+                            <label>video additional information </label>
+                            <!-- <div class="row"
+                                *ngIf="this.dementiaAssesmentBiography.get('Biography')?.get('Preference_Of_TV_or_Videos')?.get('AdditionalInfo')?.status=='INVALID'    && this.Biographysbtn==true">
+                                <p>*AdditionalInfo data mandotary</p>
+                            </div> -->
+
+                        </div>
+                        <div class=" col-md-4 inputBox">
+                            <input type="text" name="OtherInfo" formControlName="OtherInfo" minlength="2"
+                                maxlength="100" value="" >
+
+                            <label>OtherInfo </label>
+                            <!-- <div class="row"
+                                *ngIf="this.dementiaAssesmentBiography.get('Biography')?.get('Preference_Of_TV_or_Videos')?.get('OtherInfo')?.status=='INVALID'    && this.Biographysbtn==true">
+                                <p>*OtherInfo data mandotary</p>
+                            </div> -->
+                        </div>
+                        <div class="col-md-4">
+
+                            <ng-multiselect-dropdown value="dementiavideo" [placeholder]="'select video'"
+                                [settings]="dropdownvideosetting" [data]="dementiavideo"  formControlName="Data"
+                                (onSelectAll)="onvideoselectAll($event)"  (onDeSelectAll)="onDeSelectVideoALL($event)"
+                                (onSelect)="onvideoselect($event)" (onDeSelect)="onDeSelectVideo($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="table table-secondary table-bordered">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <td colspan="2">
+                                                <b>VideoName</b>
+                                            </td>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let spouseData of videoData;let i=index">
+                                        <td colspan="2">{{spouseData.VideoName}}</td>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+             
+              
+
+                <div class="row">
+                    <h4>Names of Spouse</h4>
+                </div><br>
+                <ng-container [formGroup]="Spouses">
+                    <div class="row">
+                        <div class="row">
+                            <div class=" col-md-3 inputBox m-t20">
+
+                                <input type="text" name="SpouseName" formControlName="SpouseName" minlength="2"
+                                    maxlength="100" value="" >
+
+                                <label>*Name of spouse</label>
+                                <div class="row"
+                                    *ngIf="this.Spouses.controls['SpouseName'].status=='INVALID' && this.spouseadded==true">
+                                    <p>*SpouseName Mandatory</p>
+                                </div>
+                            </div>
+                            <div class=" col-md-3 inputBox ">
+                                <div class="labelColor">Status</div>
+                                <select class="form-select" name="Type" formControlName="Marital_Status"
+                                    >
+                                    <option selected value="">Select Status</option>
+
+                                    <option value="married">married</option>
+                                    <option value="Unmarried">Unmarried</option>
+                                    <option value="Widowed">Widowed</option>
+                                    <option value="Separated">Separated</option>
+                                </select>
+                                <!-- <div class="row"
+                                    *ngIf="this.Spouses.controls['Marital_Status'].status=='INVALID' && this.spouseadded==true">
+                                    <p>*Marital_Status Mandatory</p>
+                                </div> -->
+                            </div>
+                            <div class=" col-md-3 inputBox">
+
+                                <div class="labelColor">Stauts (Expired/Alive)</div>
+
+                                <select class="form-select" name="Expired" formControlName="Expired" >
+                                    <option selected value="">Select Status</option>
+
+                                    <option value="Passed Away">Passed Away</option>
+                                    <option value="Alive">Alive</option>
+                                </select>
+
+                                <!-- <div class="row"
+                                    *ngIf="this.Spouses.controls['Expired'].status=='INVALID' && this.spouseadded==true">
+                                    <p>*Expired Mandatory</p>
+                                </div> -->
+
+                            </div>
+                            <div class=" col-md-3 inputBox m-t20">
+
+                                <input type="text" name="SpouseComment" formControlName="SpouseComment"
+                                    minlength="2" maxlength="100" value="" >
+
+                                <label>*SpouseComment</label>
+                                <!-- <div class="row"
+                                    *ngIf="this.Spouses.controls['SpouseComment'].status=='INVALID' && this.spouseadded==true">
+                                    <p>*SpouseComment Mandatory</p>
+                                </div> -->
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="anvayaabutton-primary " (click)="onspouseadd()">Add
+                                    Spouse</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="text-center" *ngIf="this.spousedata == '' && this.Biographysbtn==true"><p>* Spouse Data Required</p></div>
+
+                    <div>
+                        <div class="table table-secondary table-bordered text-center">
+                            <table *ngIf="spousedata.length > 0" style="width:60%;margin-top:20px">
+                                <thead>
+                                    <tr>
+                                        <td>
+                                            <b>S.No</b>
+                                        </td>
+                                        <td>
+                                            <b>Name</b>
+                                        </td>
+                                        <td>
+                                            <b>Status</b>
+                                        </td>
+                                        <td>
+                                            <b>Edit</b>
+                                        </td> 
+                                        <td>
+                                            <b>Action</b>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody *ngFor="let spouseData of spousedata;let i= index">
+                                    <td>{{i+1}}</td>
+                                    <td>
+                                        {{spouseData.SpouseName}}
+                                    </td>
+                                    <td>
+                                        {{spouseData.Expired}}
+                                    </td>
+                                    <td (click)="editSpouse(spouseData,i)"><img src="../../../assets/images/edit.png" style="width:25px" ></td>
+                                    <td (click)="deletespousedata(i)"><img src="../../../assets/images/delete.png"
+                                            alt="" style="height: 20px;"></td>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </ng-container>
+                <br>
+                <div class="row">
+                    <h4>Names of Children</h4>
+                </div>
+                <br>
+                <ng-container [formGroup]="children">
+                    <div class="row">
+                        <div class=" col-md-4 inputBox m-t20">
+
+                            <input type="text" name="ChildrenName" formControlName="ChildrenName" value=""
+                                minlength="2" maxlength="100" >
+
+                            <label>Name Of Children</label>
+                            <!-- <div class="row"
+                                *ngIf="this.children.controls['ChildrenName'].status=='INVALID' && this.childrenadded==true">
+                                <p>*children Mandatory</p>
+                            </div> -->
+                        </div>
+                        <div class=" col-md-4 inputBox">
+                            <div class="labelColor">Status (Expired/Alive)</div>
+                            <select class="form-select" name="Expired" formControlName="Expired" >
+                                <option selected value="">Select Status</option>
+
+                                <option value="Passesd Away">Passesd Away</option>
+                                <option value="Alive">Alive</option>
+
+                            </select>
+                            <!-- <div class="row"
+                                *ngIf="this.children.controls['Expired'].status=='INVALID' && this.childrenadded==true">
+                                <p>*Expired Mandatory</p>
+                            </div> -->
+                        </div>
+                        <div class=" col-md-4 inputBox  m-t20">
+
+                            <input type="text" name="ChildrenComment" formControlName="ChildrenComment" value=""
+                                minlength="2" maxlength="100" >
+
+                            <label>AdditionalInformation</label>
+                            <!-- <div class="row"
+                                *ngIf="this.children.controls['ChildrenComment'].status=='INVALID' && this.childrenadded==true">
+                                <p>*children Mandatory</p>
+                            </div> -->
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="anvayaabutton-primary " style="width: fit-content;" (click)="onChildrenAdd()">Add
+                                Children</button>
+                        </div>
+                    <div class="text-center" *ngIf="this.childrendata== '' && this.Biographysbtn==true"><p>* Children Data Required</p></div>
+
+                        <div>
+                            <div class="table table-secondary table-bordered text-center">
+                                <table *ngIf="childrendata.length > 0" style="width:60%;margin-top: 20px;">
+                                    <thead>
+                                        <tr>
+                                            <td>S.No</td>
+                                            <td>
+                                                <h5>Name</h5>
+                                            </td>
+
+                                            <td>
+                                                <h5>Status</h5>
+                                            </td>
+                                            <td>
+                                                <h5>Edit</h5>
+                                            </td>
+
+                                            <td>
+                                                <h5>Action</h5>
+                                            </td>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody *ngFor="let childrenData of childrendata;let i=index">
+
+                                        <td>{{i+1}}</td>
+                                        <td>
+                                            {{childrenData.ChildrenName}}
+                                        </td>
+                                        <td>
+                                            {{childrenData.Expired}}
+                                        </td>
+                                        <td (click)="editChildren(childrenData,i)">
+                                           <img src="../../../assets/images/edit.png" style="width:25px">
+                                        </td>
+                                        <td (click)="deletchilddata(i)"><img src="../../../assets/images/delete.png"
+                                                alt="" style="height: 20px;"></td>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <div class="row">
+                    <h4>Names of Siblings</h4>
+                </div>
+                <ng-container [formGroup]="silblings">
+                    <div class="row">
+                        <div class="row">
+                            <div class=" col-md-4 inputBox m-t20">
+
+                                <input type="text" name="Name" formControlName="Name" value="" minlength="2"
+                                    maxlength="100" >
+
+                                <label>Name Of Sibling</label>
+                                <!-- <div class="row"
+                                    *ngIf="this.silblings.controls['Name'].status=='INVALID' && this.ondataadded==true">
+                                    <p>*Name Mandatory</p>
+                                </div> -->
+                            </div>
+                            <div class=" col-md-2 inputBox">
+                                <div class="labelColor">Status (Expired/Alive)</div>
+                                <select class="form-select" name="Expired" formControlName="Expired" >
+                                    <option selected value="" disabled>Select Status</option>
+                                    <option value="Passesd Away">Passesd Away</option>
+                                    <option value="Alive">Alive</option>
+
+                                </select>
+                                <!-- <div class="row"
+                                    *ngIf="this.silblings.controls['Expired'].status=='INVALID' && this.ondataadded==true">
+                                    <p>*Expired Mandatory</p>
+                                </div> -->
+                            </div>
+                            <div class=" col-md-4 inputBox m-t20">
+
+                                <input type="text" name="SiblingComment" formControlName="SiblingComment" value=""
+                                    minlength="2" maxlength="100" >
+
+                                <label>AdditionalInformation</label>
+                                <!-- <div class="row"
+                                    *ngIf="this.silblings.controls['SiblingComment'].status=='INVALID' && this.ondataadded==true">
+                                    <p>*SiblingComment Mandatory</p>
+                                </div> -->
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="anvayaabutton-primary " (click)="onsiblingsadd()">Add
+                                    Siblings</button>
+                            </div>
+                    <div class="text-center" *ngIf="this.siblingsdata== '' && this.Biographysbtn==true"><p>* Siblling Data Required</p></div>
+
+                            <div>
+                                <div class="table table-secondary table-bordered text-center">
+                                    <table *ngIf="siblingsdata.length > 0" style="width:60%;margin-top: 20px;">
+                                        <thead>
+                                            <tr>
+                                                <td><h5>S.No</h5></td>
+                                                <td>
+                                                    <h5>Name</h5>
+                                                </td>
+                                                <td>
+                                                    <h5>Status </h5>
+                                                </td>
+                                                <td><h5>Edit</h5></td>
+                                                <td><h5>Action</h5></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngFor="let siblingData of siblingsdata;let i=index">
+
+                                            <td>{{i+1}}</td>
+                                            <td>
+                                                {{siblingData.Name}}
+                                            </td>
+                                            <td>
+                                                {{siblingData.Expired}}
+                                            </td>
+                                            <td (click)="editSibling(siblingData,i)"><img src="../../../assets/images/edit.png" style="width:25px"></td>
+                                            <td (click)="deletsiblingdata(i)"><img
+                                                    src="../../../assets/images/delete.png" alt=""
+                                                    style="height: 20px;"></td>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <div class="row">
+                    <h4>Closest Friend</h4>
+                </div>
+                <div [formGroup]="ClosestFriends">
+                    <div class="row">
+                        <div class="col-md-3 inputBox m-t20">
+                            <input type="text" name="Name" formControlName="Name" minlength="2" maxlength="100" value=""
+                                >
+
+                            <label>Friend Name </label>
+                            <!-- <div class="row"
+                                *ngIf="this.ClosestFriends.controls['Name'].status=='INVALID' && this.ondataadded==true">
+                                <p>*Name Mandatory</p>
+                            </div> -->
+                        </div>
+                        <div class="col-md-3" >
+                            <div class="labelColor">Friend Type</div>
+                            <select  class="form-select" name="FriendType"  formControlName="FriendType" >
+                                <option selected value="" disabled>Select Friend Type</option>
+
+                                <option value="Past">Past</option>
+                                <option value="Present">Present</option>
+
+                            </select>
+                            <!-- <div class="row"
+                                *ngIf="this.ClosestFriends.controls['FriendType'].status=='INVALID' && this.ondataadded==true">
+                                <p>*FriendType Mandatory</p>
+                            </div> -->
+                        </div>
+                        <div class=" col-md-3 inputBox m-t20">
+                            <input type="text" name="PastFriendsComment" formControlName="PastFriendsComment" value=""
+                                minlength="2" maxlength="100" >
+
+                            <label>Comment </label>
+                            <!-- <div class="row"
+                                *ngIf="this.ClosestFriends.controls['PastFriendsComment'].status=='INVALID' && this.ondataadded==true">
+                                <p>*Comment are Mandatory</p>
+                            </div> -->
+                        </div>
+                        <div class="col-md-2 m-t20">
+                            <button class="anvayaabutton-primary " (click)="onAddClosestFrnds()">Add Friends</button>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="table table-secondary table-bordered">
+                                <table *ngIf="Past_friends.length > 0" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <td><b>S.No</b></td>
+                                            <td>
+                                                <b>Name</b>
+                                            </td>
+                                            <td><b>FriendType</b></td>
+                                            <td>
+                                                <b>Edit</b>
+                                            </td>
+                                            <td>
+                                                <b>Action</b>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let closestFrndData of Past_friends;let i=index">
+                                        <td>
+                                            {{i+1}}
+                                        </td>
+                                        <td>
+                                            {{closestFrndData.Name}}
+                                        </td>
+                                        <td>{{closestFrndData.FriendType}}</td>
+                                        <td (click)="editPastFriend(closestFrndData,i)"><img src="../../../assets/images/edit.png" style="width:25px"></td>
+                                        <td (click)="deleteClosestPastFrnd(i)"><img
+                                                src="../../../assets/images/delete.png" alt="" style="height: 20px;">
+                                        </td>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="table table-secondary table-bordered">
+                                <table *ngIf="Present_friends.length > 0" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <td><b>S.No</b></td>
+                                            <td>
+                                                <b>Name</b>
+                                            </td>
+                                            <td>
+                                                <b>FriendType</b>
+                                            </td>
+                                            <td>
+                                                <b>Edit</b>
+                                            </td>
+                                            <td>
+                                                <b>Action</b>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let closestFrndData of Present_friends;let j=index">
+                                        <td>
+                                            {{j+1}}
+                                        </td>
+                                        <td>
+                                            {{closestFrndData.Name}}
+                                        </td>
+                                        <td>
+                                            {{closestFrndData.FriendType}}
+                                        </td>
+                                        <td (click)="editPresentFriend(closestFrndData,j)"><img src="../../../assets/images/edit.png" style="width:25px"></td>
+                                        <td (click)="deleteClosestPresentFrnd(j)"><img
+                                                src="../../../assets/images/delete.png" alt="" style="height: 20px;">
+                                        </td>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <br>
+            <button id="next" type="button" class="anvayaabutton-primary" (click)="dementiaCreateAssesment()"
+                [disabled]="step==4">Save &
+                Next</button>
+        </div>
+        <div>
+            <button id="previous" type="button" class="anvayaabutton-secondary" id="backbtn" [disabled]="this.Type=='Demographics'"
+                style="margin-top:-40px;margin-left:20px;" (click)="previous()">Back</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,324 @@
+<div class="bodycontent">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                           <h5> Request Details </h5>
+                        </div>
+                        <div class="card-body card-body-mini">
+                            <table class="table bordered">
+                                <tbody>
+                                    <tr>
+                                        <td class="fontbold">Request ID </td>
+                                        <td>:</td>
+                                        <td>{{requestDetailsData.RequestID}}</td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="fontbold">Service Requested</td>
+                                        <td>:</td>
+                                        <td>{{requestDetailsData?.AliasName}}</td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="fontbold">City</td>
+                                        <td>:</td>
+                                        <td>{{requestDetailsData.ServiceAreaName}}</td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="fontbold">Service Charges</td>
+                                        <td>:</td>
+                                        <td>{{requestDetailsData.Price}}</td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="fontbold">Created Date</td>
+                                        <td>:</td>
+                                        <td>{{requestDetailsData.CreatedDate*1000| date:'dd-MM-YYYY'}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                           <h5 >Customer Details</h5> 
+                        </div>
+                        <div class="card-body card-body-mini">
+                            <table class="table bordered">
+                                <tbody>
+                                    <tr>
+                                        <td class="fontbold">CustRecID</td>
+                                        <td>:</td>
+                                        <td>{{CustomerDetails?.CustRecID}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fontbold">Sponsor Name</td>
+                                        <td>:</td>
+                                        <td>{{CustomerDetails?.Name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fontbold">Sponsor Mobile</td>
+                                        <td>:</td>
+                                        <td>{{CustomerDetails?.MobileNumber}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fontbold">BeneficiaryID</td>
+                                        <td>:</td>
+                                        <td>{{CustomerDetails?.Beneficiaries.length > 0 ?
+                                            CustomerDetails.Beneficiaries[0].CustID:
+                                            "-"}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fontbold">Beneficiary Name</td>
+                                        <td>:</td>
+                                        <td>{{CustomerDetails?.Beneficiaries.length > 0 ?
+                                            CustomerDetails.Beneficiaries[0].Name:
+                                            "-"}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fontbold">Mobile</td>
+                                        <td>:</td>
+                                        <td>{{CustomerDetails?.Beneficiaries.length > 0 ?
+                                            CustomerDetails.Beneficiaries[0].MobileNumber: "-"}}</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <table class="table">
+                        <h3>Other Details</h3>
+                        <tbody>
+                            <label for="title"> Notes</label>
+
+                            <tr></tr>
+
+                            <td>
+                                <div class="form-group col-md-10">
+                                    {{requestDetailsData.Note}}
+                                    <div></div>
+                                </div>
+                            </td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <hr class="seperator">
+
+    <div class="card" *ngIf="requestDetailsData.ServiceType=='Onetime'">
+        <div class="card-header fontbold">
+            Vendor Details
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <select class="form-select" (change)="vendorID($event)">
+                        <option value="none" selected disabled hidden>
+                            {{AssignedVendor.length >0?AssignedVendor[0].VendorName:
+                            "Select Vendor"}}
+                        </option>
+                        <option *ngFor="let vList of partnerData" value="{{vList.VendorID}}">
+                            {{vList.VendorName}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <button (click)="assignVendorForRequest()"> Confirm Vendor</button>
+    
+                </div>
+
+            </div>
+           
+         
+        </div>
+    </div>
+
+    <div class="card" *ngIf="requestDetailsData.ServiceType!='Onetime'">
+
+        <div class="card-header">
+            <b>Vendor Details:</b>
+        </div>
+
+        <div class="card-body">
+            <form [formGroup]="profileForm" id="profileForm" class="border" style="padding: 10px;">
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <label class="inputtext">Select ID Type</label>
+                        <select formControlName="IdType" class="form-select" (change)="idValidation($event)" required>
+                            <option [ngValue]="null" selected disabled>Select ID Type</option>
+                            <option value="AadharID">Aadhar Card</option>
+                            <option value="VoterID">Voter Id</option>
+                            <option value="Licence">Driving Licence</option>
+                        </select>
+                        <div *ngIf=" profileForm.controls['IdType'].status == 'INVALID' && submitted == true"
+                            class="errorColor">*Select ID </div>
+
+
+                    </div>
+                    <div class="col-md-3">
+                        <label class="inputtext">ID Number</label>
+                        <input type="tel" placeholder="ID Number" formControlName="IdNumber" class="form-control"
+                            (keyup)="idInput($event)">
+
+                        <div *ngIf="idProofAadhar">
+                            <div
+                                *ngIf="profileForm.controls['IdNumber'].invalid && (profileForm.controls['IdNumber'].touched || profileForm.controls['IdNumber'].dirty)">
+                                <span *ngIf="profileForm.controls['IdNumber'].errors?.['required']" class="errorColor">
+                                    *Aadhar Number is required.
+                                </span>
+                                <span *ngIf="profileForm.controls['IdNumber'].hasError('minlength')" class="errorColor">
+                                    *Atleast minimum 12 digits Required.
+                                </span>
+                                <span *ngIf="profileForm.controls['IdNumber'].errors?.['maxlength']" class="errorColor">
+                                    *cannot exceed 12 characters.
+                                </span>
+                            </div>
+                        </div>
+                        <div *ngIf="idVoter">
+                            <div
+                                *ngIf="profileForm.controls['IdNumber'].invalid && (profileForm.controls['IdNumber'].touched || profileForm.controls['IdNumber'].dirty)">
+                                <span *ngIf="profileForm.controls['IdNumber'].errors?.['required']" class="errorColor">
+                                    *VoterID Number is required.
+                                </span>
+                                <span *ngIf="profileForm.controls['IdNumber'].hasError('minlength')" class="errorColor">
+                                    *Atleast minimum 10 digits Required.
+                                </span>
+                                <span *ngIf="profileForm.controls['IdNumber'].errors?.['maxlength']" class="errorColor">
+                                    *cannot exceed 10 characters.
+                                </span>
+                            </div>
+                        </div>
+                        <div *ngIf="idLicence">
+                            <div
+                                *ngIf="profileForm.controls['IdNumber'].invalid && (profileForm.controls['IdNumber'].touched || profileForm.controls['IdNumber'].dirty)">
+                                <span *ngIf="profileForm.controls['IdNumber'].errors?.['required']" class="errorColor">
+                                    *License Number is required.
+                                </span>
+                                <span *ngIf="profileForm.controls['IdNumber'].hasError('minlength')" class="errorColor">
+                                    *Atleast minimum 10 digits Required.
+                                </span>
+                                <span *ngIf="profileForm.controls['IdNumber'].errors?.['maxlength']" class="errorColor">
+                                    *cannot exceed 10 characters.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="inputtext">Name</label>
+                        <input type="text" placeholder="Name" formControlName="Name" class="form-control" required>
+
+                        <div *ngIf=" profileForm.controls['Name'].status == 'INVALID'&& submitted == true"
+                            class="errorColor">* Name is Required </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="inputtext">Contact Number:</label>
+                        <input type="tel" placeholder="Contact Number" formControlName="PrimaryMobileNo"
+                            class="form-control" required maxlength="10">
+                        <div
+                            *ngIf="profileForm.controls['PrimaryMobileNo'].invalid && (profileForm.controls['PrimaryMobileNo'].touched || profileForm.controls['PrimaryMobileNo'].dirty)">
+                            <span *ngIf="profileForm.controls['PrimaryMobileNo'].errors?.['required']"
+                                class="errorColor">
+                                *Mobile Number is required.
+                            </span>
+                            <span *ngIf="profileForm.controls['PrimaryMobileNo'].hasError('minlength')"
+                                class="errorColor">
+                                *Atleast minimum 10 digits Required.
+                            </span>
+                            <span *ngIf="profileForm.controls['PrimaryMobileNo'].errors?.['maxLength']"
+                                class="errorColor">
+                                *Mobile Number cannot exceed 10 characters.
+                            </span>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">
+                        <label class="inputtext">Select Vendor</label>
+                        <select (change)="selectingVendor($event)" class="form-control" formControlName="VendorID"
+                            required>
+                            <option [ngValue]="null" selected disabled>Select Vendor</option>
+                            <option class="form-control" *ngFor="let Vendi of partnerData" [value]="Vendi.VendorID">
+                                {{Vendi.VendorName}}
+                            </option>
+                        </select>
+                        <div *ngIf="profileForm.controls['VendorID'].status == 'INVALID' && submitted == true"
+                            class="errorColor">* Select Vendor Name Required </div>
+
+                    </div>
+                    <div class="col-md-3">
+                        <label class="inputtext">Upload Document</label>
+                        <input type="file" class="form-control" #fileUploader (change)="onuploadtaxFile($event)"
+                            data-buttontext="Select a File">
+                    </div>
+                    <div class="col-md-3" *ngIf="pUrl">
+                        <div>Existing Document</div>
+                        <button (click)="existing()">View</button>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <button value="Submit" (click)="SubmitProfile()">Add profile</button>
+                </div>
+            </form>
+
+            <table class="table" *ngIf="isVendorProfiles" style="margin-top:10px;">
+                <thead class="thead-dark">
+                    <tr style="background-color: #b6b2b2;">
+                        <th scope="col">ID Type</th>
+                        <th scope="col">ID Number</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Mobile No:</th>
+                        <th scope="col">Vendor ID/Name</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Profile</th>
+                        <th scope="col">Action</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor=" let details of vendorProfiles;let i=index">
+                        <td>{{details.IdType}}</td>
+                        <td>{{details.IdNumber}}</td>
+                        <td>{{details.Name}}</td>
+                        <td>{{details.PrimaryMobileNo}}</td>
+                        <td>{{details.VendorData.VendorName}}</td>
+                        <td>{{details.Status}}</td>
+                        <td><button (click)="fileView(i)">View</button></td>
+                        <td><button (click)="removeProfile(details)"
+                                [disabled]="details.Status !='None'">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="false">
+        <div class="col-md-2">
+            <button (click)="backbtn()" class="backbtn btn btn-primary">BACK</button>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+<div style="text-align: right; margin-right: 20px;" *ngIf="isVendorProfiles">
+    <button class="btn btn-success" (click)="SubmitToPartner()"> Get Job confirmation </button>
+</div>

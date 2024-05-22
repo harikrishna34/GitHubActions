@@ -1,0 +1,26 @@
+.row{
+    margin: 10px;
+}
+li{
+font-weight: bolder;
+}
+.anvayaaButton{
+    background-color: purple;
+    font-weight: bold;
+    color: whitesmoke;
+}
+input,select{
+    text-align: center;
+border-radius: 10px;
+border:2px solid
+}
+select{
+    width:24%
+}
+#customerName,#customerID{
+    color:red
+}
+.bodycontent{
+    margin-top: 100px;
+    margin-left: 120px;
+  }

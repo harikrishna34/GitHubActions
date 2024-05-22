@@ -1,0 +1,55 @@
+<div class="bodycontent">
+
+    <form [formGroup]="Permission">
+        <div class="row marginright">
+            <div class="col-md-3">
+                <label>Type Of Tasks</label>
+                <select class="form-select" formControlName="TasksType" name="TasksType" required>
+                    <option selected value="" disabled>Select Task</option>
+                    <option *ngFor="let data of dataOfTasks" value={{data}}>{{data}}</option>
+
+                </select>
+                <div *ngIf=" Permission.controls['TasksType'].value == '' && press == true"
+                class="errorColor">*Select Task</div>
+            </div>
+            <div class="col-md-3" >
+                <label>Select Roles</label>
+                <ng-multiselect-dropdown value='RoleID' formControlName="Roles"
+                    [settings]="dropdownSettings" [data]="roles" [(ngModel)]="selectedItems"required>
+                </ng-multiselect-dropdown>
+
+                <div *ngIf=" Permission.controls['Roles'].value == '' && press == true"
+                            class="errorColor">*Select Role</div>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-primary margTop" (click)="createPermission()" *ngIf="submit">Submit</button>
+                <button class="btn btn-warning margTop" *ngIf="updateButton" (click)="updateRole()">Update</button>
+            </div>
+        </div>
+    </form>
+
+    <div style="height: 25px;"></div>
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">TaskType</th>
+                <th scope="col">Role</th>
+                <th>Edit</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of authorizationTable;last as isLast">
+                <td>{{data.TaskType}}</td>
+                <td>
+                   <span>{{getEligibleRoles(data.Roles)}}</span>
+                </td>
+                <td><button class="btn btn-primary"  (click)="existingTableData(data)">Edit</button></td>
+
+          </tr>
+        </tbody>
+    </table>
+
+</div>
+<ngx-spinner type="ball-scale-multiple">loading...</ngx-spinner>
+

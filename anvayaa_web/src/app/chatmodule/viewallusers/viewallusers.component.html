@@ -1,0 +1,60 @@
+<div class="mainDiv">
+
+    <div class="card">
+        <div class="card-body">
+       <div class="text-center"><h4>Users List</h4></div>
+
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">User Id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Status</th>
+                            <!-- <th scope="col">Edit</th> -->
+                            <th scope="col">Remove</th>
+                            
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let user of usersarray">
+                            <td>{{user.uid|titlecase}}</td>
+                            <td>{{user.name|titlecase}}</td>
+                            <td>{{user.role|titlecase}}</td>
+                            <td>{{user.status|titlecase}}</td>
+                            <!-- <td><img src="../../../assets/images/edit.png" style="width:25px"></td> -->
+                            <td data-bs-toggle="modal" data-bs-target="#exampleModal"><img src="../../../assets/images/delete.png" style="width:25px" (click)="removeUserModel(user)"></td>
+                            
+                          </tr>
+                         
+                        </tbody>
+                      </table>
+                </div>
+              </div>
+        </div>
+      </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h4> Confirm to Delete User ?</h4>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="removeusers()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>

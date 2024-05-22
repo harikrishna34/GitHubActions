@@ -1,0 +1,36 @@
+.main {
+    margin-left: 120px;
+    margin-top: 100px;
+    margin-right: 10px;
+}
+
+.custrecid {
+    color: purple;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.reuestHeading {
+    color: #67d3e0;
+}
+
+.FreezeBtn {
+    background-color: #67d3e0;
+    border-radius: 5 px;
+    border: none;
+
+
+}
+
+.table>thead>tr>th {
+    border-bottom: 1px solid #e5eaee;
+    font-size: 11px;
+    font-weight: 700;
+    vertical-align: bottom;
+    /* text-transform: uppercase; */
+}
+thead{
+    background-color: #F79122;
+    color: #914572;
+}

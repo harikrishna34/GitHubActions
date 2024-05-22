@@ -1,0 +1,70 @@
+<div class="maindiv">
+   
+
+
+    <div class="card">
+      <div class="card-body">
+        <div class="text-center">
+          <h3>Alarm History</h3>
+          </div>
+          <div class="card">
+            <div class="card-body row">
+              <div class="col-md-6">
+                <form [formGroup]="RangeSelection">
+                  <div class="row">
+                    <div class="col">
+                      <label>Start Date :</label>
+                      <input type="date" formControlName="StartDate"    class="form-control" placeholder="StartDate" >
+                      <div *ngIf="RangeSelection.controls['StartDate'].value==''&&submitBtn == true" class="text-danger">*Start Date Required</div>
+                    </div>
+                    <div class="col">
+                      <label>End Date :</label>
+  
+                      <input type="date" class="form-control" [max]="maxdate|date:'yyyy-MM-dd'"  formControlName="EndDate" placeholder="EndDate" >
+                      <div *ngIf="RangeSelection.controls['EndDate'].value==''&&submitBtn == true" class="text-danger">*EndDate Required</div>
+
+                    </div>
+                    <div class="col mt-4" >
+                      <button class="btn btn-anvayaaPurple" type="button" (click)="alaramGetFunction('click')">Submit</button>
+                    </div>
+                  </div>
+                </form>
+                
+              </div>
+              <div class="col-md-6 row">
+                <div class="col-md-8" ></div>
+                <div class="col-md-4" >
+                  <label>Search</label>
+                  <div class="form-group has-search">
+                    <input type="text" class="form-control"[(ngModel)]="searchText" placeholder="Search" style="width: 200px;">
+                  </div>
+                </div> 
+              </div>
+            </div>
+          </div>
+        <table class="table mt-5">
+          <thead>
+            <tr class="text-center">
+              <th scope="col">Record </th>
+              <th scope="col">Device ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">AlarmType</th>
+              <th scope="col">CreatedDate</th>
+              <th scope="col">AlarmStatus</th>
+            </tr>
+          </thead>
+          <tbody class="text-center">
+            <tr *ngFor="let record of HistoryArray|datafilter:searchText">
+              <td>{{record?.RecordID}}</td>
+              <td>{{record?.DeviceID}}</td>
+              <td>{{record?.CustomerDetails[0]?.UserDetails?.CustomerName}}</td>
+              <td>{{record?.AlarmType}}</td>
+              <td>{{record?.CreatedDate*1000|date : 'dd-MMM-yyyy'}}</td>
+              <td>{{record?.AlarmStatus}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+   
+</div>

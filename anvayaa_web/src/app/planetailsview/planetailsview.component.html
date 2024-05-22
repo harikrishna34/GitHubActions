@@ -1,0 +1,241 @@
+<div class="main ">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="row " style="border-bottom: 1px solid;margin-left: 10px;margin-right: 10px; text-align: center;">
+                <div class="col-md-12">
+                    <h3 class="textcolor" *ngIf="CustomerPlanDetails&&CustomerPlanDetails.AliasName">
+                        {{CustomerPlanDetails.AliasName}}</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <span class="col-xs-4">CustRec ID:<span class="textcolor" style="font-size: 20px;"
+                            *ngIf="CustomerPlanDetails&&CustomerPlanDetails.CustRecID">{{CustomerPlanDetails.CustRecID}}</span></span>
+                </div>
+                <div class="col-md-3">
+                    <span class="col-xs-4">Status:<span class="textcolor" style="font-size: 20px;"
+                            *ngIf="CustomerPlanDetails&&CustomerPlanDetails.Status">{{CustomerPlanDetails.Status}}</span></span>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="ng-pristine ng-invalid ng-invalid-required">
+                <div class="row" style="margin-top:10px;">
+                    <div class="col-md-4 service-card-no">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 *ngIf="CustomerPlanDetails&&CustomerPlanDetails.AliasName" class="">
+                                    {{CustomerPlanDetails.AliasName}} Details</h3>
+                            </div>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <span><strong>Package Name:</strong></span>
+                                <span class="pull-right ng-binding"
+                                    *ngIf="CustomerPlanDetails&&CustomerPlanDetails.AliasName">{{CustomerPlanDetails.AliasName}}
+                                </span>
+                            </li>
+                            <li class="list-group-item">
+                                <span><strong>Created On:</strong></span>
+                                <span class="pull-right ng-binding"
+                                    *ngIf="CustomerPlanDetails&&CustomerPlanDetails.CreatedDate">{{CustomerPlanDetails.CreatedDate*1000
+                                    |date:"dd-MMM-yyyy"}}
+                                    </span>
+                                    <!-- HH:MM a -->
+                                    <!-- <span class="pull-right ng-binding" *ngIf="PackageAuditDetails&&PackageAuditDetails.PackageCreatedDate">{{(PackageAuditDetails.PackageCreatedDate)*1000|date:'dd MMM YYYY hh:mm a'}}</span> -->
+                            </li>
+                            <li class="list-group-item">
+                                <span><strong>Expiry Date:</strong></span>
+                                <span class="pull-right ng-binding"
+                                    *ngIf="CustomerPlanDetails&&CustomerPlanDetails.PackageExpiryDate">{{CustomerPlanDetails.PackageExpiryDate*1000
+                                    |date:"dd-MMM-yyyy "}}</span>
+                                    <!-- HH:MM a -->
+                            </li>
+                            <li class="list-group-item">
+                                <span><strong>City:</strong></span>
+                                <span class="pull-right ng-binding"
+                                    *ngIf="CustomerPlanDetails&&CustomerPlanDetails.ServiceAreaName">{{CustomerPlanDetails.ServiceAreaName}}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <span><strong>Payment Status:</strong></span>
+                                <span class="pull-right ng-binding"
+                                    *ngIf="CustomerPlanDetails&&CustomerPlanDetails.PaymentStatus">{{CustomerPlanDetails.PaymentStatus}}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <span><strong> Price:</strong></span>
+                                <span class="pull-right ng-binding"
+                                    *ngIf="CustomerPlanDetails&&CustomerPlanDetails.CurrencyType">{{CustomerPlanDetails.CurrencyType}} {{CustomerPlanDetails.Price}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-8 service-card-no">
+                        <div class="row">
+                       
+                        </div>
+
+                        <div class="finalDetailsCarsMrg" *ngIf="downplanList">
+                            <div class="row">
+                                <div class="col-md-4" *ngFor="let plans of LowerLevelPlans">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                                 <label><h4>{{plans.Name}}</h4></label>
+                                            <ul class="list-group">
+                                                <li class="list-group-item">
+                                                    <span class="pull-left"><strong>Per Month</strong></span>
+                                                    <span
+                                                        class="pull-right ng-binding">${{plans.MonthlyPrice}}</span>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <span class="pull-left"><strong>PerYear </strong></span>
+                                                    <span
+                                                        class="pull-right ng-binding">${{plans.YearlyPrice}}</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                {{noLowplans}}
+                            </div>
+                        </div>
+                        <div *ngIf="selectionMonths" class="text-center finalDetailsCarsMrg">
+                            <div class="row">
+                                <div class="card col-md-3">
+                                    <div class="card-titel">Select Months</div>
+                                    <div class="card-body">
+                                        <form [formGroup]="downGradePeriod">
+                                            <select class="form-select" formControlName="TimePeriodInMonths">
+                                                <option Selected>Select</option>
+                                                <option *ngFor="let month of Months" value={{month}}>{{month}}</option>
+                                            </select>
+                                        </form>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                        <div *ngIf="caliculationDetails">
+                            <div class="row text-center finalDetailsCarsMrg">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-titel">
+                                            <h3>Services</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Service Name</th>
+                                                        <th>Total Limit</th>
+                                                        <th>Available Limit</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody *ngFor="let servicedata of Services">
+                                                    <tr>
+                                                        <td>{{servicedata.ServiceName}}</td>
+                                                        <td>{{servicedata.TotalLimit}}</td>
+                                                        <td>{{servicedata.AvailableLimit}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="card-titel">
+                                                <h5>New Plan</h5>
+                                            </div>
+                                            <ul class="list-group">
+                                                <li class="list-group-item">
+                                                    <span class="pull-left"><strong>Plan</strong></span>
+                                                    <span
+                                                        class="pull-right ng-binding">{{NewPlanDetails.AliasName}}</span>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <span class="pull-left"><strong>Start Date</strong></span>
+                                                    <span
+                                                        class="pull-right ng-binding">{{NewPlanDetails.StartDate*1000|date:"dd-MMM-yyyy"}}</span>
+                                                        <!-- {{(PackageAuditDetails.PackageCreatedDate)*1000|date:'dd MMM YYYY hh:mm a'}} -->
+                                                        
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <span class="pull-left"><strong>Expiry Date</strong></span>
+                                                    <span
+                                                        class="pull-right ng-binding">{{NewPlanDetails.EndDate*1000|date:"dd-MMM-yyyy"}}</span>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <span class="pull-left"><strong>Plan Price</strong></span>
+                                                    <span
+                                                        class="pull-right ng-binding">{{NewPlanDetails.PlanPrice}}</span>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <span class="pull-left"><strong>Refund Amount</strong></span>
+                                                    <span
+                                                        class="pull-right ng-binding">{{NewPlanDetails.RefundAmount}}</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-default">
+        <label for="" class="panel-title">Package History</label>
+        <div class="card" >
+            <table class="table  table-striped table-hover">
+                <thead>
+                    <tr style="text-align: center;">
+                        <th scope="col">ID </th>
+                        <th scope="col">Package Name</th>
+                        <th scope="col">Membership Created Date</th>
+                        <th scope="col">Membership Expiry Date</th>
+                        <!-- <th scope="col">Subscription CREATED Date </th>
+                        <th scope="col">Subscription EXPIRY Date</th> -->
+                        <th scope="col">Payment Type/Mode</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let auditdata of PackageAuditDetails" style="text-align: center;">
+                        <td>
+                            {{auditdata.AnvayaaPaymentID}}
+                        </td>
+                        <td>
+                            {{auditdata.AliasName}}-{{auditdata.PurchaseType}}
+                        </td>
+                        <td>
+                            {{(auditdata.PackageCreatedDate)*1000|date:'dd MMM YYYY'}}
+                        </td>
+                        <!-- hh:mm a -->
+                        <td>
+                            {{(auditdata.PackageExpiryDate)*1000|date:'dd MMM YYYY'}}
+                        </td>
+                        <!-- hh:mm a -->
+                        <!-- <td>
+                            {{(auditdata.SubscriptionCreatedDate)*1000|date:'dd MMM YYYY hh:mm a'}}
+                        </td>
+                        <td>
+                            {{(auditdata.SubscriptionExpiryDate)*1000|date:'dd MMM YYYY hh:mm a'}}
+                        </td> -->
+                        <td>
+                            {{auditdata.PaymentType}}/ {{auditdata.PaymentMode}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+  
+
+</div>
+<ngx-spinner type="ball-scale-multiple">loading...</ngx-spinner>

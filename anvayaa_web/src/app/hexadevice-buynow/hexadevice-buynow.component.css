@@ -1,0 +1,17 @@
+.body-container{
+    margin-left: 110px; 
+    margin-top: 95px;
+    background-color: white; 
+}
+.selected {
+    background-color: lightblue;
+    border: 2px solid blue;
+}
+.highlighted {
+    /* Define styles to visually highlight the payment method */
+    background-color: rgb(223, 223, 223); /* For example */
+    /* Add any other styles as per your design */
+}
+.errorColor{
+    color: red;
+}

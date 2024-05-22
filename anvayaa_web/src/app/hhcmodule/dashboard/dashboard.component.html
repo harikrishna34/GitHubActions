@@ -1,0 +1,254 @@
+<div class="bodycontent">
+  <div class="card">
+    <div class="text-center header">
+      <h3> Home Health Care</h3>
+    </div>
+    <section class="pt-8 pt-md-9 ">
+      <div class="container">
+        <!-- Categories -->
+        <div class="row">
+          <!-- Category -->
+          <div class="col-md-2 mb-4 grab" (click)="dasboardCustomData('Pendingrequets')">
+            <a class="card align-items-center text-decoration-none border-0 hover-lift-light py-4">
+              <span class="icon-circle icon-circle-lg bg-pastel-primary" style="color:#914572">
+                {{dashboardCounts?.PendingRequests}}
+              </span>
+              <span class="text-dark mt-3">
+                <b>Request At Vendor</b>
+              </span>
+            </a>
+          </div>
+          <!-- Category -->
+          <div class="col-md-2 mb-4 grab" (click)="dasboardCustomData('AllRequests')">
+            <a class="card align-items-center text-decoration-none border-0 hover-lift-light py-4">
+              <span class="icon-circle icon-circle-lg bg-pastel-primary" style="color:#914572">
+                {{dashboardCounts?.Requests}}
+              </span>
+              <span class="text-dark mt-3">
+                <b>Request In-Processing</b>
+              </span>
+            </a>
+          </div>
+          <!-- Category -->
+          <div class="col-md-2 mb-4 grab" (click)="dasboardCustomData('HHCBills')">
+            <a class="card align-items-center text-decoration-none border-0 hover-lift-light py-4">
+              <span class="icon-circle icon-circle-lg bg-pastel-primary" style="color:#914572">
+                {{dashboardCounts?.Bills}}
+              </span>
+              <span class="text-dark mt-3">
+                <b>Pending Proforma Invoice</b>
+              </span>
+            </a>
+          </div>
+          <!-- Category -->
+          <div class="col-md-2 mb-4 grab" (click)="dasboardCustomData('Reconciliation')">
+            <a class="card align-items-center text-decoration-none border-0 hover-lift-light py-4">
+              <span class="icon-circle icon-circle-lg bg-pastel-primary" style="color:#914572">
+                {{dashboardCounts?.Reconciliation}}
+              </span>
+              <span class="text-dark mt-3">
+                <b>Reconciliation</b>
+              </span>
+            </a>
+          </div>
+          <!-- Category -->
+          <div class="col-md-2 mb-4 grab" (click)="dasboardCustomData('Refunds')">
+            <a class="card align-items-center text-decoration-none border-0 hover-lift-light py-4">
+              <span class="icon-circle icon-circle-lg bg-pastel-primary" style="color:#914572">
+                {{dashboardCounts?.Refunds}}
+              </span>
+              <span class="text-dark mt-3">
+                <b>Refunds</b>
+              </span>
+            </a>
+          </div>
+          <!-- Reports -->
+          <div class="col-md-2 mb-4 grab" (click)="reportsTab()">
+            <a class="card align-items-center text-decoration-none border-0 hover-lift-light py-4">
+              <span class="icon-circle icon-circle-lg bg-pastel-primary" style="color:#914572">
+                R
+              </span>
+              <span class="text-dark mt-3">
+                <b>Reports</b>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="container card" [hidden]="DataList == 0" *ngIf="tablesDiv">
+      <div class="text-center" style="color:#F79122 ;">
+        <h2>{{DashboardDataType}}</h2>
+      </div>
+      <form [formGroup]="DataFilterForm">
+        <div class="row">
+          <div class="col-md-2"><label>Start Date</label> <input type="date" class="form-control"
+              formControlName="StartDate"></div>
+          <div class="col-md-2"><label>End Date</label> <input type="date" class="form-control"
+              formControlName="EndDate"></div>
+          <div class="col-md-2">
+            <label>Select City</label>
+            <select class="form-select" formControlName="CityID" name="CityID">
+              <option value='' selected> Select </option>
+              <option *ngFor="let city of Cities" value="{{city.CityID}}">{{city.CityName}}</option>
+            </select>
+          </div>
+          <div class="col-md-2 mt-3"><button type="button" class="anvayaabutton-primary"
+              (click)="dashBoardevent()">Search</button></div>
+          <div class="col-md-2 mt-3"><button type="button" [disabled]="" class="anvayaabutton-secondary"
+              (click)=" downloadRequests()">Download</button></div>
+        </div>
+      </form>
+      <div *ngIf="RequestsTableType">
+        <table class="table table-striped text-start card-body mt-6">
+          <thead class="tablehead">
+            <tr>
+              <th>Request Details</th>
+              <th>Customer Details</th>
+              <th [hidden]="DashboardDataType != 'AllRequests'">CreatedDate</th>
+              <th>ServiceDate</th>
+              <th [hidden]="DashboardDataType != 'AllRequests'">Job Start Date</th>
+              <th>Agent</th>
+              <th [hidden]="DashboardDataType != 'Pendingrequets'">Partner Executive Name</th>
+              <th>Status</th>
+              <th>City</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let post of DataList">
+              <td>
+                <div>
+                  <span *ngIf="post.ServiceName">
+                    {{ post?.ServiceName ?post?.ServiceName : '-' |titlecase}}
+                  </span>
+                  <span *ngIf="post.SubCategoryName">
+                    {{ post?.SubCategoryName ? post?.SubCategoryName:'-' |titlecase}}
+                  </span>
+                </div>
+                <b>{{ post?.RequestID }}</b>
+              </td>
+              <td>
+                <div>
+                  {{ post?.CustomerName |titlecase}}
+                </div><b>{{ post?.CustRecID }}</b>
+                <div style="color:#914572">{{post?.CustomerType}}</div>
+              </td>
+              <td [hidden]="DashboardDataType != 'AllRequests'">{{post?.CreatedDate*1000|date: 'dd-MMM-yyyy'}}</td>
+              <td>{{post?.RequestedDate*1000|date: 'dd-MMM-yyyy'}}</td>
+              <td [hidden]="DashboardDataType != 'AllRequests'">{{post?.VendorJobStartDate*1000|date: 'dd-MMM-yyyy'}}
+              </td>
+              <td>{{ post?.AgentName|titlecase }}</td>
+              <td [hidden]="DashboardDataType != 'Pendingrequets'">{{ post?.PartnerAgentName|titlecase }}</td>
+              <td>{{ post?.Status|replaceUnderscore }}</td>
+              <td>{{ post?.ServiceAreaName|titlecase }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="financetable" style="overflow-x:auto;">
+        <table class="table table-striped text-start card-body mt-6">
+          <thead class="tablehead">
+            <tr>
+              <th>Payment For</th>
+              <th>Customer Details
+              </th>
+              <th>PaymentDate</th>
+              <th [hidden]="DashboardDataType == 'HHCBills'">Payment Type/Mode</th>
+              <th>StartDate</th>
+              <th>EndDate</th>
+              <th [hidden]="DashboardDataType == 'HHCBills'">Status</th>
+              <th>City</th>
+              <th>Agent</th>
+              <th>Amount</th>
+              <th>Delete </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let post of DataList">
+              <td>
+                <div>{{ post?.ServiceName|replaceUnderscore}}</div>
+                <b>{{ post?.PaymentID}}</b>
+              </td>
+              <td>
+                <div>
+                  {{ post?.CustomerName }}
+                </div><b>{{post?.CustRecID}}</b>
+                <div style="color:#914572">{{post?.CustomerType}}</div>
+              </td>
+              <td>{{post?.PaymentCreatedDate*1000|date:"dd-MMM-yyyy"}}</td>
+              <td [hidden]="DashboardDataType == 'HHCBills'">{{ post?.PaymentType }}
+                <div><b>{{ post?.PaymentMode }}</b></div>
+              </td>
+              <td>{{ post?.StartDate*1000|date :"dd-MMM-yyyy" }}</td>
+              <td>{{ post?.EndDate*1000|date :"dd-MMM-yyyy" }}</td>
+              <td [hidden]="DashboardDataType == 'HHCBills'">{{post?.Status}}</td>
+              <td>{{post?.ServiceAreaName|titlecase}}</td>
+              <td>{{ post?.AgentName|titlecase}}</td>
+              <td>{{post?.Amount | currency:'INR' }}</td>
+              <td><button type="button" [disabled]="" class="btn btn-anvayaaPurple"
+                  (click)="deletebills(post)">Delete</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="text-center" *ngIf="NoDataTemplate">
+      <h3 class="text-center" [hidden]="DataList.length>0">
+        No Data Found
+      </h3>
+    </div>
+
+    <div *ngIf="reportTab" class="card">
+      <div class="text-center" style="color:#F79122 ;">
+        <h2>HHC Reports</h2>
+      </div>
+      <form [formGroup]="ReportsForm">
+        <div class="row m-5">
+          <div class="col-md-2">Start Date<input class="form-control" type="date" formControlName="StartDate" required>
+            <span class="text-danger"
+              *ngIf="ReportsForm.controls['StartDate'].status=='INVALID'&& downloadReportSbmit==true">* Start Date
+              Required</span>
+          </div>
+          <div class="col-md-2"> End Date
+            <input class="form-control" type="date" formControlName="EndDate" required>
+            <span class="text-danger"
+              *ngIf="ReportsForm.controls['EndDate'].status=='INVALID'&& downloadReportSbmit==true">* End Date
+              Required</span>
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-anvayaaPurple" (click)="downloadReports()"
+              style="margin-top: 20px;">Download</button>
+          </div>
+        </div>
+      </form>
+      <div>
+        <h3 style="margin-left: 60px;">Backdated Requests</h3>
+        <form [formGroup]="backdatedRequest">
+          <div class="row m-5">
+            <div class="col-md-2">Start Date<input class="form-control" type="date" formControlName="StartDate"
+                required>
+              <span class="text-danger"
+                *ngIf="backdatedRequest.controls['StartDate'].status=='INVALID'&& downloadBackdatedReportSbmit==true">* Start Date
+                Required</span>
+            </div>
+            <div class="col-md-2"> End Date
+              <input class="form-control" type="date" formControlName="EndDate" required>
+              <span class="text-danger"
+                *ngIf="backdatedRequest.controls['EndDate'].status=='INVALID'&& downloadBackdatedReportSbmit==true">* End Date
+                Required</span>
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-anvayaaPurple" (click)="downloadBackdatedRequest()"
+                style="margin-top: 20px;">Download</button>
+            </div>
+            
+            </div>
+        </form>
+
+
+      </div>
+
+    </div>
+
+
+  </div>

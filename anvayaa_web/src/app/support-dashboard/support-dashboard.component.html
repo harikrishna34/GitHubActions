@@ -1,0 +1,388 @@
+
+<div class="container" [hidden]="this.PermissionDeniedBtn">
+    <!-- <div class="row">
+        
+        <div class="col-md-6 col-sm-6 col">
+        </div>
+        <div class=" col-md-1 col-sm-1 col">
+            <select name="cars" id="cars" class="search">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="opel">Opel</option>
+                <option value="audi">Audi</option>
+            </select>
+        </div>
+        <div class=" col-md-2 col-sm-2 col">
+            <div class="form-group has-search">
+                <span class="fa fa-search form-control-feedback"></span>
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+        </div>
+        <div class=" col-md-2 col-sm-2 col">
+            <img src="../../assets/images/settings.png" class="settingsimg">
+            <select name="cars" id="cars" class="roundDropDown">
+                <option value="volvo"> SortBy</option>
+                <option value="saab">Saab</option>
+                <option value="opel">Opel</option>
+                <option value="audi">Audi</option>
+            </select>
+        </div>
+    </div> -->
+    <div class="row">
+        <div class="col col-md-4 col-sm-6 col-lg-3">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Dropdown</button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        <div role="separator" class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                    </div>
+                </div>
+                <input type="text" class="form-control" aria-label="Text input with dropdown button">
+            </div>
+        </div>
+        <div class="col col-md-6 col-sm-2 col-lg-2">
+            <div class="row">
+                <span>Select City</span>
+            <select  class="citySelection" #CityID (change)="onCitySelection(CityID.value)">
+                
+               
+                <option value="" disabled>Select City</option>
+                <option value="All" >All</option>
+                <option *ngFor="let city of ServiceAreas" [value]="city.CityID">{{city.CityName}}
+                </option>
+            </select>
+            </div>
+            
+
+            <!-- <img src="../../assets/images/settings.png" class="settingsimg">
+                <select id="city" class="roundDropDown" #mySelectedCity (change)="onCitySelection(mySelectedCity.value)" >
+                    <option value="" disabled >Sortby City</option>
+                    <option   *ngFor="let cities of ServiceAreas" [value]="cities.CityID" >{{cities.CityName}}</option>
+                    <option value="All">All</option>
+                    <option value="saab">Saab</option>
+                    <option value="opel">Opel</option>
+                    <option value="audi">Audi</option>
+                </select> -->
+        </div>
+    </div>
+    <div class="row">
+        <div [class]='"col-md-2 col-sm-2 col-lg-2 col MemberTile member-"+this.MemberActiveScreen'
+            (click)="onMembers()">
+            <!-- <div [class]='"member-"+this.MemberActiveScreen' > -->
+            <div>Members</div>
+            <div><img src="../../assets/images/Member.png" class="memberImg"></div>
+            <p>{{this.SupportDashBoardData.TotalActiveCustomers_Count}}</p>
+            <!-- </div> -->
+        </div>
+        <div [class]='"col-md-2 col-sm-2 col-lg-2 col FamileTile families-"+this.FamilyActiveScreen'
+            (click)="onFamilies()">
+            <!-- <div [class]='"families-"+this.FamilyActiveScreen' > -->
+            <div>Families</div>
+            <div><img src="../../assets/images/family.png" class="memberImg"></div>
+            <p>{{this.SupportDashBoardData.AssignedCustomers_Count}}</p>
+            <!-- </div> -->
+        </div>
+        <div [class]='"col-md-2 col-sm-2 col-lg-2 col RequestsTile requests-"+this.RequestActiveScreen'
+            (click)="onRequests()">
+            <!-- <div [class]='"requests-"+this.RequestActiveScreen'> -->
+            <div>Requests</div>
+            <div><img src="../../assets/images/requests.png" class="memberImg"></div>
+            <p>{{this.SupportDashBoardData.ActiveRequests_Count}}</p>
+            <!-- </div> -->
+        </div>
+        <div [class]='"col-md-2 col-sm-2 col-lg-2 col callsTile calls-"+this.CallsActiveScreen' (click)="onCalls()">
+            <div>Calls</div>
+            <div><img src="../../assets/images/phone.png" class="memberImg"></div>
+            <p>{{this.SupportDashBoardData.Calls_Count}}</p>
+        </div>
+
+        <div [class]='"col-md-2 col-sm-2 col-lg-2 col PartnersTile partners-"+this.PartnerActiveScreen'
+            (click)="onPartners()">
+            <!-- <div [class]='"partners-"+this.PartnerActiveScreen'> -->
+            <div>Partners</div>
+            <div><img src="../../assets/images/partner.png" class="memberImg"></div>
+            <p>{{this.SupportDashBoardData.Partners_Count}}</p>
+            <!-- </div> -->
+        </div>
+    </div>
+
+
+    <div class="sidebyside row " *ngIf="this.screen=='undefined'||this.screen==null">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#request-tab-pane"
+                    type="button" role="tab" aria-controls="request-tab-pane" aria-selected="true">Request</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link " id="calls-tab" data-bs-toggle="tab" data-bs-target="#calls-tab-pane"
+                    type="button" role="tab" aria-controls="calls-tab-pane" aria-selected="false">Calls</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="request-tab-pane" role="tabpanel" aria-labelledby="request-tab"
+                tabindex="0">
+                <div class=" col-md-12 memberTableMaindiv">
+                    <table class="table table-striped " *ngIf="ActiveRequests.length >0 ">
+                        <thead>
+                            <tr>
+                                <th>Sponser Name</th>
+                                <th>City</th>
+                                <th>Service Name</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor=" let ActiveRequests of ActiveRequests">
+                                <td>{{ActiveRequests.Name}}</td>
+                                <td>{{ActiveRequests.ServiceAreaName}}</td>
+                                <td>{{ActiveRequests.AliasName}}</td>
+                                <td>{{ActiveRequests.Status}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade " id="calls-tab-pane" role="tabpanel" aria-labelledby="calls-tab" tabindex="0">
+                <div class="col-md-12 memberTableMaindiv">
+                    <table class="table table-striped" *ngIf="Calls.length > 0 ">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>City</th>
+                                <th>Benficiary's</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor=" let Calls of Calls;">
+                                <td>{{Calls.Name}}</td>
+                                <td>{{Calls.ServiceAreaName}}</td>
+                                <td><span *ngFor="let Beneficiarie of Calls.Beneficiaries">
+                                        {{Beneficiarie.Name}}<br /></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="memberTableMaindiv" *ngIf="this.screen=='TotalActiveCustomers'">
+        <table class="table table-striped " *ngIf="MembersDashBoardData.length > 0">
+            <thead>
+                <tr class="whitebackround">
+                    <th>Customer ID</th>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Plan</th>
+                    <th>
+                        <div>Start Date</div>
+                        <div>End Date</div>
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr scope="row" *ngFor="let Members of MembersDashBoardData;">
+                    <td style="color: #FF4112;">{{Members.CustRecID}}</td>
+                    <td>{{Members.Name}}</td>
+                    <td>{{Members.ServiceAreaName}}</td>
+                    <td>{{Members.AliasName}}</td>
+                    <td>
+                        <div>{{Members.PlanCreatedDate}}</div>
+                        <div>{{Members.PlanExpiryDate}}</div>
+                    </td>
+
+
+            </tbody>
+        </table>
+        <div *ngIf="MembersDashBoardData.length < 1 ">
+            No Records Found
+        </div>
+    </div>
+
+    <div class="memberTableMaindiv" *ngIf="this.screen=='AssignedFamilies'">
+        <table class="table table-striped " *ngIf="FamiliesDashBoardData.length > 0">
+            <thead>
+                <tr class="whitebackround">
+
+                    <th>Customer ID</th>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Plan</th>
+                    <th>
+                        <div>Start-Date</div>
+                        <div>End-Date</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr scope="row" *ngFor="let Families of FamiliesDashBoardData;">
+                    <td style="color: #FF4112;">{{Families.CustRecID}}</td>
+                    <td>{{Families.Name}}</td>
+                    <td>{{Families.ServiceAreaName}}</td>
+                    <td>{{Families.PackageName}}</td>
+                    <td>
+                        <div>{{Families.PlanCreatedDate}}</div>
+                        <div>{{Families.PlanExpiryDate}}</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="FamiliesDashBoardData.length < 1 ">
+            No Records Found
+        </div>
+    </div>
+
+    <div class="memberTableMaindiv" *ngIf="this.screen=='ActiveRequests'">
+        <table class="table table-striped " *ngIf="ActiveRequestsDashBoardData.length > 0 ">
+            <thead>
+                <tr class="whitebackround">
+
+                    <th>Customer ID</th>
+                    <th>Created Date/By</th>
+                    <th>Sponser Details</th>
+                    <th>Service</th>
+                    <th>Sevice Date & City</th>
+                    <th>Payment Tracker</th>
+                    <th>Status</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr scope="row" *ngFor="let ActiveRequests of ActiveRequestsDashBoardData;">
+
+                    <td style="color: #FF4112;">{{ActiveRequests.CustRecID}}</td>
+                    <td>{{ActiveRequests.CreatedDate}}</td>
+                    <td>{{ActiveRequests.Name}}</td>
+                    <td>{{ActiveRequests.AliasName}}</td>
+                    <td>
+                        <div>{{ActiveRequests.RequestedDate}}</div>
+                        <div>{{ActiveRequests.ServiceAreaName}}</div>
+                    </td>
+                    <td><a class="btn btn-info trackbutton">Track</a></td>
+                    <td><img src="../../assets/images/check-mark (2).png"></td>
+                    <td><img src="../../assets/images/placeholder (1).png"></td>
+            </tbody>
+        </table>
+        <div *ngIf="ActiveRequestsDashBoardData.length < 1 ">
+            No Records Found
+        </div>
+    </div>
+
+    <div class="memberTableMaindiv" *ngIf="this.screen=='Calls'">
+        <table class="table table-striped " *ngIf="CallsDashBoardData.length > 0 ">
+            <thead>
+                <tr class="whitebackround">
+
+                    <th>Customer ID</th>
+                    <th>Name</th>
+                    <th>PrimaryBenificiary</th>
+                    <th>SecondaryBenificiary</th>
+                    <th>City</th>
+                    <th>Plan</th>
+                    <th>
+                        <div>Start Date</div>
+                        <div>End Date</div>
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr scope="row" *ngFor="let CallsData of CallsDashBoardData;">
+
+                    <td style="color: #FF4112;">{{CallsData.CustRecID}}</td>
+                    <td>{{CallsData.Name}}</td>
+                    <td>{{CallsData.Beneficiaries[0].Name}}</td>
+                    <td *ngIf="CallsData.Beneficiaries.length>1; else elseSpan">
+                        {{CallsData.Beneficiaries[1].Name}}<span><img
+                                src="../../assets/images/telephone-call.png"></span></td>
+                    <ng-template #elseSpan>--</ng-template>
+                    <td>{{CallsData.ServiceAreaName}}</td>
+                    <td>{{CallsData.PackageName}}</td>
+                    <td>
+                        <div>{{CallsData.PlanCreatedDate}}</div>
+                        <div>{{CallsData.PlanExpiryDate}}</div>
+                    </td>
+
+                </tr>
+
+            </tbody>
+        </table>
+        <div *ngIf="CallsDashBoardData.length < 1">
+            No Records Found
+        </div>
+    </div>
+
+    <div class="memberTableMaindiv" *ngIf="this.screen=='Partners'">
+        <table class="table table-striped " *ngIf="PartnerDashBoardData.length>0">
+            <thead>
+                <tr class="whitebackround">
+
+                    <th>Customer Info</th>
+                    <th>Service Info</th>
+                    <th>Partner Info </th>
+                    <th>
+                        <div>Start Date</div>
+                        <div>End Date</div>
+                    </th>
+                    <th>Days Served</th>
+                    <th>
+                        <div>Tariff Details</div>
+                        <div>Anvayaa Comission</div>
+                    </th>
+                    <th>
+                        <div>Update</div>
+                        <div>Status</div>
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr scope="row" *ngFor="let partners of PartnerDashBoardData;">
+
+                    <td>
+                        <div>{{partners.Name}}</div>
+                        <div style="color: #FF4112;">{{partners.CustRecID}}</div>
+                        <div>{{partners.MobileNumber}}</div>
+                    </td>
+                    <td>
+                        <div> {{partners.SubCategoryName}}</div>
+                        <div>{{partners.RequestID}}&nbsp;&nbsp;--&nbsp;&nbsp;{{partners.CustomerType}}</div>
+                    </td>
+                    <td>                       
+                        <div>{{partners.PartnerID}}</div>
+                        <div>{{partners.Partner}}</div>
+                    </td>
+                    <td>
+                        <div>{{partners.StartDate}}</div>
+                        <div>{{partners.EndDate}}</div>
+                    </td>
+                    <td>{{partners.DaysServed}} Days</td>
+                    <td>
+                        <div>{{partners.Tariff}}</div>
+                        <div>{{partners.TariffType}}</div>
+                        <div>{{partners.AnvayaaCommission}}%</div>
+                    </td>
+                    <td><img src="../../assets/images/cloud-computing (1).png"></td>
+
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="PartnerDashBoardData.length < 1">
+            No Records Found
+        </div>
+    </div>
+
+</div>
+<ngx-spinner type="ball-scale-multiple">loading...</ngx-spinner>
+
+<div class="container" [hidden]="!this.PermissionDeniedBtn">
+    <p>Do not have a permisson To Access this Page</p>
+</div>

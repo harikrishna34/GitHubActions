@@ -1,0 +1,94 @@
+<div class="bodycontent">
+  <div class="card">
+    <div class="col-md-12">
+      <button style="margin:10px; float: right;" class="btn anvayaaButton" id="create_Permission" data-bs-toggle="modal"
+        (click)="create_Permisiion()" data-bs-target="#_CreatePermission">Create</button>
+    </div>
+    <table class="table table-striped table-bordered table-hover">
+      <thead style="background-color: #c7c4c4;">
+        <tr>
+          <th>Sl.No</th>
+          <th>Module</th>
+          <th>Role</th>
+          <th>Permissions</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let Obj of Permissions; let i = index">
+          <td>{{i+1}}</td>
+          <td>{{Obj.Module}}</td>
+          <td>{{Obj.Role}}</td>
+          <td>
+            <span *ngFor="let Privilege of Obj.ChannelPartners[0].Privileges;let j = index">{{Privilege.Privilege}}{{j
+              === Obj.ChannelPartners[0].Privileges.length - 1 ? '' : ', '}}
+            </span>
+          </td>
+
+          <td><button type="button" class="btn btn-primary" (click)="updatePermisiion(Obj)" data-bs-toggle="modal"
+              data-bs-target="#_CreatePermission">Update </button> </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+<div class=" row">
+  <div class="modal fade " id="_CreatePermission" role="dialog " aria-hidden="true " data-backdrop="static "
+    data-keyboard="false " aria-labelledby="fieldEmployeeModalLabel " style="padding-bottom: 50px;">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content" style="height: auto; width: auto;">
+        <div class="modal-header model">
+          <h4 class="titlevendor modal-title  text-center ">Create Permission</h4>
+        </div>
+
+        <div class="modal-content" style="height: auto; width: auto;">
+          <div class="modal-header model row">
+            <form [formGroup]="createPermissionForm">
+              <div class="rows">
+                <div>
+                  <select formControlName="RoleID" class="form-select" aria-label="Default select example"
+                    (change)="roleSelection($event)" [attr.disabled]="update ? '' : null">
+                    <option value="" selected disabled>Select Role</option>
+                    <option *ngFor="let role of Roles" [value]="role.RoleID">{{role.Role}}</option>
+                  </select>
+                </div>
+                <select formControlName="Module" class="form-select" aria-label="Default select example"
+                  [attr.disabled]="update ? '' : null">
+                  <option value="" selected disabled>Select Module</option>
+                  <option *ngFor="let module of Modules" [value]="module">{{module}}</option>
+                </select>
+                <div formGroupName="ChannelPartners">
+                  <select formControlName="ChannelPartnerID" class="form-select" aria-label="Default select example"
+                    (change)="channelSelection($event)" [attr.disabled]="update ? '' : null">
+                    <option value="" selected disabled>Select Channel Partners</option>
+                    <option *ngFor="let channelPartner of Channel_Partners" [value]="channelPartner.ChannelID">
+                      {{channelPartner.AliasName}}</option>
+                  </select>
+
+                  <ng-multiselect-dropdown formControlName="Privileges" [placeholder]="'Select Privilege'"
+                    [settings]="privilegeSettings" [data]="PrivilegesArray">
+                  </ng-multiselect-dropdown>
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                  (click)="cancelPermission()">Cancel</button>
+                <button *ngIf="create == true" type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                  (click)="createPermission()">Save</button>
+                <button *ngIf="update == true" type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                  (click)="updatePermisiionApi()">Update</button>
+              </div>
+
+            </form>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

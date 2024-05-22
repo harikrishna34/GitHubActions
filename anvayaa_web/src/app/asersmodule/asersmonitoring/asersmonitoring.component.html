@@ -1,0 +1,61 @@
+<div class="bodycontent">
+  <div class="card">
+    <table class="table  table-striped table-hover">
+      <thead class="tablehead">
+        <tr>
+          <th scope="col" style="cursor: pointer;" (click)="sortdetails('CreatedDate')">Created <span><i
+                class="fa fa-sort" aria-hidden="true"></i></span></th>
+          <th scope="col">Details</th>
+          <th scope="col" style="cursor: pointer;" (click)="sortdetails('AlarmType')">Alarm Type <span><i
+                class="fa fa-sort" aria-hidden="true"></i></span></th>
+          <th scope="col">Vital Readings</th>
+          <th scope="col">Assigned To</th>
+          <th scope="col" (click)="sortdetails('Status')">Status <span><i class="fa fa-sort"
+                aria-hidden="true"></i></span></th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of monitoringdata;let i=index" class=" geeks">
+          <td> <span>{{data.CreatedDate*1000|date:"dd-MMM-yyyy"}}</span>
+            <div>{{data.CreatedDate*1000|date:"HH:MM a"}}</div>
+          </td>
+          <td>
+            <h6>{{data.CustomerDetails?.Name}}</h6>
+            <div>{{data.CustomerDetails?.MobileNumber}}</div>
+          </td>
+          <td>
+            <h6>{{data.AlarmType}}</h6>
+          </td>
+          <td>{{data.Type}}<span *ngIf="data.AlarmType=='ThresholdAlarm'&& data.Type=='BloodPressure'">
+              <h6>{{data.Data.Hypertension}}/{{data.Data.Hypotension}}</h6>Reading(Expected Reading
+              :{{data.Actualmaxvalue}})
+            </span>
+            <span *ngIf="data.AlarmType=='ThresholdAlarm'&& data.Type=='Stepcount'">
+              <h6>{{data.Data.Stepcount}}</h6>
+            </span>
+            <span *ngIf="data.AlarmType=='ThresholdAlarm'&& data.Type=='Oxygen'">
+              <h6>{{data.Data.Oxygen}}</h6>
+            </span>
+            <span *ngIf="data.AlarmType=='ThresholdAlarm'&& data.Type=='HeartRate'">
+              <h6>{{data.Data.HeartRate}}</h6>
+            </span>
+            <span *ngIf="data.AlarmType=='ThresholdAlarm'&& data.Type=='Temperature'">
+              <h6>{{data.Data.Temperature}}</h6>
+            </span>
+          </td>
+          <td><span *ngIf="data.AssignedDetails[0]?.FirstName">{{data.AssignedDetails[0]?.FirstName}}
+              {{data.AssignedDetails[0]?.LastName}}</span> <span *ngIf="!data.AssignedDetails[0]?.FirstName">-</span>
+          </td>
+          <td>
+            {{data.Status}}
+          </td>
+          <td>
+            <button type="button" class="btn btn-anvayaaPurple" (click)="customermonitordetails(data)">Take
+              Action</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+.errorColor {
+  color: red;
+}
+
+.bodycontent {
+  margin-top: 100px;
+  margin-left: 120px;
+  margin-right: 12px;
+}
+
+.accordionclass {
+  margin-top: 50px;
+  margin-left: 120px;
+  margin-right: 12px;
+}
+
+.updatebuttonclass {
+  margin-top: 30px;
+  margin-left: 120px;
+  margin-right: 12px;
+}
+
+.spacingDiv {
+  height: 5px
+}
+
+.AmbulanceRequired {
+  width: 18%;
+  height: 31%;
+
+}
+
+.col-md-6 label {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.col-md-6 input[type="radio"] {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}

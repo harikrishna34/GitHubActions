@@ -1,0 +1,506 @@
+<div class="body-container" style="margin-left: 120px; margin-top: 100px;  ">
+  <div class="row col-md-12">
+    <div class="col-md-3">
+      <div style="text-align: right;  margin-right: 20px;">
+        <img src="../../../assets/images/customerComprehinsivePageIcons/settings.png"
+          style="height: 40px; width: 40px; margin-bottom: 10px;" alt="Touch Point Settings"
+          title="Touch Point Settings" (click)="navigateToTouchPoints(ViewCCdbArray)">
+      </div>
+    </div>
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-3">
+      <div style="text-align: right; margin-right: 20px;">
+        <img src="../../../assets/images/customerComprehinsivePageIcons/shopping.png"
+          style="height: 40px; width: 40px; margin-bottom: 10px;" title="Hexa Devices"
+          (click)="navigateToHexaDevices(ViewCCdbArray)">
+      </div>
+    </div>
+    <div class="col-md-3">
+
+    </div>
+  </div>
+  <div class="row col-md-12" style=" margin-bottom: 5px;">
+    <div class="card col-md-3">
+      <b>Customer Detials</b>
+      <div class="cardcontent">
+        <h5>{{ViewCCdbArray?.customerDoc?.Name | titlecase}}</h5>
+      </div>
+      <div class="row col-md-12">
+        <div class="col-md-2">
+          <img src="../../../assets/images/telephone-callpurple.png" class="img-call">
+          <img src="../../../assets/images/mailpurple.png" class="img-mail">
+          <img src="../../../assets/images/planningpurple.png" class="img-plan">
+        </div>
+        <div class=" row col-md-10" style="text-align: left;">
+          <span>({{ViewCCdbArray?.customerDoc?.CountryCode}}) {{ViewCCdbArray?.customerDoc?.MobileNumber}}</span>
+          <span>{{ViewCCdbArray?.customerDoc?.EmailID}}</span>
+          <span>{{ViewCCdbArray?.customerDoc?.PackageDetails?.Type}}</span>
+
+        </div>
+      </div>
+    </div>
+    <!-- &nbsp; -->
+    <div class="card col-md-3" data-bs-toggle="modal" data-bs-target="#ben1staticBackdrop"
+      title="PROFILE INFO OF BENEFICIARY 1" (click)="viewprofilebenone(ViewCCdbArray?.customerDoc?.Beneficiaries[0])"
+      *ngIf="ViewCCdbArray?.customerDoc?.Beneficiaries.length > 0">
+      <b>Benficiary Details 1 <label
+          [ngClass]="getStatusColor(ViewCCdbArray?.customerDoc?.Beneficiaries[0]?.Status)">({{ViewCCdbArray?.customerDoc?.Beneficiaries[0]?.Status}})</label>
+      </b>
+      <div class="cardcontent">
+        <h5>{{ViewCCdbArray?.customerDoc?.Beneficiaries[0]?.Name | titlecase}}</h5>
+      </div>
+      <div class="row col-md-12">
+        <div class="col-md-2">
+          <img src="../../../assets/images/telephone-callpurple.png" class="img-call">
+          <img src="../../../assets/images/mailpurple.png" class="img-mail">
+          <img src="../../../assets/images/genderpurple.png" class="img-plan">
+          <img src="../../../assets/images/calendarpurple.png" class="img-plan">
+        </div>
+        <div class="row col-md-10" style="text-align: left;">
+          <span>{{ViewCCdbArray?.customerDoc?.Beneficiaries[0]?.MobileNumber}}</span>
+          <span>{{ViewCCdbArray?.customerDoc?.Beneficiaries[0]?.EmailID}}</span>
+          <span>{{ViewCCdbArray?.customerDoc?.Beneficiaries[0]?.Gender}}</span>
+          <span>{{ViewCCdbArray?.customerDoc?.Beneficiaries[0]?.DOB}} Age :
+            {{ViewCCdbArray?.customerDoc?.Beneficiaries[0]?.Age}}</span>
+        </div>
+      </div>
+    </div>
+    <!-- &nbsp; -->
+    <div class="card col-md-3" 
+      title="PROFILE INFO OF BENEFICIARY 2" (click)="viewprofilebentwo(ViewCCdbArray?.customerDoc?.Beneficiaries[1])"
+      *ngIf="ViewCCdbArray?.customerDoc?.Beneficiaries.length > 1">
+      <b>Benficiary Details 2 <label
+          [ngClass]="getStatusColor(ViewCCdbArray?.customerDoc?.Beneficiaries[1]?.Status)">({{ViewCCdbArray?.customerDoc?.Beneficiaries[1]?.Status}})</label>
+        <div class="badge" *ngIf="ViewCCdbArray?.customerDoc?.Beneficiaries.length > 2" 
+          title="view more beneficaiary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">+{{ViewCCdbArray?.customerDoc?.Beneficiaries.length}}</div></b>
+      <div class="cardcontent">
+        <h5 data-bs-toggle="modal" data-bs-target="#ben2staticBackdrop">{{ViewCCdbArray?.customerDoc?.Beneficiaries[1]?.Name | titlecase}}</h5>
+      </div>
+      <div class="row col-md-12">
+        <div class="col-md-2">
+          <img src="../../../assets/images/telephone-callpurple.png" class="img-call">
+          <img src="../../../assets/images/mailpurple.png" class="img-mail">
+          <img src="../../../assets/images/genderpurple.png" class="img-plan">
+          <img src="../../../assets/images/calendarpurple.png" class="img-plan">
+        </div>
+        <div class="row col-md-10" style="text-align: left;">
+          <span>{{ViewCCdbArray?.customerDoc?.Beneficiaries[1]?.MobileNumber}}</span>
+          <span>{{ViewCCdbArray?.customerDoc?.Beneficiaries[1]?.EmailID}}</span>
+          <span>{{ViewCCdbArray?.customerDoc?.Beneficiaries[1]?.Gender}}</span>
+          <span>{{ViewCCdbArray?.customerDoc?.Beneficiaries[1]?.DOB}} Age :
+            {{ViewCCdbArray?.customerDoc?.Beneficiaries[1]?.Age}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="card col-md-3" (click)="navigatetoPlandetails(ViewCCdbArray)">
+      <b>Plan Details</b>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-1">
+            <img src="../../../assets/images/planningpurple.png" style="height: 30px; width: 30px;">
+          </div>
+          <div class="col-md-9">
+            <h5>{{ViewCCdbArray?.customerDoc?.PackageDetails?.AliasName}}</h5>
+          </div>
+          <div class="col-md-1">
+
+          </div>
+          <div class="col-md-1">
+
+          </div>
+          <div class="col-md-4">
+            <strong>Start Date</strong>
+          </div>
+          <div class="col-md-4">
+            :
+          </div>
+          <div class="col-md-4">
+            {{ViewCCdbArray?.customerDoc?.PackageDetails?.PackageCreatedDate * 1000 | date:'dd-MMM-yyyy' }}
+          </div>
+          <div class="col-md-4">
+            <strong>Expiry Date</strong>
+          </div>
+          <div class="col-md-4">
+            :
+          </div>
+          <div class="col-md-4">
+            {{ViewCCdbArray?.customerDoc?.PackageDetails?.PackageExpiryDate * 1000 | date:'dd-MMM-yyyy' }}
+          </div>
+          <div class="col-md-4">
+            <strong> <img src="../../../assets/images/locationpurple.png"
+                style="height: 15px; width: 15px;">Location</strong>
+          </div>
+          <div class="col-md-4">
+            :
+          </div>
+          <div class="col-md-4">
+            {{ViewCCdbArray?.customerDoc?.PackageDetails?.ServiceAreaName}}
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="boxcontent" style="padding-top: 0px; font-size: medium;">
+          <div>
+            <span><strong>Start Date:</strong> {{ViewCCdbArray?.customerDoc?.PackageDetails?.PackageCreatedDate * 1000 | date:'dd-MMM-yyyy' }}</span><br>
+            <span><strong>Expiry Date:</strong> {{ViewCCdbArray?.customerDoc?.PackageDetails?.PackageExpiryDate * 1000 | date:'dd-MMM-yyyy' }}</span><br>
+            <span><strong> <img src="../../../assets/images/locationpurple.png" style="height: 30px; width: 30px;">:</strong> {{ViewCCdbArray?.customerDoc?.PackageDetails?.ServiceAreaName}}</span>
+          </div>
+        </div> -->
+    </div>
+  </div>
+  <div class="row col-md-12" style="text-align: center; margin-bottom: 5px;">
+    <div class="card card-medium col-md-2" (click)="navigatetoComprehensivpms(ViewCCdbArray)">
+      <b>PMS Balance</b>
+      <div class="row pmsBalance">
+        <img src="../../../assets/images/moneypurple.png" style="height: 50px; width: 80px;">
+        {{ViewCCdbArray?.PMSTransactions?.ClosingBalance | currency:'INR'}}
+      </div>
+    </div>
+    <div class="card card-medium col-md-2" (click)="navigatetoOpenTickets(ViewCCdbArray)">
+      <b>Opened Tickets</b>
+      <div class="boxcontent">
+        <img src="../../../assets/images/ticketpurple.png" style="height: 50px; width: 50px;">
+        {{ViewCCdbArray?.OpenedTickets}}
+      </div>
+    </div>
+    <div class="card card-medium col-md-2" (click)="navigatetoCloseTickets(ViewCCdbArray)">
+      <b>Closed Tickets</b>
+      <div class="boxcontent">
+        <img src="../../../assets/images/ticketpurple.png" style="height: 50px; width: 50px;">
+        {{ViewCCdbArray?.ClosedTickets}}
+      </div>
+    </div>
+    <!-- <div class="card card-medium col-md-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"  (click)="toOpen()">
+      
+        <b>Touch Points</b>
+        <div class="boxcontent">
+          <img src="../../../assets/images/presspurple.png" style="height: 50px; width: 50px;"> {{ViewCCdbArray?.TouchPoints}}
+        </div>
+      </div> -->
+    <div class="card card-medium col-md-2" (click)="toOpen()">
+      <b>Touch Points</b>
+      <div class="boxcontent">
+        <img src="../../../assets/images/presspurple.png" style="height: 50px; width: 50px;">
+        {{ViewCCdbArray?.TouchPoints }}
+      </div>
+    </div>
+    <div class="card card-medium col-md-2" (click)="navigatetoHHCdetails(ViewCCdbArray)">
+      <b>Ongoing Requests</b>
+      <div class="row">
+        <div class="boxcontent">
+          <img src="../../../assets/images/housepurple.png" style="height: 50px; width: 50px;">
+          {{ViewCCdbArray?.OnGoingHHCDetails}}
+        </div>
+      </div>
+    </div>
+    <div class="card card-medium col-md-2" (click)="navigatetoCaremangerDetails(ViewCCdbArray)">
+      <b>Ongoing CM Visits</b>
+      <div class="boxcontent">
+        <img src="../../../assets/images/housepurple (3).png" style="height: 50px; width: 50px;">
+        {{ViewCCdbArray?.OnGoingCMVisits}}
+      </div>
+    </div>
+  </div>
+  <div class="row col-md-12" style="text-align: center; margin-bottom: 5px;">
+
+    <div class="card col-md-2" (click)="emrdetails('EMR')">
+      <!-- data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom" -->
+      <b>EMR Details</b>
+      <div class="boxcontent">
+        <img src="../../../assets/images/medical-prescriptionpurple.png" style="height: 55px; width: 55px;">
+        {{ViewCCdbArray?.EMRDetails}}
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <strong style="font-size: smaller;">Latest Update</strong>
+        </div>
+        <div class="col-md-6">
+          <label style="font-size: smaller;">
+            <u>{{ViewCCdbArray?.EMRlastUpdatedDate?.UpdatedDate*1000 | date : 'dd-MMM-YYYY'}}</u>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="card col-md-3">
+      <b>Support Executive Details</b>
+      <div class="cardcontent">
+        {{ViewCCdbArray?.customerDoc?.SupportExicutiveDetails?.FirstName | titlecase}}
+        {{ViewCCdbArray?.customerDoc?.SupportExicutiveDetails?.LastName | titlecase}}
+      </div>
+      <div class="row col-md-12">
+        <div class="col-md-2">
+          <img src="../../../assets/images/telephone-callpurple.png" class="img-call">
+          <img src="../../../assets/images/mailpurple.png" class="img-mail">
+          <img src="../../../assets/images/age.png" class="img-plan">
+        </div>
+        <div class="row col-md-10" style="text-align: left;">
+          <span>{{ViewCCdbArray?.customerDoc?.SupportExicutiveDetails?.ContactNumber}}</span>
+          <span>{{ViewCCdbArray?.customerDoc?.SupportExicutiveDetails?.EmailID}}</span>
+          <span>Age: {{ViewCCdbArray?.customerDoc?.SupportExicutiveDetails?.Age}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="card col-md-3">
+      <b>Care Manager Details</b>
+      <div class="cardcontent">
+        {{ViewCCdbArray?.customerDoc?.CareManagerDetails?.FirstName | titlecase}}
+        {{ViewCCdbArray?.customerDoc?.CareManagerDetails?.LastName | titlecase}}
+      </div>
+      <div class="row col-md-12">
+        <div class="col-md-2">
+          <img src="../../../assets/images/telephone-callpurple.png" class="img-call">
+          <img src="../../../assets/images/mailpurple.png" class="img-mail">
+          <img src="../../../assets/images/age.png" class="img-plan">
+        </div>
+        <div class="row col-md-10" style="text-align: left;">
+          <span>{{ViewCCdbArray?.customerDoc?.CareManagerDetails?.ContactNumber}}</span>
+          <span>{{ViewCCdbArray?.customerDoc?.CareManagerDetails?.EmailID}}</span>
+          <span>Age: {{ViewCCdbArray?.customerDoc?.CareManagerDetails?.Age}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="card col-md-4" (click)="navigateToVisitsUtilized(ViewCCdbArray, 'Visits')"> <b>Visits Utilized</b>
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th style="font-size: smaller;text-align: center;">Total</th>
+            <th style="font-size: smaller;text-align: center;">Used</th>
+            <th style="font-size: smaller;text-align: center;">Available</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let services of ViewCCdbArray?.VisitsUtilized?.Services">
+            <td (mouseover)="hoverService(services?.ServiceName)" (mouseout)="hoverService(null)"
+              [class.highlight-row]="services?.ServiceName === selectedService" (click)="click(services?.ServiceName)"
+              style="font-size: smaller;">{{services?.ServiceName | titlecase |replaceUnderscore}}</td>
+            <td style="font-size: smaller;text-align: center;">{{services?.TotalLimit}}</td>
+            <td style="font-size: smaller;text-align: center;">{{services?.Used}}</td>
+            <td style="font-size: smaller;text-align: center;">{{services?.AvailableLimit}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- modal for beneficaiary 1 start -->
+<div class="modal fade" id="ben1staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Beneficiary-1 Profile Info</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6">
+              <p><span style="font-weight: bold; color: #914573;">Name:</span> <strong>{{benonedetails?.Name}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">Gender:</span>
+                <strong>{{benonedetails?.Gender}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">Date Of Birth:</span>
+                <strong>{{benonedetails?.DOB}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">Age:</span> <strong>{{benonedetails?.Age}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">Language:</span>
+                <strong>{{benonedetails?.LanguagePreference}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">City:</span>
+                <strong>{{benonedetails?.ServiceAreaName}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">Mobile Number:</span>
+                <strong>{{benonedetails?.MobileNumber}}</strong>
+              </p>
+
+            </div>
+            <div class="col-md-6">
+              <p><span style="font-weight: bold; color: #914573;">Blood Group:</span>
+                <strong>{{benonedetails?.BloodGroup}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">Status:</span>
+                <strong>{{benonedetails?.Status}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">Past Proffesion:</span>
+                <strong>{{benonedetails?.PastProffesion}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">Address:</span>
+                <strong>{{benonedetails?.Address}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">Landmark:</span>
+                <strong>{{benonedetails?.Landmark}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">Pincode:</span>
+                <strong>{{benonedetails?.Pincode}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">Google Link:</span>
+                <strong>{{benonedetails?.GoogleMapAddressLink}}</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal for beneficaiary 1 end -->
+<!-- modal for beneficaiary 2 start -->
+<div class="modal fade" id="ben2staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Beneficiary-2 Profile Info</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6">
+              <p><span style="font-weight: bold; color: #914573;">Name:</span> <strong>{{bentwodetails?.Name}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">Gender:</span>
+                <strong>{{bentwodetails?.Gender}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">Date Of Birth:</span>
+                <strong>{{bentwodetails?.DOB}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">Age:</span> <strong>{{bentwodetails?.Age}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">Language:</span>
+                <strong>{{bentwodetails?.LanguagePreference}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">City:</span>
+                <strong>{{bentwodetails?.ServiceAreaName}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">Mobile Number:</span>
+                <strong>{{bentwodetails?.MobileNumber}}</strong>
+              </p>
+
+            </div>
+            <div class="col-md-6">
+              <p><span style="font-weight: bold; color: #914573;">Blood Group:</span>
+                <strong>{{bentwodetails?.BloodGroup}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">Status:</span>
+                <strong>{{bentwodetails?.Status}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">Past Proffesion:</span>
+                <strong>{{bentwodetails?.PastProffesion}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">Address:</span>
+                <strong>{{bentwodetails?.Address}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">Landmark:</span>
+                <strong>{{bentwodetails?.Landmark}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">Pincode:</span>
+                <strong>{{bentwodetails?.Pincode}}</strong>
+              </p>
+              <p><span style="font-weight: bold; color: #914573;">Google Link:</span>
+                <strong>{{bentwodetails?.GoogleMapAddressLink}}</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal for beneficaiary 2 end -->
+
+<!-- off canvars to view touch points start -->
+<div class="offcanvas offcanvas-end" [ngClass]="{'show': offcanvasfortouchpoints}" tabindex="-1" id="offcanvasRight"
+  aria-labelledby="offcanvasRightLabel" *ngIf="task == 'Touch_Points'">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Touch Points</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <app-update-touch-point></app-update-touch-point>
+  </div>
+</div>
+<!-- off canvars to view touch points end -->
+<!-- off canvars to EMR start -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRightemr" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel"><strong>EMR Files</strong></h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="ratio ratio-16x9">
+      <iframe [src]="Emrfiles | safe" type="application/pdf" title="EMR FILES" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+<!-- off canvars to EMR end -->
+<div class="emrtable mt-4" style="margin-left: 120px;" *ngIf="emrtypedata">
+  <div class="card-header" style="text-align: center;"><strong>
+      <H5>EMR Details</H5>
+    </strong></div>
+  <table class="table table-hover">
+    <thead class="emrtablehead" style="background-color:#914573;color: white;">
+      <tr>
+        <!-- <th scope="col">#</th> -->
+        <th scope="col">Report Type</th>
+        <th scope="col">Report Name</th>
+        <th scope="col">Name</th>
+        <th scope="col">Report Date</th>
+        <th scope="col">Description</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emr of emrdetailsarray">
+        <!-- <th scope="row">1</th> -->
+        <td>{{emr?.RecordType}}</td>
+        <td>{{emr?.RecordName}}</td>
+        <td>{{emr?.CreatedPersonName}}</td>
+        <td>{{emr?.ReportGeneratedDate}}</td>
+        <td>{{emr?.Description}}</td>
+        <td type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightemr" aria-controls="offcanvasRight"
+          style="cursor: pointer;" title="View EMR Files" (click)="viewemrfiles(emr.HealthRecordImageURLS)"><img
+            src="../../../assets/images/paper-clip.png" width="30px" height="30px"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Off Canvas To View BenFicary Start-->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Beneficiaries</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <table class="table table-hover">
+      <thead class="emrtablehead" style="background-color:#914573;color: white;">
+        <tr>
+          <!-- <th scope="col">#</th> -->
+          <th scope="col">Name</th>
+          <th scope="col">Ph.No</th>
+          <th scope="col">EmailID</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Age</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let data of ViewCCdbArray?.customerDoc?.Beneficiaries">
+        <tr>
+          <td>{{data?.Name}}</td>
+          <td>{{data?.MobileNumber}}</td>
+          <td>{{data?.EmailID}}</td>
+          <td>{{data?.Gender}}</td>
+          <td>{{data?.Age}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- Code End To view Benficary -->

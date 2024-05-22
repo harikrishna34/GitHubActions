@@ -1,0 +1,143 @@
+
+<div class="card" style="margin-left:10px">
+      <!-- =================================== screen two table is below -->
+      <div class=" head" style="text-align: center;">
+        <h5><u>Shortlist Profile/Shortlist Partner</u></h5>
+      </div>
+
+
+      <table class="table">
+        <thead class="tableheadsss">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Partner Name</th>
+            <th scope="col">Staff Name</th>
+            <th scope="col">Date of Birth</th>
+            <th scope="col">Age</th>
+            <th scope="col">Experience</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Price</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let profiles of shortListperofiles;let rowIndex = index">
+            <th scope="row"><img [src]="profiles.partnerstaffDetails?.ProfileImage?.ProfileImg" height="50px" width="50px" (click)="openModalpopupforimage(profiles)" data-bs-toggle="modal" data-bs-target="#infostaticBackdrop" style="cursor: pointer;" title="View profile info"></th>
+            <td>{{profiles.partnersDetails.BusinessInfo?.PartnerName}}</td>
+            <td>{{profiles.partnerstaffDetails?.Name}}</td>
+            <td>{{profiles.partnerstaffDetails?.DOB *1000 | date : 'dd-MMM-YYYY'}}</td>
+            <td>{{profiles.partnerstaffDetails?.Age}}</td>
+            <td>{{profiles.partnerstaffDetails?.Experience}}</td>
+            <td>-</td>
+            <td>{{profiles.Budget}}</td>
+            <div class="row col-md-12" style="display: flex;">
+                <div class="col-2" (click)="openmd(profiles.partnerstaffDetails?.ProfileID)" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdroppop" title="Approve"><img src="../../../assets/images/check-mark.png" height="20px" width="20px"></div>
+                  <div class="col-2" (click)="rejectmd(profiles.partnerstaffDetails?.ProfileID)" type="button" data-bs-toggle="modal" data-bs-target="#closeStaticBackdrop" title="Reject"><img src="../../../assets/images/decline.png" height="20px" width="20px">
+                </div></div>  
+          </tr>
+        </tbody>
+      </table>
+</div>
+
+<div class="modal" id="staticBackdroppop" data-bs-backdrop="static" tabindex="-1" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+    <!-- Modal content here -->
+    <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">Approve Profile</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal"  #ApproveModalClose  aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="myForm">
+        <label>Comments</label>
+        <textarea class="form-control" formControlName="comments"></textarea>
+        <div *ngIf="myForm.controls['comments'].value == '' && press" class="text-danger">*Required</div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-modalpopup"  (click)="Saveandapproveprofile()">Save & Approve</button>
+    </div>
+    <!-- Additional details here -->
+  </div>
+  </div>
+</div>
+
+<div class="modal fade" id="closeStaticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">Reject Profile</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" #rejectModalClose aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="myForm">
+        <label>Comments</label>
+        <textarea class="form-control" formControlName="comments"></textarea>
+        <div *ngIf="myForm.controls['comments'].value == '' && press" class="text-danger">*Required</div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-modalpopup" id="closeModal" (click)="Saveandrejectprofile()">Save & Reject</button>
+    </div>
+  </div>
+  </div>
+</div>
+
+<div class="modal fade" id="infostaticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Profile Info..</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="color: #914573;"></button>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="profile-image">
+                <img [src]="selectedProfileforimage?.partnerstaffDetails?.ProfileImage?.ProfileImg" height="100px" width="100px" alt="Profile Picture">
+            </div>
+            </div>
+            <div class="col-md-8">
+              <div class="profile-header">
+                <h2>{{selectedProfileforimage?.partnerstaffDetails?.Name}}</h2>
+                <p><span style="font-weight: bold; color: #914573;">ProfileID :</span> <strong></strong>{{selectedProfileforimage?.partnerstaffDetails?.ProfileID}}</p>
+            </div>
+            </div>
+          </div>
+        </div>
+       <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-6">
+                <p><span style="font-weight: bold; color: #914573;">Partner Name:</span> <strong>{{selectedProfileforimage?.partnersDetails?.BusinessInfo?.PartnerName}}</strong></p>
+                <p><span style="font-weight: bold; color: #914573;">DOB:</span> <strong>{{selectedProfileforimage?.partnerstaffDetails?.DOB *1000 | date : 'dd-MMM-YYYY'}}</strong></p>
+                <p><span style="font-weight: bold; color: #914573;">Age:</span> <strong>{{selectedProfileforimage?.partnerstaffDetails?.Age}}</strong></p>
+                <p><span style="font-weight: bold; color: #914573;">Gender:</span> <strong>{{selectedProfileforimage?.partnerstaffDetails?.Gender}}</strong></p>
+                <p><span style="font-weight: bold; color: #914573;">City:</span> <strong>{{selectedProfileforimage?.partnerstaffDetails?.ServiceAreaName}}</strong></p>
+                <p><span style="font-weight: bold; color: #914573;">Address:</span> <strong>{{selectedProfileforimage?.partnerstaffDetails?.Address}}</strong></p>
+                <p><span style="font-weight: bold; color: #914573;">Languages:</span> <strong>
+                  <span *ngFor="let language of selectedProfileforimage?.partnerstaffDetails?.Languages;let lastLanguage = last">
+                    {{ language }}
+                    <span *ngIf="!lastLanguage">, </span>
+                  </span>
+                </strong></p>
+              </div>
+              <div class="col-md-6">
+                <p><span style="font-weight: bold; color: #914573;">Service:</span> <strong>{{selectedProfileforimage?.partnerstaffDetails?.SubcategoryName}}</strong></p>
+                <p><span style="font-weight: bold; color: #914573;">Experience:</span> <strong>{{selectedProfileforimage?.partnerstaffDetails?.Experience}}</strong></p>
+                <p><span style="font-weight: bold; color: #914573;">Education:</span> <strong>{{selectedProfileforimage?.partnerstaffDetails?.Education}}</strong></p>
+                <p><span style="font-weight: bold; color: #914573;">Mobile Number:</span> <strong>{{selectedProfileforimage?.partnerstaffDetails?.MobileNumber}}</strong></p>
+                <p><span style="font-weight: bold; color: #914573;">AadhaarNo:</span> <strong>{{selectedProfileforimage?.partnerstaffDetails?.AadhaarNo}}</strong></p>
+                <p><span style="font-weight: bold; color: #914573;">Religion:</span> <strong>{{selectedProfileforimage?.partnerstaffDetails?.Religion}}</strong></p>
+              </div>
+            </div> 
+          </div>             
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

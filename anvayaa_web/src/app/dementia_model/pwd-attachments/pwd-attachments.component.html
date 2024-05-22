@@ -1,0 +1,72 @@
+<div class="mainDiv">
+    <div class="card">
+        <div class="card-header">
+          <button type="button" class="btn btn-primary" (click)="openUpload()">+ Upload</button>
+          <form [formGroup]="attachmentsForm" *ngIf="uploadForm">
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Time-Date</label>
+                    <input  type="date"   class="form-control" [max]="today| date : 'yyyy-MM-dd'"  formControlName="ReportDate"   required>
+                    <div *ngIf="this.attachmentsForm.controls['ReportDate'].value==''&& upload == true" class="errorclr">*Required Date </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Type</label>
+                    <select class="form-select" formControlName="Type" >
+                        <option value="" disabled selected>Select Type</option>
+                        <option value="MonthlyReview">MonthlyReview</option>
+                        <option value="INCAForm">INCAForm</option>
+                        <option value="WellbeingForm">WellbeingForm</option>
+
+                    </select>
+                    <div *ngIf="this.attachmentsForm.controls['Type'].value==''&& upload == true" class="errorclr"> *Required Type </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Chose File</label>
+                    <input type="file" class="form-control"  formControlName="File" (change)="attachment($event)" accept="application/pdf,application/docx"  data-buttontext="Select a File">
+                    <div>(only PDF / Word Documents aceept)</div>
+                    <div class="errorclr" *ngIf="this.attachmentsForm.controls['File'].value==''&& upload == true">*Required Attachment </div>
+                </div>
+                <div class="col-md-3">
+                   <label>Note :</label>
+                    <textarea class="form-control" formControlName="Note">
+                    </textarea>
+                    <div  class="errorclr" *ngIf="this.attachmentsForm.controls['Note'].value==''&& upload == true">*Required Note </div>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary" style="margin-top:20px" (click)="addattachment()">Upload</button>
+        
+                </div>
+                
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 20px;">
+        <div class="card-body text-center">
+          <h4>Attachments</h4>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Note</th>
+                    <th scope="col">Attachment</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let att of attachmentarray" >
+                    <th >{{(att.ReportDate)*1000 | date:'dd-MM-yyyy'}}</th>
+                    <td>{{att.Type}}</td>
+                    <td>{{att.Note}}</td>
+                    <td><button class="btn btn-primary" (click)="documetn(att)"><img src="../../../assets/images/icons8-attachment-24.png"></button></td>
+                  </tr>
+                 <tr *ngIf="nodata"><td colspan="4"><div class="text-center"><h1>No Attachments Found </h1></div></td></tr>
+                </tbody>
+              </table>
+        </div>
+      </div>
+</div>
+

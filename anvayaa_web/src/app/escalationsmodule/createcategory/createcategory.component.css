@@ -1,0 +1,25 @@
+.mainDiv{
+    margin-top: 90px;
+    margin-left: 112px;
+}
+
+.errorColor{
+    color:red
+}
+
+.row{
+    margin-right: calc(0 * var(--bs-gutter-x));
+}
+
+label,th{
+    font-weight: 700;
+    color:#838383
+}
+h2,h3{
+    color:purple
+}
+
+.card-title{
+    color: cornflowerblue;
+}
+

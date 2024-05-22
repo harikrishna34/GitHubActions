@@ -1,0 +1,240 @@
+
+<div class="bodycontent">
+<div class="searchButton row">
+  <div class="ng-autocomplete">
+    <ng-autocomplete [data]="data" [searchKeyword]="keyword" placeholder="Select Customer"
+      (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)' (inputCleared)='onFocused($event)'
+      historyIdentifier="data" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+    </ng-autocomplete>
+
+
+    <ng-template #itemTemplate let-item>
+      <a [innerHTML]="item.Name"></a>
+    </ng-template>
+
+    <ng-template #notFoundTemplate let-notFound>
+      <div [innerHTML]="notFound"></div>
+    </ng-template>
+  </div>
+</div>
+<br>
+<div class="customerData row" *ngIf="userDetails.length>0">
+  <div class="row" *ngFor="let data of userDetails">
+    <div class="border col-md-4">
+     <span> <h4>Sponsor</h4></span>
+
+
+      <!-- <span>  Name:</span> -->
+      <h3>{{data.Name}}</h3>
+      <p><span> Ph NO:</span>{{data.MobileNumber}}</p>
+      <p><span> EmailID:</span>{{data.EmailID}}</p>
+      <!-- <p><span> City:</span>{{data.City}}</p> -->
+
+
+    </div>
+    <div class="border col-md-4">
+      <h4>Beneficiary 1</h4>
+      <h3>{{data.Beneficiaries[0].Name}}</h3>
+      <p><span> PhNO:</span>{{data.Beneficiaries[0].MobileNumber}}</p>
+      <p><span> EmailID:</span>{{data.Beneficiaries[0].EmailID}}</p>
+      <!-- <p><span> City:</span>{{data.Beneficiaries[0].City}}</p> -->
+    </div>
+    <div class="border col-md-4" *ngIf="data.Beneficiaries.length>=2">
+      <h4>Beneficiary 2</h4>
+
+      <h3>{{data.Beneficiaries[1].Name}}</h3>
+      <p><span> PhNO:</span>{{data.Beneficiaries[1].MobileNumber}}</p>
+      <p><span> EmailID:</span>{{data.Beneficiaries[1].EmailID}}</p>
+      <!-- <p><span> City:</span>{{data.Beneficiaries[1].City}}</p> -->
+    </div>
+  </div>
+  <div class="cmspdetails row" *ngFor="let data of userDetails">
+    <!-- {{data.SupportExecutiveObj==null}} -->
+    <div class="bgcolors border col-md-4" *ngIf="data.SupportExecutiveObj!=null">
+      <span class="support">Support Excecutive</span> 
+
+      <h3>{{data.SupportExecutiveObj.FirstName}}</h3>
+      <!-- <span>  Name:</span> -->
+      <p><span> Contact Number:</span>{{data.SupportExecutiveObj.ContactNumber}}</p>
+    </div>
+    <div class="bgcolors border col-md-4" *ngIf="data.CareManagerObj!=null">
+      <span class="support">Care Manager</span> 
+
+
+      <h3>{{data.CareManagerObj.FirstName}}</h3>
+      <p><span> Contact Number:</span>{{data.CareManagerObj.ContactNumber}}</p>
+    </div>
+    <div class="bgcolors border col-md-4" *ngIf="data.BackUpCareManagerDetails!=null">
+      <span class="support">Backup CareManager</span> 
+
+      <h3 *ngIf="data.BackUpCareManagerObj!=null">{{data.BackUpCareManagerObj.FirstName}}</h3>
+      <p *ngIf="data.BackUpCareManagerObj!=null"><span> Contact
+          Number:</span>{{data.BackUpCareManagerObj.ContactNumber}}</p>
+    </div>
+  </div>
+  <div class="row" [formGroup]="createRequestData">
+
+    <div class="searchbox col-md-4">
+
+      <div class="serviceSelect ng-autocomplete">
+        <ng-autocomplete [data]="categaryDetails" [searchKeyword]="keyword1" placeholder="Select Service"
+          (inputChanged)='onChangePlan($event)' (selected)='selectCategory($event)' (inputCleared)='onFocuse($event)'
+          historyIdentifier="categaryDetails" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+        </ng-autocomplete>
+
+        <ng-template #itemTemplate let-item>
+          <a [innerHTML]="item.AliasName"></a>
+        </ng-template>
+
+        <ng-template #notFoundTemplate let-notFound>
+          <div [innerHTML]="notFound"></div>
+        </ng-template>
+      </div>
+    </div>
+    <div class="anvayaaCharges col-md-4" [hidden]="formDetails==false">
+
+      <h2>Anvayaa Charges:</h2>
+      <h6> {{Covered}}</h6>
+      <h6 class="text-danger"> {{NotCovered}}</h6>
+      <p><span>Estimated Range:</span> /-</p>
+      <p><span>Anvayaa Charges:</span>{{TotalPrice}} /-</p>
+
+
+    </div>
+    <div class="nxtbtn col-md-2" [hidden]="formDetails==false">
+      <button   class="createReqBtn" data-bs-toggle="modal"
+        data-bs-target="#CreateRequest">NEXT</button>
+    </div>   
+  </div>
+</div>
+</div>
+  <div class="modal fade " id="CreateRequest" role="dialog " aria-hidden="true " data-backdrop="static "
+    data-keyboard="false " aria-labelledby="fieldEmployeeModalLabel " style="padding-bottom: 50px;">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content" style="height: auto; width: auto;">
+
+        <form name="UpdateStatusForm" [formGroup]="createRequestData">
+          <div class="header modal-header model">
+            <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+            <h2 class="titleCreate modal-title  text-center ">Create Request </h2>
+          </div>
+          <div class="modal-body">
+            <div class="container allcp-form ">
+              <div class="row" >
+                <div class=' col-sm-3' [hidden]="CoverdPlan">
+                  Request Type:
+                  <div id='Status'>
+                    <label for="Status" class="field select">
+                      <select class="selectType" formControlName="RequestType">
+                        <option selected value="">Select Request Type</option>
+                        <option value="InHouseRequest">In House</option>
+                        <option value="ThirdPartyRequest">Third Party</option> -->
+                      </select>
+                      <i class="arrow double"></i>
+                    </label>
+                  </div>
+                </div>
+                <div class='col-sm-3' [hidden]="CoverdPlan">
+                  Service Type :
+                  <div id='Status'>
+                    <label for="Status" class="field select">
+                      <select class="selectType" formControlName="ServiceType">
+                        <option selected value="">Select Service Type</option>
+                        <option value="Onetime">One Time</option>
+                        <option value="Ongoing/ Daily">Daily/Ongoing</option>
+                        <option value="Recurring">Recurring</option>
+                      </select>
+                      <i class="arrow double"></i>
+                    </label>
+                  </div>
+                </div>
+                <div class='col-sm-3'>
+                  Select Start Date :
+
+                  <div class="input-group date">
+                    <input formControlName="RequestedStartDate" type='datetime-local' class="selectType form-control"
+                      placeholder="Select Start Date" required>
+
+
+                  </div>
+
+                </div>
+                <div class='col-sm-3'>
+                  Select End Date :
+
+                  <div class="input-group date">
+                    <input formControlName="RequestedEndDate" type='date' class="selectType form-control"
+                      placeholder="Select EndDate ">
+
+
+                  </div>
+
+                </div>
+
+
+              </div>
+              <div class="row" style="padding-top: 20px ;">
+                <div class="selectType col-sm-3" *ngIf="this.createRequestData.value.ServiceType=='Recurring'">
+                  <ng-multiselect-dropdown class="" value="dropdownList" formControlName="days" [placeholder]="'select Days '"
+                    [settings]="dropdownSettings" [data]="Days" [(ngModel)]="selectedItems">
+                  </ng-multiselect-dropdown>
+                </div>
+                
+                <div class="col-sm-2" [hidden]="CoverdPlan" (change)="paymentMode($event)">
+                  <div class="form-check">
+                    <input value="Cheque" class="checkboxstyle form-check-input" type="radio" name="flexRadioDefault"
+                      id="flexRadioDefault2">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      Cheque
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input value="Wire Transfer" class="checkboxstyle form-check-input" type="radio" name="flexRadioDefault"
+                      id="flexRadioDefault2">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      Wire Transfer
+                    </label>
+                  </div>
+               
+                </div>
+                <div class="col-sm-2" [hidden]="CoverdPlan" (change)="paymentMode($event)">
+                  <div class="form-check">
+                    <input value="Cash" class="checkboxstyle form-check-input" type="radio" name="flexRadioDefault"
+                      id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      Cash
+                    </label>
+                  </div>
+                 
+
+                  <div class="form-check" [hidden]="pmsVerify">
+                    <input value="PMS" class="checkboxstyle form-check-input" type="radio" name="flexRadioDefault"
+                      id="flexRadioDefault2">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      PMS
+                    </label>
+                  </div>
+                </div>
+                <div class='col-sm-3'>
+                  Remarks :
+                  <div id='Remark'>
+                    <textarea type='text' formControlName="Note" class="form-control" required style="width: 225px;"
+                      placeholder="Enter Remark">
+                        </textarea>
+                  </div>
+                </div>
+               
+
+              </div>
+            </div>
+          </div>
+
+        </form>
+        <div class="modal-footer">
+          <button (click)="createRequest()" class="createReqBtn">Create Request</button>
+          <button type="button"  class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,264 @@
+<div class="body content" style="margin-top: 8%;margin-left: 10%;">
+  <div class="row">
+    <div class="col-md-3">
+      <form [formGroup]="LocationList">
+        <div class="col-md-12">
+            <label>States</label>
+            <select class="form-select" (change)="selectedstate($event)" name="selectstate" formControlName="selectstate"  required>
+              <option selected value=""  disabled>Select State</option>
+              <option *ngFor="let data of LocationListType"    value="{{data.name}}">{{data.name}}</option>
+            </select>
+            <div *ngIf=" LocationList.controls['selectstate'].status == 'INVALID' && press == true"
+            class="errorColor">*Select State</div>
+          </div>
+          <div class="col-md-12">
+            <Label>State Name</Label>
+            <input type="text" class="form-control" readonly formControlName="StateName" placeholder="State Name" />
+            <div *ngIf=" LocationList.controls['StateName'].status == 'INVALID' && press == true"
+            class="errorColor">*Select State</div>
+          </div>
+      
+          <div class="col-md-12">
+            <Label>State Code</Label>
+            <input type="text" class="form-control" readonly formControlName="StateCode" placeholder="State Code"/>
+            <div *ngIf=" LocationList.controls['StateName'].status == 'INVALID' && press == true"
+            class="errorColor">*Select State</div>
+          </div>
+          <div class="col-md-12">
+            <label>AliasName</label>
+            <input type="text" class="form-control"  readonly formControlName="AliseName" placeholder="Alise Name"/>
+            <div *ngIf=" LocationList.controls['AliseName'].status == 'INVALID' && press == true"
+            class="errorColor">*Select AliseName</div>
+          </div>
+          <div class="col-md-12">
+            <label>Type</label>
+            <input type="text" class="form-control" readonly formControlName="Type" placeholder="Type"/>
+            <div *ngIf=" LocationList.controls['StateName'].status == 'INVALID' && press == true"
+            class="errorColor">*Select State</div>
+          </div>
+          <div class="col-md-12">
+            <label>GST :- </label>
+            <label class="radio-inline">
+              <input type="radio"  formControlName="GST" name="GST" value=true (change)="checkgst()">Yes
+            </label>
+            <label class="radio-inline">
+              <input type="radio"   formControlName="GST"  name="GST" value=false (change)="checkgst()">No
+            </label>
+            <div *ngIf=" LocationList.controls['GST'].status == 'INVALID' && press == true"
+            class="errorColor">*Select Yes/No for GST</div>
+          </div>
+          <div class="col-md-12">
+            <Label>CGST</Label>
+            <input type="number" class="form-control" formControlName="CGST"  placeholder="CGST" (change)="checkgst()"/>
+            <div *ngIf=" LocationList.controls['CGST'].status == 'INVALID' && press == true"
+            class="errorColor">*Enter CGST</div>
+          </div>
+          <div class="col-md-12">
+            <Label>SGST</Label>
+            <input type="number" class="form-control" formControlName="SGST" placeholder="SGST" (change)="checkgst()"/>
+            <div *ngIf=" LocationList.controls['SGST'].status == 'INVALID' && press == true"
+            class="errorColor">*Enter SGST</div>
+          </div>
+          <div class="col-md-12">
+            <Label>IGST</Label>
+            <input type="number" class="form-control" formControlName="IGST" placeholder="IGST" (change)="checkgst()"/>
+            <div *ngIf=" LocationList.controls['IGST'].status == 'INVALID' && press == true"
+            class="errorColor">*Enter IGST</div>
+          </div>
+          <div class="col-md-12" style="text-align: center;margin-top:10px">
+            <button type="button" class="btn btn-success"  (click)="creatstate()">
+              <i class="fa fa-save" aria-hidden="true"></i>
+              Submit
+            </button>
+          </div>
+      </form>
+</div>
+  <!--SELECTING CITIES............-->
+
+  <div class="col-md-3">
+    <form [formGroup]="LocationcityList">
+      <div class="col-md-12">
+          <label>States</label>
+          <select class="form-select"  name="selectstatecity" formControlName="StateID" (change)="selectedcity($event)"  required>
+            <option selected value=""  disabled>Select State</option>
+            <option *ngFor="let statedata of LocationcityListType"    value="{{statedata.StateID}}">{{statedata.StateName}}</option>
+          </select>
+          <div *ngIf=" LocationcityList.controls['StateID'].status == 'INVALID' && citypress == true"
+          class="errorColor">*Select State</div>
+        </div>
+   
+       
+        <div class="col-md-12">
+          <Label>City Name</Label>
+          <input type="text" class="form-control" formControlName="CityName" placeholder="City Name" [readonly]="createcity == false">
+          <div *ngIf=" LocationcityList.controls['CityName'].status == 'INVALID' && citypress == true"
+        class="errorColor">*Enter City Name</div>
+      </div>
+        <div class="col-md-12">
+          <label>City Shortname</label>
+          <input type="text" class="form-control"  formControlName="CityShortName" placeholder="City Shortname"/>
+          <div *ngIf=" LocationcityList.controls['CityShortName'].status == 'INVALID' && citypress == true"
+          class="errorColor">*Enter City Short Name</div>
+          </div>
+    
+     
+        <div class="col-md-12">
+          <label>City Type</label>
+          <select class="form-select"  formControlName="Type" placeholder="CityType">
+            <option selected value=""  disabled>Select City Type</option> 
+            <option value="Metro"><li><span class="dropdown-item-text">Metro</span></li></option>
+            <option value="Tier_2"><li><span class="dropdown-item-text">Tier_2</span></li></option>
+           </select>
+           <div *ngIf=" LocationcityList.controls['Type'].status == 'INVALID' && citypress == true"
+          class="errorColor">*Select City Type</div>
+        </div>
+      
+          
+          <div class="col-md-12" style="text-align: center;margin-top:10px">
+          <button type="button" class="btn btn-success"  (click)="submitcityform()">
+            <i class="fa fa-save" aria-hidden="true"></i>
+            Submit
+          </button>
+        </div>
+    </form>
+    
+</div>
+</div>
+
+
+<div class="container mt-6">
+  <br>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-bs-toggle="tab" href="#state">STATES</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="tab" href="#city">CITIES</a>
+    </li>
+ 
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div id="state" class="container tab-pane active"><br>
+      <h3><u>STATES LIST:-</u></h3>
+      <div class="container">
+        <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">State Name</th>
+                  <th scope="col">CGST</th>
+                  <th scope="col">SGST</th>
+                  <th scope="col">IGST</th>
+                  <th style="text-align: center;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let list of locationlistarray; let i = index">
+                  <td>{{list.StateID}}</td>
+                  <td>{{list.StateName}}</td>
+                  <td>{{list.CGST}}</td>
+                  <td>{{list.SGST}}</td>
+                  <td>{{list.IGST}}</td>
+                  <td style="text-align: center;"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="permissionremovestate(list)" title="Delete">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </button>
+                &nbsp;
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" (click)="updatestatelist(list)" title="Update">
+                    <i class="fa fa-edit" aria-hidden="true"></i>
+                  </button></td>
+                  <td>
+                    
+                    <div class="modal" id="exampleModal" tabindex="0" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title"></h5> 
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          Do You Want to Remove this Particular Record {{permremovestate.StateName}}?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="removetablestatelist()">Yes</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+    <div id="city" class="container tab-pane fade"><br>
+    <h3><u>CITIES LIST:-</u></h3>
+          <div class="container">
+        <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">State Name</th>
+                  <th scope="col">City Name</th>
+                  <th scope="col">City ShortName</th>
+                  <th scope="col">City Type</th>
+                  <th scope="col">Status</th>
+                  <th style="text-align: center;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let list of locationcitylistarray; let i = index">
+                  <!-- <td>{{list.StateDetails.StateName}}</td> -->
+                  <td>{{list.CityName}}</td>
+                  <td>{{list.CityShortName}}</td>
+                  <td>{{list.Type}}</td>
+                  <td>{{list.Status}}</td>
+    
+                 
+                  <td style="text-align: center;">
+                    <!-- <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"(click)="permissionremovecity(list.StateID)"title="Delete">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </button> -->
+                &nbsp;
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" (click)="updatecitylist(list)"  title="Update">
+    
+                    <i class="fa fa-edit" aria-hidden="true"></i>
+                  </button></td>
+                   <!-- <td><div class="modal" id="exampleModal" tabindex="0" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title"></h5> 
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Do You Want to Remove this Particular Record {{permremovecity}}?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" >Yes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+   
+  </div>
+</div>
+  
+
+
+
+  
+
+  
+  
+
+

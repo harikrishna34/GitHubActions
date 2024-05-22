@@ -1,0 +1,85 @@
+<div class="mainDiv">
+    <br>
+    <div class="card">
+        <div class="card-body">
+            <div class="card">
+                <div class="card-body">
+                 <form [formGroup]="ChatRolesForm">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="titelColor">Role</label>
+                            <!-- <input type="text" formControlName="role" class="form-control" required> -->
+                            <select class="form-select" formControlName="role" name="role" (change)="roleid($event)" required>
+                              <option selected value=" ">Select Owner</option>
+                              <option *ngFor="let role of roleslistarray" value="{{role.Role}}">{{role.Role}}</option>
+                            
+                          </select>
+                            <span class="errorColor" *ngIf="ChatRolesForm.controls['role'].status=='INVALID'&&ChatRolesForm.controls['role'].value==''&&submit == true">* role required</span>
+                        </div>
+                        <!-- <div class="col-md-3">
+                            <label class="titelColor">Name</label>
+                            <input type="text" formControlName="name" class="form-control" required>
+                            <span class="errorColor" *ngIf="ChatRolesForm.controls['name'].status=='INVALID'&&ChatRolesForm.controls['name'].value==''&&submit == true">* name required</span>
+
+                        </div> -->
+                        <div class="col-md-2">
+                             
+                          <button  class="btn btn-primary addBtn" (click)="submitrole()">Add Role</button>
+                        </div>
+                    </div>
+                 </form>
+                </div>
+              </div>
+        </div>
+      </div>
+
+     <br>
+    <div class="card">
+        <div class="card-body">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">Role</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Created Date</th>
+                            <th scope="col">Remove</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let role of rolesarray">
+                            <td>{{role.role|titlecase}}</td>
+                            <td>{{role.name}}</td>
+                            <td>{{role.createdAt*1000|date: "dd-MM-YYYY"}}</td>
+                            <td data-bs-toggle="modal" data-bs-target="#removeRole"><img src="../../../assets/images/delete.png" style="width:20px" (click)="confirmationToRemove(role)"></td>
+                          </tr>
+                         
+                        </tbody>
+                      </table>
+                </div>
+              </div>
+        </div>
+      </div>
+
+
+
+<!-- Remove Role  Modal -->
+<div class="modal fade" id="removeRole" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        Confirm to Remove Role
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="removerole()"> Delete </button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

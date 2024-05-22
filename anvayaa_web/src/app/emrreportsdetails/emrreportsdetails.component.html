@@ -1,0 +1,280 @@
+
+<div class="body-container">
+  
+        <div class="row">
+          <div class="col-md-3">
+            <button class="addhealthbtn" (click)="addhealthreports()">
+              <img src="../../assets/images/reports-lg.png"><i class="fa fa-plus fa-3" aria-hidden="true"></i> Add
+              Health Report </button>
+          </div>
+        </div>
+      
+      
+      <form action="" *ngIf="addprofilebtn" [formGroup]="reports">
+        <div class="row"  >
+          <div class="col-md-3">
+            <div class="health-profile heading" style="margin-top: 10px;">Create Health Report
+            </div>
+            <div class="card" style="height: 700px;margin: 5px; margin-top:2%;">
+              <div class="card-body">
+                Select Parent
+                <div class="card" *ngFor="let Beneficiaries of users" style="width: 100%;height: 30%;" class="card-img-top"
+                  (click)="custID(Beneficiaries)">
+      
+                  <img *ngIf="!Beneficiaries.BeneficiaryProfileImageURL" value="Beneficiaries.CustID"
+                    src="../../assets/images/parent1_512.png" style="width: 30%;" alt="...aa"><br>
+      
+      
+                  <img *ngIf="Beneficiaries.BeneficiaryProfileImageURL" 
+                  value="Beneficiaries.CustID"   src="{{Beneficiaries.BeneficiaryProfileImageURL}}" width="100" height="100" style="border-radius: 100%;"
+                    alt="...aa"><br>
+                    
+                  <label for="">{{Beneficiaries.Name}}</label>
+                  <div>
+                    <span style="color: red;" *ngIf="this.reports.controls['CustID'].status=='INVALID' &&updateBtn">
+                      *Enter Date</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3" style="margin-top: 25px;">
+            <div class="card" style="height: 700px;margin: 5px;margin-top: 5%;">
+              <div class="card-body">
+                <label for="email">Report Generated Date</label>
+                <div class="input-group date" id="datetimepicker1">
+                  <input class="form-control" type="date" formControlName="ReportGeneratedDate" required="" />
+                </div>
+                <span style="color: red;" *ngIf="this.reports.controls['ReportGeneratedDate'].status=='INVALID' &&updateBtn">
+                  *Enter Date</span>
+                  <br>
+      
+                <div class="typeofreports">
+                  <label for="email"> Type Of Report</label>
+                  <select class="form-control" name="type" formControlName="RecordType" required="" (change)="ReportTypesData($event)">
+                    <option selected="" value="" disabled="">Type of Report</option>
+                    <option value="{{ReportType.ReportTypeID}}" *ngFor=" let ReportType of  ReportTypes">
+                      {{ReportType.AliasName}}</option>
+                  </select>
+                </div>
+                <span style="color: red;" *ngIf="this.reports.controls['RecordType'].status=='INVALID' &&updateBtn">
+                  *Enter RecordType</span> 
+                  <br>
+                <div class="typeofreports">
+                  <label for="email"> Report Name</label>
+      
+                  <select class="form-control" name="RecordName" formControlName="RecordName" required="" (change)="GetReportNameID($event)">
+                    <option selected="" value="" disabled="">Report Name</option>
+                    <option value="{{ReportName.ReportNameID}}" *ngFor="let ReportName of  ReportNames">
+                      {{ReportName.AliasName}}</option>
+                  </select>
+                </div> 
+                <br>
+                <span style="color: red;" *ngIf="this.reports.controls['RecordName'].status=='INVALID' &&updateBtn">
+                  *Enter RecordName</span>
+                <div class="description">
+                  <label for="email" class="health-label">Description </label>
+                  <textarea class="form-control" formControlName="Description"  style="height: 110px;"
+                    placeholder="ex:Date and Time Refered Doctor" cols="2" name="test" rows="2" required=""></textarea>
+                </div>
+                <span style="color: red;" *ngIf="this.reports.controls['Description'].status=='INVALID' &&updateBtn"> *Enter
+                  Description </span>
+                <div class="typeofreports">
+                  <div class="avatar-upload">
+                    <div class="avatar-edit">
+                      <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput
+                        (change)="selectReport($event)" multiple="multiple" />
+                    </div>
+                    <br>
+      
+                    <button type="submit" class="btn btn-danger btn-lg btn-block" (click)="fileInput.click()">Select
+                      Report</button>
+      
+                  </div>
+      
+                </div>
+      
+                <div class="typeofreports">
+                  <button class="Savereports-btn-lg " type="botton" (click)="uploadHealthRecordDetails()">Save
+                    Report(s)</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+      
+          <div class="col-md-12 col-lg-6">
+            <div class="detail-card" style="max-height:700px;min-height:700px;overflow: hidden;margin-top: 5%;">
+              <div class="col-sm-6  col-xs-6 " *ngFor=" let p of PrescriptionImageFiles;let i=index">
+                <div class="pharmacy-imagecard">
+                  <div class="row">
+                    
+                    <img src="{{p}}" class="thumb">
+                  </div>
+                  <div class="row">
+                    <button type="button" class="btn btn-default" (click)="removeImage(i)" *ngIf="p">Remove</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="col-md-6" >
+            <div class="card" style="height: 700px;margin: 5px;margin-top: 5%;">
+              <div class="card-body">
+              
+        
+        
+        <div class="row">
+        
+        
+                <div class="avatar-preview">
+        
+                  <div id="imagePreview"  
+                *ngFor="let img of PrescriptionImageFiles"  >
+        <div class="col-md-3"></div>
+                      <img  style="width: 200px;height: 200px" src="{{img}}" alt="">
+                  </div>
+                </div>
+                  <div class="row">
+           
+                </div>
+              </div>
+              </div>
+            </div>
+          </div> -->
+      
+        </div>
+      
+      
+      
+      </form>
+      
+      
+        <div style=" margin-left: 5%; margin-right: 5%;" [formGroup]="ViewHealthRecordsByDate">
+          <div class="row">
+            <div class="col-md-2">
+              <label for="email">Start Date</label>
+              <input class="form-control" type="date" formControlName="StartDate" required=""/>
+              <span style="color:red" *ngIf="this.ViewHealthRecordsByDate.controls['StartDate'].status=='INVALID' &&viewBtn "> *Enter Start Date</span>
+            </div>
+      
+            <div class="col-md-2">
+              <label for="email">End Date</label>
+              <input class="form-control" type="date"  formControlName="EndDate"  required=""/>
+              <span style="color:red" *ngIf="this.ViewHealthRecordsByDate.controls['EndDate'].status=='INVALID' &&viewBtn "> *Enter End Date</span>
+      
+            </div>
+      
+            <div class="col-md-2">
+              <div class="form-group ">
+                <label for="email">Report Type</label>
+                <select class="form-select" name="type"  required="" (change)="ReportTypesData($event)">
+                  <option selected="" value="" disabled="">Type of Report</option>
+                  <option value="{{ReportType.ReportTypeID}}" *ngFor=" let ReportType of  ReportTypes">
+                    {{ReportType.AliasName}}</option>
+                </select>
+              </div>
+            </div>
+      
+            <div class="col-md-2">
+              <div class="form-group ">
+                <label for="email">Report Description</label>
+                <select class="form-select" name="RecordName"  required="" (change)="GetReportNameID($event)">
+                  <option selected=""  disabled="">Report Name</option>
+                  <option value="{{ReportName.ReportNameID}}" *ngFor="let ReportName of  ReportNames">
+                    {{ReportName.AliasName}}</option>
+                </select>
+              </div>
+            </div>
+      
+            <div class="col-md-2">
+              <div class="form-group ">
+                <label for="email">Report Name</label>
+                <div class="input-group date">
+                  <input class="form-control" type="search" placeholder="search" />
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-1">
+              <button class="btn btn-cta" style="margin-top: 15px;" (click)="ReportTypesDataSearch($event,'Dates')">Search</button>
+            </div>
+            <div class="col-md-2">
+              <button class="anvayaa-btn-lgnew  btn-l-blue health" style="margin-top: 15px; height: 38px;margin-left: -3px;border-radius: 20px;">Clear filters</button>
+            </div>
+            <div class="col-md-4">
+            </div>
+          </div>
+        </div>
+      
+        <hr style="border-top:1px solid #9a9494;">
+        <div class="row">
+          <div class="topmargin20 col-sm-12 col-lg-6 " *ngFor="let emr of electronichealthrecords">
+            <div class="detail-card medical-card">
+              <div class="row">
+                <div class="pharmacy-image-div  col-sm-4">
+                  <img *ngFor="let slide of emr.HealthRecordImageURLS ;let i=index" [hidden]="slide.Status !='Active'"
+                  data-bs-toggle="modal" data-bs-target="#emr"    src="{{slide.ImageUrl}}" alt="" class="health-image"
+                    (click)="healthreportview(emr.HealthRecordImageURLS)">
+      
+      
+                  <div>
+                    <button *ngFor="let image of emr.HealthRecordImageURLS;let i=index"
+                    (click)="presprictionView(image,i,emr.HealthRecordID)"    class="health-button">{{i+1}} &nbsp;
+                    </button>
+                  </div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="report-data col-sm-7">
+                  <p><strong>Report Type </strong>:{{emr.RecordType}} </p>
+                  <p><strong>Report Name </strong>:{{emr.RecordName}} </p>
+      
+                  <p> <strong>Name:</strong> {{emr.CustomerName}}</p>
+                  <p><strong> Report Date:</strong>{{emr.ReportGeneratedDate *1000 |date:"dd-MMM-yyyy"}}</p>
+                </div>
+              </div>
+              <div>
+                <p style="word-wrap: break-word;height: 100px;max-height: 100px;  
+                overflow: auto;"> {{emr.Description}} </p>
+              </div>
+              <!--  <a   href="{{button}}" download>qq</a> -->
+              <!-- <button ng-click="fun();$event.stopPropagation();">Download All</button> -->
+            </div>
+            <br>
+          </div>
+        </div>
+        <div class="row topmargin20" *ngIf="code == 'HR02'" ng-clock>
+          <div class="alert alert-success norecoerd" role="alert">
+              <label for="email" class="txt-center">{{HealthRecordmsg}}
+              </label>
+          </div>
+      </div>
+      
+      
+      
+      
+       <div class="modal fade" id="emr" #emr role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+          <div class="modal-dialog ">
+              <div class="modal-content">
+                  <div class="modal-header ">
+                      <!-- <button type="button" class="close" ng-click="close()" data-dismiss="modal">&times;</button> -->
+                  </div>
+                  <div class="modal-body appointment-modal">
+                      <div class="row">
+                          <div class="col-sm-12">
+                              <img src="{{newslide}}" alt="" class="health-image-view">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      <img    *ngFor="let slide of slides" (click)="presprictiondetailView(slide,slides)" src="{{slide.ImageUrl}}" class="health-thumbs">
+                      <button type="button" #emr class="anvayaa-btn-lgnew " data-bs-dismiss="modal">close</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+</div>

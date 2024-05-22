@@ -1,0 +1,54 @@
+<div class="col-md-8" id="aggreementform">
+    <form *ngFor="let data of anchorsAgreementDetails" [formGroup]="anchorsdata">
+        <div class="previosButton" (click)="dashboard()"><img src="../../../assets/images/previous.png"></div>
+        <div class="col-md-10 container">
+
+            <div class="col-md-3" id="heading">
+                <h5>Agreement Details</h5>
+            </div>
+            <br>
+
+            <div class="row">
+
+
+                <div class="form-group col-md-4 inputBox">
+                    <input type="date" class="date-picker" name="StartDate" formControlName="StartDate"
+                        onkeyup="this.setAttribute('value', this.value);" value="">
+
+                    <label>StartDate</label>
+                    <div class="row"
+                        *ngIf='this.anchorsdata.controls["StartDate"].status=="INVALID" && this.bankDetailsSubmitBtn==true'>
+                        <p>*StartDate Number Mandatory</p>
+                    </div>
+
+                </div>
+                <div class="form-group col-md-4 inputBox">
+                    <input type="date" class="date-picker" name="EndDate" formControlName="EndDate"
+                        min="{{maxdate | date:'yyyy-MM-dd'}}" onkeyup="this.setAttribute('value', this.value);"
+                        value="">
+
+                    <label>EndDate</label>
+                    <div class="row"
+                        *ngIf='this.anchorsdata.controls["EndDate"].status=="INVALID" && this.bankDetailsSubmitBtn==true'>
+                        <p>*Account Number Mandatory</p>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4 inputBox">
+
+                    <span> AgreementFile: </span> <input type="file" name="CityID" accept="img/"
+                        (change)="onFileUpload($event)" value="" required>
+                            
+
+                </div>
+
+            </div>
+
+            <button class="btn" (click)="updateachors()">SUBMIT DETAILS</button>
+            <br>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,1644 @@
+<div class="row bodycontent">
+    <form [formGroup]="AddCustomerEmergencyProfileDetails">
+        <u>
+            <h2 class="box-title">Customer Emergency Profile Details :</h2>
+        </u>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-md-4">
+                        <strong><label>Name:</label></strong>
+                        <input type="text" class="pull-right" formControlName="Name">
+                        <div *ngIf="AddCustomerEmergencyProfileDetails.controls['Name'].status == 'INVALID' && customerpress == true"
+                            class="errorColor">*Enter Name</div>
+
+                    </div>
+                    <div class="col-md-4">
+                        <strong><label>Gender:&nbsp;</label></strong>
+                        <!-- <input type="radio" name="atnd" ng-model="emergencyObject.Gender" id="a1" required class="pull-right"> -->
+                        <input type="radio" value="Male" formControlName="Gender">&nbsp;Male&nbsp;
+                        <input type="radio" value="Female" formControlName="Gender">&nbsp;Female&nbsp;
+                        <div *ngIf=" AddCustomerEmergencyProfileDetails.controls['Gender'].status == 'INVALID' && customerpress == true"
+                            class="errorColor">*Enter Gender</div>
+                    </div>
+                    <div class="col-md-4">
+                        <strong><label for="Age">Age:</label></strong>
+                        <input type="number" class="pull-right" formControlName="Age">
+                        <div *ngIf=" AddCustomerEmergencyProfileDetails.controls['Age'].status == 'INVALID' && customerpress == true"
+                            class="errorColor">*Enter Age</div>
+                    </div>
+                </div>
+            </li>
+
+
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-md-4">
+                        <span><strong>Blood Group:</strong></span>
+                        <label for="requestStatus" class="field select pull-right">
+                            <select class="form-select" formControlName="BloodGroup">
+                                <option selected="" disabled="" value="">Select Blood Group</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="NA">Doesn't Know</option>
+                            </select>
+                            <i class="arrow double"></i>
+                        </label>
+                        <div *ngIf=" AddCustomerEmergencyProfileDetails.controls['BloodGroup'].status == 'INVALID' && customerpress == true"
+                            class="errorColor">*Select BloodGroup</div>
+                    </div>
+                    <div class="col-md-4">
+                        <strong><label for="Address">Address:</label></strong>
+                        <textarea rows="3" cols="30" type="text" class="pull-right"
+                            formControlName="Address"></textarea>
+                        <div *ngIf=" AddCustomerEmergencyProfileDetails.controls['Address'].status == 'INVALID' && customerpress == true"
+                            class="errorColor">*Enter Address</div>
+                    </div>
+                </div>
+            </li>
+
+
+
+        </ul>
+    </form>
+</div>
+
+
+
+<div class="modal fade" id="EmergencyDetailsModal" tabindex="-1" aria-labelledby="EmergencyDetailsModalLabel"
+    aria-hidden="true">
+    <!-- *ngIf="emdetailsmodal"  -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{type}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" #closebutton aria-label="Close"
+                    (click)="refreshform()"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="Addpreferedemergencyhospitals">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <Label>Name</Label>
+                            <input type="text" class="form-control" placeholder="Name" formControlName="Name" required>
+                            <div *ngIf=" Addpreferedemergencyhospitals.controls['Name'].status == 'INVALID' && emergencypress == true"
+                                class="errorColor">*Enter Service Name</div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <Label>Contact Number</Label>
+                            <input type="text" class="form-control" placeholder="Contact Number"
+                                formControlName="ContactNumber" pattern="[0-9]+[0-9 ]+" required>
+                            <div *ngIf=" Addpreferedemergencyhospitals.controls['ContactNumber'].status == 'INVALID' && emergencypress == true"
+                                class="errorColor">*Enter Phone Number</div>
+                            <!-- <div *ngIf="Addpreferedemergencyhospitals."></div> -->
+                        </div>
+                        <div class="col-md-12">
+                            <Label>Address</Label>
+                            <input type="text" class="form-control" formControlName="Address"
+                                placeholder="Enter address">
+                            <ul *ngIf="suggestions.length > 0">
+                                <li *ngFor="let suggestion of suggestions" (click)="selectAddress(suggestion)">{{
+                                    suggestion.description }}</li>
+                            </ul>
+                            <u style="color:blue;cursor: pointer;" (click)="getAddressCoordinates()">Get Coordinates</u>
+                            <div *ngIf=" Addpreferedemergencyhospitals.controls['Address'].status == 'INVALID' && emergencypress == true"
+                                class="errorColor">*Enter Address</div>
+                        </div>
+
+                        <div class="row" formGroupName="LatLong">
+                            <div class="col-md-6" *ngIf="showCoordinates">
+                                <!-- [value]="Addpreferedemergencyhospitals.value?.LatLong?.Lat" -->
+                                <Label>Latitude</Label>
+                                <input type="number" class="form-control" placeholder="Latitude" formControlName="Lat"
+                                    readonly>
+                                <!-- <div *ngIf="Addpreferedemergencyhospitals.get('LatLong')?.get('Lat')?.value == '' && emergencypress == true" class="errorColor">*Enter Latitude</div> -->
+                            </div>
+                            <div class="col-md-6" *ngIf="showCoordinates">
+                                <!-- [value]="Addpreferedemergencyhospitals.value?.LatLong?.Long" -->
+                                <Label>Longitude</Label>
+                                <input type="number" class="form-control" placeholder="Longitude" formControlName="Long"
+                                    readonly>
+                                <!-- <div *ngIf="Addpreferedemergencyhospitals?.get('LatLong')?.get('Lat')?.status == 'INVALID' && Addpreferedemergencyhospitals.get('LatLong')?.get('Long')?.value == '' && emergencypress == true" class="errorColor">*Enter Longitude</div> -->
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="closeModal"
+                    (click)="submittingnewprefferedhospital()">Save changes</button>
+                <!-- data-bs-dismiss="modal" -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordionclass">
+    <u>
+        <h3>Emergency PLan:</h3>
+    </u>
+    <div class="row">
+        <div class="col-9">
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                    aria-controls="flush-collapseOne">
+                                    Preferred Emergency Hospitals Details - ({{PreferredEmergencyHospitals.length}})
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <table class="table table-striped ">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">NAME</th>
+                                                <th scope="col">CONTACT NUMBER</th>
+                                                <th scope="col">ADDRESS</th>
+                                                <th style="text-align: center;">ACTION</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let list of PreferredEmergencyHospitals; let i = index">
+                                                <td>{{list.Name}}</td>
+                                                <td>{{list.ContactNumber}}</td>
+                                                <td>{{list.Address}}</td>
+                                                <!-- <td>{{list.LatLong.Lat}}</td> -->
+                                                <!-- <td>{{list.LatLong.Long}}</td> -->
+                                                <td style="text-align: center;">
+                                                    <button type="button" class="anvayaabutton-primary"
+                                                        data-bs-toggle="modal" data-bs-target="#EmergencyDetailsModal"
+                                                        title="EDIT"
+                                                        (click)="updateandsubmittingnewprefferedhospital(i,list,'Emergency Hospital')">
+                                                        <i class="fa fa-edit" aria-hidden="true"></i>
+                                                    </button>
+                                                    &nbsp;
+                                                    <!-- <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                        title="Delete">
+                                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                                    </button> -->
+                                                </td>
+                                                <td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <button type="button" class="anvayaabutton-primary" data-bs-toggle="modal"
+                            data-bs-target="#EmergencyDetailsModal" (click)="addingdetails('Emergency Hospital')">
+                            Add
+
+                        </button>
+
+                    </div>
+                </div>
+                <div class="spacingDiv"></div>
+
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                        aria-controls="flush-collapseTwo">
+                                        Nearest Super Speciality Hospitals Details -
+                                        ({{NearestSuperSpecialityHospitals.length}})
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                    aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <table class="table table-striped ">
+                                            <thead>
+                                                <tr>
+
+                                                    <th scope="col">NAME</th>
+                                                    <th scope="col">CONTACT NUMBER</th>
+                                                    <th scope="col">ADDRESS</th>
+                                                    <!-- <th scope="col">LATITUDE</th>
+                                                    <th scope="col">LONGITUDE</th> -->
+                                                    <th style="text-align: center;">ACTION</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let list of NearestSuperSpecialityHospitals; let i = index">
+                                                    <td>{{list.Name}}</td>
+                                                    <td>{{list.ContactNumber}}</td>
+                                                    <td>{{list.Address}}</td>
+                                                    <!-- <td>{{list.LatLong.Lat}}</td>
+                                                    <td>{{list.LatLong.Long}}</td> -->
+                                                    <td style="text-align: center;">
+                                                        <button type="button" class="anvayaabutton-primary"
+                                                            (click)="updateandsubmittingnewnearesthospital(i,list,'Nearest Super Speciality Hospitals')"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#EmergencyDetailsModal" title="EDIT">
+                                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                                        </button>
+                                                        &nbsp;
+                                                        <!-- <button type="button" class="btn btn-danger"
+                                                            data-bs-toggle="modal" title="Delete">
+                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        </button> -->
+                                                    </td>
+                                                    <td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <button type="button" class="anvayaabutton-primary" data-bs-toggle="modal"
+                                data-bs-target="#EmergencyDetailsModal"
+                                (click)="addingdetails('Nearest Super Speciality Hospitals')">
+                                Add
+                            </button>
+
+                        </div>
+                        <div class="spacingDiv"></div>
+
+                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="flush-headingThree">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#flush-collapseThree"
+                                                aria-expanded="false" aria-controls="flush-collapseThree">
+                                                Ambulance Service Details - ({{NearestAmbulanceServices.length}})
+                                            </button>
+                                        </h2>
+                                        <div id="flush-collapseThree" class="accordion-collapse collapse"
+                                            aria-labelledby="flush-headingThree"
+                                            data-bs-parent="#accordionFlushExample">
+                                            <div class="accordion-body">
+                                                <table class="table table-striped ">
+                                                    <thead>
+                                                        <tr>
+
+                                                            <th scope="col">NAME</th>
+                                                            <th scope="col">CONTACT NUMBER</th>
+                                                            <th scope="col">ADDRESS</th>
+                                                            <!-- <th scope="col">LATITUDE</th>
+                                                            <th scope="col">LONGITUDE</th> -->
+                                                            <th style="text-align: center;">ACTION</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr
+                                                            *ngFor="let list of NearestAmbulanceServices; let i = index">
+                                                            <td>{{list.Name}}</td>
+                                                            <td>{{list.ContactNumber}}</td>
+                                                            <td>{{list.Address}}</td>
+                                                            <!-- <td>{{list.LatLong.Lat}}</td>
+                                                            <td>{{list.LatLong.Long}}</td> -->
+                                                            <td style="text-align: center;">
+                                                                <button type="button" class="anvayaabutton-primary"
+                                                                    (click)="updateandsubmittingnewnearestambulance(i,list,'Nearest Ambulance Services')"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#EmergencyDetailsModal"
+                                                                    title="EDIT">
+                                                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                                                </button>
+                                                                &nbsp;
+                                                                <!-- <button type="button" class="btn btn-danger"
+                                                                    data-bs-toggle="modal" title="Delete">
+                                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                                </button> -->
+                                                            </td>
+                                                            <td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                    <button type="button" class="anvayaabutton-primary" data-bs-toggle="modal"
+                                        data-bs-target="#EmergencyDetailsModal"
+                                        (click)="addingdetails('Nearest Ambulance Services')">
+                                        Add
+                                    </button>
+
+                                </div>
+                                <div class="spacingDiv"></div>
+
+                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="flush-headingFour">
+                                                    <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#flush-collapseFour"
+                                                        aria-expanded="false" aria-controls="flush-collapseFour">
+                                                        Nearest PoliceStation Details - ({{PoliceStations.length}})
+                                                    </button>
+                                                </h2>
+                                                <div id="flush-collapseFour" class="accordion-collapse collapse"
+                                                    aria-labelledby="flush-headingFour"
+                                                    data-bs-parent="#accordionFlushExample">
+                                                    <div class="accordion-body">
+                                                        <table class="table table-striped ">
+                                                            <thead>
+                                                                <tr>
+
+                                                                    <th scope="col">NAME</th>
+                                                                    <th scope="col">CONTACT NUMBER</th>
+                                                                    <th scope="col">ADDRESS</th>
+                                                                    <!-- <th scope="col">LATITUDE</th>
+                                                                    <th scope="col">LONGITUDE</th> -->
+                                                                    <th style="text-align: center;">ACTION</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let list of PoliceStations; let i = index">
+                                                                    <td>{{list.Name}}</td>
+                                                                    <td>{{list.ContactNumber}}</td>
+                                                                    <td>{{list.Address}}</td>
+                                                                    <!-- <td>{{list.LatLong.Lat}}</td>
+                                                                    <td>{{list.LatLong.Long}}</td> -->
+                                                                    <td style="text-align: center;">
+                                                                        <button type="button" class="btn btn-primary"
+                                                                            (click)="updateandsubmittingnewnearestpolice(i,list,'Nearest Police Station')"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#EmergencyDetailsModal"
+                                                                            title="EDIT">
+                                                                            <i class="fa fa-edit"
+                                                                                aria-hidden="true"></i>
+                                                                        </button>
+                                                                        &nbsp;
+                                                                        <!-- <button type="button" class="btn btn-danger"
+                                                                            data-bs-toggle="modal" title="Delete">
+                                                                            <i class="fa fa-trash"
+                                                                                aria-hidden="true"></i>
+                                                                        </button> -->
+                                                                    </td>
+                                                                    <td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-1">
+                                            <button type="button" class="anvayaabutton-primary" data-bs-toggle="modal"
+                                                data-bs-target="#EmergencyDetailsModal"
+                                                (click)="addingdetails('Nearest Police Station')">
+                                                Add
+                                            </button>
+
+                                        </div>
+                                        <div class="spacingDiv"></div>
+
+                                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header" id="flush-headingFive">
+                                                            <button class="accordion-button collapsed" type="button"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#flush-collapseFive"
+                                                                aria-expanded="false"
+                                                                aria-controls="flush-collapseFive">
+                                                                Nearest Neighbours Details - ({{Neighbours.length}})
+                                                            </button>
+                                                        </h2>
+                                                        <div id="flush-collapseFive" class="accordion-collapse collapse"
+                                                            aria-labelledby="flush-headingFive"
+                                                            data-bs-parent="#accordionFlushExample">
+                                                            <div class="accordion-body">
+                                                                <table class="table table-striped ">
+                                                                    <thead>
+                                                                        <tr>
+
+                                                                            <th scope="col">NAME</th>
+                                                                            <th scope="col">CONTACT NUMBER</th>
+                                                                            <th scope="col">ALTERNATE CONTACT NUMBER
+                                                                            </th>
+                                                                            <th scope="col">ADDRESS</th>
+                                                                            <!-- <th scope="col">LATITUDE</th>
+                                                                            <th scope="col">LONGITUDE</th> -->
+                                                                            <th style="text-align: center;">ACTION</th>
+
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr
+                                                                            *ngFor="let list of Neighbours; let i = index">
+                                                                            <td>{{list.Name}}</td>
+                                                                            <td>{{list.ContactNumber}}</td>
+                                                                            <td>{{list.AlternativeContactNumber}}</td>
+                                                                            <td>{{list.Address}}</td>
+                                                                            <!-- <td>{{list.LatLong.Lat}}</td>
+                                                                            <td>{{list.LatLong.Long}}</td> -->
+                                                                            <td style="text-align: center;">
+                                                                                <button type="button"
+                                                                                    class="btn btn-primary"
+                                                                                    (click)="updateandsubmittingnewnearestneighbours(i,list)"
+                                                                                    data-bs-toggle="modal"
+                                                                                    data-bs-target="#NeigbourModal"
+                                                                                    title="EDIT">
+                                                                                    <i class="fa fa-edit"
+                                                                                        aria-hidden="true"></i>
+                                                                                </button>
+                                                                                &nbsp;
+                                                                                <!-- <button type="button"
+                                                                                    class="btn btn-danger"
+                                                                                    data-bs-toggle="modal"
+                                                                                    title="Delete">
+                                                                                    <i class="fa fa-trash"
+                                                                                        aria-hidden="true"></i>
+                                                                                </button> -->
+                                                                            </td>
+                                                                            <td>
+                                                                        </tr>
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-1">
+                                                    <button type="button" class="anvayaabutton-primary"
+                                                        data-bs-toggle="modal" data-bs-target="#NeigbourModal">
+                                                        Add
+                                                    </button>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="spacingDiv"></div>
+
+                                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header" id="flush-headingSix">
+                                                            <button class="accordion-button collapsed" type="button"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#flush-collapseSix"
+                                                                aria-expanded="false" aria-controls="flush-collapseSix">
+                                                                Prefered Family Physician Details - <label
+                                                                    *ngIf="PreferedFamilyPhysician && PreferedFamilyPhysician.ClinicName">(1)</label>
+                                                                <label *ngIf="!PreferedFamilyPhysician">(0)</label>
+                                                            </button>
+                                                        </h2>
+                                                        <div id="flush-collapseSix" class="accordion-collapse collapse"
+                                                            aria-labelledby="flush-headingSix"
+                                                            data-bs-parent="#accordionFlushExample">
+                                                            <div class="accordion-body">
+                                                                <table class="table table-striped ">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th scope="col">NAME</th>
+                                                                            <th scope="col">CONTACT NUMBER</th>
+                                                                            <th scope="col">CLINIC NAME</th>
+                                                                            <th style="text-align: center;">ACTION</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr *ngIf="PreferedFamilyPhysician">
+                                                                            <td>{{PreferedFamilyPhysician.Name}}</td>
+                                                                            <td>{{PreferedFamilyPhysician.ContactNumber}}
+                                                                            </td>
+                                                                            <td>{{PreferedFamilyPhysician.ClinicName}}
+                                                                            </td>
+                                                                            <td style="text-align: center;">
+                                                                                <button type="button"
+                                                                                    class="btn btn-primary"
+                                                                                    (click)="updateandsubmittingnewnearestFamilyPhysician(PreferedFamilyPhysician)"
+                                                                                    data-bs-toggle="modal"
+                                                                                    data-bs-target="#FamilyPhysicianModal"
+                                                                                    title="EDIT">
+                                                                                    <i class="fa fa-edit"
+                                                                                        aria-hidden="true"></i>
+                                                                                </button>
+                                                                                &nbsp;
+                                                                                <!-- <button type="button"
+                                                                                    class="btn btn-danger"
+                                                                                    data-bs-toggle="modal"
+                                                                                    title="Delete">
+                                                                                    <i class="fa fa-trash"
+                                                                                        aria-hidden="true"></i>
+                                                                                </button> -->
+                                                                            </td>
+                                                                            <td>
+                                                                        </tr>
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-1">
+                                                    <button type="button" class="anvayaabutton-primary"
+                                                        data-bs-toggle="modal" data-bs-target="#FamilyPhysicianModal">
+                                                        Add
+                                                    </button>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="spacingDiv"></div>
+
+                                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header" id="flush-headingSeven">
+                                                            <button class="accordion-button collapsed" type="button"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#flush-collapseSeven"
+                                                                aria-expanded="false"
+                                                                aria-controls="flush-collapseSeven">
+                                                                Nearest Fire Station Details - ({{FireStations.length}})
+                                                            </button>
+                                                        </h2>
+                                                        <div id="flush-collapseSeven"
+                                                            class="accordion-collapse collapse"
+                                                            aria-labelledby="flush-headingSeven"
+                                                            data-bs-parent="#accordionFlushExample">
+                                                            <div class="accordion-body">
+                                                                <table class="table table-striped ">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th scope="col">NAME</th>
+                                                                            <th scope="col">CONTACT NUMBER</th>
+                                                                            <th scope="col">ADDRESS</th>
+                                                                            <!-- <th scope="col">ALTERNATE CONTACT NUMBER
+                                                                            </th> -->
+                                                                            <!-- <th scope="col">LATITUDE</th>
+                                                                            <th scope="col">LONGITUDE</th> -->
+                                                                            <th style="text-align: center;">ACTION</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr
+                                                                            *ngFor="let list of FireStations; let i = index">
+                                                                            <td>{{list.Name}}</td>
+                                                                            <td>{{list.ContactNumber}}</td>
+                                                                            <td>{{list.Address}}</td>
+                                                                            <!-- <td>{{list.LatLong.Lat}}</td>
+                                                                            <td>{{list.LatLong.Long}}</td> -->
+                                                                            <!-- <td>{{list.AlternateContactNumber}}</td> -->
+
+                                                                            <td style="text-align: center;">
+                                                                                <button type="button"
+                                                                                    class="btn btn-primary"
+                                                                                    (click)="updateandsubmittingnewnearestFirestation(i,list)"
+                                                                                    data-bs-toggle="modal"
+                                                                                    data-bs-target="#FirestationModal"
+                                                                                    title="EDIT">
+                                                                                    <i class="fa fa-edit"
+                                                                                        aria-hidden="true"></i>
+                                                                                </button>
+                                                                                &nbsp;
+                                                                                <!-- <button type="button"
+                                                                                    class="btn btn-danger"
+                                                                                    data-bs-toggle="modal"
+                                                                                    title="Delete">
+                                                                                    <i class="fa fa-trash"
+                                                                                        aria-hidden="true"></i>
+                                                                                </button> -->
+                                                                            </td>
+                                                                            <td>
+                                                                        </tr>
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-1">
+                                                    <button type="button" class="anvayaabutton-primary"
+                                                        data-bs-toggle="modal" data-bs-target="#FirestationModal">
+                                                        Add
+                                                    </button>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="spacingDiv"></div>
+
+                                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header" id="flush-headingEight">
+                                                            <button class="accordion-button collapsed" type="button"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#flush-collapseEight"
+                                                                aria-expanded="false"
+                                                                aria-controls="flush-collapseEight">
+                                                                Emergency Local Contact Details -
+                                                                ({{EmergencyLocalContactDetails.length}}) </button>
+                                                        </h2>
+                                                        <div id="flush-collapseEight"
+                                                            class="accordion-collapse collapse"
+                                                            aria-labelledby="flush-headingEight"
+                                                            data-bs-parent="#accordionFlushExample">
+                                                            <div class="accordion-body">
+                                                                <table class="table table-striped ">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th scope="col">NAME</th>
+                                                                            <th scope="col">CONTACT NUMBER</th>
+
+                                                                            <th style="text-align: center;">ACTION</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr
+                                                                            *ngFor="let list of EmergencyLocalContactDetails; let i = index">
+                                                                            <td>{{list.Name}}</td>
+                                                                            <td>{{list.ContactNumber}}</td>
+                                                                            <td style="text-align: center;">
+                                                                                <button type="button"
+                                                                                    class="btn btn-primary"
+                                                                                    (click)="updateandsubmittingnewnearestemergencylocaldetials(i,list)"
+                                                                                    data-bs-toggle="modal"
+                                                                                    data-bs-target="#EmergencycontactModal"
+                                                                                    title="EDIT">
+                                                                                    <i class="fa fa-edit"
+                                                                                        aria-hidden="true"></i>
+                                                                                </button>
+                                                                                &nbsp;
+                                                                                <!-- <button type="button"
+                                                                                    class="btn btn-danger"
+                                                                                    data-bs-toggle="modal"
+                                                                                    title="Delete">
+                                                                                    <i class="fa fa-trash"
+                                                                                        aria-hidden="true"></i>
+                                                                                </button> -->
+                                                                            </td>
+                                                                            <td>
+                                                                        </tr>
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-1">
+                                                    <button type="button" class="anvayaabutton-primary"
+                                                        data-bs-toggle="modal" data-bs-target="#EmergencycontactModal">
+                                                        Add
+                                                    </button>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="spacingDiv"></div>
+
+                                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header" id="flush-headingNine">
+                                                            <button class="accordion-button collapsed" type="button"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#flush-collapseNine"
+                                                                aria-expanded="false"
+                                                                aria-controls="flush-collapseNine">
+                                                                Nearest Pharmacy Outlet Details -
+                                                                ({{NearestPharmacyOutlet.length}})</button>
+                                                        </h2>
+                                                        <div id="flush-collapseNine" class="accordion-collapse collapse"
+                                                            aria-labelledby="flush-headingNine"
+                                                            data-bs-parent="#accordionFlushExample">
+                                                            <div class="accordion-body">
+                                                                <table class="table table-striped ">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th scope="col">NAME</th>
+                                                                            <th scope="col">CONTACT NUMBER</th>
+                                                                            <th scope="col">ADDRESS</th>
+                                                                            <!-- <th scope="col">LATITUDE</th>
+                                                                            <th scope="col">LONGITUDE</th> -->
+                                                                            <th scope="col">*24/7 PHARMACY</th>
+                                                                            <th style="text-align: center;">ACTION</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr
+                                                                            *ngFor="let list of NearestPharmacyOutlet; let i = index">
+                                                                            <td>{{list.Name}}</td>
+                                                                            <td>{{list.ContactNumber}}</td>
+                                                                            <td>{{list.Address}}</td>
+                                                                            <!-- <td>{{list.LatLong.Lat}}</td>
+                                                                            <td>{{list.LatLong.Long}}</td> -->
+                                                                            <td>{{list.IsAvailable24Hours}}</td>
+                                                                            <td style="text-align: center;">
+                                                                                <button type="button"
+                                                                                    class="btn btn-primary"
+                                                                                    (click)="updateandsubmittingnewnearestpharmacyoutlet(i,list)"
+                                                                                    data-bs-toggle="modal"
+                                                                                    data-bs-target="#PharmacyoutletModal"
+                                                                                    title="EDIT">
+                                                                                    <i class="fa fa-edit"
+                                                                                        aria-hidden="true"></i>
+                                                                                </button>
+                                                                                &nbsp;
+                                                                                <!-- <button type="button"
+                                                                                    class="btn btn-danger"
+                                                                                    data-bs-toggle="modal"
+                                                                                    title="Delete">
+                                                                                    <i class="fa fa-trash"
+                                                                                        aria-hidden="true"></i>
+                                                                                </button> -->
+                                                                            </td>
+                                                                            <td>
+                                                                        </tr>
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-1">
+                                                    <button type="button" class="anvayaabutton-primary"
+                                                        data-bs-toggle="modal" data-bs-target="#PharmacyoutletModal">
+                                                        Add
+                                                    </button>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="spacingDiv"></div>
+
+
+                                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header" id="flush-headingTen">
+                                                            <button class="accordion-button collapsed" type="button"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#flush-collapseTen"
+                                                                aria-expanded="false" aria-controls="flush-collapseTen">
+                                                                Sponsor Contact Details -
+                                                                ({{SponsorContactDetails.length}})</button>
+                                                        </h2>
+                                                        <div id="flush-collapseTen" class="accordion-collapse collapse"
+                                                            aria-labelledby="flush-headingTen"
+                                                            data-bs-parent="#accordionFlushExample">
+                                                            <div class="accordion-body">
+                                                                <table class="table table-striped ">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th scope="col">NAME</th>
+                                                                            <th scope="col">CONTACT NUMBER</th>
+                                                                            <th style="text-align: center;">ACTION</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr
+                                                                            *ngFor="let list of SponsorContactDetails; let i = index">
+                                                                            <td>{{list.Name}}</td>
+                                                                            <td>{{list.ContactNumber}}</td>
+                                                                            <td style="text-align: center;">
+                                                                                <button type="button"
+                                                                                    class="btn btn-primary"
+                                                                                    (click)="updateandsubmittingnewnearestsposorcontact(i,list)"
+                                                                                    data-bs-toggle="modal"
+                                                                                    data-bs-target="#SponsorContactModal"
+                                                                                    title="EDIT">
+                                                                                    <i class="fa fa-edit"
+                                                                                        aria-hidden="true"></i>
+                                                                                </button>
+                                                                                &nbsp;
+                                                                                <!-- <button type="button"
+                                                                                    class="btn btn-danger"
+                                                                                    data-bs-toggle="modal"
+                                                                                    title="Delete">
+                                                                                    <i class="fa fa-trash"
+                                                                                        aria-hidden="true"></i>
+                                                                                </button> -->
+                                                                            </td>
+                                                                            <td>
+                                                                        </tr>
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-1">
+                                                    <button type="button" class="anvayaabutton-primary"
+                                                        data-bs-toggle="modal" data-bs-target="#SponsorContactModal">
+                                                        Add
+                                                    </button>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="spacingDiv"></div>
+
+                                <!-- for Property Details-->
+                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="flush-headingEleven">
+                                                    <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#flush-collapseEleven"
+                                                        aria-expanded="false" aria-controls="flush-collapseEleven">
+                                                        Property Details - ({{propertyDetailsArray.length}})
+                                                    </button>
+                                                </h2>
+                                                <div id="flush-collapseEleven" class="accordion-collapse collapse"
+                                                    aria-labelledby="flush-headingTen"
+                                                    data-bs-parent="#accordionFlushExample">
+                                                    <div class="accordion-body">
+                                                        <table class="table table-striped ">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">Property Type</th>
+                                                                    <th scope="col">Floor</th>
+                                                                    <th scope="col">Lift</th>
+                                                                    <th scope="col">Lift Size</th>
+
+                                                                    <th style="text-align: center;">ACTION</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr
+                                                                    *ngFor="let list of propertyDetailsArray; let i = index">
+                                                                    <td>{{list?.Property}}</td>
+                                                                    <td>{{list?.Floor}}</td>
+                                                                    <td>{{list?.Lift}}</td>
+                                                                    <td>{{list?.LiftSize}}</td>
+                                                                    <td style="text-align: center;">
+                                                                        <button type="button"
+                                                                            class="anvayaabutton-primary"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#Propertydetailsmodal"
+                                                                            (click)="UpdateLastPropertyDetails(i,list)">
+                                                                            Update
+                                                                        </button>
+                                                                        &nbsp;
+                                                                        <!-- <button type="button"
+                                                                            class="btn btn-danger"
+                                                                            data-bs-toggle="modal"
+                                                                            title="Delete">
+                                                                            <i class="fa fa-trash"
+                                                                                aria-hidden="true"></i>
+                                                                        </button> -->
+                                                                    </td>
+                                                                    <td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-1">
+                                            <button type="button" class="anvayaabutton-primary" data-bs-toggle="modal"
+                                                data-bs-target="#Propertydetailsmodal">
+                                                Add
+                                            </button>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="spacingDiv"></div>
+
+                            <!-- For Medical Details-->
+                            <div class="accordion accordion-flush" id="accordionFlushExample">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="flush-headingTwele">
+                                                <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseTwele"
+                                                    aria-expanded="false" aria-controls="flush-collapseTwele">
+                                                    Medical Details -({{benMedicalConditions.length}})
+                                                </button>
+                                            </h2>
+                                            <div id="flush-collapseTwele" class="accordion-collapse collapse"
+                                                aria-labelledby="flush-headingTwele"
+                                                data-bs-parent="#accordionFlushExample">
+                                                <div class="accordion-body">
+                                                    <button type="button" class="anvayaabutton-primary"
+                                                        data-bs-toggle="modal" data-bs-target="#MedicalDetailsModal"
+                                                        (click)="updateLastMedicalDetails()">
+                                                        Update
+                                                    </button>
+
+                                        <div class="row">
+
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped ">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Diseases</th>
+                                                                <th scope="col">Height</th>
+                                                                <th scope="col">MobilityofUser</th>
+                                                                <th scope="col">Weight</th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr
+                                                                *ngFor="let list of benMedicalConditions; let i = index">
+                                                                <td>{{list?.Diseases}}</td>
+                                                                <td>{{list?.Height}}</td>
+                                                                <td>{{list?.MobilityofUser}}</td>
+                                                                <td>{{list?.Weight}}</td>
+                                                             
+                                                                <td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table> 
+                                                </div>
+                                      
+
+                                                    <div class="row">
+
+                                                        <div class="accordion-body">
+                                                            <table class="table table-striped ">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col">Diseases</th>
+                                                                        <th scope="col">Height</th>
+                                                                        <th scope="col">MobilityofUser</th>
+                                                                        <th scope="col">Weight</th>
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr
+                                                                        *ngFor="let list of benMedicalConditions; let i = index">
+                                                                        <td>{{list?.Diseases}}</td>
+                                                                        <td>{{list?.Height}}</td>
+                                                                        <td>{{list?.MobilityofUser}}</td>
+                                                                        <td>{{list?.Weight}}</td>
+
+                                                                        <td>
+                                                                    </tr>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-1" [hidden]="benMedicalConditions.length>0">
+                                        <button type="button" class="anvayaabutton-primary" data-bs-toggle="modal"
+                                            data-bs-target="#MedicalDetailsModal">
+                                            Add
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="spacingDiv"></div>
+
+
+                            <!-- Ambulance Type -->
+                            <div class="accordion accordion-flush" id="accordionFlushExample">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="flush-headingTwele">
+                                                <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#flush-collapseAmbulanceType" aria-expanded="false"
+                                                    aria-controls="flush-collapseAmbulanceType">
+                                                    Ambulance Type Details -({{AmbulanceType.length}})
+                                                </button>
+                                            </h2>
+                                            <div id="flush-collapseAmbulanceType" class="accordion-collapse collapse"
+                                                aria-labelledby="flush-headingTen"
+                                                data-bs-parent="#accordionFlushExample">
+                                                <div class="accordion-body">
+                                                    <table class="table table-striped ">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Ambulance Type</th>
+                                                                <th scope="col">Paramedic Required</th>
+                                                                <th style="text-align: center;">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let ambulance of AmbulanceType; let i = index">
+                                                                <td>{{ambulance?.AmbulanceType}}</td>
+                                                                <td>{{ambulance?.IsParamedicRequired}}</td>
+                                                                <td>
+                                                                    <button type="button" class="anvayaabutton-primary"
+                                                                        style="text-align: center;"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#AmbulanceTypeDetailsModal"
+                                                                        (click)="updateAmbulanceTypeDetails()">
+                                                                        Update
+                                                                    </button>
+                                                                    &nbsp;
+                                                                </td>
+                                                                <td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <button type="button" class="anvayaabutton-primary"
+                                            [hidden]="AmbulanceType.length>0" data-bs-toggle="modal"
+                                            data-bs-target="#AmbulanceTypeDetailsModal">
+                                            Add
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="updatebuttonclass" style="padding: 10px;">
+    <button type="button" data-toggle="modal" data-target="#myModal" class="anvayaabutton-secondary"
+        (click)="updatingentireform(this.AddCustomerEmergencyProfileDetails)">Update</button>
+</div>
+
+
+
+
+<!--  for Neighbour Modal -->
+<div class="modal fade" id="NeigbourModal" tabindex="-1" aria-labelledby="NeigbourModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="NeigbourModalLabel">Add Neighbours</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    #neighbourclose></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="Addneighboursdetails">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <Label>Name</Label>
+                            <input type="text" class="form-control" placeholder="Name" formControlName="Name" required>
+                            <div *ngIf="Addneighboursdetails.controls['Name'].status == 'INVALID' && npress == true"
+                                class="errorColor">*Enter Name</div>
+                        </div>
+                        <div class="col-md-12">
+                            <Label>Address</Label>
+                            <input type="text" class="form-control" formControlName="Address"
+                                placeholder="Enter address">
+                            <!-- <ul *ngIf="suggestions.length > 0">  
+                                <li *ngFor="let suggestion of suggestions" (click)="selectAddress(suggestion)">{{ suggestion.description }}</li>
+                            </ul> -->
+                            <u style="color:blue;cursor: pointer;" (click)="getAddressCoordinates1()">Get
+                                Coordinates</u>
+                            <div *ngIf=" Addpreferedemergencyhospitals.controls['Address'].status == 'INVALID' && emergencypress == true"
+                                class="errorColor">*Enter Address</div>
+                        </div>
+                        <div class="col-md-6">
+                            <Label>Contact Number</Label>
+                            <input type="text" class="form-control" placeholder="Contact Number"
+                                formControlName="ContactNumber" required>
+                            <div *ngIf="Addneighboursdetails.controls['ContactNumber'].status == 'INVALID' && npress == true"
+                                class="errorColor">*Enter Contact Number</div>
+                        </div>
+                        <div class="col-md-6">
+                            <Label>Alternate Contact Number</Label>
+                            <input type="text" class="form-control" placeholder="Alternate Contact Number"
+                                formControlName="AlternativeContactNumber" required>
+                            <div *ngIf="Addneighboursdetails.controls['AlternativeContactNumber'].status == 'INVALID' && npress == true"
+                                class="errorColor">*Enter Alternative Contact Number</div>
+                        </div>
+                        <div class="row" formGroupName="LatLong">
+                            <div class="col-md-6" *ngIf="showCoordinates">
+                                <Label>Latitude</Label>
+                                <input type="number" class="form-control" placeholder="Latitude" formControlName="Lat"
+                                    required>
+                                <!-- <div *ngIf="Addneighboursdetails.get('LatLong')?.get('Lat')?.status == 'INVALID' && npress == true"
+                                    class="errorColor">*Enter Latitude</div> -->
+                            </div>
+                            <div class="col-md-6" *ngIf="showCoordinates">
+                                <Label>Longitude</Label>
+                                <input type="number" class="form-control" placeholder="Longitude" formControlName="Long"
+                                    required>
+                                <!-- <div *ngIf="Addneighboursdetails.get('LatLong')?.get('Long')?.status == 'INVALID' && npress == true"
+                                    class="errorColor">*Enter Longitude</div> -->
+                            </div>
+
+                        </div> -->
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="anvayaabutton-secondary" (click)="submitneighbourdetails()"
+                    id="closeModal">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--  for family physician Modal -->
+<div class="modal fade" id="FamilyPhysicianModal" tabindex="-1" aria-labelledby="FamilyPhysicianModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="FamilyPhysicianModalLabel">Add Prefered Family Physician</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    #preferedfamilyclose></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="Addpreferedfamilydetails">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <Label>Name</Label>
+                            <input type="text" class="form-control" placeholder="Name" formControlName="Name" required>
+                            <div *ngIf=" Addpreferedfamilydetails.controls['Name'].status == 'INVALID' && pfpress == true"
+                                class="errorColor">*Enter Name</div>
+                        </div>
+                        <div class="col-md-6">
+                            <Label>Contact Number</Label>
+                            <input type="text" class="form-control" placeholder="Contact Number"
+                                formControlName="ContactNumber" required>
+                            <div *ngIf=" Addpreferedfamilydetails.controls['ContactNumber'].status == 'INVALID' && pfpress == true"
+                                class="errorColor">*Enter Contact Number</div>
+                        </div>
+                        <div class="col-md-6">
+                            <Label>Clinic Name</Label>
+                            <input type="type" class="form-control" placeholder="Clinic Name"
+                                formControlName="ClinicName" required>
+                            <div *ngIf=" Addpreferedfamilydetails.controls['ClinicName'].status == 'INVALID' && pfpress == true"
+                                class="errorColor">*Enter Clinic Name</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="anvayaabutton-secondary" (click)="submitpreferedfamilydetails()"
+                    id="closeModal">Save
+                    changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  for fire station Modal -->
+<div class="modal fade" id="FirestationModal" tabindex="-1" aria-labelledby="FirestationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="FirestationModalLabel">Add Nearest Fire Station</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #fireclose></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="Addfirestationdetails">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <Label>Name</Label>
+                            <input type="text" class="form-control" placeholder="Name" formControlName="Name" required>
+                            <div *ngIf=" Addfirestationdetails.controls['Name'].status == 'INVALID' && fspress == true"
+                                class="errorColor">*Enter Name</div>
+                        </div>
+                        <div class="col-md-12">
+                            <Label>Address</Label>
+                            <input type="text" class="form-control" formControlName="Address"
+                                placeholder="Enter address">
+                            <!-- <ul *ngIf="suggestions.length > 0">  
+                                <li *ngFor="let suggestion of suggestions" (click)="selectAddress(suggestion)">{{ suggestion.description }}</li>
+                            </ul> -->
+                            <u style="color:blue;cursor: pointer;" (click)="getAddressCoordinates3()">Get
+                                Coordinates</u>
+                            <div *ngIf=" Addpreferedemergencyhospitals.controls['Address'].status == 'INVALID' && emergencypress == true"
+                                class="errorColor">*Enter Address</div>
+                        </div>
+                        <div class="col-md-6">
+                            <Label>Contact Number</Label>
+                            <input type="text" class="form-control" placeholder="Contact Number"
+                                formControlName="ContactNumber" required>
+                            <div *ngIf=" Addfirestationdetails.controls['ContactNumber'].status == 'INVALID' && fspress == true"
+                                class="errorColor">*Enter Contact Number</div>
+                        </div>
+                        <!-- <div class="col-md-6">
+                            <Label>Alternate Contact Number</Label>
+                            <input type="number" class="form-control" placeholder="Alternate Contact Number"
+                                formControlName="AlternateContactNumber" required>
+                            <div *ngIf=" Addfirestationdetails.controls['AlternateContactNumber'].status == 'INVALID' && fspress == true"
+                                class="errorColor">*Enter Alternate Contact Number</div>
+                        </div> -->
+                        <div class="row" formGroupName="LatLong">
+                            <div class="col-md-6" *ngIf="showCoordinates">
+                                <Label>Latitude</Label>
+                                <input type="number" class="form-control" placeholder="Latitude" formControlName="Lat"
+                                    required>
+                                <!-- <div *ngIf="Addfirestationdetails.get('LatLong')?.get('Lat')?.status == 'INVALID' && fspress == true"
+                                    class="errorColor">*Enter Latitude</div> -->
+                            </div>
+                            <div class="col-md-6" *ngIf="showCoordinates">
+                                <Label>Longitude</Label>
+                                <input type="number" class="form-control" placeholder="Longitude" formControlName="Long"
+                                    required>
+                                <!-- <div *ngIf="Addfirestationdetails.get('LatLong')?.get('Long')?.status == 'INVALID' && fspress == true"
+                                    class="errorColor">*Enter Longitude</div> -->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="anvayaabutton-secondary" (click)="submitfirestationdetails()"
+                    id="closeModal">Save
+                    changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  for Emergency Contact deatils Modal -->
+<div class="modal fade" id="EmergencycontactModal" tabindex="-1" aria-labelledby="EmergencycontactModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="EmergencycontactModalLabel">Add Emergency Local Contact Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    #emergencylocalclose></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="AddEmergencylocalcontactdetails">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <Label>Name</Label>
+                            <input type="text" class="form-control" placeholder="Name" formControlName="Name" required>
+                            <div *ngIf=" AddEmergencylocalcontactdetails.controls['Name'].status == 'INVALID' && ecpress == true"
+                                class="errorColor">*Enter Name</div>
+                        </div>
+                        <div class="col-md-6">
+                            <Label>Contact Number</Label>
+                            <input type="text" class="form-control" placeholder="Contact Number"
+                                formControlName="ContactNumber" required>
+                            <div *ngIf=" AddEmergencylocalcontactdetails.controls['ContactNumber'].status == 'INVALID' && ecpress == true"
+                                class="errorColor">*Enter Contact Number</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="anvayaabutton-secondary" (click)="submitemergencycontactdetails()"
+                    id="closeModal">Save
+                    changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  for Nearest pharmacy outlet deatils Modal -->
+<div class="modal fade" id="PharmacyoutletModal" tabindex="-1" aria-labelledby="PharmacyoutletModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="PharmacyoutletModalLabel">Add Nearest Pharmacy Outlet Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    #pharmacyclose></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="Addnearestpharmacyoutletdetails">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <Label>Name</Label>
+                            <input type="text" class="form-control" placeholder="Name" formControlName="Name" required>
+                            <div *ngIf=" Addnearestpharmacyoutletdetails.controls['Name'].status == 'INVALID' && popress == true"
+                                class="errorColor">*Enter Name</div>
+                        </div>
+                        <div class="col-md-6">
+                            <Label>Contact Number</Label>
+                            <input type="text" class="form-control" placeholder="Contact Number"
+                                formControlName="ContactNumber" required>
+                            <div *ngIf=" Addnearestpharmacyoutletdetails.controls['ContactNumber'].status == 'INVALID' && popress == true"
+                                class="errorColor">*Enter Contact Number</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>*24/7 Pharmacy:-</label>
+                            <br>
+                            <label class="radio-inline">
+                                <input type="radio" formControlName="IsAvailable24Hours" name="IsAvailable24Hours"
+                                    value="true" required>Yes
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" formControlName="IsAvailable24Hours" name="IsAvailable24Hours"
+                                    value="false" required>No
+                            </label>
+                            <div *ngIf=" Addnearestpharmacyoutletdetails.controls['IsAvailable24Hours'].status == 'INVALID' && popress == true"
+                                class="errorColor">*Click YES/NO </div>
+                        </div>
+                        <div class="col-md-12">
+                            <Label>Address</Label>
+                            <input type="text" class="form-control" formControlName="Address"
+                                placeholder="Enter address">
+                            <!-- <ul *ngIf="suggestions.length > 0">  
+                                <li *ngFor="let suggestion of suggestions" (click)="selectAddress(suggestion)">{{ suggestion.description }}</li>
+                            </ul> -->
+                            <u style="color:blue;cursor: pointer;" (click)="getAddressCoordinates5()">Get
+                                Coordinates</u>
+                            <div *ngIf=" Addpreferedemergencyhospitals.controls['Address'].status == 'INVALID' && emergencypress == true"
+                                class="errorColor">*Enter Address</div>
+                        </div>
+                        <div class="row" formGroupName="LatLong">
+                            <div class="col-md-6" *ngIf="showCoordinates">
+                                <Label>Latitude</Label>
+                                <input type="number" class="form-control" placeholder="Latitude" formControlName="Lat"
+                                    required>
+                                <!-- <div *ngIf="Addnearestpharmacyoutletdetails.get('LatLong')?.get('Lat')?.status == 'INVALID' && popress == true"
+                                    class="errorColor">*Enter Latitude</div> -->
+                            </div>
+                            <div class="col-md-6" *ngIf="showCoordinates">
+                                <Label>Longitude</Label>
+                                <input type="number" class="form-control" placeholder="Longitude" formControlName="Long"
+                                    required>
+                                <!-- <div *ngIf="Addnearestpharmacyoutletdetails.get('LatLong')?.get('Long')?.status == 'INVALID' && popress == true"
+                                    class="errorColor">*Enter Longitude</div> -->
+                            </div>
+                        </div> 
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="anvayaabutton-secondary" (click)="submitepharmacyoutletdetails()"
+                    id="closeModal">Save
+                    changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  for sponsor deatils Modal -->
+<div class="modal fade" id="SponsorContactModal" tabindex="-1" aria-labelledby="SponsorContactModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="SponsorContactModalLabel">Add Sponsor Contact Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    #sponsorclose></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="Addsponsorcontactdetails">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <Label>Name</Label>
+                            <input type="text" class="form-control" placeholder="Name" formControlName="Name" required>
+                            <div *ngIf=" Addsponsorcontactdetails.controls['Name'].status == 'INVALID' && scpress == true"
+                                class="errorColor">*Enter Name</div>
+                        </div>
+                        <div class="col-md-6">
+                            <Label>Contact Number</Label>
+                            <input type="text" class="form-control" placeholder="Contact Number"
+                                formControlName="ContactNumber" required>
+                            <div *ngIf=" Addsponsorcontactdetails.controls['ContactNumber'].status == 'INVALID' && scpress == true"
+                                class="errorColor">*Enter Contact Number</div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="anvayaabutton-secondary" data-bs-dismiss="modal"
+                    (click)="submitesponsorcontactdetails()" id="closeModal">Save
+                    changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- For Property Details modal-->
+<div class="modal fade" id="Propertydetailsmodal" tabindex="-1" aria-labelledby="PropertydetailsmodalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="PropertydetailsmodalLabel">Add Property Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    #propertyclose></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="AddPropertyDetails">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="Property">Property Type</label>
+                            <select class="form-control" formControlName="Property" placeholder="Property Type"
+                                required>
+                                <option value="" selected disabled> select Property</option>
+                                <option value="IndependentHouse">IndependentHouse</option>
+                                <option value="Apartment">Apartment</option>
+                                <option value="Villa">Villa</option>
+                            </select>
+                            <div *ngIf="AddPropertyDetails.controls['Property'].status == 'INVALID' && propertypress == true"
+                                class="errorColor">*Select Property Type
+
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Floor">Floor</label>
+                            <input type="number" class="form-control" placeholder="Floor" formControlName="Floor"
+                                min="0" max="50" required>
+                            <div *ngIf="AddPropertyDetails.controls['Floor'].status == 'INVALID' && propertypress == true"
+                                class="errorColor">*Enter Floor</div>
+                        </div>
+                        <div class="col-md-6" *ngIf="AddPropertyDetails.controls['Floor'].value>'0'">
+                            <label for="Lift">Lift</label>
+                            <select class="form-control" formControlName="Lift" required>
+                                <option value="" selected disabled>Select lift ?</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                            <div *ngIf="AddPropertyDetails.controls['Lift'].value=='' && propertypress == true"
+                                class="errorColor">*Select Lift</div>
+                        </div>
+                        <div class="col-md-6"
+                            *ngIf="AddPropertyDetails.controls['Lift'].value=='Yes' && AddPropertyDetails.controls['Floor'].value>'0'">
+                            <label for="LiftSize">Lift Size</label>
+                            <select class="form-control" formControlName="LiftSize" required>
+                                <option value="" selected disabled> select Lift Size ?</option>
+                                <option value="Small">Small</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Large">Large</option>
+                            </select>
+                            <div *ngIf="AddPropertyDetails.controls['LiftSize'].value=='' && propertypress == true"
+                                class="errorColor">*Select Lift Size</div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="anvayaabutton-secondary" (click)="submitPropertyDetails()"
+                    id="closeModal">Save
+                    changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- For Medical Details modal-->
+<div class="modal fade" id="MedicalDetailsModal" tabindex="-1" aria-labelledby="MedicalDetailsModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="MedicalDetailsModalLabel">Add Medical Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    #sponsorclose></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="AddMedicalDetails">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <Label>Diseases</Label>
+                            <input type="text" class="form-control" placeholder="Diseases" formControlName="Diseases"
+                                required>
+                            <div *ngIf=" AddMedicalDetails.controls['Diseases']?.status == 'INVALID' && medicalPress == true"
+                                class="errorColor">*Enter Mobility</div>
+                        </div>
+                        <div class="col-md-6">
+                            <Label>Mobility</Label>
+                            <input type="text" class="form-control" placeholder="Mobility"
+                                formControlName="MobilityofUser" required>
+                            <div *ngIf=" AddMedicalDetails.controls['MobilityofUser']?.status == 'INVALID' && medicalPress == true"
+                                class="errorColor">*Enter Mobility</div>
+                        </div>
+                        <div class="col-md-6">
+                            <Label>Height in cm's</Label>
+                            <input type="number" class="form-control" placeholder="Height" formControlName="Height"
+                                required>
+                            <div *ngIf=" AddMedicalDetails.controls['Height']?.status == 'INVALID' && medicalPress == true"
+                                class="errorColor">*Enter Height</div>
+                        </div>
+                        <div class="col-md-6">
+                            <Label>Weight in Kg's</Label>
+                            <input type="number" class="form-control" placeholder="Weight" formControlName="Weight"
+                                required>
+                            <div *ngIf=" AddMedicalDetails.controls['Weight'].status == 'INVALID' && medicalPress == true"
+                                class="errorColor">*Enter Weight</div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="anvayaabutton-secondary" data-bs-dismiss="modal"
+                    (click)="submitMedicalDeatils()" id="closeModal">Save
+                    changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- AmbulanceTypeDetailsModal -->
+<div class="modal fade" data-bs-backdrop="static" id="AmbulanceTypeDetailsModal" tabindex="-1"
+    aria-labelledby="MedicalDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="AmbulanceTypeDetailsModal">Ambulance Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    #ambulanceTypeclose></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="AmbulanceTypeDetails">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Is Paramedic Required</label> <br>
+                            <label for="paramedicYes">Yes &nbsp; : &nbsp;
+                            </label>
+                            <input type="radio" value="true" id="paramedicYes" class="AmbulanceRequired"
+                                (click)="onSelectIsAmbulanceRequired($event)" formControlName="IsParamedicRequired"
+                                required>
+                            <label for="paramedicNo">No &nbsp; : &nbsp;</label>
+                            <input type="radio" value="false" id="paramedicNo" class="AmbulanceRequired"
+                                (click)="onSelectIsAmbulanceRequired($event)" formControlName="IsParamedicRequired"
+                                required>
+                            <div *ngIf="AmbulanceTypeDetails.controls['IsParamedicRequired'].status == 'INVALID' && ambulanceTypeFlag == true"
+                                class="errorColor">*Select Paramedic</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="AmbulanceType">Ambulance Type</label>
+                            <select class="form-control" formControlName="AmbulanceType" id="AmbulanceType" required>
+                                <option value="" disabled selected> Select Type</option>
+                                <option *ngFor="let Ambulance of ambulanceTypeDetails"
+                                    [value]="Ambulance.AmbulanceType">{{Ambulance.AmbulanceType}}</option>
+                            </select>
+                            <div *ngIf="AmbulanceTypeDetails.controls['AmbulanceType'].status == 'INVALID' && ambulanceTypeFlag == true"
+                                class="errorColor">*Select Ambulance Type</div>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="anvayaabutton-secondary" (click)="submitAmbulanceTypeDetails()"
+                    id="closeModal">Save </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<ngx-spinner type="ball-scale-multiple">loading...</ngx-spinner>

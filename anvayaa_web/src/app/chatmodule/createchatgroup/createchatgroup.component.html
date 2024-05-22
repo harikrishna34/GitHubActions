@@ -1,0 +1,274 @@
+<div class="mainDiv">
+    <div class="card">
+        <div><h3>Create-Chat-Group</h3></div>
+        <div class="card-body">
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="createuser">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-3">  
+                                    <label>Select User</label>
+                                    <select class="form-select" formControlName="guid" name="guid" (change)="customerId($event)" required>
+                                        <option selected value="">Select User Id</option>
+                                        <option *ngFor="let i of customerlistarray" value="{{i.uid}}">{{i.name}}</option>
+                                    </select>
+                                    <span class="errorcolor" *ngIf="createuser.controls['guid'].status =='INVALID' && submited == true &&createuser.controls['guid'].value==''">* select user</span>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Group Name</label>
+                                    <input type="text" class="form-control" formControlName="name" name="name" placeholder="name">
+                                    <span class="errorcolor" *ngIf="createuser.controls['name'].status =='INVALID' && submited == true &&createuser.controls['name'].value==''"> *Group Name Required</span>
+                                    
+                                </div>
+                                <div class="col-md-3">
+                                     <label>Select Support Exicutive</label>
+                                   <!-- <ng-multiselect-dropdown value="employeearray" 
+                                    [placeholder]="'select admin'" [settings]="dropdownSettings" [data]="employeearray"
+                                    [(ngModel)]="selectOwnerSettings" (onSelect)="supportexcadd($event)" [ngModelOptions]="{standalone: true}" (onDeSelect)="suuportexremove($event)">
+                                </ng-multiselect-dropdown> -->
+                                    <select class="form-select" formControlName="owner" name="owner" (change)="supportexcadd($event)" required>
+                                        <option selected value=" ">Select </option>
+                                        <option *ngFor="let emp of employeearray" value="{{emp.uid}}">{{emp.name}}</option>
+                                    </select>
+                                    <span class="errorcolor" *ngIf="createuser.controls['owner'].status =='INVALID' && submited == true &&createuser.controls['owner'].value==''"> *Required</span>
+
+                                </div>
+                                <div class="col-md-3">
+                                    <label> Group Description</label>
+                                    <input type="text"   class="form-control" formControlName="description" name="description" placeholder="description">
+                                    <span class="errorcolor" *ngIf="createuser.controls['description'].status =='INVALID' && submited == true &&createuser.controls['description'].value==''"> *Required</span>
+                                    
+                                  </div>
+                                <div class="row" formGroupName="members">
+                                    <h4>Members</h4>
+                                    <!-- <div class="col-md-3">
+                                        <label>*Select Care Manager</label>
+                                        <ng-multiselect-dropdown value="adminslistarray" 
+                                        [placeholder]="'select care manager'" [settings]="dropdownSettings" [data]="adminslistarray"
+                                        [(ngModel)]="selectedItems"  [ngModelOptions]="{standalone: true}"(onSelect)="addadmin($event)" (onDeSelect)="removeadim($event)"  required>
+                                    </ng-multiselect-dropdown>
+
+                                    <span  class="errorcolor" *ngIf=" submited == true"  [hidden]="adminarray!=''"> *Required</span>
+                                     
+                                    </div> -->
+                                    <!-- <div class="col-md-3">
+                                        <label>*Moderators</label>
+                                        <ng-multiselect-dropdown value="dropdownList" formControlName="moderators" name="moderators"
+                                        [placeholder]="'select Languages '" [settings]="dropdownSettings" [data]="dropdownList"
+                                        [(ngModel)]="selectedItems">
+                                    </ng-multiselect-dropdown>
+                                    </div> -->
+                                    <div class="col-md-3">
+                                        <label>* Select Members</label>
+                                        <ng-multiselect-dropdown value="participentslistarray" 
+                                        [placeholder]="'select Members '" [settings]="dropdownSettings" [data]="participentslistarray"
+                                        [(ngModel)]="otherusers"  [ngModelOptions]="{standalone: true}" (onSelect)="othersSingleAdd($event)" (onSelectAll)="others($event)" (onDeSelectAll)="removeIndividule($event)" (onDeSelect)="removeothers($event)" required>
+                                    </ng-multiselect-dropdown>
+                                    <span  class="errorcolor" *ngIf="submited == true"  [hidden]="participentsarray.length >1"> *Required</span>
+
+                                    </div>
+                                </div>
+                              
+                            </div>
+                          </div>
+                          <div class="text-center" style="margin-top: 20px;"><button class="btn btn-primary" (click)="createchatgroup()" >Create Group</button></div>
+                    </form>
+                  
+                </div>
+              </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+
+             <h3>List Of Groups</h3>
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                          <tr>
+                           
+                            <th scope="col">Group Name</th>
+                            <th scope="col">Members</th>                                
+                            
+                            <th scope="col">Description</th>
+                            <!-- <th scope="col">Add Member</th> -->
+                            <th scope="col">Update</th>
+                            <th scope="col">Remove</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let group of grouplistarray">
+                            <td>{{group.name}}</td>
+                            <td>{{group.membersCount}}</td>
+                            <td>{{group.description}}</td>
+                            <!-- <td (click)="addmember(group)"><img src="../../../assets/images/add-contact (1).png" style="width: 30px;"></td> -->
+                            <td (click)="updategroupdata(group)"  data-bs-toggle="modal" data-bs-target="#updategroup"><img src="../../../assets/images/edit.png" style="width:24px"></td>
+                            <td  data-bs-toggle="modal" data-bs-target="#staticBackdrop"   (click)="groupRemoveAlert(group)"> <img src="../../../assets/images/delete.png" style="width:24px"></td>
+                            <td></td>
+                          </tr>
+              <tr *ngIf="emptyData"><td colspan="5"><h3> No Groups Found </h3></td></tr>
+
+                        </tbody>
+                      </table>
+           
+                </div>
+              </div>
+        </div>
+      </div>
+      <!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade"    id="updategroup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:1000px">
+      <div class="modal-content" style="margin-left: -300px;width:1111px">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Chat Group Details</h5>
+          <button type="button"  class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-3"><span><h5>Group Name</h5></span><span style="margin:5px"></span><span>{{groupdetails?.name}}</span></div>
+              <div class="col-md-3"><span><h5>Group Members</h5></span><span></span><span>{{groupdetails?.membersCount}}</span></div>
+              <div class="col-md-3"><span><h5>Group Created Date</h5></span><span></span><span>{{groupdetails?.createdAt*1000| date:"dd-MM-yyyy"}}</span></div> 
+            </div>
+           </div>
+
+         <div class="container" style="margin-top: 8px;">
+          <div class="card text-dark bg-light mb-3" >
+             
+            <div class="card-body">
+              <div class="card text-dark bg-light mb-3" >
+              <h4>Add Member To Group </h4>
+
+                <div class="card-body">
+                <form [formGroup]="addgroupmembersform">
+                  <div class="row">
+                    <!-- <div class="col-md-3">
+                      <label>Select Care Manager</label>
+                      <ng-multiselect-dropdown value="dropdownList" [placeholder]="'select'" [settings]="dropdownSettings"
+                        [data]="adminslistarray" [(ngModel)]="membersadmin" (onSelect)="addadinformember($event)"
+                        [ngModelOptions]="{standalone: true}" (onDeSelect)="removemembersadim($event)">
+                      </ng-multiselect-dropdown>
+                    </div> -->
+                    <div class="col-md-3">
+                      <label>Select Participent</label>
+                      <!-- <ng-multiselect-dropdown value="dropdownList" [placeholder]="'select  '" [settings]="dropdownSettings"
+                        [data]="participentslistarray" [(ngModel)]="membersparticipents" (onSelect)="membersaddothers($event)"
+                        [ngModelOptions]="{standalone: true}" (onDeSelect)="removememberothers($event)">
+                      </ng-multiselect-dropdown> -->
+                      <select class="form-select" formControlName="participants" name="participants" (change)="membersaddothers($event)" required>
+                        <option selected value="">Select User Id</option>
+                        <option *ngFor="let i of participentslistarray" value="{{i.uid}}">{{i.name}}</option>
+                    </select>
+                     
+                    <span class="errorcolor" *ngIf="addgroupmembersform.controls['participants']?.status =='INVALID' && submited == true &&addgroupmembersform.controls['participants']?.value==''"> *Required</span>
+                    
+                    </div>
+                    <div class="col-md-3">
+                      <button type="button" class="btn btn-primary" style="margin-top:23px"  (click)="addmembers()">Add Member</button>
+                    </div>
+                  </div>
+                </form>
+                </div>
+              </div>
+          </div>
+         </div>
+        </div>
+        <div class="container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Role</th>
+                <th scope="col">Status</th>
+                <th scope="col">Scope</th>
+                <th scope="col">Remove</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let member of groupmembersarray">
+                <td>{{member.name}}</td>
+                <td>{{member.role}}</td>
+                <td>{{member.status}}</td>
+                <td>{{member.scope}}</td>
+                <td data-bs-toggle="modal" data-bs-target="#removegroupmembers" [hidden]="member.scope =='admin'"  (click)="removeGroupDilough(member)"><img src="../../../assets/images/delete.png" style="width:20px"></td>
+                
+              </tr>
+             
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"   (click)="closeMembersModel()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal Groups -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5> -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <h5> Confirm to Delete Group ?</h5>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+        <button type="button" class="btn btn-primary"   data-bs-dismiss="modal"  (click)="removegroup()"> Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Remove Group Members Modal -->
+<div class="modal fade"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="0" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5> -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <h5> Confirm to Delete Group Members ?</h5>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+        <button type="button" class="btn btn-primary"  data-bs-dismiss="modal"  (click)="removeMemberInGroup()"> Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="removegroupmembers" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h5> Confirm to Delete Group Members ?</h5>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button> -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updategroup" (click)="removeMemberInGroup()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+

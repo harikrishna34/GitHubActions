@@ -1,0 +1,40 @@
+.bodycontent{
+    margin-top: 90px;
+    margin-left: 125px;
+}
+ 
+ .cancelBtn{
+    font-weight: bold;
+ }
+.anvayaaButton{
+    background-color: purple;
+    font-weight: bold;
+    color: aliceblue;
+}
+.ambulanceUserBtn{
+    cursor: no-drop;
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    gap:10px
+}
+.details{
+    display: flex;
+    justify-content: space-between;
+    line-height: 2.5rem;
+}
+label{
+    font-size: medium;
+    font-weight: 100;
+    color: #914573;
+}
+.card-title{
+    font-weight: 100;
+}
+.ambulanceBtn{
+    /* background-color: aliceblue; */
+    /* background-color: white; */
+    font-weight: bold;
+    color:#914573
+}

@@ -1,0 +1,74 @@
+
+.bodycontent{
+    margin-top: 100px;
+    margin-left: 142px;
+  }
+.bodycontent1{
+    margin-top: 20px;
+    margin-left: 142px;
+}
+  .button2{
+      margin-left: 700px;
+      margin-top: -50px;
+  }
+  .modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
+.modal-header.model {
+    background-color: #914573;
+    font-weight: 300;
+    color: white;
+    border-bottom: 4px solid rgb(128, 128, 128);
+}
+
+.modal-title.header {
+    font-family: inherit;
+    font-weight: 300;
+    line-height: 1.1;
+    color: white;
+    padding: 20px 0px 10px 10px;
+}
+/* .textVendor{
+    margin-left: 10px;
+} */
+.btns{
+    margin-left: 900px;
+}
+.sendtovndrbtn{
+    margin-left: 150px;
+}
+.titlevendor{
+margin-left: 250px;
+/* background-color: #914573; */
+}
+
+.reqIDStyle{
+    font-size: 20px;
+}
+.backbtn{
+/* baccolor:#67d3e0 */
+background:#914573;
+padding: 6px 15px;
+
+color: white;
+border-radius: 15px;
+border: none;
+}
+.bodycontent2{
+    /* margin-top:10px; */
+    margin-left: 124px;
+}
+.AcceptBtn{
+    background:#914573;
+    padding: 5px 15px;
+    color: white;
+    border-radius: 5px;
+}
+.ScheduleJob{
+margin-left: 80rem;
+background-color: #914573;
+border-radius: 15px;
+margin-top: 20px;
+border: none;
+}

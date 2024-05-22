@@ -1,0 +1,140 @@
+<div class="col-md-8" id="bankform">
+    <form *ngFor="let data of anchorsCompanyDetails" #userlogin="ngForm" (ngSubmit)="updateachors()" id="anchorsdata"
+        [formGroup]="anchorsdata">
+
+
+        <div class="previosButton" (click)="dashboard()"><img src="../../../assets/images/previous.png"></div>
+        <div class="col-md-10 container">
+            <div class="col-md-3" id="heading">
+                <h5 >Company  Details</h5>
+     
+        </div>
+            <br>
+            <div class="row">
+               
+
+                <div class="form-group col-md-4 inputBox">
+                    <input type="text" name="CompanyName" formControlName="CompanyName" required
+                        onkeyup="this.setAttribute('value', this.value);" value="" ngModel="{{data.CompanyName}}" minlength="2" maxlength="500">
+
+                    <label>CompanyName</label>
+                    <div class="row"
+                        *ngIf='this.anchorsdata.controls["CompanyName"].status=="INVALID" && this.bankDetailsSubmitBtn==true'>
+                        <p>*CompanyName Mandatory </p>
+                    </div>
+
+                </div>
+                <div class=" col-md-4 inputBox">
+                    <input type="text" name="CompanyEmail" formControlName="CompanyEmail" required value=""
+                        ngModel="{{data.CompanyEmail}}">
+
+                    <label>CompanyEmail:</label>
+                    <div class="row"
+                        *ngIf='this.anchorsdata.controls["CompanyEmail"].status=="INVALID" && this.bankDetailsSubmitBtn==true'>
+                        <p>*CompanyEmail Mandatory</p>
+                    </div>
+                </div>
+                <div class=" col-md-4 inputBox">
+                    <input type="text" name="MobileNumber" formControlName="MobileNumber" required
+                     minlength="10" maxlength="10"   onkeyup="this.setAttribute('value', this.value);" value="" ngModel="{{data.MobileNumber}}">
+
+                    <label>MobileNumber</label>
+                    <div class="row"
+                        *ngIf='this.anchorsdata.controls["MobileNumber"].status=="INVALID" && this.bankDetailsSubmitBtn==true'>
+                        <p>*MobileNumber Mandatory</p>
+                    </div>
+                </div>
+
+
+            </div>
+            <br>
+            <div class="row">
+
+
+
+
+                <div class=" col-md-4 inputBox">
+                    <input type="text" name="GST" formControlName="GST" 
+                        onkeyup="this.setAttribute('value', this.value);" value="" ngModel="{{data.GST}}" maxlength="15" required>
+
+                    <label>GST</label>
+                    <div class="row"
+                        *ngIf='this.anchorsdata.controls["GST"].status=="INVALID" && this.bankDetailsSubmitBtn==true'>
+                        <p>*GST Mandatory</p>
+                    </div>
+                </div>
+                <div class=" col-md-4 inputBox">
+                    <input type="text" name="Address" formControlName="Address" required
+                        onkeyup="this.setAttribute('value', this.value);" value="" ngModel="{{data.Address}}">
+
+                    <label>Address</label>
+                    <div class="row"
+                        *ngIf='this.anchorsdata.controls["Address"].status=="INVALID" && this.bankDetailsSubmitBtn==true'>
+                        <p>*Address Mandatory</p>
+                    </div>
+                </div>
+                <div class=" col-md-4 inputBox">
+                    <input type="text" name="InCorporation" formControlName="InCorporation" required
+                        onkeyup="this.setAttribute('value', this.value);" value="" ngModel="{{data.InCorporation}}">
+
+                    <label>InCorporation</label>
+                    <div class="row"
+                        *ngIf='this.anchorsdata.controls["InCorporation"].status=="INVALID" && this.bankDetailsSubmitBtn==true'>
+                        <p>*InCorporation Mandatory</p>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+
+                <div class=" col-md-4 inputBox">
+                    <input type="text" name="PanCard" formControlName="PanCard" required
+                        onkeyup="this.setAttribute('value', this.value);" value="" ngModel="{{data.PanCard}}">
+
+                    <label>PanCard</label>
+                    <div class="row"
+                        *ngIf='this.anchorsdata.controls["PanCard"].status=="INVALID" && this.bankDetailsSubmitBtn==true'>
+                        <p>*PanCard Mandatory</p>
+                    </div>
+                </div>
+
+                <div class=" col-md-4 inputBox">
+                    <input type="file" (change)="onuploadcompanypan($event)" formControlName="panfileimg" accept="image/*">
+                    <div class="row"
+                    *ngIf='this.anchorsdata.controls["panfileimg"].status=="INVALID" && this.bankDetailsSubmitBtn==true'>
+                    <p>*PanCardfile Mandatory</p>
+                </div>
+
+
+
+                </div>
+
+           
+
+            </div>
+            <br>
+            <div class="row">
+
+                <div class=" col-md-3">
+                    <h4>IsTaxExeempeted</h4>
+               
+
+                </div>
+                <img src="../../../assets/images/icons8-checkmark-80.png" (click)="clickwrite('true')" class="writemark"
+                    alt="Dinosaur" ngModel="truedata" > 
+                
+                <img src="../../../assets/images//icons8-close-64.png" (click)="clickfalse('false')" class="writemark" alt="Dinosaur">
+                <div class=" col-md-4 inputBox" [hidden]="!isTaxExemptedbtn" >
+                    <input  type="file" formControlName="TaxFile"  (change)="onuploadtaxFile($event)" accept="image/*" >
+                    
+                </div>
+                <button type="button"    class="btn btn-info" id="submitbankdata" (click)="updateachors()">SUBMIT
+                    DETAILS</button>
+
+            </div>
+            <br>
+        </div>
+        <br>
+
+    </form>
+</div>

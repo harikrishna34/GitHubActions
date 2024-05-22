@@ -1,0 +1,40 @@
+.Main{
+    background: rgb(248, 141, 0);
+   width: 101%;
+   height: 100%;
+   
+}
+
+header{
+    height:80px;
+}
+
+.statustables{
+    background-color: rgba(59, 178, 186, 0.83);
+    height: 80px;
+    margin: 15px;
+    border-radius: 17px;
+    
+
+}
+
+.image--cover {
+ 
+        width: 122px !important;
+        height: 122px;
+        border-radius: 20px;
+        border: 1px solid;
+        object-fit: cover;
+        object-position: center right;
+        
+    }
+  
+   .title{
+    border-radius: 29px;
+    background-color: #914573;
+    border: none;
+    color: #FFFFFF;
+   }
+  .text{
+      color:white;
+  }

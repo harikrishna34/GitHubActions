@@ -1,0 +1,41 @@
+<div class="main">
+
+    
+
+     <form [formGroup]="downGrade" >
+        <div class="modal-body">
+            <div>
+                <select formControlName='TimePeriodInMonths'>
+                    <option Selected  >Select</option>
+                    <option *ngFor="let month of Months" value={{month}}>{{month}}</option>
+                </select>
+             </div>
+          </div>
+  
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary" (click)="downgradeplan()">Procced</button>
+
+    </div>
+  </form>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Exisiting Plan Details</h5>
+          
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">New Plan Details</h5>
+          <p class="card-text"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,1643 @@
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" >Create Customer</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #closebutton></button>
+      </div>
+      <div class="modal-body">
+          <form  [formGroup]="newCustomer">
+            <!-- class="row" -->
+            <div class="col-md-6">
+              <label>Name</label>
+              <input type="text" class="form-control" placeholder="Name" formControlName="Name" required>
+              <div *ngIf='this.newCustomer.controls["Name"].errors&&this.newCustomerSubmit==true ' style="color: red;">*
+                Name Required</div>
+            </div>
+            <div class="col-md-6">
+              <label>Mobile</label>
+              <input type="phone" class="form-control" placeholder="Mobile"  formControlName="MobileNumber" maxlength="10" required>
+              <div *ngIf='this.newCustomer.controls["MobileNumber"].errors && this.newCustomerSubmit==true'
+                style="color: red;">
+                *Required Mobile Number
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label>E-mail</label>
+              <input type="email" class="form-control" placeholder="Mobile" formControlName="EmailID" required>
+        
+              <div *ngIf='this.newCustomer.controls["EmailID"].errors && this.newCustomerSubmit==true'
+                style="color: red;">
+                *Required Email-id
+              </div>
+            </div>
+            <div class="col-md-3">
+              <label>&nbsp;</label>
+        
+              <!-- <button type="submit" class="btn btn-primary" [disabled]='!this.newCustomer.valid'
+                (click)=" creatCustomer()">Add Customer</button> -->
+            </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn  anvayaaButtonYellow" [disabled]='!this.newCustomer.valid'
+        (click)=" creatCustomer()" id="closeModal">Add Customer </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="createReqq container-fluid">
+  <div class=" card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-sm-4">
+          <label class="serviceName">New Request</label>
+        </div>
+
+        <div class="col-sm-4" >
+          <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="newCustomerForm()">Create Customer</button>
+        </div>
+        <div class="col-sm-3" >
+          </div>
+        <div class="col-sm-1">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" #closebutton (click)="cancel()"></button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+
+        <div class="col-md-4">
+          <div class="customerSelect  ng-autocomplete">
+            <ng-autocomplete [data]="data" [searchKeyword]="keyword" placeholder="Search Customer"
+              (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)'
+              (inputCleared)='onFocused($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+            </ng-autocomplete>
+            <ng-template #itemTemplate let-item>
+              <a [innerHTML]="item.Name"> </a>
+
+            </ng-template>
+            <ng-template #notFoundTemplate let-notFound>
+              <div [innerHTML]="notFound"></div>
+            </ng-template>
+          </div>
+        </div>
+      
+
+       
+
+        <div class="planDetailsContent col-md-6" [hidden]="!planDetails ||citySelect">
+          <span class="planDetails">Plan Type:</span><span class="plaData"> {{planType}}</span>
+          <br>
+          <span class="planDetails"> Package Nature: </span><span class="PackageNature">{{PackageNature}}</span>
+          <br>
+          <span class="planDetails"> PMS Balance:</span> <span class="pms"> </span>
+        </div>
+        <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+          </ul>
+        </div> -->
+        <div class="collapse" id="navbarToggleExternalContent">
+          <div class="bg-dark p-4">
+            <div class="planDetailsContent col-md-6" [hidden]="!planDetails ||citySelect">
+              <span class="planDetails">Plan Type:</span><span class="plaData"> {{planType}}</span>
+              <br>
+              <span class="planDetails"> Package Nature: </span><span class="PackageNature">{{PackageNature}}</span>
+              <br>
+              <span class="planDetails"> PMS Balance:</span> <span class="pms"> </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="row"></div> -->
+      <div  >
+        <div class="row"  *ngIf="userDetails && userDetails.Name">
+          <div class="col-md-8 row customerDetails" *ngIf="userDetails && userDetails.Name">
+            <div class="col-md-4" style="border-right: 1px solid #000000;height: 172px;">
+              <label class="headingStyle">Sponsor</label>
+    
+              <label class="customerName">Name : {{userDetails.Name}}</label>
+              <label class="phNo">Ph NO : {{userDetails.MobileNumber}}</label> <br>
+              <label class="phNo">Email : {{userDetails.EmailID}}</label>
+            </div>
+            <div class="col-md-4" style="border-right: 1px solid #000000;"
+              *ngIf="userDetails.Beneficiaries && userDetails.Beneficiaries.length>0">
+              <label class="headingStyle">Beneficiary 1</label>
+              <label class="customerName">Name : {{userDetails.Beneficiaries[0].Name}}</label>
+              <label class="phNo">Ph NO : {{userDetails.Beneficiaries[0].MobileNumber}}</label>
+              <br>
+              <label class="phNo">Email : {{userDetails.Beneficiaries[0].EmailID}}</label>
+            </div>
+            <div class="col-md-4" *ngIf="userDetails.Beneficiaries && userDetails.Beneficiaries.length==2">
+              <label class="headingStyle">Beneficiary 2</label>
+              <label class="customerName">Name : {{userDetails.Beneficiaries[1].Name}}</label>
+              <label class="phNo">Ph NO : {{userDetails.Beneficiaries[1].MobileNumber}}</label><br>
+              <label class="phNo">Email : {{userDetails.Beneficiaries[1].EmailID}}</label>
+            </div>
+           
+          </div>
+          <div class="col-md-4">
+            <button class="btn anvayaaButtonYellow"  style="margin-left: 40%;margin-top: 13%;" (click)="CustomerProfile()">Customer Profile</button>
+          </div>
+        </div>
+        
+      </div>
+      
+      
+      <div class="row supportDetails" *ngIf="userDetails.SupportExecutiveObj && userDetails.SupportExecutiveObj">
+        <div class="col-md-4 " style="border-right: 1px solid #000000;height: 172px;">
+          <label class="supportStyle">Support Executive</label>
+          <label class="customerName">Name : {{userDetails.SupportExecutiveObj.FirstName}}
+            {{userDetails.SupportExecutiveObj.LastName}}</label>
+          <label class="phNo">Contact Number: {{userDetails.SupportExecutiveObj.ContactNumber}}</label><br>
+          <label class="phNo">Email: {{userDetails.SupportExecutiveObj.EmailID}}</label>
+        </div>
+        <div class="col-md-4" style="border-right: 1px solid #000000;"
+          *ngIf="userDetails.CareManagerObj && userDetails.CareManagerObj!=null">
+          <label class="supportStyle">Care Manager</label>
+          <label class="customerName">Name : {{userDetails.CareManagerObj.FirstName}}
+            {{userDetails.CareManagerObj.LastName}}</label>
+          <label class="phNo">Contact Number : {{userDetails.CareManagerObj.ContactNumber}}</label>
+          <label class="phNo">Email : {{userDetails.CareManagerObj.EmailID}}</label>
+        </div>
+        <div class="col-md-4" *ngIf="userDetails.BackUpCareManagerObj && userDetails.BackUpCareManagerObj!=null">
+          <label class="backupcm">Backup Care Manager</label>
+          <label class="customerName">Name : {{userDetails.BackUpCareManagerObj.FirstName}}
+            {{userDetails.BackUpCareManagerObj.LastName}}</label>
+          <label class="phNo">Contact Number: {{userDetails.BackUpCareManagerObj.ContactNumber}}</label><br>
+          <label class="phNo">Email : {{userDetails.BackUpCareManagerObj.EmailID}}</label>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col-md-4" *ngIf="citySelect==true">
+          <label> Select City</label>
+          <select class="form-select" aria-label="Default select example" (change)="selectCityID($event)">
+            <option selected value="" disabled> Select City </option>
+            <option *ngFor="let city of cityData" value="{{city.CityID}}">{{city.CityName}}</option>
+          </select>
+        </div>
+        <div class="col-md-4" *ngIf="citySelect==true">
+          <label> Select Executive</label>
+          <select class="form-select" aria-label="Default select example" (change)="selectEmployeeID($event)">
+            <option selected value="" disabled> Select Employee</option>
+            <option *ngFor="let Employee of SalesEmployees" value="{{Employee.EmployeeID}}">{{Employee.FirstName}}
+              {{Employee.LastName}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row searchbox2" [hidden]="ServiceSelect!=true"
+        *ngIf="userDetails && userDetails.Name && serviceInputBox ">
+        <div class="col-md-5" [hidden]="categoryDetails">
+          <div class="serviceSelect ng-autocomplete">
+            <ng-autocomplete [data]="categaryDetails" [searchKeyword]="keyword1" placeholder="Select Service"
+              (inputChanged)='onChangePlan($event)' (selected)='selectCategory($event)'
+              (inputCleared)='onFocuse($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+            </ng-autocomplete>
+            <ng-template #itemTemplate let-item>
+              <a [innerHTML]="item.AliasName"></a>
+            </ng-template>
+            <ng-template #notFoundTemplate let-notFound>
+              <div [innerHTML]="notFound"></div>
+            </ng-template>
+          </div>
+
+          <div class="AnvayaaCharges" *ngIf="TotalPrice">
+            <span class="anvayaaChargeslist"><u>Anvayaa Charges:</u></span> <br>
+            <img class="crossimg" *ngIf="CoverdPlan==true" src="../../assets/images/check-mark (2).png" alt="">
+            <span class="coverd"> {{Covered}}</span>
+            <img class="crossimg" *ngIf="notCoveredInPlan==true" src="../../assets/images/icons8-close-64.png " alt="">
+            <span class="NOtcoverd"> {{NotCovered}}</span> <br>
+            <label class="Estimated">Estimated Range: &nbsp; &nbsp; :/-</label>
+            <label class="Estimated">Anvayaa Charges: &nbsp;&nbsp;&#x20B9;{{TotalPrice}} /-</label>
+            <label class="Estimated" *ngIf="citySelect==true">Anvayaa Charges: <input type="number"
+                [(ngModel)]="TotalPrice"></label>
+
+            <span class="formDetails" *ngIf="citySelect==true">Service Valid Till:</span>
+            <div class=" input-group date" *ngIf="citySelect==true">
+              <input [(ngModel)]="OTMSubscriptionDate" type='date' class="startdate form-control"
+                placeholder="Select Start Date">
+            </div>
+
+          </div>
+        </div>
+        <div class="col-md-5" *ngIf="SubSubCategory && SubSubCategory.length>0">
+          <div class="serviceSelect ng-autocomplete">
+            <ng-autocomplete [data]="SubSubCategory" [searchKeyword]="keyword1" placeholder="Select Sub Service"
+              (selected)='selectSubCategory($event)' [itemTemplate]="itemTemplate"
+              [notFoundTemplate]="notFoundTemplate">
+            </ng-autocomplete>
+            <ng-template #itemTemplate let-item>
+              <a [innerHTML]="item.AliasName"></a>
+            </ng-template>
+            <ng-template #notFoundTemplate let-notFound>
+              <div [innerHTML]="notFound"></div>
+            </ng-template>
+          </div>
+          <br>
+          <table *ngIf="PriceRange && PriceRange.length>0">
+            <tr>
+              <th>Tariff Type</th>
+              <th>Minimum Amount</th>
+              <th>Maximum Amount</th>
+            </tr>
+
+            <tr *ngFor="let Range of PriceRange">
+              <td>{{Range.Tariff}}</td>
+              <td>&#x20B9; {{Range.MinValue}}</td>
+              <td>&#x20B9; {{Range.MaxValue}}</td>
+            </tr>
+          </table>
+          <label *ngIf="SubSubCategoryID && PriceRange && PriceRange.length ==0">
+            <b>No Partner Found With This Service</b>
+          </label>
+
+        </div>
+
+        <div class="row" [formGroup]="createRequestData">
+          <div class="row" *ngIf="TotalPrice">
+            <div class="col-md-3">
+              <span class="formDetails">Request Type:</span>
+              <div id='Status'>
+                <label for="Status" class="field select">
+                  <select class="RequestType" formControlName="ServiceRequestType"
+                    [attr.disabled]="!RequestTypeSelect ? '' : null">
+                    <option selected value="">Select Service Type</option>
+                    <option value="InHouseRequest">In House Request</option>
+                    <option value="ThirdPartyRequest">Third Party Request</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <span class="formDetails">Service Type:</span>
+              <div id='Status'>
+                <label for="Status" class="RequestType field select">
+                  <select class="RequestType" formControlName="ServiceType">
+                    <option selected value="" disabled>Select Service Type</option>
+                    <option value="Onetime">One Time</option>
+                    <option value="Ongoing/ Daily">Daily/Ongoing</option>
+                    <option value="Recurring">Recurring</option>
+                    <i class="arrow double"></i>
+                  </select>
+                </label>
+                <div class="row">
+                  <!-- <span for="" class="alerts"
+                    *ngIf='this.createRequestData.controls["ServiceType"].status=="INVALID" && this.createRequestbBtn==true'>*Mandatory</span> -->
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-3">
+              <span class=" formDetails" [hidden]="selectBeneficiary!='Yes'" for=""> Select Beneficiary:</span>
+              <div id='Status' (change)="selectBeneficiaryID($event)" [hidden]="selectBeneficiary!='Yes'">
+                <label for="Status" class="field select">
+                  <select class="Beneficiary">
+                    <option selected value="">Select Benfificiary</option>
+                    {{Beneficiaries}}
+                    <option value="{{beneficiary.CustID}}" *ngFor="let beneficiary of Beneficiaries">
+                      {{beneficiary.Name}}</option>
+                  </select>
+                  <i class="arrow double"></i>
+                </label>
+                <!-- <span for="" class="alerts" *ngIf='CustID==null&& this.createRequestbBtn==true'>*Beneficiary
+                  Mandatory</span> -->
+              </div>
+            </div>
+            <div class="col-md-4">
+              <span class="formDetails">Language</span>
+              <div id='Status'>
+                <ng-multiselect-dropdown value="dropdownList" formControlName="Languages" class="formDetails"
+                  [placeholder]="'select Languages'" [settings]="dropdownSettings" [data]="dropdownList"
+                  [(ngModel)]="selectedItems">
+                </ng-multiselect-dropdown>
+              </div>
+            </div>
+            <div class="col-md-4 ">
+              <div>
+                <span class="formDetails">Select Religion</span>
+                <!-- <span class=" formDetails" [hidden]="selectBeneficiary!='Yes'" for=""> Select Gender:</span> -->
+                <!-- <div id='Status' (change)="selectBeneficiaryID($event)" [hidden]="selectBeneficiary!='Yes'"> -->
+                <select class="form-select" formControlName="Religion" placeholder="Select Religion">
+                  <option selected value="" disabled>Select Religion</option>
+                  <option value="Hindu">
+                    <li><span class="dropdown-item-text">Hindu</span></li>
+                  </option>
+                  <option value="Christianity">
+                    <li><span class="dropdown-item-text">Christianity</span></li>
+                  </option>
+                  <option value="Islam">
+                    <li><span class="dropdown-item-text">Islam</span></li>
+                  </option>
+                  <option value="Judaism">
+                    <li><span class="dropdown-item-text">Judaism</span></li>
+                  </option>
+                  <option value="Buddhism">
+                    <li><span class="dropdown-item-text">Buddhism</span></li>
+                  </option>
+                  <option value="Jainism">
+                    <li><span class="dropdown-item-text">Jainism</span></li>
+                  </option>
+                  <option value="Sikhism">
+                    <li><span class="dropdown-item-text">Sikhism</span></li>
+                  </option>
+                  <option value="Zoroastrianism.Q">
+                    <li><span class="dropdown-item-text">Zoroastrianism.Q</span></li>
+                  </option>
+
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <span class="formDetails">Select Gender</span>
+              <!-- <span class=" formDetails" [hidden]="selectBeneficiary!='Yes'" for=""> Select Gender:</span> -->
+              <!-- <div id='Status' (change)="selectBeneficiaryID($event)" [hidden]="selectBeneficiary!='Yes'"> -->
+              <select class="form-select" formControlName="Gender" placeholder="Select Gender">
+                <option selected value="" disabled>Select Gender</option>
+                <option value="Male">
+                  <li><span class="dropdown-item-text">Male</span></li>
+                </option>
+                <option value="Female">
+                  <li><span class="dropdown-item-text">Female</span></li>
+                </option>
+              </select>
+              <!-- <span for="" class="alerts" *ngIf='CustID==null&& this.createRequestbBtn==true'>*Beneficiary
+                    Mandatory</span> -->
+              <!-- </div> -->
+              <!-- <div class="reqType">
+                  <div class='selectDays '>
+                    <span class="formDetails">Budget</span>
+                    <div id='Remark'>
+                      <textarea type='number' formControlName="Budget" class="form-control" style="width: 225px;"
+                        placeholder="Budget">
+                          </textarea>
+                    </div>
+                  </div>
+                </div> -->
+            </div>
+            <div class="col-md-4">
+              <span class="formDetails">Select Start Date :</span>
+              <div class=" input-group date">
+                <input type='date' formControlName="RequestedDate" class="startdate form-control"
+                  placeholder="Select Start Date">
+              </div>
+            </div>
+            <div class="col-md-4" [hidden]="this.createRequestData.value.ServiceType=='Onetime'">
+              <span class="formDetails">Select End Date :</span>
+              <div class=" input-group date">
+                <input formControlName="RequestEndDate" type='date' class="startdate form-control"
+                  min="{{mindate | date:'yyyy-MM-dd'}}" placeholder="Select End Date ">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <span class="formDetails">Select Placement Time:</span>
+              <div class=" input-group date">
+                <input formControlName="PlacementTime" type='datetime-local' class="startdate form-control"
+                  min="{{mindate | date:'yyyy-MM-dd'}}" placeholder="Select  Placement Time">
+              </div>
+              <!-- <div class="reqType">
+                  <div class='selectDays '>
+                    <span class="formDetails">Comment:</span>
+                    <div id='Remark'>
+                      <textarea type='text' formControlName="Note" class="form-control" style="width: 225px;"
+                        placeholder="Comment">
+                          </textarea>
+                    </div>
+                  </div>
+                </div> -->
+            </div>
+            <div class="col-md-3">
+              <div class="reqType">
+                <div class='selectDays '>
+                  <span class="formDetails">Budget</span>
+                  <div id='Remark'>
+                    <textarea type='number' formControlName="Budget" class="form-control" style="width: 225px;"
+                      placeholder="Budget">
+                          </textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="reqType">
+                <div class='selectDays '>
+                  <span class="formDetails">Comment:</span>
+                  <div id='Remark'>
+                    <textarea type='text' formControlName="Note" class="form-control" style="width: 225px;"
+                      placeholder="Comment">
+                          </textarea>
+                    <!-- style="width: 100px;" -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="" class="formDetails" [hidden]="CoverdPlan"> Payment Mode:</label>
+              <div class="col-md-10" (change)="paymentMode($event)" [hidden]="CoverdPlan">
+                <input value="Cheque" class="checkboxstyle form-check-input" type="radio" name="flexRadioDefault"
+                  id="flexRadioDefault2" required> &nbsp;Cheque&nbsp;
+                <input value="Cash" class="checkboxstyle form-check-input" type="radio" name="flexRadioDefault"
+                  id="flexRadioDefault2" required>&nbsp; Cash&nbsp;
+                <input value="Wiretransfer" class="checkboxstyle form-check-input" type="radio" name="flexRadioDefault"
+                  id="flexRadioDefault2" required> &nbsp; Wire Transfer&nbsp;
+                <input [hidden]="pmsVerify!=true" value="PMS" class="checkboxstyle form-check-input" type="radio"
+                  name="flexRadioDefault" id="flexRadioDefault2" required> &nbsp; <label for=""
+                  [hidden]="pmsVerify!=true">Pms</label>
+              </div>
+
+
+            </div>
+            <div class="modal-footer " *ngIf="TotalPrice"  [hidden]="selectedCategoryName == 'DIAGNOSTICS' || selectedCategoryName == 'DR_VIRTUAL_CONSULTATION' || selectedCategoryName == 'HOME_VISITS_BY_PHYSIOTHERAPIST' || selectedCategoryName == 'HOME_STAY_NURSE / HOME_STAY_HELP' || selectedCategoryName == '24X7 CARE GIVER ASSISTANCE'">
+              <button class="createReqBtn" type="button" (click)="createRequests()">Create request</button>
+            </div>
+             
+            <div class="col-md-4" style="align-items: center ;">
+              <div  *ngIf="selectedCategoryName == 'DIAGNOSTICS' || selectedCategoryName == 'DR_VIRTUAL_CONSULTATION' || selectedCategoryName == 'HOME_VISITS_BY_PHYSIOTHERAPIST' || selectedCategoryName == 'HOME_STAY_NURSE / HOME_STAY_HELP' || selectedCategoryName == '24X7 CARE GIVER ASSISTANCE'">
+               
+
+                <!-- Modal -->
+                <div class="modal fade" id="reqModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-xl">
+                    <div class="modal-content" >
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"><strong>Fill Few More Requirements
+                              Here!  ({{selectedCategoryName|replaceUnderscore}})</strong></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="row">
+                          <div class="col-md-2" *ngIf="selectedCategoryName != 'DIAGNOSTICS'&& selectedCategoryName !== 'DR_VIRTUAL_CONSULTATION'&& selectedCategoryName !== 'HOME_VISITS_BY_PHYSIOTHERAPIST'">
+                            <span class="formdetails">Select Order Type</span>
+                            <select class="form-select" formControlName="OrderType" placeholder="Select Order Type">
+                              <option selected value="" disabled>Select Order Type</option>
+                              <option value="Placement">
+                                <li><span class="dropdown-item-text">Placement</span></li>
+                              </option>
+                              <option value="Replacement">
+                                <li><span class="dropdown-item-text">Replacement</span></li>
+                              </option>
+                            </select>
+                          </div>
+                         
+                          <div class="col-md-2" *ngIf="selectedCategoryName != 'DIAGNOSTICS' && selectedCategoryName !== 'DR_VIRTUAL_CONSULTATION' && selectedCategoryName !== 'HOME_VISITS_BY_PHYSIOTHERAPIST' && selectedCategoryName != 'HOME_STAY_NURSE / HOME_STAY_HELP' ">
+                            <span class="formdetails">Select Gender</span>
+                            <select class="form-select" formControlName="CareTakerType" placeholder="Select Gender">
+                              <option selected value="" disabled>Select Gender</option>
+                              <option value="Male">
+                                <li><span class="dropdown-item-text">Male</span></li>
+                              </option>
+                              <option value="Female">
+                                <li><span class="dropdown-item-text">Female</span></li>
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-md-2" *ngIf="selectedCategoryName == 'DR_VIRTUAL_CONSULTATION' ">
+                            <span class="formdetails">Select Dr Order Type</span>
+                            <select class="form-select" formControlName="OrderType" placeholder="Select Dr Order Type">
+                              <option selected value="" disabled>Select Order Type</option>
+                              <option value="Doctor Home Visit">
+                                <li><span class="dropdown-item-text">Doctor Home Visit</span></li>
+                              </option>
+                              <option value="Doctor Virtual Consultation">
+                                <li><span class="dropdown-item-text">Doctor Virtual Consultation</span></li>
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-md-2" *ngIf="selectedCategoryName == 'DR_VIRTUAL_CONSULTATION' ">
+                            <span class="formdetails">Select Service Required</span>
+                            <select class="form-select" formControlName="ServiceRequired"
+                              placeholder="Select Dr Service required">
+                              <option selected value="" disabled>Select Dr Service Required</option>
+                              <option value="GP Consultation">
+                                <li><span class="dropdown-item-text">GP Consultation</span></li>
+                              </option>
+                              <option value="Pain Management">
+                                <li><span class="dropdown-item-text">Pain Management</span></li>
+                              </option>
+                              <option value="Post Operative Checkup">
+                                <li><span class="dropdown-item-text">Post Operative Checkup</span></li>
+                              </option>
+                              <option value="Geratic Care Checkup">
+                                <li><span class="dropdown-item-text">Geratic Care Checkup</span></li>
+                              </option>
+                              <option value="Pallative Care Checkup">
+                                <li><span class="dropdown-item-text">Pallative Care Checkup</span></li>
+                              </option>
+                              <option value="Oncology Check up">
+                                <li><span class="dropdown-item-text">Oncology Check up</span></li>
+                              </option>
+                              <option value="Cardiology Checkup">
+                                <li><span class="dropdown-item-text">Cardiology Checkup</span></li>
+                              </option>
+                              <option value="Orthopedic Checkup">
+                                <li><span class="dropdown-item-text">Orthopedic Checkup</span></li>
+                              </option>
+                              <option value="Death validation">
+                                <li><span class="dropdown-item-text">Death validation</span></li>
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-md-2" *ngIf="selectedCategoryName =='HOME_VISITS_BY_PHYSIOTHERAPIST'">
+                            <span class="formdetails">Select Order Type</span>
+                            <select class="form-select" formControlName="OrderType" placeholder="Select Order Type">
+                              <option selected value="" disabled>Select Order Type</option>
+                              <option value="Placement">
+                                <li><span class="dropdown-item-text">Placement</span></li>
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-md-2"  *ngIf="selectedCategoryName == 'HOME_VISITS_BY_PHYSIOTHERAPIST'">
+                            <span class="formdetails">Select Service Required</span>
+                            <select class="form-select" formControlName="ServiceRequired"
+                              placeholder="Select Physio Service required">
+                              <option selected value="" disabled>Select Physio Service Required</option>
+                              <option value="Physiotherapy For Muscle Movement">
+                                <li><span class="dropdown-item-text">Physiotherapy For Muscle Movement</span></li>
+                              </option>
+                              <option value="Physiotherapy For Pain Management">
+                                <li><span class="dropdown-item-text">Physiotherapy For Pain Management</span></li>
+                              </option>
+                              <option value="Physiotherapy For Joint Locks">
+                                <li><span class="dropdown-item-text">Physiotherapy For Joint Locks</span></li>
+                              </option>
+                              <option value="Physiotherapy For Neurological Disorder">
+                                <li><span class="dropdown-item-text">Physiotherapy For Neurological Disorder</span></li>
+                              </option>
+                              <option value="Physiothery For Post Operative Care">
+                                <li><span class="dropdown-item-text">Physiothery For Post Operative Care</span></li>
+                              </option>
+                              <option value="Rehablitation">
+                                <li><span class="dropdown-item-text">Rehablitation</span></li>
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-md-2" *ngIf="selectedCategoryName == 'DIAGNOSTICS'">
+                            <!-- [hidden]="data.SubCategoryName != 'DIAGNOSTICS'" -->
+                            <span class="formdetails">Select Order Type</span>
+                            <select class="form-select" formControlName="OrderType" placeholder="Select Order Type">
+                              <option selected value="" disabled>Select Order Type</option>
+                              <option value="Pathology">
+                                <li><span class="dropdown-item-text">Pathology</span></li>
+                              </option>
+                              <option value="Radiology">
+                                <li><span class="dropdown-item-text">Radiology</span></li>
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-md-2" *ngIf="this.createRequestData.value.OrderType"
+                          [hidden]="this.createRequestData.value.OrderType != 'Pathology'">
+                            <span class="formdetails">Type Of Test(Pathology)</span>
+                            <input type="text" class="form-control" formControlName="TypeOfPathology" placeholder="Enter Type Of Pathology">
+                          </div>
+                              <!-- <div class="col-md-2" *ngIf="selectedCategoryName =='24X7 CARE GIVER ASSISTANCE'" >
+                            <span class="formdetails">Select Nurse Type</span>
+                            <select class="form-select" formControlName="NurseType" placeholder="Select Gender">
+                              <option selected value="" disabled>Select Nurse Gender</option>
+                              <option value="Male Nurse">
+                                <li><span class="dropdown-item-text">Male Nurse</span></li>
+                              </option>
+                              <option value="Female Nurse">
+                                <li><span class="dropdown-item-text">Female Nurse</span></li>
+                              </option>
+                            </select>
+                          </div> -->
+                          <div class="col-md-2">
+                            <span class="formdetails">City</span>
+                            <!-- <Label>City</Label> -->
+                            <!-- <input type="text" class="form-control" formControlName="City" placeholder="City Name"> -->
+                            <select class="form-select" aria-label="Default select example" formControlName="City">
+                              <option selected value="" disabled> Select City </option>
+                              <option *ngFor="let city of cityData" value="{{city.CityName}}">{{city.CityName}}</option>
+                            </select>
+                          </div>
+                          <div class="col-md-2">
+                            <span class="formdetails">Mobile Number</span>
+                            <input type="tel" class="form-control" placeholder="Enter Number"
+                              formControlName="MobileNumber" minlength="10" maxlength="10" pattern="^[6-9]\d{9}$">
+                          </div>
+                          <div class="col-md-2">
+                            <span class="formdetails">Alternate M.No</span>
+                            <input type="tel" class="form-control" placeholder="Enter Number"
+                              formControlName="AlternateMobileNumber" minlength="10" maxlength="10"
+                              pattern="^[6-9]\d{9}$">
+                          </div>
+                          <div class="col-md-2">
+                            <span class="formdetails">Area</span>
+                            <textarea type='text' formControlName="Area" class="form-control" style="width: 180px;"
+                              placeholder=" Enter Area"></textarea>
+                          </div>
+                          <div class="col-md-2">
+                            <span class="formdetails">Age</span>
+                            <input type="number" class="form-control" placeholder="Enter Age" formControlName="Age"
+                              minlength="1" maxlength="3" min="1" max="120">
+                          </div>
+                          <div class="col-md-2" *ngIf="selectedCategoryName != 'DIAGNOSTICS'">
+                            <span class="formdetails">Select Mobility</span>
+                            <select class="form-select" formControlName="Mobility" placeholder="Select Mobility">
+                              <option selected value="" disabled>Select Mobility</option>
+                              <option value="walkable">
+                                <li><span class="dropdown-item-text">Walkable</span></li>
+                              </option>
+                              <option value="Walking with support">
+                                <li><span class="dropdown-item-text">Walking with support</span></li>
+                              </option>
+                              <option value="Bedridden">
+                                <li><span class="dropdown-item-text">Bedridden</span></li>
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-md-2" *ngIf="selectedCategoryName != 'DIAGNOSTICS' && selectedCategoryName !== 'DR_VIRTUAL_CONSULTATION'&& selectedCategoryName !== 'HOME_VISITS_BY_PHYSIOTHERAPIST'">
+                            <span class="formdetails">Weight Of The Patient</span>
+                            <input type="number" class="form-control" placeholder="Enter Weight"
+                              formControlName="WeightOfThePatient" minlength="1" maxlength="3" min="1" max="120">
+                          </div>
+                          <div class="col-md-2" *ngIf="selectedCategoryName != 'DIAGNOSTICS' && selectedCategoryName !== 'DR_VIRTUAL_CONSULTATION' && selectedCategoryName !== 'HOME_VISITS_BY_PHYSIOTHERAPIST'">
+                            <span class="formdetails">Select Washroom Usage</span>
+                            <select class="form-select" formControlName="WashroomUsage"
+                              placeholder="Select Washroom Usage">
+                              <option selected value="" disabled>Select Washroom Usage</option>
+                              <option value="Going to Washroom">
+                                <li><span class="dropdown-item-text">Going to Washroom</span></li>
+                              </option>
+                              <option value="Going to Washroom with support">
+                                <li><span class="dropdown-item-text">Going to Washroom with support</span></li>
+                              </option>
+                              <option value="Daiper">
+                                <li><span class="dropdown-item-text">Daiper</span></li>
+                              </option>
+                              <option value="Cozy Sheets">
+                                <li><span class="dropdown-item-text">Cozy Sheets</span></li>
+                              </option>
+                              <option value="Bed Pan">
+                                <li><span class="dropdown-item-text">Bed Pan</span></li>
+                              </option>
+                              <option value="Using Toilet Seat/Commode Wheel Chair">
+                                <li><span class="dropdown-item-text">Using Toilet Seat/Commode Wheel Chair</span></li>
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-md-2" *ngIf="selectedCategoryName != 'DIAGNOSTICS' && selectedCategoryName !== 'HOME_VISITS_BY_PHYSIOTHERAPIST' && selectedCategoryName !== 'HOME_STAY_NURSE / HOME_STAY_HELP'">
+                            <span class="formdetails">Food In Take</span>
+                            <select class="form-select" formControlName="FoodIntake" placeholder="Select Food In Take">
+                              <option selected value="" disabled>Select Food In Takee</option>
+                              <option value="Self">
+                                <li><span class="dropdown-item-text">Self</span></li>
+                              </option>
+                              <option value="Need Assistance">
+                                <li><span class="dropdown-item-text">Need Assistance</span></li>
+                              </option>
+
+                            </select>
+                          </div>
+                          <div class="col-md-2" *ngIf="selectedCategoryName == 'HOME_STAY_NURSE / HOME_STAY_HELP'||selectedCategoryName == '24X7 CARE GIVER ASSISTANCE' && selectedCategoryName !== 'DR_VIRTUAL_CONSULTATION'">
+                            <span class="formdetails">Medication</span>
+                            <select class="form-select" formControlName="Medication" placeholder="Select Medication">
+                              <option selected value="" disabled>Select Medication</option>
+                              <option value="Yes">
+                                <li><span class="dropdown-item-text">Yes</span></li>
+                              </option>
+                              <option value="No">
+                                <li><span class="dropdown-item-text">No</span></li>
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-md-2" *ngIf="this.createRequestData.value.Medication"
+                            [hidden]="this.createRequestData.value.Medication != 'Yes'">
+                            <span class="formdetails">What type of Medication</span>
+                            <input type="text" class="form-control" placeholder="Enter Medication Type" 
+                              formControlName="MedicationText">
+                          </div>
+                          <div class="col-md-2" *ngIf="selectedCategoryName == 'HOME_STAY_NURSE / HOME_STAY_HELP' || selectedCategoryName == '24X7 CARE GIVER ASSISTANCE'">
+                            <span class="formdetails">Exercise Activity</span>
+                            <select class="form-select" formControlName="ExerciseActivity"
+                              placeholder="Select Exercise Activity">
+                              <option selected value="" disabled>Select Exercise Activity</option>
+                              <option value="Yes">
+                                <li><span class="dropdown-item-text">Yes</span></li>
+                              </option>
+                              <option value="No">
+                                <li><span class="dropdown-item-text">No</span></li>
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-md-2" *ngIf="this.createRequestData.value.ExerciseActivity"
+                            [hidden]="this.createRequestData.value.ExerciseActivity != 'Yes'">
+                            <span class="formdetails">What type of Excercise</span>
+                            <input type="text" class="form-control" placeholder="Enter Excercise Type"
+                              formControlName="ExerciseText">
+                          </div>
+
+                          <div class="col-md-2"*ngIf="selectedCategoryName != 'DIAGNOSTICS' && selectedCategoryName !== 'DR_VIRTUAL_CONSULTATION' && selectedCategoryName !== 'HOME_VISITS_BY_PHYSIOTHERAPIST' && selectedCategoryName !== 'HOME_STAY_NURSE / HOME_STAY_HELP'" >
+                            <span class="formdetails">Select Service Required</span>
+                            <select class="form-select" formControlName="ServiceRequired"
+                              placeholder="Select Service Required">
+                              <option selected value="" disabled>Select Service Required</option>
+                              <option value="General Care Support Only">
+                                <li><span class="dropdown-item-text">General Care Support Only</span></li>
+                              </option>
+                              <option value="General Care Support & Hygiene">
+                                <li><span class="dropdown-item-text">General Care Support & Hygiene</span></li>
+                              </option>
+                              <option value="Caretaker Support & Vital Monitoring">
+                                <li><span class="dropdown-item-text">Caretaker Support & Vital Monitoring</span></li>
+                              </option>
+                              <option value="Caretaker Support, Hygiene & Vital Monitoring">
+                                <li><span class="dropdown-item-text">Caretaker Support, Hygiene & Vital
+                                    Monitoring</span></li>
+                              </option>
+                              <option value="Post Operative Care">
+                                <li><span class="dropdown-item-text">Post Operative Care</span></li>
+                              </option>
+                              <option value="Companionship">
+                                <li><span class="dropdown-item-text">Companionship</span></li>
+                              </option>
+                              <option value="End Of Life Care">
+                                <li><span class="dropdown-item-text">End Of Life Care</span></li>
+                              </option>
+                              <option value="Dementia Care">
+                                <li><span class="dropdown-item-text">Dementia Care</span></li>
+                              </option>
+                              <option value="Parkinson">
+                                <li><span class="dropdown-item-text">Parkinson</span></li>
+                              </option>
+                              <option value="BiPolar">
+                                <li><span class="dropdown-item-text">BiPolar</span></li>
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-md-2" *ngIf="selectedCategoryName != 'DIAGNOSTICS' && selectedCategoryName !== 'DR_VIRTUAL_CONSULTATION' && selectedCategoryName !== 'HOME_VISITS_BY_PHYSIOTHERAPIST'">
+                            <span class="formdetails">Price Quotation Type</span>
+                            <select class="form-select" formControlName="PricingQuoted"
+                              placeholder="Select Pricing Quoted">
+                              <option selected value="" disabled>Select Price Quoted</option>
+                              <option value="Day">
+                                <li><span class="dropdown-item-text">Day</span></li>
+                              </option>
+                              <option value="Month">
+                                <li><span class="dropdown-item-text">Month</span></li>
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-md-2">
+                            <span class="formdetails">Price Informed</span>
+                            <input type="number" class="form-control" placeholder="Enter Price Informed"
+                              formControlName="PriceInformed">
+                          </div>
+                          <div class="col-md-2" *ngIf="selectedCategoryName != 'DIAGNOSTICS' && selectedCategoryName !== 'DR_VIRTUAL_CONSULTATION'&& selectedCategoryName !== 'HOME_VISITS_BY_PHYSIOTHERAPIST' && selectedCategoryName !== 'HOME_STAY_NURSE / HOME_STAY_HELP'">
+                            <span class="formdetails">Duty hours</span>
+                            <select class="form-select" formControlName="DutyHours" placeholder="Select Duty Hours">
+                              <option selected value="" disabled>Select Duty Hours</option>
+                              <option value="24 Hours">
+                                <li><span class="dropdown-item-text">24 Hours</span></li>
+                              </option>
+                              <option value="12-hrs Day">
+                                <li><span class="dropdown-item-text">12-hrs Day</span></li>
+                              </option>
+                              <option value="12-hrs Night">
+                                <li><span class="dropdown-item-text">12-hrs Night</span></li>
+                              </option>
+                              <option value="Single Visit">
+                                <li><span class="dropdown-item-text">Single Visit</span></li>
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-md-2" *ngIf="this.selectedCategoryName == '24X7 CARE GIVER ASSISTANCE'">
+                            <span class="formdetails">Service Duration Requested Days</span>
+                            <input type="number" class="form-control" placeholder="Enter Service Duration Requested"
+                              formControlName="ServiceDurationRequested" min="1" max="31">
+                          </div>
+                          <div class="col-md-2" *ngIf="selectedCategoryName == '24X7 CARE GIVER ASSISTANCE' || selectedCategoryName == 'HOME_STAY_NURSE / HOME_STAY_HELP'">
+                            <span class="formdetails">Insulin</span>
+                            <select class="form-select" formControlName="Insulin" placeholder="Insulin">
+                              <option selected value="" disabled>Select Insulin</option>
+                              <option value="Yes">
+                                <li><span class="dropdown-item-text">Yes</span></li>
+                              </option>
+                              <option value="No">
+                                <li><span class="dropdown-item-text">No</span></li>
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-md-2" *ngIf="this.createRequestData.value.Insulin"
+                            [hidden]="this.createRequestData.value.Insulin != 'Yes'">
+                            <!-- *ngIf="insulintype" -->
+                            <span class="formdetails">What Type of Insulin</span>
+                            <select class="form-select" formControlName="TypeOfInsulin" placeholder="Insulin">
+                              <option selected value="" disabled>Select Insulin Type</option>
+                              <option value="Pen Insulin">
+                                <li><span class="dropdown-item-text">Pen Insulin</span></li>
+                              </option>
+                              <option value="Syringe">
+                                <li><span class="dropdown-item-text">Syringe</span></li>
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-md-2" *ngIf="this.createRequestData.value.Insulin"
+                          [hidden]="this.createRequestData.value.Insulin != 'Yes'">
+                          <!-- *ngIf="insulintype" -->
+                          <span class="formdetails">Insulin Details</span>
+                        <input type="text" class="form-control" placeholder="Enter Type of Insulin" formControlName="InsulinText" >
+                        </div>
+                        <div class="col-md-2" *ngIf="selectedCategoryName == '24X7 CARE GIVER ASSISTANCE'">
+                          <span class="formdetails">Do you want Maid ?</span>
+                          <select class="form-select" formControlName="DoYouWantMaid" placeholder="Do you need Maid?">
+                            <option selected value="" disabled>Need Maid?</option>
+                            <option value="Yes">
+                              <li><span class="dropdown-item-text">Yes</span></li>
+                            </option>
+                            <option value="No">
+                              <li><span class="dropdown-item-text">No</span></li>
+                            </option>
+
+                          </select>
+                        </div>
+                         
+                          <div class="col-md-2" *ngIf="this.createRequestData.value.DoYouWantMaid"
+                          [hidden]="this.createRequestData.value.DoYouWantMaid != 'Yes'">
+                            <span class="formdetails">Residence Type</span>
+                            <select class="form-select" formControlName="ResidenceType" placeholder="Insulin">
+                              <option selected value="" disabled>Select Residence Type</option>
+                              <option value="1 BHK Flat">
+                                <li><span class="dropdown-item-text">1 BHK Flat</span></li>
+                              </option>
+                              <option value="2 BHK Flat">
+                                <li><span class="dropdown-item-text">2 BHK Flat</span></li>
+                              </option>
+                              <option value="3 BHK Flat">
+                                <li><span class="dropdown-item-text">3 BHK Flat</span></li>
+                              </option>
+                              <option value="4 BHK Flat">
+                                <li><span class="dropdown-item-text">4 BHK Flat</span></li>
+                              </option>
+                              <option value="Villa">
+                                <li><span class="dropdown-item-text">Villa</span></li>
+                              </option>
+                              <option value="Duplex">
+                                <li><span class="dropdown-item-text">Duplex</span></li>
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-md-4"  *ngIf="this.createRequestData.value.DoYouWantMaid"
+                          [hidden]="this.createRequestData.value.DoYouWantMaid != 'Yes'">
+                            <span class="formdetails">Specify Maid Work</span>
+                            <!-- <select class="form-select" formControlName="SpecifyMaidWork" placeholder="Insulin">
+                              <option selected value="" disabled>Select Residence Type</option>
+                              <option value="Brooming">
+                                <li><span class="dropdown-item-text">Brooming</span></li>
+                              </option>
+                              <option value="Moping">
+                                <li><span class="dropdown-item-text">Moping</span></li>
+                              </option>
+                              <option value="Dusting">
+                                <li><span class="dropdown-item-text">Dusting</span></li>
+                              </option>
+                              <option value="Washing Cloths With Hands">
+                                <li><span class="dropdown-item-text">Washing Cloths With Hands</span></li>
+                              </option>
+                              <option value="Washing Cloths With Machine">
+                                <li><span class="dropdown-item-text">Washing Cloths With Machine</span></li>
+                              </option>
+                              <option value="Washroom Cleaning">
+                                <li><span class="dropdown-item-text">Washroom Cleaning</span></li>
+                              </option>
+                              <option value="Utensil Cleaning">
+                                <li><span class="dropdown-item-text">Utensil Cleaning</span></li>
+                              </option>
+                            </select> -->
+                            <ng-multiselect-dropdown value="maidtext" formControlName="SpecifyMaidWork"
+                            class="formDetails" [placeholder]="'select Maid Service'" [settings]="maidsetting"
+                            [data]="maidtext"></ng-multiselect-dropdown>
+                          </div>
+                          <div class="col-md-2" *ngIf="selectedCategoryName == '24X7 CARE GIVER ASSISTANCE'">
+                            <span class="formdetails">Do you want Cook ?</span>
+                            <select class="form-select" formControlName="DoYouWantCook" placeholder="Do you need cook?">
+                              <option selected value="" disabled>Need Cook?</option>
+                              <option value="Yes">
+                                <li><span class="dropdown-item-text">Yes</span></li>
+                              </option>
+                              <option value="No">
+                                <li><span class="dropdown-item-text">No</span></li>
+                              </option>
+
+                            </select>
+                          </div>
+                          <div class="col-md-2" *ngIf="this.createRequestData.value.DoYouWantCook"
+                          [hidden]="this.createRequestData.value.DoYouWantCook != 'Yes'">
+                            <span class="formdetails">No Of People To Cook</span>
+                            <input type="number" class="form-control" placeholder="Enter No.of people to cook"
+                              formControlName="NoOfPeopleToCook" minlength="1" maxlength="2" min="1" max="10">
+                          </div>
+                          <div class="col-md-2" *ngIf="this.createRequestData.value.DoYouWantCook"
+                          [hidden]="this.createRequestData.value.DoYouWantCook != 'Yes'">
+                            <span class="formdetails">Cooking Type</span>
+                            <select class="form-select" formControlName="CookingType" placeholder="Cooking Type">
+                              <option selected value="" disabled>Select Cooking Type</option>
+                              <option value="Vegetarian">
+                                <li><span class="dropdown-item-text">Vegetarian</span></li>
+                              </option>
+                              <option value="Non-Vegetarain">
+                                <li><span class="dropdown-item-text">Non-Vegetarain</span></li>
+                              </option>
+
+                            </select>
+                          </div>
+                          <div class="row" *ngIf="selectedCategoryName == '24X7 CARE GIVER ASSISTANCE'">
+                          <div class="col-md-2" *ngIf="selectedCategoryName == '24X7 CARE GIVER ASSISTANCE'">
+                            <span class="formdetails">Medical Equipment Assistance</span>
+                            <select class="form-select" formControlName="MedicalEquipmentAssistance"
+                              placeholder="Select Medical Equipment Assistance">
+                              <option selected value="" disabled>Select Medical Equipment Assistance</option>
+                              <option value="Yes">
+                                <li><span class="dropdown-item-text">Yes</span></li>
+                              </option>
+                              <option value="No">
+                                <li><span class="dropdown-item-text">No</span></li>
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-md-4" *ngIf="this.createRequestData.value.MedicalEquipmentAssistance"
+                          [hidden]="this.createRequestData.value.MedicalEquipmentAssistance != 'Yes'">
+                          <span class="formdetails">What types of Equipment Patient is using</span>
+                          <ng-multiselect-dropdown value="equipmenttext" formControlName="TypeOfEquipment"
+                            class="formDetails" [placeholder]="'select Equipment type'" [settings]="equipemtsetting"
+                            [data]="equipmenttext"></ng-multiselect-dropdown>
+                        </div>
+                        <div class="col-md-2" *ngIf="this.createRequestData.value.MedicalEquipmentAssistance"
+                        [hidden]="this.createRequestData.value.MedicalEquipmentAssistance != 'Yes'" >
+                          <span class="formdetails">What Type of Support is Required </span>
+                          <textarea type="text" formControlName="EquipmentText" class="form-control" placeholder="Write your type of Equipment"></textarea>
+
+                        </div>
+                      </div>
+                          <!-- <div class="col-md-2">
+                            <span class="formdetails">Service Required</span>
+                            <select class="form-select" formControlName="CookingType" placeholder="Insulin">
+                              <option selected value="" disabled>Select Cooking Type</option>
+                              <option value="Vegetarian">
+                                <li><span class="dropdown-item-text">Vegetarian</span></li>
+                              </option>
+                              <option value="Non-Vegetarain">
+                                <li><span class="dropdown-item-text">Non-Vegetarain</span></li>
+                              </option>
+                            </select>
+                          </div> -->
+                             <!-- nurse started-->
+                             <div class="col-md-2" *ngIf="selectedCategoryName == 'HOME_STAY_NURSE / HOME_STAY_HELP' ">
+                              <span class="formdetails">Select Nurse Type</span>
+                              <select class="form-select" formControlName="NurseType" placeholder="Select Gender">
+                                <option selected value="" disabled>Select Nurse Gender</option>
+                                <option value="Semi_Male_Nurse">
+                                  <li><span class="dropdown-item-text">Semi Male Nurse</span></li>
+                                </option>
+                                <option value="Semi_Female_Nurse">
+                                  <li><span class="dropdown-item-text">Semi Female Nurse</span></li>
+                                </option>
+                                <option value="GNM/BSC_Non_Critical_Male">
+                                  <li><span class="dropdown-item-text">GNM/BSC Non Critical - Male</span></li>
+                                </option>
+                                <option value="GNM/BSC_Non_Critical_Female">
+                                  <li><span class="dropdown-item-text">GNM/BSC Non Critical - Female</span></li>
+                                </option>
+                                <option value="GNM/BSC_Critical_Male">
+                                  <li><span class="dropdown-item-text">GNM/BSC Critical - Male</span></li>
+                                </option>
+                                <option value="GNM/BSC_Critical_Female">
+                                  <li><span class="dropdown-item-text">GNM/BSC Critical - Female</span></li>
+                                </option>
+
+                              </select>
+                            </div>
+                            <div class="col-md-2" *ngIf="selectedCategoryName == 'HOME_STAY_NURSE / HOME_STAY_HELP'">
+                              <span class="formdetails">Select Service Required</span>
+                              <select class="form-select" formControlName="ServiceRequired"
+                                placeholder="Select Service Required">
+                                <option selected value="" disabled>Select Service Required</option>
+                                <option value="Post Operative Care">
+                                  <li><span class="dropdown-item-text">Post Operative Care</span></li>
+                                </option>
+                                <option value="ICU Care">
+                                  <li><span class="dropdown-item-text">ICU Care</span></li>
+                                </option>
+                                <option value="Critical Care">
+                                  <li><span class="dropdown-item-text">Critical Care</span></li>
+                                </option>
+                                <option value="Non-Critical Care">
+                                  <li><span class="dropdown-item-text">Non-Critical Care</span></li>
+                                </option>
+                                <option value="Rehablitation">
+                                  <li><span class="dropdown-item-text">Rehablitation</span></li>
+                                </option>
+                              </select>
+                            </div>
+                            <div class="row" *ngIf="selectedCategoryName == 'HOME_STAY_NURSE / HOME_STAY_HELP'">
+                            <div class="col-md-2" *ngIf="selectedCategoryName == 'HOME_STAY_NURSE / HOME_STAY_HELP'">
+                              <span class="formdetails">Medical Equipment Assistance</span>
+                              <select class="form-select" formControlName="MedicalEquipmentAssistance"
+                                placeholder="Select Medical Equipment Assistance">
+                                <option selected value="" disabled>Select Medical Equipment Assistance</option>
+                                <option value="Yes">
+                                  <li><span class="dropdown-item-text">Yes</span></li>
+                                </option>
+                                <option value="No">
+                                  <li><span class="dropdown-item-text">No</span></li>
+                                </option>
+                              </select>
+                            </div>
+                            <div class="col-md-4" *ngIf="this.createRequestData.value.MedicalEquipmentAssistance"
+                              [hidden]="this.createRequestData.value.MedicalEquipmentAssistance != 'Yes'">
+                              <span class="formdetails">What types of Equipment Patient is using</span>
+                              <ng-multiselect-dropdown value="equipmenttext" formControlName="TypeOfEquipment"
+                                class="formDetails" [placeholder]="'select Equipment type'" [settings]="equipemtsetting"
+                                [data]="equipmenttext"></ng-multiselect-dropdown>
+                            </div>
+                            <div class="col-md-2" *ngIf="this.createRequestData.value.MedicalEquipmentAssistance"
+                            [hidden]="this.createRequestData.value.MedicalEquipmentAssistance != 'Yes'" >
+                              <span class="formdetails">Type of Monitoring is Required</span>
+                              <textarea type="text" formControlName="EquipmentText" class="form-control" placeholder="Write your type of Equipment"></textarea>
+  
+                            </div>
+                            </div>
+                            
+                            
+                            <div class="col-md-2" *ngIf="selectedCategoryName == 'HOME_STAY_NURSE / HOME_STAY_HELP'">
+                              <span class="formdetails">Any Medical Procedure</span>
+                              <select class="form-select" formControlName="MedicalProcedure"
+                                placeholder="Select Medical Procedure">
+                                <option selected value="" disabled>Select Medical Procedure</option>
+                                <option value="Yes">
+                                  <li><span class="dropdown-item-text">Yes</span></li>
+                                </option>
+                                <option value="No">
+                                  <li><span class="dropdown-item-text">No</span></li>
+                                </option>
+                              </select>
+                            </div>
+                            <div class="col-md-4" *ngIf="this.createRequestData.value.MedicalProcedure"
+                            [hidden]="this.createRequestData.value.MedicalProcedure != 'Yes'">
+                            <span class="formdetails">What types of Medical Procedure</span>
+                            <ng-multiselect-dropdown value="medicaltext"  formControlName="TypeOfMedicalProcedure"
+                              class="formDetails" [placeholder]="'select Medical Procedure Type'"
+                              [settings]="medicalsetting" [data]="medicaltext"></ng-multiselect-dropdown>
+                          </div>
+                            <div class="col-md-2" *ngIf="this.createRequestData.value.MedicalProcedure"
+                            [hidden]="this.createRequestData.value.MedicalProcedure != 'Yes'" >
+                              <span class="formdetails">Any Additional Information</span>
+                              <textarea type="text" formControlName="MedicalProcedureText" class="form-control" placeholder="Additional Information"></textarea>
+  
+                            </div>
+                           
+                            
+                            <div class="col-md-2" *ngIf="selectedCategoryName == 'HOME_STAY_NURSE / HOME_STAY_HELP' && this.selectedCategoryName!=='HOME_VISITS_BY_PHYSIOTHERAPIST' && this.selectedCategoryName!=='DIAGNOSTICS'">
+                              <span class="formdetails">Service Duration Requested Days</span>
+                              <input type="number" class="form-control" placeholder="Enter Service Duration Requested"
+                                formControlName="ServiceDurationRequested" min="1" max="31">
+                            </div>
+                            <div class="col-md-2" *ngIf="selectedCategoryName == 'HOME_STAY_NURSE / HOME_STAY_HELP'|| selectedCategoryName != 'DIAGNOSTICS' && selectedCategoryName !== 'DR_VIRTUAL_CONSULTATION' && selectedCategoryName !='24X7 CARE GIVER ASSISTANCE'&& selectedCategoryName !== 'HOME_VISITS_BY_PHYSIOTHERAPIST'">
+                              <span class="formdetails">Duty hours</span>
+                              <select class="form-select" formControlName="DutyHours" placeholder="Select Duty Hours">
+                                <option selected value="" disabled>Select Duty Hours</option>
+                                <option value="24 Hours">
+                                  <li><span class="dropdown-item-text">24 Hours</span></li>
+                                </option>
+                                <option value="12-hrs Day">
+                                  <li><span class="dropdown-item-text">Shift Duty Day</span></li>
+                                </option>
+                                <option value="12-hrs Night">
+                                  <li><span class="dropdown-item-text">Shift Duty Night</span></li>
+                                </option>
+                                <option value="Single Visit">
+                                  <li><span class="dropdown-item-text">Double Shift Duty</span></li>
+                                </option>
+                              </select>
+                            </div>
+                            <div class="col-md-2" *ngIf="selectedCategoryName == 'HOME_STAY_NURSE / HOME_STAY_HELP' || selectedCategoryName != 'DIAGNOSTICS' && selectedCategoryName !== 'DR_VIRTUAL_CONSULTATION' && selectedCategoryName !== 'HOME_VISITS_BY_PHYSIOTHERAPIST' && selectedCategoryName !='24X7 CARE GIVER ASSISTANCE'">
+                              <span class="formdetails">Food In Take</span>
+                              <select class="form-select" formControlName="FoodIntake" placeholder="Select Food In Take">
+                                <option selected value="" disabled>Select Food In Takee</option>
+                                <option value="Self">
+                                  <li><span class="dropdown-item-text">Self</span></li>
+                                </option>
+                                <option value="Need Assistance">
+                                  <li><span class="dropdown-item-text">Need Assistance</span></li>
+                                </option>
+                                <option value="Ryls Tube">
+                                  <li><span class="dropdown-item-text">Ryls Tube</span></li>
+                                </option>
+                                <option value="Peg Feeding">
+                                  <li><span class="dropdown-item-text">Peg Feeding</span></li>
+                                </option>
+  
+                              </select>
+                            </div>
+  
+                            <!-- nurse ended-->
+                          <!-- Nurse on call fields started -->
+                          <!-- <div class="col-md-2" *ngIf="selectedCategoryName == 'HOME_STAY_NURSE / HOME_STAY_HELP'">
+                            <span class="formdetails">Do you want Nurse On Call ?</span>
+                            <select class="form-select" formControlName="DoYouWantNurseOnCall" placeholder="Do you want Nurse On Call ?">
+                              <option selected value="" disabled>Need Nurse on Call?</option>
+                              <option value="Yes">
+                                <li><span class="dropdown-item-text">Yes</span></li>
+                              </option>
+                              <option value="No">
+                                <li><span class="dropdown-item-text">No</span></li>
+                              </option>
+  
+                            </select>
+                          </div>
+                          <div class="col-md-2" *ngIf="this.createRequestData.value.DoYouWantNurseOnCall"
+                          [hidden]="this.createRequestData.value.DoYouWantNurseOnCall != 'Yes'" >
+                            <span class="formdetails">Select Nurse On Call Type</span>
+                            <select class="form-select" formControlName="NurseType" placeholder="Select Gender">
+                              <option selected value="" disabled>Select Nurse Gender</option>
+                              <option value="Male_Nurse">
+                                <li><span class="dropdown-item-text">Male Nurse</span></li>
+                              </option>
+                              <option value="Female_Nurse">
+                                <li><span class="dropdown-item-text">Female Nurse</span></li>
+                              </option>
+                            </select>
+                          </div> -->
+                          <!-- <div class="col-md-2" *ngIf="selectedCategoryName == 'HOME_STAY_NURSE / HOME_STAY_HELP'">
+                            <span class="formdetails">Select Service Required</span>
+                            <select class="form-select" formControlName="ServiceRequired"
+                              placeholder="Select Nurse Service required">
+                              <option selected value="" disabled>Select Nurse Service Required</option>
+                              <option value="IM Injection Service">
+                                <li><span class="dropdown-item-text">IM Injection Service</span></li>
+                              </option>
+                              <option value="IV Injection Service">
+                                <li><span class="dropdown-item-text">IV Injection Service</span></li>
+                              </option>
+                              <option value="Wound Management">
+                                <li><span class="dropdown-item-text">Wound Management</span></li>
+                              </option>
+                              <option value="IV Saline">
+                                <li><span class="dropdown-item-text">IV Saline</span></li>
+                              </option>
+                              <option value="IV NS">
+                                <li><span class="dropdown-item-text">IV NS</span></li>
+                              </option>
+                              <option value="Catheterisation">
+                                <li><span class="dropdown-item-text">Catheterisation</span></li>
+                              </option>
+                              <option value="Catheter Removal">
+                                <li><span class="dropdown-item-text">Catheter Removal</span></li>
+                              </option>
+                              <option value="Suctioning">
+                                <li><span class="dropdown-item-text">Suctioning</span></li>
+                              </option>
+                              <option value="Tracheotomy Care">
+                                <li><span class="dropdown-item-text">Tracheotomy Care</span></li>
+                              </option>
+                              <option value="Colectomy Care">
+                                <li><span class="dropdown-item-text">Colectomy Care</span></li>
+                              </option>
+                            </select>
+                          </div> -->
+                          <!-- <div class="col-md-4" *ngIf="this.createRequestData.value.DoYouWantNurseOnCall"
+                          [hidden]="this.createRequestData.value.DoYouWantNurseOnCall != 'Yes'">
+                          <span class="formdetails">Select Service Required(NOC)</span>
+                          <ng-multiselect-dropdown value="nurseoncalltext" formControlName="OnCallServiceRequired"
+                            class="formDetails" [placeholder]="'select service required'" [settings]="nurseoncallsetting"
+                            [data]="nurseoncalltext"></ng-multiselect-dropdown>
+                        </div>
+                          <div class="col-md-2" *ngIf="this.createRequestData.value.DoYouWantNurseOnCall"
+                          [hidden]="this.createRequestData.value.DoYouWantNurseOnCall != 'Yes'">
+                            <span class="formdetails">Select Service Type(NOC)</span>
+                            <select class="form-select" formControlName="ServiceType"
+                              placeholder="Select Nurse Service Type">
+                              <option selected value="" disabled>Select Nurse Service Type</option>
+                              <option value="One Visit In A Day">
+                                <li><span class="dropdown-item-text">One Visit In A Day</span></li>
+                              </option>
+                              <option value="Two Visits In A Day">
+                                <li><span class="dropdown-item-text">Two Visits In A Day</span></li>
+                              </option>
+                              <option value="Three Visits In A Day">
+                                <li><span class="dropdown-item-text">Three Visits In A Day</span></li>
+                              </option>
+                              <option value="Full Day Visit">
+                                <li><span class="dropdown-item-text">Full Day Visit</span></li>
+                              </option>
+                              <option value="Entire Night Visit">
+                                <li><span class="dropdown-item-text">Entire Night Visit</span></li>
+                              </option>
+                              <option value="24 Hours Visit">
+                                <li><span class="dropdown-item-text">24 Hours Visit</span></li>
+                              </option>
+                            </select>
+                          </div> -->
+                          <!-- Nurse on call fields Ended -->
+                          <!-- physio on call started -->
+                         
+                          <div class="col-md-2" *ngIf="selectedCategoryName =='HOME_VISITS_BY_PHYSIOTHERAPIST'">
+                            <span class="formdetails">Select Nurse Type</span>
+                            <select class="form-select" formControlName="NurseType" placeholder="Select Gender">
+                              <option selected value="" disabled>Select Nurse Gender</option>
+                              <option value="Male Nurse">
+                                <li><span class="dropdown-item-text">Male Physio</span></li>
+                              </option>
+                              <option value="Female Nurse">
+                                <li><span class="dropdown-item-text">Female Physio</span></li>
+                              </option>
+                            </select>
+                          </div>
+                        
+                          <div class="col-md-2" *ngIf="selectedCategoryName == 'HOME_VISITS_BY_PHYSIOTHERAPIST'">
+                            <span class="formdetails">Select Service Type</span>
+                            <select class="form-select" formControlName="ServiceType"
+                              placeholder="Select Physio Service Type">
+                              <option selected value="" disabled>Select Physio Service Type</option>
+                              <option value="One Visit In A Day">
+                                <li><span class="dropdown-item-text">One Visit In A Day</span></li>
+                              </option>
+                              <option value="Two Visits In A Day">
+                                <li><span class="dropdown-item-text">Two Visits In A Day</span></li>
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-md-2" *ngIf="selectedCategoryName == 'HOME_VISITS_BY_PHYSIOTHERAPIST'">
+                            <span class="formdetails" for="vote">Physio Servicable Day</span>
+                            <input type="date" id="vote" name="vote" (keydown)="disableDate() "formControlName="ServicableDay">
+                          </div>
+                          <!-- physio on call Ended-->
+                          <!-- dr on call started-->
+                       
+                          <div class="col-md-2" *ngIf="selectedCategoryName == 'DR_VIRTUAL_CONSULTATION' ">
+                            <span class="formdetails">Select Service Type</span>
+                            <select class="form-select" formControlName="ServiceType"
+                              placeholder="Select Dr Service Type">
+                              <option selected value="" disabled>Select Dr Service Type</option>
+                              <option value="One Visit In A Day">
+                                <li><span class="dropdown-item-text">One Visit In A Day</span></li>
+                              </option>
+                              <option value="Two Visits In A Day">
+                                <li><span class="dropdown-item-text">Two Visits In A Day</span></li>
+                              </option>
+                            </select>
+                          </div>
+                          <!-- dr on call ended-->
+                       
+                          <!-- Diagno strated-->
+                          <!-- <div class="col-md-2" *ngIf="selectedCategoryName == 'DIAGNOSTICS'">
+                            <span class="formdetails">Select Order Type</span>
+                            <select class="form-select" formControlName="OrderType" placeholder="Select Order Type">
+                              <option selected value="" disabled>Select Order Type</option>
+                              <option value="Pathology">
+                                <li><span class="dropdown-item-text">Pathology</span></li>
+                              </option>
+                              <option value="Radiology">
+                                <li><span class="dropdown-item-text">Radiology</span></li>
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-md-2" *ngIf="this.createRequestData.value.OrderType"
+                          [hidden]="this.createRequestData.value.OrderType != 'Pathology'">
+                            <span class="formdetails">Type Of Test(Pathology)</span>
+                            <input type="text" class="form-control" formControlName="TypeOfPathology" placeholder="Enter Type Of Pathology">
+                          </div> -->
+                          <div class="col-md-2" *ngIf="this.createRequestData.value.OrderType"
+                          [hidden]="this.createRequestData.value.OrderType != 'Radiology'">
+                            <span class="formdetails">Type Of Test(Radiology)</span>
+                            <input type="text" class="form-control" formControlName="TypeOfRadiology" placeholder="Enter Type Of Radiology">
+                          </div>
+                          <div class="col-md-3" *ngIf="selectedCategoryName == 'DIAGNOSTICS' || selectedCategoryName == 'HOME_VISITS_BY_PHYSIOTHERAPIST' || selectedCategoryName == 'DR_VIRTUAL_CONSULTATION'">
+                            <span class="formdetails">Any Special Instruction</span>
+                            <textarea type="text" class="form-control" formControlName="Note" placeholder="Enter Spl Instruction">
+                            </textarea>
+                          </div>
+
+                          <!-- Diagno ended-->
+
+                       
+                      </div>
+                      <div class="modal-footer " >
+                        <button class="createReqBtn" type="button" (click)="createRequests()">Create request</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- Button trigger modal -->
+          <div class="row">
+            <div class="col-md-9"></div>
+            <div class="col-md-3"  *ngIf="selectedCategoryName == 'DIAGNOSTICS' || selectedCategoryName == 'DR_VIRTUAL_CONSULTATION' || selectedCategoryName == 'HOME_VISITS_BY_PHYSIOTHERAPIST' || selectedCategoryName == 'HOME_STAY_NURSE / HOME_STAY_HELP' || selectedCategoryName == '24X7 CARE GIVER ASSISTANCE'">
+              <button type="button" class="createReqBtn" data-bs-toggle="modal" data-bs-target="#reqModal">
+                Fill Few More Requirement
+              </button>
+            </div>
+          </div>
+           
+
+          <!-- <div class="reqType">
+            <div class='selectDays '>
+              <span class="formDetails">Comment:</span>
+              <div id='Remark'>
+                <textarea type='text' formControlName="Note" class="form-control" style="width: 225px;"
+                  placeholder="Comment">
+                    </textarea>
+              </div>
+            </div>
+          </div> -->
+          <div>
+          </div>
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="DetailsStyle col-md-6" *ngIf="TotalPrice">
+
+
+          <div>
+
+          </div>
+          <label class="formDetails" *ngIf="this.createRequestData.value.ServiceType=='Recurring'"> Select
+            Days:</label>
+          <div class="row" (change)="DaysSelect($event)" *ngIf="this.createRequestData.value.ServiceType=='Recurring'">
+            <input value="SUNDAY" class="checkboxstyle form-check-input" type="checkbox" name="flexRadioDefault"
+              id="flexRadioDefault2">&nbsp; Sun &nbsp;
+            <input value="MONDAY" class="checkboxstyle form-check-input" type="checkbox" name="flexRadioDefault"
+              id="flexRadioDefault2"> &nbsp;Mon &nbsp;
+            <input value="TUESDAY" class="checkboxstyle form-check-input" type="checkbox" name="flexRadioDefault"
+              id="flexRadioDefault2">&nbsp; Tues &nbsp;
+            <input value="WEDNESDAY" class="checkboxstyle form-check-input" type="checkbox" name="flexRadioDefault"
+              id="flexRadioDefault2">&nbsp; Wed &nbsp;
+            <input value="THURSDAY" class="checkboxstyle form-check-input" type="checkbox" name="flexRadioDefault"
+              id="flexRadioDefault2">&nbsp; Thu &nbsp;
+            <input value="FRIDAY" class="checkboxstyle form-check-input" type="checkbox" name="flexRadioDefault"
+              id="flexRadioDefault2">&nbsp; Fri &nbsp;
+            <input value="SATURDAY" class="checkboxstyle form-check-input" type="checkbox" name="flexRadioDefault"
+              id="flexRadioDefault2">&nbsp; Sat
+          </div>
+
+
+          <div class="row">
+            <div class='col-md-5'>
+              <!-- <span class="formDetails">Select Start Date :</span>
+              <div class=" input-group date">
+                <input formControlName="RequestedDate" type='datetime-local' class="startdate form-control"
+                  placeholder="Select Start Date">
+              </div> -->
+
+            </div>
+            <div class='col-md-5' [hidden]="this.createRequestData.value.ServiceType=='Onetime'">
+              <!-- <span class="formDetails">Select End Date :</span>
+              <div class=" input-group date">
+                <input formControlName="RequestEndDate" type='date' class="startdate form-control"
+                  placeholder="Select EndDate ">
+              </div> -->
+            </div>
+          </div>
+          <div class="row">
+            <!-- <label for="" class="formDetails" [hidden]="CoverdPlan"> Payment Mode:</label>
+            <div class="col-md-10" (change)="paymentMode($event)" [hidden]="CoverdPlan">
+              <input value="Cheque" class="checkboxstyle form-check-input" type="radio" name="flexRadioDefault"
+                id="flexRadioDefault2" required> &nbsp;Cheque&nbsp;
+              <input value="Cash" class="checkboxstyle form-check-input" type="radio" name="flexRadioDefault"
+                id="flexRadioDefault2" required>&nbsp; Cash&nbsp;
+              <input value="Wiretransfer" class="checkboxstyle form-check-input" type="radio" name="flexRadioDefault"
+                id="flexRadioDefault2" required> &nbsp; Wire Transfer&nbsp;
+              <input [hidden]="pmsVerify!=true" value="PMS" class="checkboxstyle form-check-input" type="radio"
+                name="flexRadioDefault" id="flexRadioDefault2" required> &nbsp; <label for=""
+                [hidden]="pmsVerify!=true">Pms</label>
+            </div> -->
+
+          </div>
+
+          <!-- <div class="reqType">
+            <div class='selectDays '>
+              <span class="formDetails">Budget</span>
+              <div id='Remark'>
+                <textarea type='number' formControlName="Budget" class="form-control" style="width: 225px;"
+                  placeholder="Budget">
+                    </textarea>
+              </div>
+            </div>
+          </div> -->
+
+          <!-- <div *ngIf="thirdPartyRequestType" class="row">
+            <label class="payment">Payment Type:</label>
+
+            <div class="col-md-4">
+              <input value="Prepaid" class="checkboxstyle form-check-input" type="radio" formControlName="PayoutModel"
+                id="flexRadioDefault3" required="thirdPartyRequestType"> Prepaid
+            </div>
+            <div class="col-md-4">
+              <div class="form-check">
+                <input value="PostPaid" class="checkboxstyle form-check-input" type="radio"
+                  formControlName="PayoutModel" id="flexRadioDefault3" required="thirdPartyRequestType">
+                <label class="daysSize form-check-label" for="flexRadioDefault2">
+                  Postpaid
+                </label>
+              </div>
+            </div>
+            <div class="row" ngClass="alerts"
+            *ngIf='this.createRequestData.controls["PayoutModel"].status=="INVALID" && this.createRequestbBtn==true'>
+            <p>*PayoutModel Mandatory</p>
+          </div>
+
+          </div> -->
+
+
+        </div>
+      </div>
+      <!-- <div class="row" *ngIf="TotalPrice">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-4">
+          <button class="createReqBtn" type="button" (click)="createRequests()">Create request</button>
+        </div>
+
+      </div> -->
+
+      <div class="row">
+      </div>
+      <div class="col-md-8">
+
+
+
+
+        <!-- <div class="row">
+          <div class="col-md-4" *ngIf="TotalPrice">
+            <div class="">
+              <span class="formDetails">Request Type:</span>
+              <div id='Status'>
+                <label for="Status" class="field select">
+                  <select class="RequestType" formControlName="ServiceRequestType" required aria-readonly>
+                    <option selected value="">Select Service Type</option>
+                    <option value="InHouseRequest">In House Request</option>
+                    <option value="ThirdPartyRequest">Third Party Request</option>
+                  </select>
+
+            
+                </label>
+                <span for="" class="alerts"
+                  *ngIf='this.createRequestData.controls["ServiceRequestType"].status=="INVALID" && this.createRequestbBtn==true'>*Mandatory</span>
+              </div>
+            </div>
+            <div>
+              <span class="formDetails"> Service Type:</span>
+              <div id='Status' class="col-md-4">
+                <label for="Status" class="RequestType field select">
+                  <select class="RequestType" formControlName="ServiceType" required>
+                    <option selected value="">Select Service Type</option>
+                    <option value="Onetime">One Time</option>
+                    <option value="Ongoing/ Daily">Daily/Ongoing</option>
+                    <option value="Recurring">Recurring</option>
+                    <i class="arrow double"></i>
+                  </select>
+                </label>
+                <div class="row">
+                  <span for="" class="alerts"
+                    *ngIf='this.createRequestData.controls["ServiceType"].status=="INVALID" && this.createRequestbBtn==true'>*Mandatory</span>
+                </div>
+
+              </div>
+            </div>
+            <span class="formDetails" [hidden]="selectBeneficiary!='Yes'" for=""> select Beneficiary:</span>
+            <div id='Status' (change)="selectBeneficiaryID($event)" [hidden]="selectBeneficiary!='Yes'">
+              <label for="Status" class="field select">
+                <select class="Beneficiary">
+                  <option selected value="">Select Benfificiary</option>
+                  <option value="{{beneficiary.CustID}}" *ngFor="let beneficiary of Beneficiaries">
+                    {{beneficiary.Name}}</option>
+                </select>
+                <i class="arrow double"></i>
+              </label>
+              <span for="" class="alerts" *ngIf='CustID==null&& this.createRequestbBtn==true'>*Benfificiary
+                Mandatory</span>
+            </div>
+            <div class="reqType">
+              <div class='selectDays '>
+                <span class="formDetails">Comment:</span>
+                <div id='Remark'>
+                  <textarea type='text' formControlName="Note" class="form-control" required style="width: 225px;"
+                    placeholder="Comment">
+                      </textarea>
+                  <div class="row" ngClass="alerts"
+                    *ngIf='this.createRequestData.controls["Note"].status=="INVALID" && this.createRequestbBtn==true'>
+                    <p>*Comment Mandatory</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+            </div>
+          </div>
+          <div class="col-md-8" *ngIf="TotalPrice">
+            <label class="formDetails" *ngIf="this.createRequestData.value.ServiceType=='Recurring'"> Select
+              Days:</label>
+            <div class="row" (change)="DaysSelect($event)"
+              *ngIf="this.createRequestData.value.ServiceType=='Recurring'">
+              <input value="SUNDAY" class="checkboxstyle form-check-input" type="checkbox" name="flexRadioDefault"
+                id="flexRadioDefault2">&nbsp; Sun &nbsp;
+              <input value="MONDAY" class="checkboxstyle form-check-input" type="checkbox" name="flexRadioDefault"
+                id="flexRadioDefault2"> &nbsp;Mon &nbsp;
+              <input value="TUESDAY" class="checkboxstyle form-check-input" type="checkbox" name="flexRadioDefault"
+                id="flexRadioDefault2">&nbsp; Tues &nbsp;
+              <input value="WEDNESDAY" class="checkboxstyle form-check-input" type="checkbox" name="flexRadioDefault"
+                id="flexRadioDefault2">&nbsp; Wed &nbsp;
+              <input value="THURSDAY" class="checkboxstyle form-check-input" type="checkbox" name="flexRadioDefault"
+                id="flexRadioDefault2">&nbsp; Thu &nbsp;
+              <input value="FRIDAY" class="checkboxstyle form-check-input" type="checkbox" name="flexRadioDefault"
+                id="flexRadioDefault2">&nbsp; Fri &nbsp;
+              <input value="SATURDAY" class="checkboxstyle form-check-input" type="checkbox" name="flexRadioDefault"
+                id="flexRadioDefault2">&nbsp; Sat
+            </div>
+            <span for="" class="alerts"
+              *ngIf='daysData.length<1 && this.createRequestbBtn==true && this.createRequestData.value.ServiceType=="Recurring"'>*Days
+              Mandatory</span>
+
+            <div class="row">
+              <div class='col-md-5'>
+                <span class="formDetails">Select Start Date :</span>
+                <div class=" input-group date">
+                  <input formControlName="RequestedDate" type='datetime-local' class="startdate form-control"
+                    placeholder="Select Start Date" required>
+                </div>
+                <span for="" class="alerts"
+                  *ngIf='this.createRequestData.controls["RequestedDate"].status=="INVALID" && this.createRequestbBtn==true'>*Start
+                  Date
+                  Mandatory</span>
+              </div>
+              <div class='col-md-5' [hidden]="this.createRequestData.value.ServiceType=='Onetime'">
+                <span class="formDetails">Select End Date :</span>
+                <div class=" input-group date">
+                  <input formControlName="RequestEndDate" type='date' class="startdate form-control"
+                    placeholder="Select EndDate ">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <label for="" class="formDetails" [hidden]="CoverdPlan"> Payment Mode:</label>
+              <div class="col-md-10" (change)="paymentMode($event)" [hidden]="CoverdPlan">
+                <input value="Cheque" class="checkboxstyle form-check-input" type="radio" name="flexRadioDefault"
+                  id="flexRadioDefault2" required> &nbsp;Cheque&nbsp;
+                <input value="cash" class="checkboxstyle form-check-input" type="radio" name="flexRadioDefault"
+                  id="flexRadioDefault2" required>&nbsp; cash&nbsp;
+                <input value="Wire Transfer" class="checkboxstyle form-check-input" type="radio" name="flexRadioDefault"
+                  id="flexRadioDefault2" required> &nbsp; Wire Transfer&nbsp;
+                <input [hidden]="pmsVerify!=true" value="PMS" class="checkboxstyle form-check-input" type="radio"
+                  name="flexRadioDefault" id="flexRadioDefault2" required> &nbsp; <label for=""
+                  [hidden]="pmsVerify!=true">Pms</label>
+              </div>
+              <span for="" class="alerts"
+                *ngIf='CoverdPlan!=true&& this.createRequestbBtn==true && paymentmode==null'>*paymentMode
+                Mandatory</span>
+            </div>
+            <div class="row" (change)="paymentTo($event)">
+              <label class="payment">Payment :</label>
+              <div class="col-md-4">
+                <input value="Anvayaa" class="checkboxstyle form-check-input" type="radio" name="AnvayaaPayment"
+                  id="flexRadioDefault2" required> To Anvayaa
+              </div>
+              <div class="col-md-4">
+                <div class="form-check">
+                  <input value="Vendor" class="checkboxstyle form-check-input" type="radio" name="AnvayaaPayment"
+                    id="flexRadioDefault2" required>
+                  <label class="daysSize form-check-label" for="flexRadioDefault2">
+                    To Vendor
+                  </label>
+                </div>
+              </div>
+             
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <button class="createReqBtn" type="button" (click)="createRequests()">Create request</button>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+
+  </div>
+</div>
+<ngx-spinner type="ball-scale-multiple">loading...</ngx-spinner>

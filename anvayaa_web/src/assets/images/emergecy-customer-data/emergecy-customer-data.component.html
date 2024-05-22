@@ -1,0 +1,2017 @@
+<div class="bodycontent card">
+<!-- <div class="container mt-4">
+  <div class="row">
+    <div class="col-md-4" style="background-color: #E0E0E0;">
+      <div class="text-center"><h4>Initiation</h4></div>
+      <div>
+        <form [formGroup]="requestdetailsform">
+          <table class="table ">
+            <tr><td class="text-start">Care Manager Accepted</td><td></td><td><span style="margin:35px"><img src="../../assets/images/telephone.png" style="width: 20px;"></span></td><td><div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" value="CareManagerAccepted" role="switch" id="flexSwitchCheckChecked" formControlName="CareManagerAccepted"  data-bs-toggle="modal" data-bs-target="#exampleModal" (change)="changedStatus($event)" checked>
+            </div></td>
+          <div></div></tr>
+            <tr><td class="text-start">Contacted Sponser</td><td class="hl text-center">{{List?.CustomersHealthPlanDetails?.SponsorContactDetails[0]?.ContactNumber}}</td><td class="hl"><span style="margin:35px" (click)="callNumber(List[0]?.CustomersHealthPlanDetails?.SponsorContactDetails[0]?.ContactNumber)"><img src="../../assets/images/telephone.png" style="width: 20px;"></span></td><td><div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" value="ContactedSponsor" role="switch" id="flexSwitchCheckChecked" formControlName="ContactedSponsor"  data-bs-toggle="modal" data-bs-target="#exampleModal" (change)="changedStatus($event)" checked>
+            </div></td></tr>
+            <tr><td class="text-start">Contacted Neighbour </td><td>{{List?.CustomersHealthPlanDetails?.Neighbours[0]?.ContactNumber}}</td><td><span style="margin:35px" (click)="callNumber(List[0]?.CustomersHealthPlanDetails?.Neighbours[0]?.ContactNumber)"><img src="../../assets/images/telephone.png" style="width: 20px;"></span></td><td>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" value="ContactedNeighbours" role="switch" id="flexSwitchCheckChecked" formControlName="ContactedNeighbours"  data-bs-toggle="modal" data-bs-target="#exampleModal" (change)="changedStatus($event)" checked>
+              </div>
+            </td></tr>
+            <tr><td class="text-start">Contacted EmergencyContact</td><td>{{List?.CustomersHealthPlanDetails?.EmergencyLocalContactDetails[0]?.ContactNumber}}</td><td><span style="margin:35px" (click)="callNumber(List[0]?.CustomersHealthPlanDetails?.EmergencyLocalContactDetails[0]?.ContactNumber)"><img src="../../assets/images/telephone.png" style="width: 20px;"></span></td><td>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" value="ContactedEmergencyPointofContacts" role="switch" id="flexSwitchCheckChecked" formControlName="ContactedEmergencyPointofContacts"  data-bs-toggle="modal" data-bs-target="#exampleModal" (change)="changedStatus($event)" checked>
+              </div>
+            </td></tr>
+            <tr><td class="text-start">Contacted Preferred Hospital</td><td>{{List?.CustomersHealthPlanDetails?.PreferredEmergencyHospitals[0]?.ContactNumber}}</td><td><span style="margin:35px" (click)="callNumber(List[0]?.CustomersHealthPlanDetails?.PreferredEmergencyHospitals[0]?.ContactNumber)"><img src="../../assets/images/telephone.png" style="width: 20px;"></span></td><td>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" value="ContactedPreferredHospital" role="switch" id="flexSwitchCheckChecked" formControlName="ContactedPreferredHospital"  data-bs-toggle="modal" data-bs-target="#exampleModal" (change)="changedStatus($event)" checked>
+              </div>
+            </td></tr>
+            <tr><td class="text-start">Contacted Nearest Hospital</td><td>{{List?.CustomersHealthPlanDetails?.NearestSuperSpecialityHospitals[0]?.ContactNumber}}</td><td><span style="margin:35px" (click)="callNumber(List[0]?.CustomersHealthPlanDetails?.NearestSuperSpecialityHospitals[0]?.ContactNumber)"><img src="../../assets/images/telephone.png" style="width: 20px;"></span></td><td>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" value="ContactedNearestHospital" role="switch" id="flexSwitchCheckChecked" formControlName="ContactedNearestHospital"  data-bs-toggle="modal" data-bs-target="#exampleModal" (change)="changedStatus($event)" checked>
+              </div>
+            </td></tr>
+            <tr><td class="text-start">Contacted Ambulance</td><td>{{List?.CustomersHealthPlanDetails?.NearestAmbulanceServices[0]?.ContactNumber}}</td><td><span style="margin:35px" (click)="callNumber(List[0]?.CustomersHealthPlanDetails?.NearestAmbulanceServices[0]?.ContactNumber)"><img src="../../assets/images/telephone.png" style="width: 20px;"></span></td><td>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" value="ContactedAmbulance" role="switch" id="flexSwitchCheckChecked" formControlName="ContactedAmbulance"  data-bs-toggle="modal" data-bs-target="#exampleModal" (change)="changedStatus($event)" checked>
+              </div>
+            </td></tr>
+            <tr><td class="text-start">Contacted Fire Station</td><td>{{List?.CustomersHealthPlanDetails?.FireStations[0]?.ContactNumber}}</td><td><span style="margin:35px" (click)="callNumber(List[0]?.CustomersHealthPlanDetails?.FireStations[0]?.ContactNumber)"><img src="../../assets/images/telephone.png" style="width: 20px;"></span></td><td><div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" value="ContactedFireStation" role="switch" id="flexSwitchCheckChecked" formControlName="ContactedFireStation"  data-bs-toggle="modal" data-bs-target="#exampleModal" (change)="changedStatus($event)" checked>
+            </div></td></tr>
+          </table>
+        </form>
+       
+      </div>
+    </div>
+    <div class="col-md-4 vl" style="background-color: #E0E0E0;">
+      <div class="text-center"><h4>Response</h4></div>
+      <div>
+        <form [formGroup]="requestdetailsform">
+          <table class="table table-borderless">
+            
+            
+            <tr><td class="text-start">Reached   Hospital </td><td></td><td>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" value="ReachedHospital" role="switch" id="flexSwitchCheckChecked" formControlName="ReachedHospital"  data-bs-toggle="modal" data-bs-target="#exampleModal" (change)="changedStatus($event)" checked>
+              </div>
+            </td></tr>
+            <tr><td class="text-start">Police Reached</td><td></td><td><div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" value="PoliceReached" role="switch" id="flexSwitchCheckChecked" formControlName="PoliceReached"  data-bs-toggle="modal" data-bs-target="#exampleModal" (change)="changedStatus($event)" checked>
+            </div></td></tr>
+           
+            <tr><td class="text-start">Fire Engine Reached</td><td></td><td><div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" value="FireEngineReached" role="switch" id="flexSwitchCheckChecked" formControlName="FireEngineReached"  data-bs-toggle="modal" data-bs-target="#exampleModal" (change)="changedStatus($event)" checked>
+            </div></td></tr>
+           
+          </table>
+        </form>
+        
+      </div>
+    </div>
+    <div class="col-md-4 vl" style="background-color: #E0E0E0;">
+      <div class="text-center"><h4>Closer</h4></div>
+      <div>
+        <form [formGroup]="requestdetailsform">
+          <table class="table table-borderless">
+            <tr><td class="text-start">Hospitilization Completed</td><td ></td><td>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" value="HospittalizationCompleted" role="switch" id="flexSwitchCheckChecked" formControlName="HospittalizationCompleted"  data-bs-toggle="modal" data-bs-target="#exampleModal" (change)="changedStatus($event)" checked>
+              </div>
+            </td></tr>
+            <tr><td class="text-start">Emergency Closed</td><td></td><td><div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" value="EmergencyClosed" role="switch" id="flexSwitchCheckChecked" formControlName="EmergencyClosed"  data-bs-toggle="modal" data-bs-target="#exampleModal" (change)="changedStatus($event)" checked>
+            </div></td></tr>
+          </table>
+        </form>        
+      </div>
+    </div>
+  </div>
+</div>
+  <body class="mt-3" style="height: 300px;">
+    <div class="text-center">Status Track</div>
+    <div class=" mt-5">
+      <span *ngFor="let item of IncommingStatusTrack;let i = index">
+        <span class="bar" *ngIf="(i != item.length)"></span>
+        <span
+          class="circle-desc"
+          [class.circle-desc-active]="item.Status === lastElement[0].Status"
+          >{{ item.Status}}</span>
+          <span class="time-desc"><b>{{item.Time*1000|date :'dd-MM-yyyy | hh:mm a'}}</b></span>
+        <span
+          class="circles"
+          [class.active]="item.Status === lastElement[0].Status"
+        ></span>
+        
+      </span>
+    </div>
+  </body>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{ModelBoxTitel}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="commentForm">
+            <label>Comment</label>
+            <textarea class="form-control" formControlName="comment"></textarea>
+          </form>
+        
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="this.commentForm.value.comment == ''" (click)="contactStatusChange()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>  -->
+<div class="row ">
+  <div class="col-md-8 col-lg-8">
+    <div class="row">
+      <div class="col-md-4">
+        <table class="table table-borderless">
+          <thead>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-start">Customer Name</td>
+              <td>:</td>
+              <td class="text-start">
+                Desaraju Surya Narayana Sai Ram 
+              </td>
+            </tr>
+            <tr>
+              <td class="text-start">Age</td>
+              <td>:</td>
+              <td class="text-start">
+                90
+                </td>
+            </tr>
+            <tr>
+              <td class="text-start">Mobile</td>
+              <td>:</td>
+              <td class="text-start">
+                9087654321
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-4">
+        <dl class="row">
+          <dt class="col-sm-5">Address :</dt>
+          <dd class="col-sm-7">A description list is perfect for defining terms.</dd>
+        </dl>
+        <dl class="row">
+          <dt class="col-sm-5">Location :</dt>
+          <dd class="col-sm-7"><img src="../../assets/images/placeholder (1).png"><a href="">Copy Link</a></dd>
+        </dl>
+      </div>
+      <div class="col-md-4">
+        <dl class="row">
+          <dt class="col-sm-5">Incident Address :</dt>
+          <dd class="col-sm-7">A description list is perfect for defining terms.</dd>
+        </dl>
+        <dl class="row">
+          <dt class="col-sm-5">Location :</dt>
+          <dd class="col-sm-7"><img src="../../assets/images/placeholder (1).png"> <a href="">Copy Link</a></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-lg-4">
+    <div class="card">
+      <div class="card-body">
+        <details>
+          <summary><span class="fs-6">Spoc-1</span> : <span class="fs-6">Ramya</span></summary>
+          <div>
+          <span>Role</span>:<span>Support Head</span>
+          </div>
+          <div>
+            <span>Contact</span>:<span>9087654321</span>
+          </div>
+        </details>
+      </div>
+     
+    </div>
+   <div class="card">
+    <div class="card-body">
+      <details>
+        <summary><span class="fs-6">Spoc-1</span> : <span class="fs-6">Santhosh</span></summary>
+        <div>
+          <span>Role</span>:<span>Care Manager</span>
+        </div>
+        <div>
+        <span>Contact</span>:<span>9087654321</span>
+        </div>
+      </details>
+    </div>
+   </div>
+  </div>
+</div>
+ <div class="row">
+  <div class="col-md-8">
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item mt-1">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+            Customer Details
+            
+                  <span class="ms-auto">
+                    <img src="../../assets/images/phone.png"  data-bs-toggle="modal" data-bs-target="#customer_model" style="margin-left: 20rem;" width="25">    
+                    </span>
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+          <div class="row"> 
+            <div class="col-md-4">
+              <table class="table table-borderless">
+                <thead>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-start">Benficiary-2</td>
+                    <td>:</td>
+                    <td class="text-start">
+                     <span>Ramesh</span> 
+                     <!-- <div><img src="../../assets/images/phone.png" width="15">9087654321</div>  -->
+                    </td>
+                    <td>Active</td>
+                  </tr>
+                  <tr>
+                    <td class="text-start">Sponser</td>
+                    <td>:</td>
+                    <td class="text-start">
+                      Responded
+                      </td>
+                      <td>Active</td>
+                  </tr>
+                  <tr>
+                    <td class="text-start">Neighbour</td>
+                    <td>:</td>
+                    <td class="text-start">
+                      Not Responded
+                      </td>
+                      <td>In-Active</td>
+                  </tr>
+                 
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+          </div>
+             
+              
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item mt-1">
+        <h2 class="accordion-header" id="headingTwo">
+          
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Care Manager
+            <span class="ms-auto">
+              <img src="../../assets/images/phone.png"  data-bs-toggle="modal" data-bs-target="#care_manager" style="margin-left: 21rem;" width="25">    
+              </span>
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h6>Care Manager </h6>
+                <table class="table table-borderless ">
+                  <thead>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td scope="row" class="text-start">Name</td>
+                      <td>:</td>
+                      <td class="text-start">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-start">Primary Number
+                      </td>
+                      <td>:</td>
+                      <td class="text-start">
+                        
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-start">Secondary Number
+                      </td>
+                      <td>:</td>
+                      <td class="text-start">
+                        
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-md-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                  <label class="form-check-label" for="flexSwitchCheckChecked">Contacted Care Manager </label>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item mt-1">
+        <h2 class="accordion-header" id="headingThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            Contact Ambulance
+            <span class="ms-auto">
+              <img src="../../assets/images/phone.png"  data-bs-toggle="modal" data-bs-target="#ambulance" style="margin-left: 19rem;" width="25">    
+              </span>
+          </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item mt-1">
+        
+        <h2 class="accordion-header" id="headingThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+            Contact Hospital
+            <span class="ms-auto">
+              <img src="../../assets/images/phone.png"  data-bs-toggle="modal" data-bs-target="#hospital" style="margin-left: 21rem;" width="25">    
+              </span>
+          </button>
+        </h2>
+        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item mt-1">
+        
+        <h2 class="accordion-header" id="headingThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
+            Contact Police Station
+            <span class="ms-auto">
+              <img src="../../assets/images/phone.png"  data-bs-toggle="modal" data-bs-target="#Police" style="margin-left: 19rem;" width="25">    
+              </span>
+          </button>
+        </h2>
+        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item mt-1">        
+        <h2 class="accordion-header" id="headingThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseThree">
+            Contact Fire Station
+            <span class="ms-auto">
+              <img src="../../assets/images/phone.png"  data-bs-toggle="modal" data-bs-target="#callingMode" style="margin-left: 20rem;" width="25">    
+              </span>
+          </button>
+        </h2>
+        <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4" >
+    <div class="card mt-1" style="height:auto">
+      <div class="card m-1" style="width: 200px;height: 40px; background-color: #E70C0C;color: #ffff;">
+        <div class="text-center m-2">
+        <h5>Care Manager</h5>
+        </div>
+      </div>
+      <div class="card m-1" style="width:200px;height:40px;background-color:#F79123">
+         <div class="text-center m-2">
+         <h5>Ambulance</h5>
+         </div>
+       </div>
+       <div class="card m-1" style="width:200px;height:40px;background-color:#F79123">
+         <div class="text-center m-2">
+         <h5>Police</h5>
+         </div>
+       </div>
+       <div class="card m-1"  style="width:200px;height:40px;background-color:#F79123">
+        <div class="text-center m-2">
+        <h5>Nearest Hospital</h5>
+        </div>
+      </div>
+       <div class="card m-1"  style="width:200px;height:40px;background-color:#F79123">
+         <div class="text-center m-2">
+         <h5>Fire Station</h5>
+         </div>
+       </div>
+       
+     
+    </div>
+  </div>  
+</div>
+<div class="row">
+  <div class="col-md-8"></div>
+  <div class="col-md-4">
+    <div class="card mt-1" style="height:auto">
+      <dl class="row">
+        <dt class="col-sm-6">Ambulance Driver Details :</dt>
+        <dd class="col-sm-6">rmaesh 9087654321
+          <img src="../../assets/images/phone.png"  width="15">    
+        </dd>
+      </dl>
+      <dl class="row">
+        <dt class="col-sm-6">Contacted Hospital:</dt>
+        <dd class="col-sm-6">
+          <div>Apollo Hospital</div>
+        </dd>
+        <dt class="col-sm-7">Contact Number:</dt>
+        <dd class="col-sm-5">
+          <div>9087654321</div>
+        </dd>
+        <dt class="col-sm-7">Address</dt>
+        <dd class="col-sm-5">
+          <div>Madhapur</div>
+          <div>
+          <img src="../../assets/images/placeholder (1).png"><a href="">Copy Link</a>
+        </div> 
+        </dd>
+      </dl>
+       
+     
+    </div>
+  </div>
+</div>
+<!-- Customer Model  -->
+<div class="modal fade" id="customer_model" tabindex="-1" aria-labelledby="customer_model" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="callingMode">Calling Details</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="insideFieldset">
+          <div class="fallandsos1">
+            <div class="row">
+              <div class="col-md-8">
+                <table class="table ">
+                  <thead>
+                    <tr>
+                      <th scope="col">Relation </th>
+                      <th scope="col">Name </th>
+                      <th scope="col">Number</th>
+                      <th scope="col">Contacted</th>
+                      <th scope="col">Near-location</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row" class="text-start">Customer</th>
+                      <td class="text-wrap"> Ram surya sai</td>
+                      <td><span class="me-2"
+                          ><i
+                            class="fa fa-phone"></i> <span class="text-primary pointer">
+                            </span>
+                        </span>9301129122</td>
+                        <td>
+                      
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                          
+                        </td>
+                        <td>
+                       
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                            
+                          
+                        </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="text-start">Benficiar-2</th>
+                      <td class="text-wrap">Narayana</td>
+                      <td>
+                        <span class="me-2"
+                         ><i
+                            class="fa fa-phone"></i><span class="text-primary pointer">
+                           </span>993929329</span>
+                      </td>
+                      <td>
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                      </td>
+                      <td>
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                        
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="text-start">Sponser</th>
+                      <td class="text-wrap">Ramesh</td>
+                      <td>
+                        <span class="me-2"
+                         ><i
+                            class="fa fa-phone"></i><span class="text-primary pointer">
+                           </span>993929329</span>
+                      </td>
+                      <td>
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                      </td>
+                      <td>
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="text-start">Neighbour</th>
+                      <td class="text-wrap">Naresh</td>
+                      <td>
+                        <span class="me-2"
+                         ><i
+                            class="fa fa-phone"></i><span class="text-primary pointer">
+                           </span>993929329</span>
+                      </td>
+                      <td>
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                      </td>
+                      <td>
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="text-start">Emergency Contact</th>
+                      <td class="text-wrap">Shyam</td>
+                      <td><span class="me-2"
+                          ><i
+                            class="fa fa-phone"></i> <span class="text-primary pointer">
+                              938333333
+                           </span>
+                        </span>
+                      </td>
+                      <td>
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                      </td>
+                      <td>
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault">  
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div>
+                </div>
+              </div>
+              <div class="col-md-4 vl">
+                <div class="text-center" style="height :50px">
+                  <img src="../../assets/images/Vanilla-1.5s-244px (1).gif"
+                    style="width: 225px;"><span class="fs-5"></span>
+                </div>
+                <div class="form-check mt-3">
+                  <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault" >
+                    Other Benficiary is with him ?
+                  </label>
+                </div>
+                <div>
+                  <label>Comments</label>
+                  <textarea type="text" class="form-control" formControlName="Note"
+                    placeholder="Comments"></textarea>
+                </div>
+                <div class="text-end" style="cursor: pointer;"
+                >
+                <div class="actionImg mt-3">
+                  <span class="text-success fs-5 me-3">
+                    <i class="fa fa-check" aria-hidden="true">Accept</i>
+                  </span>
+                  <span class="vl  text-danger fs-5">
+                    <i class="fa fa-times ms-3" aria-hidden="true" data-bs-toggle="modal"
+                      data-bs-target="#callingtwoModal"></i>
+                  </span>
+                </div>
+              </div>
+              </div>
+            </div>
+            
+            <div class="mt-2">
+              <div class="container">
+                <div class="row">
+                  <div style="border: 1px solid #a09e9ef1;" class="mt-2"></div>
+                  <div class="mt-2">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div class="fs-4">Customer Details</div>
+                          <table class="table table-borderless">
+                            <thead>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row" class="text-start">Name</th>
+                                <td>:</td>
+                                <td class="text-start">
+                                   Surya Narayana Sai ram 
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Age |Gender</th>
+                                <td>:</td>
+                                <td class="text-start">
+                                    65 | male 
+                                  </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Mobile</th>
+                                <td>:</td>
+                                <td class="text-start">
+                                  9721237382
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Address</th>
+                                <td>
+                                  :
+                                </td>
+                                <td class="text-start"></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="col-sm-4 text-center vl">
+                          <!-- <div class="fs-4">Care Manger Details</div>
+                          <table class="table table-borderless ">
+                            <thead>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row" class="text-start">Name</th>
+                                <td>:</td>
+                                <td class="text-start">
+                                 
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Primary Number
+                                </th>
+                                <td>:</td>
+                                <td class="text-start">
+                                  
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Secondary Number
+                                </th>
+                                <td>:</td>
+                                <td class="text-start">
+                                  
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table> -->
+                          <div class="card text-start">
+                            <div class="card-body">
+                              <details>
+                                <summary><span class="fs-6">Sponser</span> : <span class="fs-6">Santhosh</span></summary>
+                                <div>
+                                  <span>Name</span>:<span>Akhila</span>
+                                </div>
+                                <div>
+                                <span>Contact</span>:<span>9087654321</span>
+                                </div>
+                                <div>
+                                  <span>Address</span>:<span>US</span>
+                                  </div>
+                              </details>
+                            </div>
+                           </div>
+                          <div class="card text-start">
+                            <div class="card-body">
+                              <details>
+                                <summary><span class="fs-6">Benficiary Details</span> : <span class="fs-6">Santhosh</span></summary>
+                                <div>
+                                  <span>Name</span>:<span>Akhila</span>
+                                </div>
+                                <div>
+                                <span>Contact</span>:<span>9087654321</span>
+                                </div>
+                                <div>
+                                  <span>Address</span>:<span>Hyderabad</span>
+                                  </div>
+                              </details>
+                            </div>
+                           </div>
+                           <div class="card text-start">
+                            <div class="card-body">
+                              <details>
+                                <summary><span class="fs-6">Neighbour Details</span> : <span class="fs-6">Satya</span></summary>
+                                <div>
+                                  <span>Name</span>:<span>Akhila</span>
+                                </div>
+                                <div>
+                                <span>Contact</span>:<span>9087654321</span>
+                                </div>
+                                <div>
+                                  <span>Address</span>:<span>Hyderabad</span>
+                                  </div>
+                              </details>
+                            </div>
+                           </div>
+                           <div class="card text-start">
+                            <div class="card-body">
+                              <details>
+                                <summary><span class="fs-6">Emergency Point of Contact</span> : <span class="fs-6">Santhosh</span></summary>
+                                <div>
+                                  <span>Name</span>:<span>Akhila</span>
+                                </div>
+                                <div>
+                                <span>Contact</span>:<span>9087654321</span>
+                                </div>
+                                <div>
+                                  <span>Address</span>:<span>Hyderabad</span>
+                                  </div>
+                              </details>
+                            </div>
+                           </div>
+
+                        </div>
+                        <div class="col-sm-4 vl">
+                          <div class="form-check mt-1">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault" >
+                              Care Manager Contacted
+                            </label>
+                          </div>
+                          <div class="form-check mt-1">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault" >
+                              Is Sponser Contacted ?
+                            </label>
+                          </div>
+                          <div class="form-check mt-1">
+                            <input class="form-check-input" type="checkbox" [(ngModel)]="showInput" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault" >
+                              incident location is Not Same as Address ?
+                            </label>
+                          </div>
+                          <div *ngIf="showInput" class="text-start">
+                            
+                            <form>
+                              <div class="form-group">
+                                <label for="streetNumber1">House No / Flat No</label>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="streetNumber2"
+                                  formControlName="streetNumber2"
+                                  placeholder="Apartment, suite, unit, building, floor, etc."
+                                />
+                             </div>
+                              <div class="form-group">
+                                <label for="streetNumber1">Street number</label>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="streetNumber1"
+                                  formControlName="streetNumber1"
+                                  placeholder="Street address, P.O. box, company name, c/o"
+                                />
+                              
+                              </div>
+                              
+                              <div class="form-group">
+                                <label for="city">City</label>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="city"
+                                  formControlName="city"
+                                  placeholder=""
+                                />
+                             </div>
+                             
+                              <div class="form-group">
+                                <label for="phoneNumber">Phone number</label>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="phoneNumber"
+                                  placeholder=""
+                                />
+                                
+                              </div>
+                             
+                              <button class="btn btn-success" type="submit">Add address</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+</div>
+<!-- Ambulance Model -->
+<div class="modal fade" id="ambulance" tabindex="-1" aria-labelledby="ambulance" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="callingMode">Ambulance  Details</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="insideFieldset">
+          <div class="fallandsos1">
+            <div class="row">
+              <div class="col-md-6">
+                <table class="table ">
+                  <thead>
+                    <tr>
+                      <th scope="col">Ambulance Provider </th>
+                      <th scope="col">Provider Name </th>
+                      <th scope="col">Number</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row" class="text-start">Prefered Ambulance</th>
+                      <td class="text-wrap"> Ram surya sai</td>
+                      <td><span class="me-2"
+                          ><i
+                            class="fa fa-phone"></i> <span class="text-primary pointer">
+                            </span>
+                        </span>9301129122</td>
+                        <td>
+                          <span class="text-success fs-5 me-3">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                          </span>
+                          <span class="vl  text-danger fs-5">
+                            <i class="fa fa-times ms-3" aria-hidden="true" data-bs-toggle="modal"
+                              data-bs-target="#callingtwoModal"></i> </span>
+                        </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="text-start">Preferd-2</th>
+                      <td class="text-wrap">Narayana</td>
+                      <td>
+                        <span class="me-2"
+                         ><i
+                            class="fa fa-phone"></i><span class="text-primary pointer">
+                           </span>993929329</span>
+
+                      </td>
+                      <td>
+                        <span class="text-success fs-5 me-3">
+                          <i class="fa fa-check" aria-hidden="true"></i>
+                        </span>
+                        <span class="vl  text-danger fs-5">
+                          <i class="fa fa-times ms-3" aria-hidden="true" data-bs-toggle="modal"
+                            data-bs-target="#callingtwoModal"></i> </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="text-start">Preferd-3</th>
+                      <td class="text-wrap">Ramesh</td>
+                      <td>
+                        <span class="me-2"
+                         ><i
+                            class="fa fa-phone"></i><span class="text-primary pointer">
+                           </span>993929329</span>
+
+                      </td>
+                      <td>
+                        <span class="text-success fs-5 me-3">
+                          <i class="fa fa-check" aria-hidden="true"></i>
+                        </span>
+                        <span class="vl  text-danger fs-5">
+                          <i class="fa fa-times ms-3" aria-hidden="true" data-bs-toggle="modal"
+                            data-bs-target="#callingtwoModal"></i> </span>
+                      </td>
+                    </tr>
+                    <!-- <tr>
+                      <td><input class="form-control" placeholder="other Ambulance"></td>
+                      <td><input class="form-control" placeholder="Provider Name"></td>
+                      <td><input class="form-control" placeholder="Provider Name"></td>
+                    </tr> -->
+                  </tbody>
+                </table>
+                <div>
+                  <span class="fs-6"><div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                      <label class="form-check-label" for="flexCheckDefault" >
+                       Other Ambulance Contacted ?
+                      </label>               
+                    </div>
+                  </div></span>
+                  <div class="row">
+                    <div class="col-md-3"><input class="form-control" placeholder="other Ambulance"></div>
+                    <div class="col-md-3"><input class="form-control" placeholder="other Ambulance"></div>
+                    <div class="col-md-3"><input class="form-control" placeholder="other Ambulance"></div>
+                    <div class="col-md-3"><button class="btn btn-primary">Add</button></div>
+                  </div>
+                  </div>
+              </div>
+              <div class="col-md-6 vl">
+                <div class="text-center" style="height :50px">
+                  <img src="../../assets/images/Vanilla-1.5s-244px (1).gif"
+                    style="width: 225px;"><span class="fs-5"></span>
+                </div>
+                
+                <select class="form-select">
+                  <option selected value="" disabled>Select Ambulance Type</option>
+                  <option>Type-1</option>
+                  <option>Type-2</option>
+                  <option>Type-2</option>
+                </select>
+                <div class="row mt-3">
+                  <div class="col-md-6">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                      <label class="form-check-label" for="flexCheckDefault" >
+                       Add Driver Details ?
+                      </label>               
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="row">
+                    <div class="col-md-3"><input class="form-control" placeholder="Name"></div>
+                    <div class="col-md-3"><input class="form-control" placeholder="Number"></div>
+                    <div class="col-md-3"><button class="btn btn-primary">Add</button></div>
+                  </div>
+                </div>
+                <div>
+                  <label>Comments</label>
+                  <textarea type="text" class="form-control" formControlName="Note"
+                    placeholder="Comments"></textarea>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-2">
+              <div class="container">
+                <div class="row">
+                  <div style="border: 1px solid #a09e9ef1;" class="mt-2"></div>
+                  <div class="mt-2">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div><h6>Preferd Ambulance Type</h6></div>
+                          <table class="table table-borderless">
+                            <thead>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row" class="text-start">Type</th>
+                                <td>:</td>
+                                <td class="text-start">
+                                   Type-1
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">
+                                  Equipment List
+                                </th>
+                                <td>:</td>
+                                <td class="text-start">
+                                    
+                                  </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Type</th>
+                                <td>:</td>
+                                <td class="text-start">
+                                  Type-2
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Equipment List</th>
+                                <td>
+                                  :
+                                </td>
+                                <td class="text-start"></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="col-sm-4 text-center vl">
+                         <div><h6>Customer Details</h6></div>
+                         <table class="table table-borderless">
+                          <thead>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row" class="text-start">Name</th>
+                              <td>:</td>
+                              <td class="text-start">
+                                 Shyam
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row" class="text-start">
+                                Age|Gender
+                              </th>
+                              <td>:</td>
+                              <td class="text-start">
+                                  58|M
+                                </td>
+                            </tr>
+                            <tr>
+                              <th scope="row" class="text-start">Height | weight</th>
+                              <td>:</td>
+                              <td class="text-start">
+                                6 feet 0inch | 90kg
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row" class="text-start">Address</th>
+                              <td>
+                                :
+                              </td>
+                              <td class="text-start">Balnager</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div class="card">
+                          <div class="card-body">
+                            <details>
+                              <summary>Customer Medical Condition</summary>
+                              <div>
+                                <span>Role</span>:<span>Care Manager</span>
+                              </div>
+                              <div>
+                              <span>Contact</span>:<span>9087654321</span>
+                              </div>
+                            </details>
+                          </div>
+                         </div>
+                        </div>
+                        <div class="col-sm-4 vl">
+                          <div class="text-start">
+                            <h6>Ambulance Driver Details</h6>
+                          <span>Ramesh</span>
+                          <span>:</span>
+                          <span>982723737</span>
+                           
+                          </div>
+                          <div class="form-check mt-3">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault" >
+                              Share Driver Details
+                            </label>
+                          </div>
+                          <div class="form-check mt-3">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault" >
+                              Ambulance Reached location ?
+                            </label>
+                          </div>
+                          <div class="form-check mt-3">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault" >
+                              Ambulance Reached Hospital ?
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+</div>
+<!-- Care manger Details -->
+<div class="modal fade" id="care_manager" tabindex="-1" aria-labelledby="care_manager" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="callingMode">Care Manager  Details</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="insideFieldset">
+          <div class="fallandsos1">
+            <div class="row">
+              <div class="col-md-6">
+                <table class="table ">
+                  <thead>
+                    <tr>
+                      <th scope="col">Person Type </th>
+                      <th scope="col">Name </th>
+                      <th scope="col">Number</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row" class="text-start">Care Manager</th>
+                      <td class="text-wrap"> Ram surya sai</td>
+                      <td><span class="me-2"
+                          ><i
+                            class="fa fa-phone"></i> <span class="text-primary pointer">
+                            </span>
+                        </span>9301129122</td>
+                        <td>
+                          <span class="text-success fs-5 me-3">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                          </span>
+                          <span class="vl  text-danger fs-5">
+                            <i class="fa fa-times ms-3" aria-hidden="true" data-bs-toggle="modal"
+                              data-bs-target="#callingtwoModal"></i> </span>
+                        </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="text-start">Backup-Care Manager</th>
+                      <td class="text-wrap">Narayana</td>
+                      <td>
+                        <span class="me-2"
+                         ><i
+                            class="fa fa-phone"></i><span class="text-primary pointer">
+                           </span>993929329</span>
+
+                      </td>
+                      <td>
+                        <span class="text-success fs-5 me-3">
+                          <i class="fa fa-check" aria-hidden="true"></i>
+                        </span>
+                        <span class="vl  text-danger fs-5">
+                          <i class="fa fa-times ms-3" aria-hidden="true" data-bs-toggle="modal"
+                            data-bs-target="#callingtwoModal"></i> </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="text-start">Area Manager</th>
+                      <td class="text-wrap">Ramesh</td>
+                      <td>
+                        <span class="me-2"
+                         ><i
+                            class="fa fa-phone"></i><span class="text-primary pointer">
+                           </span>993929329</span>
+
+                      </td>
+                      <td>
+                        <span class="text-success fs-5 me-3">
+                          <i class="fa fa-check" aria-hidden="true"></i>
+                        </span>
+                        <span class="vl  text-danger fs-5">
+                          <i class="fa fa-times ms-3" aria-hidden="true" data-bs-toggle="modal"
+                            data-bs-target="#callingtwoModal"></i> </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-md-6 vl">
+                <div class="text-center" style="height :50px">
+                  <img src="../../assets/images/Vanilla-1.5s-244px (1).gif"
+                    style="width: 225px;"><span class="fs-5"></span>
+                </div>
+                <div>
+                  <label>Comments</label>
+                  <textarea type="text" class="form-control" 
+                    placeholder="Comments"></textarea>
+                </div>
+                <div class="text-end" style="cursor: pointer;"
+                >
+              </div>
+              </div>
+            </div>
+            <div class="mt-2">
+              <div class="container">
+                <div class="row">
+                  <div style="border: 1px solid #a09e9ef1;" class="mt-2"></div>
+                  <div class="mt-2">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div><h6>Customer Details</h6></div>
+                          <table class="table table-borderless">
+                           <thead>
+                           </thead>
+                           <tbody>
+                             <tr>
+                               <th scope="row" class="text-start">Name</th>
+                               <td>:</td>
+                               <td class="text-start">
+                                  Shyam
+                               </td>
+                             </tr>
+                             <tr>
+                               <th scope="row" class="text-start">
+                                 Age|Gender
+                               </th>
+                               <td>:</td>
+                               <td class="text-start">
+                                   58|M
+                                 </td>
+                             </tr>
+                             <tr>
+                               <th scope="row" class="text-start">Height | weight</th>
+                               <td>:</td>
+                               <td class="text-start">
+                                 6 feet 0inch | 90kg
+                               </td>
+                             </tr>
+                             <tr>
+                               <th scope="row" class="text-start">Address</th>
+                               <td>
+                                 :
+                               </td>
+                               <td class="text-start">Balnager</td>
+                             </tr>
+                           </tbody>
+                         </table>
+                         <div class="card">
+                           <div class="card-body">
+                             <details>
+                               <summary>Customer Medical Condition</summary>
+                               <div>
+                                 <span>Role</span>:<span>Care Manager</span>
+                               </div>
+                               <div>
+                               <span>Contact</span>:<span>9087654321</span>
+                               </div>
+                             </details>
+                           </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-4 text-center vl">
+                          <!-- <div class="fs-4">Care Manger Details</div>
+                          <table class="table table-borderless ">
+                            <thead>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row" class="text-start">Name</th>
+                                <td>:</td>
+                                <td class="text-start">
+                                 
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Primary Number
+                                </th>
+                                <td>:</td>
+                                <td class="text-start">
+                                  
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Secondary Number
+                                </th>
+                                <td>:</td>
+                                <td class="text-start">
+                                  
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table> -->
+                          <div class="card text-start">
+                            <div class="card-body">
+                              <details>
+                                <summary><span class="fs-6">Sponser</span> : <span class="fs-6">Santhosh</span></summary>
+                                <div>
+                                  <span>Name</span>:<span>Akhila</span>
+                                </div>
+                                <div>
+                                <span>Contact</span>:<span>9087654321</span>
+                                </div>
+                                <div>
+                                  <span>Address</span>:<span>US</span>
+                                  </div>
+                              </details>
+                            </div>
+                           </div>
+                          <div class="card text-start">
+                            <div class="card-body">
+                              <details>
+                                <summary><span class="fs-6">Benficiary Details</span> : <span class="fs-6">Santhosh</span></summary>
+                                <div>
+                                  <span>Name</span>:<span>Akhila</span>
+                                </div>
+                                <div>
+                                <span>Contact</span>:<span>9087654321</span>
+                                </div>
+                                <div>
+                                  <span>Address</span>:<span>Hyderabad</span>
+                                  </div>
+                              </details>
+                            </div>
+                           </div>
+                           <div class="card text-start">
+                            <div class="card-body">
+                              <details>
+                                <summary><span class="fs-6">Neighbour Details</span> : <span class="fs-6">Satya</span></summary>
+                                <div>
+                                  <span>Name</span>:<span>Akhila</span>
+                                </div>
+                                <div>
+                                <span>Contact</span>:<span>9087654321</span>
+                                </div>
+                                <div>
+                                  <span>Address</span>:<span>Hyderabad</span>
+                                  </div>
+                              </details>
+                            </div>
+                           </div>
+                           <div class="card text-start">
+                            <div class="card-body">
+                              <details>
+                                <summary><span class="fs-6">Emergency Point of Contact</span> : <span class="fs-6">Santhosh</span></summary>
+                                <div>
+                                  <span>Name</span>:<span>Akhila</span>
+                                </div>
+                                <div>
+                                <span>Contact</span>:<span>9087654321</span>
+                                </div>
+                                <div>
+                                  <span>Address</span>:<span>Hyderabad</span>
+                                  </div>
+                              </details>
+                            </div>
+                           </div>
+
+                        </div>
+                        <div class="col-sm-4 vl">
+                          <div class="form-check mt-3 text-start">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault" >
+                              Contacted Customer 
+                            </label>
+                          </div>
+                          <div class="form-check mt-3 text-start">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault" >
+                              Care Manager Reached Location
+                            </label>
+                          </div>
+                          <div class="form-check mt-3 text-start">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault" >
+                              Contacted Ambulance ?
+                            </label>
+                          </div>
+                          <div class="form-check mt-3 text-start">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault" >
+                              Ambulance Reached ?
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+</div>
+<!-- Hospital model  -->
+<div class="modal fade" id="hospital" tabindex="-1" aria-labelledby="hospital" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="callingMode">Hospital Details</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="insideFieldset">
+          <div class="fallandsos1">
+            <div class="row">
+              <div class="col-md-8">
+                <table class="table ">
+                  <thead>
+                    <tr>
+                      <th scope="col">Hospital Type </th>
+                      <th scope="col">Distance</th>
+                      <th scope="col">Name </th>
+                      <th scope="col">Number</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row" class="text-start">Nearest Hospital</th>
+                      <th scope="row" class="text-start">5km</th>
+                      <td class="text-wrap"> Ram surya sai</td>
+                      <td><span class="me-2"
+                          ><i
+                            class="fa fa-phone"></i> <span class="text-primary pointer">
+                            </span>
+                        </span>9301129122</td>
+                        <td>
+                          <span class="text-success fs-5 me-3">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                          </span>
+                          <span class="vl  text-danger fs-5">
+                            <i class="fa fa-times ms-3" aria-hidden="true" data-bs-toggle="modal"
+                              data-bs-target="#callingtwoModal"></i> </span>
+                        </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="text-start">Preferd Hospital</th>
+                      <th scope="row" class="text-start">10km</th>
+                      <td class="text-wrap">Narayana</td>
+                      <td>
+                        <span class="me-2"
+                         ><i
+                            class="fa fa-phone"></i><span class="text-primary pointer">
+                           </span>993929329</span>
+
+                      </td>
+                      <td>
+                        <span class="text-success fs-5 me-3">
+                          <i class="fa fa-check" aria-hidden="true"></i>
+                        </span>
+                        <span class="vl  text-danger fs-5">
+                          <i class="fa fa-times ms-3" aria-hidden="true" data-bs-toggle="modal"
+                            data-bs-target="#callingtwoModal"></i> </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="text-start">Preferd Super Speciality</th>
+                      <th scope="row" class="text-start">15km</th>
+                      <td class="text-wrap">Ramesh</td>
+                      <td>
+                        <span class="me-2"
+                         ><i
+                            class="fa fa-phone"></i><span class="text-primary pointer">
+                           </span>993929329</span>
+
+                      </td>
+                      <td>
+                        <span class="text-success fs-5 me-3">
+                          <i class="fa fa-check" aria-hidden="true"></i>
+                        </span>
+                        <span class="vl  text-danger fs-5">
+                          <i class="fa fa-times ms-3" aria-hidden="true" data-bs-toggle="modal"
+                            data-bs-target="#callingtwoModal"></i> </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div>
+                  <span class="fs-6"><div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                      <label class="form-check-label" for="flexCheckDefault" >
+                       Other Hospital Contacted ?
+                      </label>               
+                    </div>
+                  </div></span>
+                  <div class="row">
+                    <div class="col-md-4"><input class="form-control" placeholder="Hospital Name"></div>
+                    <div class="col-md-4"><input class="form-control" placeholder="Number"></div>
+                    <div class="col-md-3"><button class="btn btn-primary">Add</button></div>
+                  </div>
+                  </div>
+              </div>
+              <div class="col-md-4 vl">
+                <div class="text-center" style="height :50px">
+                  <img src="../../assets/images/Vanilla-1.5s-244px (1).gif"
+                    style="width: 225px;"><span class="fs-5"></span>
+                </div>
+                <div>
+                  <label>Comments</label>
+                  <textarea type="text" class="form-control" 
+                    placeholder="Comments"></textarea>
+                </div>
+                <div class="text-end" style="cursor: pointer;"
+                >
+              </div>
+              </div>
+            </div>
+            <div class="mt-2">
+              <div class="container">
+                <div class="row">
+                  <div style="border: 1px solid #a09e9ef1;" class="mt-2"></div>
+                  <div class="mt-2">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div><h6>Customer Details</h6></div>
+                          <table class="table table-borderless">
+                           <thead>
+                           </thead>
+                           <tbody>
+                             <tr>
+                               <th scope="row" class="text-start">Name</th>
+                               <td>:</td>
+                               <td class="text-start">
+                                  Shyam
+                               </td>
+                             </tr>
+                             <tr>
+                               <th scope="row" class="text-start">
+                                 Age|Gender
+                               </th>
+                               <td>:</td>
+                               <td class="text-start">
+                                   58|M
+                                 </td>
+                             </tr>
+                             <tr>
+                               <th scope="row" class="text-start">Height | weight</th>
+                               <td>:</td>
+                               <td class="text-start">
+                                 6 feet 0inch | 90kg
+                               </td>
+                             </tr>
+                             <tr>
+                               <th scope="row" class="text-start">Address</th>
+                               <td>
+                                 :
+                               </td>
+                               <td class="text-start">Balnager</td>
+                             </tr>
+                           </tbody>
+                         </table>
+                         <div class="card">
+                           <div class="card-body">
+                             <details>
+                               <summary>Customer Medical Condition</summary>
+                               <div>
+                                 <span>Role</span>:<span>Care Manager</span>
+                               </div>
+                               <div>
+                               <span>Contact</span>:<span>9087654321</span>
+                               </div>
+                             </details>
+                           </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-4 text-center vl">
+                          <!-- <div class="fs-4">Care Manger Details</div>
+                          <table class="table table-borderless ">
+                            <thead>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row" class="text-start">Name</th>
+                                <td>:</td>
+                                <td class="text-start">
+                                 
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Primary Number
+                                </th>
+                                <td>:</td>
+                                <td class="text-start">
+                                  
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" class="text-start">Secondary Number
+                                </th>
+                                <td>:</td>
+                                <td class="text-start">
+                                  
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table> -->
+                          <div class="card text-start">
+                            <div class="card-body">
+                              <details>
+                                <summary><span class="fs-6">Nearest Hospital</span></summary>
+                                <div>
+                                  <span>Name</span>:<span>Akhila Hospital</span>
+                                </div>
+                                <div>
+                                <span>Contact</span>:<span>9087654321</span>
+                                </div>
+                                <div>
+                                  <span>Address</span>:<span>US</span>
+                                  </div>
+                                  <dl class="row">
+                                    <dt class="col-sm-5">Location :</dt>
+                                    <dd class="col-sm-7"><img src="../../assets/images/placeholder (1).png"><a href="">Copy Link</a></dd>
+                                  </dl>
+                              </details>
+                            </div>
+                           </div>
+                          <div class="card text-start">
+                            <div class="card-body">
+                              <details>
+                                <summary><span class="fs-6">Preferd Hospital</span> : <span class="fs-6">Santhosh</span></summary>
+                                <div>
+                                  <span>Name</span>:<span>Apollo Hospital</span>
+                                </div>
+                                <div>
+                                <span>Contact</span>:<span>9087654321</span>
+                                </div>
+                                <div>
+                                  <span>Address</span>:<span>Hyderabad</span>
+                                  </div>
+                                  <dl class="row">
+                                    <dt class="col-sm-5">Location :</dt>
+                                    <dd class="col-sm-7"><img src="../../assets/images/placeholder (1).png"><a href="">Copy Link</a></dd>
+                                  </dl>
+                              </details>
+                            </div>
+                           </div>
+                           <div class="card text-start">
+                            <div class="card-body">
+                              <details>
+                                <summary><span class="fs-6">Preferd Speciality Hospital</span> : <span class="fs-6">Satya</span></summary>
+                                <div>
+                                  <span>Name</span>:<span>Naveen Speciality Hospital</span>
+                                </div>
+                                <div>
+                                <span>Contact</span>:<span>9087654321</span>
+                                </div>
+                                <div>
+                                  <span>Address</span>:<span>Hyderabad</span>
+                                  </div>
+                                  <dl class="row">
+                                    <dt class="col-sm-5">Location :</dt>
+                                    <dd class="col-sm-7"><img src="../../assets/images/placeholder (1).png"><a href="">Copy Link</a></dd>
+                                  </dl>
+                              </details>
+                            </div>
+                           </div>
+                           
+
+                        </div>
+                        <div class="col-sm-4 vl text-start">
+                          <div class="form-check mt-3 text-start">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault" >
+                              Contacted Hospital ? 
+                            </label>
+                          </div>
+                          <dl class="row">
+                            <dt class="col-sm-6">Contacted Hospital:</dt>
+                            <dd class="col-sm-6">
+                              <div>Apollo Hospital</div>
+                            </dd>
+                            <dt class="col-sm-7">Contact Number:</dt>
+                            <dd class="col-sm-5">
+                              <div>9087654321</div>
+                            </dd>
+                            <dt class="col-sm-7">Address</dt>
+                            <dd class="col-sm-5">
+                              <div>Madhapur</div>
+                              <div>
+                              <img src="../../assets/images/placeholder (1).png"><a href="">Copy Link</a>
+                            </div> 
+                            </dd>
+                  
+                          </dl>
+                          
+                          <!-- <div class="form-check mt-3 text-start">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault" >
+                              Care Manager Reached Location
+                            </label>
+                          </div>
+                          <div class="form-check mt-3 text-start">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault" >
+                              Contacted Ambulance ?
+                            </label>
+                          </div>
+                          <div class="form-check mt-3 text-start">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault" >
+                              Ambulance Reached ?
+                            </label>
+                          </div> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+</div>
+<!-- Police Model -->
+<div class="modal fade" id="Police" tabindex="-1" aria-labelledby="Police" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="callingMode">Police Details</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="insideFieldset">
+          <div class="fallandsos1">
+            <div class="row">
+              <div class="col-md-8">
+                <table class="table ">
+                  <thead>
+                    <tr>
+                      <th scope="col">Area Police Station</th>
+                      <th scope="col">Number</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row" class="text-start">Madhapur Police station</th>
+                      <td><span class="me-2"
+                          ><i
+                            class="fa fa-phone"></i> <span class="text-primary pointer">
+                            </span>
+                        </span>9301129122</td>
+                        <td>
+                          <span class="text-success fs-5 me-3">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                          </span>
+                          <span class="vl  text-danger fs-5">
+                            <i class="fa fa-times ms-3" aria-hidden="true" data-bs-toggle="modal"
+                              data-bs-target="#callingtwoModal"></i> </span>
+                        </td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-md-4 vl">
+                <div class="text-center" style="height :50px">
+                  <img src="../../assets/images/Vanilla-1.5s-244px (1).gif"
+                    style="width: 225px;"><span class="fs-5"></span>
+                </div>
+                <div>
+                  <label>Comments</label>
+                  <textarea type="text" class="form-control" 
+                    placeholder="Comments"></textarea>
+                </div>
+                <div class="text-end" style="cursor: pointer;"
+                >
+              </div>
+              </div>
+            </div>
+            <div class="mt-2">
+              <div class="container">
+                <div class="row">
+                  <div style="border: 1px solid #a09e9ef1;" class="mt-2"></div>
+                  <div class="mt-2">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div><h6>Customer Details</h6></div>
+                          <table class="table table-borderless">
+                           <thead>
+                           </thead>
+                           <tbody>
+                             <tr>
+                               <th scope="row" class="text-start">Name</th>
+                               <td>:</td>
+                               <td class="text-start">
+                                  Shyam
+                               </td>
+                             </tr>
+                             <tr>
+                               <th scope="row" class="text-start">
+                                 Age|Gender
+                               </th>
+                               <td>:</td>
+                               <td class="text-start">
+                                   58|M
+                                 </td>
+                             </tr>
+                             <tr>
+                               <th scope="row" class="text-start">Height | weight</th>
+                               <td>:</td>
+                               <td class="text-start">
+                                 6 feet 0inch | 90kg
+                               </td>
+                             </tr>
+                             <tr>
+                               <th scope="row" class="text-start">Address</th>
+                               <td>
+                                 :
+                               </td>
+                               <td class="text-start">Balnager</td>
+                             </tr>
+                           </tbody>
+                         </table>
+                         <div class="card">
+                           <div class="card-body">
+                             <details>
+                               <summary>Customer Medical Condition</summary>
+                               <div>
+                                 <span>Role</span>:<span>Care Manager</span>
+                               </div>
+                               <div>
+                               <span>Contact</span>:<span>9087654321</span>
+                               </div>
+                             </details>
+                           </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-4 text-center vl">
+                        
+                        </div>
+                        <div class="col-sm-4 vl text-start">
+                          <div class="form-check mt-3 text-start">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault" >
+                              Contacted Police ? 
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+</div>
+<!-- Fire Station -->
+<div class="modal fade" id="Police" tabindex="-1" aria-labelledby="Police" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="callingMode">Fire Station Details</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="insideFieldset">
+          <div class="fallandsos1">
+            <div class="row">
+              <div class="col-md-8">
+                <table class="table ">
+                  <thead>
+                    <tr>
+                      <th scope="col">Area Fire Station </th>
+                      <th scope="col">Number</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row" class="text-start">Madhapur Fire station</th>
+                      <td><span class="me-2"
+                          ><i
+                            class="fa fa-phone"></i> <span class="text-primary pointer">
+                            </span>
+                        </span>9301129122</td>
+                        <td>
+                          <span class="text-success fs-5 me-3">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                          </span>
+                          <span class="vl  text-danger fs-5">
+                            <i class="fa fa-times ms-3" aria-hidden="true" data-bs-toggle="modal"
+                              data-bs-target="#callingtwoModal"></i> </span>
+                        </td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-md-4 vl">
+                <div class="text-center" style="height :50px">
+                  <img src="../../assets/images/Vanilla-1.5s-244px (1).gif"
+                    style="width: 225px;"><span class="fs-5"></span>
+                </div>
+                <div>
+                  <label>Comments</label>
+                  <textarea type="text" class="form-control" 
+                    placeholder="Comments"></textarea>
+                </div>
+                <div class="text-end" style="cursor: pointer;"
+                >
+              </div>
+              </div>
+            </div>
+            <div class="mt-2">
+              <div class="container">
+                <div class="row">
+                  <div style="border: 1px solid #a09e9ef1;" class="mt-2"></div>
+                  <div class="mt-2">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div><h6>Customer Details</h6></div>
+                          <table class="table table-borderless">
+                           <thead>
+                           </thead>
+                           <tbody>
+                             <tr>
+                               <th scope="row" class="text-start">Name</th>
+                               <td>:</td>
+                               <td class="text-start">
+                                  Shyam
+                               </td>
+                             </tr>
+                             <tr>
+                               <th scope="row" class="text-start">
+                                 Age|Gender
+                               </th>
+                               <td>:</td>
+                               <td class="text-start">
+                                   58|M
+                                 </td>
+                             </tr>
+                             <tr>
+                               <th scope="row" class="text-start">Height | weight</th>
+                               <td>:</td>
+                               <td class="text-start">
+                                 6 feet 0inch | 90kg
+                               </td>
+                             </tr>
+                             <tr>
+                               <th scope="row" class="text-start">Address</th>
+                               <td>
+                                 :
+                               </td>
+                               <td class="text-start">Balnager</td>
+                             </tr>
+                           </tbody>
+                         </table>
+                         <div class="card">
+                           <div class="card-body">
+                             <details>
+                               <summary>Customer Medical Condition</summary>
+                               <div>
+                                 <span>Role</span>:<span>Care Manager</span>
+                               </div>
+                               <div>
+                               <span>Contact</span>:<span>9087654321</span>
+                               </div>
+                             </details>
+                           </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-4 text-center vl">
+                        
+                        </div>
+                        <div class="col-sm-4 vl text-start">
+                          <div class="form-check mt-3 text-start">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault" >
+                              Contacted Fire Station ? 
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+</div>
+</div>

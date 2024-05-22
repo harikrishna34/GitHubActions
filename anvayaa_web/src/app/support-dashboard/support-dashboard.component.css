@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+.wrapper {
+    max-width: min-content;
+
+}
+.wrapper {
+    display: flex;
+    align-items: stretch;
+}
+
+.MemberTile{
+    background: linear-gradient(180deg, rgba(237, 139, 25, 0.132) 0%, rgba(255, 138, 0, 0.6) 100%);
+    height: 100px;
+    font-weight: 600; 
+    margin: 5px;
+}
+.FamileTile{
+    background: linear-gradient(180deg, rgba(0, 255, 240, 0.132) 0%, rgba(26, 219, 207, 0.6) 100%);
+
+    height: 100px;
+    margin: 5px;
+    font-weight: 600;
+}
+.RequestsTile{
+    background: linear-gradient(180deg, rgba(233, 237, 25, 0.132) 0%, rgba(250, 255, 0, 0.6) 100%);
+    height: 100px;
+    margin: 5px;
+    font-weight: 600;
+}
+.callsTile{
+    background: linear-gradient(180deg, rgba(25, 237, 33, 0.132) 0%, rgba(0, 255, 10, 0.6) 100%);
+
+    height: 100px;
+    margin: 5px;
+    font-weight: 600;
+}
+.PartnersTile{
+    background: linear-gradient(180deg, rgba(255, 0, 154, 0.378) 0%, rgba(145, 69, 115, 0.51) 100%);
+
+    height: 100px;
+    margin: 5px;
+    font-weight: 100;
+}
+.table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd)  {
+    background-color: #EBF0FA;
+ }
+ .table-striped > tbody > tr:nth-child(even) > td, .table-striped > tbody > tr:nth-child(even)  {
+    background-color:white;
+ }
+ 
+
+ body{
+    font-family: 'Inter', sans-serif !important;
+    
+ }
+
+ body{
+    background-color: #f0f0f0 !important;
+
+  }
+
+ .memberTableMaindiv{
+    overflow-x:auto;
+
+ }
+
+ thead{
+    background-color:rgba(244, 247, 252, 0.75);
+    font-weight: 100;
+
+ }
+ td{  
+     font-weight: 100;
+ }
+
+.custIdColor{
+    color: #FF4112;
+}
+
+/*tiles images css */
+
+.memberImg{
+    height: 50px;
+}
+ 
+/*side by side table */
+
+  .searchHeader{
+    float:right
+  }
+  
+    
+  .column {
+    float: left;
+    width: 50%;
+    padding: 5px;
+  }
+  
+  /* Clearfix (clear floats) */
+  .sidebyside::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .sidebysidetable {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 16px;
+  }
+  
+  .trackbutton{
+    width: 84px;
+    height: 37px;
+    font-size: larger;
+
+  }
+
+  span{
+      margin-left: 25px;
+  }
+ /* Styles for wrapping the search box */
+
+.main {
+    width: 50%;
+    margin: 50px auto;
+}
+
+/* Bootstrap 4 text input with search icon */
+
+.has-search .form-control {
+    padding-left: 4.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+
+select{
+    height: 37px;
+    margin-left: 25px;
+}
+
+.roundDropDown{
+    border-radius: 24px;
+    width: 103px;
+    padding-left: 29px;
+}
+
+.settingsimg{
+    position: absolute;
+    margin-left: 36px;
+    margin-top: 11px;
+    /* flex: left; */
+}
+
+.maindiv{
+    width: 100vw;
+    background-color: #F5F5F5 !important;
+    height:100vh
+}
+
+.whitebackround{
+    background-color:#F4F7FC
+}
+table{
+    background-color: #ffff;
+}
+
+.member-true,.families-true,.requests-true,.calls-true,.partners-true{
+box-shadow:0px 5px 5px 3px ;
+margin-top:-15px;
+width:100px;
+height:120px
+}
+.tab-content{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.citySelection{
+    text-align: center;
+    border-radius: 10px;
+}
+#selectCitySpan{
+   text-decoration: yellow;
+}

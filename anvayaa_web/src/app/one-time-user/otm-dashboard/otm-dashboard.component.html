@@ -1,0 +1,566 @@
+<div class="row">
+    <div class="header">
+        <div class="row ">
+            <div class="col-md-9">
+                <label id="tittleNav">One Time User</label>
+            </div>
+            <div class="col-md-1 ">
+                <img class="headerImg" src="../../../assets/images/OneTimeUser/search.png" (click)="onCustomerSearch()">
+            </div>
+            <div class="col-md-1">
+                <img class="headerImg" src="../../../assets/images/OneTimeUser/tasks.png">
+            </div>
+            <div class="col-md-1">
+                <img class="headerImg" src="../../../assets/images/calculator.png">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row content">
+    <div class="row">
+        <div class="col-md-4 otm">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6"> <label class="grid-tittle"> OTM</label></div>
+                        <div class="col-3">
+                            <label class="grid-subinfo">Open
+                                <!-- <div>{{PaymentdashBoardData.OpenPaymentsCount}}</div> -->
+                                <div>67</div>
+                            </label>
+                        </div>
+                        <div class="col-3">
+                            <label class="grid-subinfo">Closed
+                                <!-- <div>{{PaymentdashBoardData.ClosedPaymentsCount}}</div> -->
+                                <div>12</div>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- <ul class="list-group otmList">
+                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <span>CustomerName</span>
+                                    <img class="listImg" src="../../../assets/images/view.png">
+                                    <img class="listImg" src="../../../assets/images/telephone.png">
+                                </li>
+                            </ul> -->
+
+                <ul class="list-group otmList">
+                    <li class="list-item d-flex justify-content-between">
+                        <div class="col-md-7">
+                            <ul class="customerNameDisplay">
+                                <li id="statusdisplay">Completed</li>
+                                <li id="benName">CustomerName</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="align-items-center col-md-4 images">
+                            <img class="listImg col-md-6" src="../../../assets/images/view.png">
+                            <img class="listImg col-md-6" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-item d-flex justify-content-between">
+                        <div class="col-md-7">
+                            <ul class="customerNameDisplay">
+                                <li id="statusdisplay">Completed</li>
+                                <li id="benName">CustomerName</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="align-items-center col-md-4 images">
+                            <img class="listImg col-md-6" src="../../../assets/images/view.png">
+                            <img class="listImg col-md-6" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4 Payment">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6"> <label class="grid-tittle"> Payment</label></div>
+                        <div class="col-3">
+                            <label class="grid-subinfo">Open
+                                <!-- <div>{{PaymentdashBoardData.OpenPaymentsCount}}</div> -->
+                                <div>47</div>
+                            </label>
+                        </div>
+                        <div class="col-3">
+                            <label class="grid-subinfo">Closed
+                                <!-- <div>{{PaymentdashBoardData.ClosedPaymentsCount}}</div> -->
+                                <div>23</div>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- <ul class="list-group otmList">
+                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <span>CustomerName</span>
+                                    <img class="listImg" src="../../../assets/images/view.png">
+                                    <img class="listImg" src="../../../assets/images/telephone.png">
+                                </li>
+                            </ul> -->
+
+                <ul class="list-group paymentList">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+        <div class="col-md-4 Escalation">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6"> <label class="grid-tittle"> Escalation</label></div>
+                        <div class="col-3">
+                            <label class="grid-subinfo">Open
+                                <!-- <div>{{PaymentdashBoardData.OpenPaymentsCount}}</div> -->
+                                <div>17</div>
+                            </label>
+                        </div>
+                        <div class="col-3">
+                            <label class="grid-subinfo">Closed
+                                <!-- <div>{{PaymentdashBoardData.ClosedPaymentsCount}}</div> -->
+                                <div>02</div>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- <ul class="list-group otmList">
+                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <span>CustomerName</span>
+                                    <img class="listImg" src="../../../assets/images/view.png">
+                                    <img class="listImg" src="../../../assets/images/telephone.png">
+                                </li>
+                            </ul> -->
+
+                <ul class="list-group escalationList">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div> A First list item</div>
+                        <div>
+                            <img class="listImg" src="../../../assets/images/view.png">
+                            <img class="listImg" src="../../../assets/images/telephone.png">
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>

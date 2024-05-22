@@ -1,0 +1,150 @@
+<div class="bodycontent" [formGroup]="CustomerEscalationsForm">
+  <div class="row">
+    <div class="col-md-6">
+            <span class="formdetails">Issue Raised By:</span>
+            <div *ngFor="let related of Related" style="display: inline-block; margin-right: 10px; font-size: x-large;">
+                <input
+                  type="radio"
+                  formControlName="RelatedTo"
+                  [value]="related"
+                  id="{{ related }}"
+                />
+                <label for="{{ related }}">{{ related }}</label>
+              </div>
+            <div
+              class="row"
+              *ngIf="
+                this.CustomerEscalationsForm.controls['RelatedTo'].status ==
+                  'INVALID' && this.CreateEscalationbtn == true
+              "
+            >
+              <p class="errorlines">*Select Related</p>
+            </div>
+
+    </div>
+    <div class="col-md-6">  
+            <div class="customerSelect ng-autocomplete" *ngIf="isInternal()">
+                <span class="formdetails">Select Customer</span>
+              <ng-autocomplete
+                formControlName="CustomerID"
+                [data]="CustomerDetails"
+                [searchKeyword]="keyword"
+                placeholder="Search Customer"
+                (selected)="selectEvent($event)"
+                (inputChanged)="onChangeSearch($event)"
+                (inputCleared)="onFocused($event)"
+                [itemTemplate]="itemTemplate"
+                [notFoundTemplate]="notFoundTemplate"
+              >
+              </ng-autocomplete>
+              <ng-template #itemTemplate let-item>
+                <a [innerHTML]="item.Name"></a>
+              </ng-template>
+              <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="notFound"></div>
+              </ng-template>
+            </div>
+            <div
+              class="row"
+              *ngIf="
+                this.CustomerEscalationsForm.controls['RelatedTo'].value === 'Internal' &&
+                this.CustomerEscalationsForm.controls['CustomerID'].status == 'INVALID'
+              "
+            >
+              <p>*Select Customer</p>
+            </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+            <span class="formdetails">Issue Type:</span>
+            <select
+              class="form-select"
+              aria-label="Select Issue"
+              formControlName="Issue"
+            >
+              <option value="" disabled hidden>Select Issue</option>
+              <option
+                *ngFor="let escalation of escalationsTypes"
+                [value]="escalation"
+              >
+                {{ escalation }}
+              </option>
+            </select>
+            <div
+              class="row"
+              *ngIf="
+                this.CustomerEscalationsForm.controls['Issue'].status == 'INVALID' &&
+                this.CreateEscalationbtn == true
+              "
+            >
+              <p class="errorlines">*Select Issue</p>
+            </div>
+    </div>
+    <div class="col-md-6">
+        <div class="custom-info" style="margin-top: 30px;" *ngIf="isCustomerRelated()">
+            <span class="formdetails">Customer Details:</span>
+      
+            <span class="info-label">Customer Name:</span>
+            <span class="info-value">{{ customerDetailsData.Name }}</span
+            ><br />
+            <span class="info-label">Customer ID:</span>
+            <span class="info-value">{{ customerDetailsData.CustRecID }}</span
+            ><br />
+        </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+        <span class="formdetails"> Department:</span>
+        <select
+          class="form-select"
+          aria-label="Select Department"
+          formControlName="Department"
+        >
+          <option value="" selected disabled>Select Department</option>
+          <option
+            *ngFor="let Department of escalationsDepartment"
+            [value]="Department"
+          >
+            {{ Department }}
+          </option>
+        </select>
+        <div
+          class="row"
+          *ngIf="
+            this.CustomerEscalationsForm.controls['Department'].status ==
+              'INVALID' && this.CreateEscalationbtn == true
+          "
+        >
+          <p class="errorlines">*Select Department</p>
+        </div>
+  </div>
+  <div class="col-md-6">
+    <div style="margin-top: 10px; text-align: left;">
+        <span class="formdetails">Issue Description:</span>
+        <textarea
+          formControlName="Comment"
+          class="form-control"
+          rows="4"
+          placeholder="Enter Issue Description"
+        ></textarea>
+        <div
+          class="row"
+          *ngIf="
+            this.CustomerEscalationsForm.controls['Comment'].status == 'INVALID' &&
+            this.CreateEscalationbtn == true
+          "
+        >
+          <p>*Add Comment</p>
+        </div>
+      </div>
+
+  </div>
+  <div class="col-md-12" style="display: list-item;margin-top: auto; margin-left: 500px; margin-top:-40px;">
+      <button class="corner-button" (click)="cancelButton()">Cancel</button>
+      <button class="corner-button" style="background-color: #f79022;" (click)="SaveEscalation()">Save</button>
+  </div>
+</div>
+
+
+<ngx-spinner type="ball-scale-multiple">loading...</ngx-spinner>

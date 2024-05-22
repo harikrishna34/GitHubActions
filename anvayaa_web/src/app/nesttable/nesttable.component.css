@@ -1,0 +1,137 @@
+h1, p, .td {
+   font-family: Poppins;
+  }
+  
+  .table {
+    font-size: 12px;
+    border: 1px solid lightgray;
+  }
+  
+  .table, .td {
+    text-align: left;
+  }
+
+
+  .table-header {
+    background-color: #914573;/* Purple with 100% opacity */
+    color: white;
+    font-weight: bold;
+  }
+  .table-headers {
+    background-color: rgba(145, 69, 115, 0.75); /* #914573 with 75% opacity */
+    color: white;
+    font-weight: bold;
+}
+  .table-header.table-row {
+    border-bottom: 2px solid gray;
+  }
+  
+  .table-row {
+    /* display: block; */
+    /* white-space: nowrap; */
+    border-bottom: 1px solid lightgray;
+    overflow: hidden;
+  }
+  .table-row:last-child {
+    border: none
+  }
+  .td {
+    display: inline-block;
+    /* padding: 8px; */
+  }
+  
+  .td:nth-child(0) {
+    width: calc(10vw);
+  }
+  
+  .td:nth-child(1) {
+    width: calc(10vw);
+  }
+  .td:nth-child(2) {
+    width: calc(20vw);
+  }
+  .td:nth-child(3) {
+    width: calc(20vw);
+  }
+  .td:nth-child(4) {
+    width: calc(15vw);
+  }
+  .td:nth-child(5) {
+    width: calc(10vw);
+  }
+  .td:nth-child(6) {
+    width: calc(8vw);
+  }
+  
+  
+  .clickable {
+    cursor: pointer;
+  }
+  
+  .clickable:hover {
+    background-color: #f3f3f3;
+  }
+  
+  .child-row {
+    background-color: #e8e8e8;
+  }
+  .btn-anvayaa{
+    margin-left: 93%;
+    background-color: #914573;
+    color: white;
+  }
+  .form-check-input:checked[type="checkbox"] {
+    background-color: #914573 !important;
+    border-color: #914573 !important;
+  }
+  h4 {
+    text-align: center;
+  }
+  /* .nested-table-container {
+    .table-striped .table-row:hover,
+    .table-hover .table-row:hover {
+      background-color: inherit;
+    }
+  
+    .table-striped .table-row:nth-of-type(odd) {
+      background-color: inherit;
+    }
+  } */
+
+
+  .profile-photo {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%; /* This will create a circular shape */
+    object-fit: cover; /* This ensures the image fills the circular shape */
+  }
+  .profile-image {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%; /* This will create a circular shape */
+    object-fit: cover; /* This ensures the image fills the circular shape */
+  }
+
+  .image-container {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+  }
+  
+  .profile-Img {
+    height: 200px;
+    width: 200px;
+    border: 5px solid #000;
+    /* border-radius: 50%; */
+  }
+  
+  .select-profile-picture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }

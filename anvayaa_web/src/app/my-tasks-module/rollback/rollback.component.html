@@ -1,0 +1,139 @@
+<div class="bodycontent">
+  <div class="card">
+      <h3>Customer Details</h3>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-2">
+          <span><label>Name</label></span><span class="m-1">:</span><span>{{customerDetails[0]?.CustomerData?.Name}}</span>
+        </div>
+        <div class="col-md-3">
+          <span><label>CustRecID</label></span><span class="m-1">:</span><span>{{customerDetails[0]?.CustomerData?.CustRecID}}</span>
+        </div>
+        <div class="col-md-3">
+          <span><label>MobileNumber</label></span><span class="m-1">:</span><span>{{customerDetails[0]?.CustomerData?.MobileNumber}}</span>
+        </div>
+        <div class="col-md-4">
+          <span><label>EmailID</label></span><span class="m-1">:</span><span>{{customerDetails[0]?.CustomerData?.EmailID}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="card">
+    <div class="m-2 text-center">
+        <h4>Payment Details</h4>
+    </div>
+    <div class="card-group">
+        <div class="card">
+          <div class="card-body">
+            <div class="card card-color text-center">
+                <h5 class="card-title ">Payment For </h5>
+            </div>
+             <table class="table">
+                <tbody>
+                    <tr><td>Payment For</td><td>:</td><td>{{customerDetails[0]?.PaymentForDetails?.PaymentFor}}</td></tr>
+                    <tr><td>Package Name</td><td>:</td><td>{{customerDetails[0]?.PaymentForDetails?.PackageDetails?.Name}}</td></tr>
+                    <tr><td>AliasName</td><td>:</td><td>{{customerDetails[0]?.PaymentForDetails?.PackageDetails?.AliasName}}</td></tr>
+                    <tr><td>PurchaseType</td><td>:</td><td>{{customerDetails[0]?.PaymentForDetails?.PackageDetails?.PurchaseType}}</td></tr>
+                    <!-- <tr><td>Package StartDate</td><td>:</td><td>{{customerDetails[0]?.PaymentForDetails?.PackageDetails?.PackageCreatedDate*1000|date:'dd-MM-yyyy'}}</td></tr>
+                    <tr><td>Package EndDate</td><td>:</td><td>{{customerDetails[0]?.PaymentForDetails?.PackageDetails?.PackageExpiryDate*1000|date:'dd-MM-yyyy'}}</td></tr> -->
+                </tbody>
+             </table>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="card card-color text-center">
+            <h5 class="card-title">Payment Info</h5>
+            </div>
+            <table class="table">
+                <tbody>
+                    <tr><td>Payment ID</td><td>:</td><td>{{customerDetails[0]?.Payment?.AnvayaaPaymentID}}</td></tr>
+                    <tr><td>Invoice ID</td><td>:</td><td>{{customerDetails[0]?.Payment?.InvoiceID}}</td></tr>
+                    <tr><td>TransactionType</td><td>:</td><td>{{customerDetails[0]?.Payment?.TransactionType}}</td></tr>
+                    <tr><td>Payment Date</td><td>:</td><td>{{customerDetails[0]?.Payment?.PaymentCreatedDate*1000 |date : 'dd-MM-yyyy'}}</td></tr>
+                    <tr><td>PaymentMode</td><td>:</td><td>{{customerDetails[0]?.Payment?.PaymentMode}}</td></tr>
+                    <tr><td>PaymentType</td><td>:</td><td>{{customerDetails[0]?.Payment?.PaymentType}}</td></tr>
+                    <tr><td>PaymentStatus</td><td>:</td><td>{{customerDetails[0]?.Payment?.PaymentStatus}}</td></tr>
+                </tbody>
+             </table>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="card card-color text-center">
+              <h5 class="card-title">GST Details</h5>
+              </div>
+              <table>
+                  <tbody>
+                      <tr><td>CGST</td><td>:</td><td>{{customerDetails[0]?.Payment?.GSTDetails?.CGST}}</td></tr>
+                      <tr><td>CGSTPrice</td><td>:</td><td>{{customerDetails[0]?.Payment?.GSTDetails?.CGSTPrice}}</td></tr>
+                      <tr><td>IGST</td><td>:</td><td>{{customerDetails[0]?.Payment?.GSTDetails?.IGST}}</td></tr>
+                      <tr><td>IGSTPrice</td><td>:</td><td>{{customerDetails[0]?.Payment?.GSTDetails?.IGSTPrice}}</td></tr>
+                      <tr><td>InclusiveOfGST</td><td>:</td><td>{{customerDetails[0]?.Payment?.GSTDetails?.InclusiveOfGST}}</td></tr>
+                      <tr><td>SGST</td><td>:</td><td>{{customerDetails[0]?.Payment?.GSTDetails?.SGST}}</td></tr>
+                      <tr><td>SGSTPrice</td><td>:</td><td>{{customerDetails[0]?.Payment?.GSTDetails?.SGSTPrice}}</td></tr>
+                  </tbody>
+               </table>
+               <div class="card card-color text-center">
+                <h5 class="card-title">Reconciliation GST Details</h5>
+                </div>
+                <table>
+                    <tbody>
+                        <tr><td>CGST</td><td>:</td><td>{{customerDetails[0]?.Payment?.ReconciliationGSTDetails?.CGST}}</td></tr>
+                        <tr><td>CGSTPrice</td><td>:</td><td>{{customerDetails[0]?.Payment?.ReconciliationGSTDetails?.CGSTPrice}}</td></tr>
+                        <tr><td>IGST</td><td>:</td><td>{{customerDetails[0]?.Payment?.ReconciliationGSTDetails?.IGST}}</td></tr>
+                        <tr><td>IGSTPrice</td><td>:</td><td>{{customerDetails[0]?.Payment?.ReconciliationGSTDetails?.IGSTPrice}}</td></tr>
+                        <tr><td>InclusiveOfGST</td><td>:</td><td>{{customerDetails[0]?.Payment?.ReconciliationGSTDetails?.InclusiveOfGST}}</td></tr>
+                        <tr><td>SGST</td><td>:</td><td>{{customerDetails[0]?.Payment?.ReconciliationGSTDetails?.SGST}}</td></tr>
+                        <tr><td>SGSTPrice</td><td>:</td><td>{{customerDetails[0]?.Payment?.ReconciliationGSTDetails?.SGSTPrice}}</td></tr>
+                    </tbody>
+                 </table>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 text-center">
+         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Approve</button>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Comments</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            Comment :
+            <div class="modal-body">
+              <form [formGroup]="comment">
+                <textarea class="form-control" formControlName="RollBackComments" required>
+                </textarea>
+                <span class="text-danger" *ngIf="comment.controls['RollBackComments'].status=='INVALID'&&submitRollBack==true">Required Comment</span>
+              </form>
+         
+            
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-secondary" >Close</button> -->
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal"   (click)="approveRoleBack()">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+    
+
+
+
+
+
+
+
+
+
+
+
+</div>

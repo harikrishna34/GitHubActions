@@ -1,0 +1,377 @@
+<div class="bodycontent">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="heading heading-main">Assigned To Me</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            Assign Vendor / Add Profiles
+                        </div>
+                        <div class="col-md-6">
+                            {{taskcount.assignedRequest}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            Upload Bill
+                        </div>
+                        <div class="col-md-6">
+                            0
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="heading">Pending Assignment</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            Assign Vendor / Add Profiles
+                        </div>
+                        <div class="col-md-6">
+                            {{taskcount.unAssignedRequest}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            Upload Bill
+                        </div>
+                        <div class="col-md-6">
+                            0
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="height: 40px;">
+
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row" (change)="radiobutton($event)">
+                        <div class="col-md-4">
+                            <input class="form-check-input" value="Assigned" type="radio" name="flexRadioDefault"
+                                id="flexRadioDefault1">
+                            <label class="labelemargin"> Assigned To Me</label>
+
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-check-input" type="radio" value="Unassigned" name="flexRadioDefault"
+                                id="flexRadioDefault2">
+                            <label class="labelemargin"> Un-assigned</label>
+
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-check-input" value="All" type="radio" name="flexRadioDefault"
+                                id="flexRadioDefault2" checked>
+                            <label class="labelemargin"> All</label>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="height: 40px;">
+
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group" >
+                        <input type="text" placeholder="Serach by Request Id/BenificearyName" [(ngModel)]="term"
+                            class="form-control" id="search" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 20px; margin-bottom: 25px;">
+                <div class="row rocolor">
+                    <div class="col-md-6 pad">
+                        <div id="buttons" (click)="viewProfileTab()">
+                            <a [ngClass]="profilestab? 'btn green green_selected': 'btn green'">Assign Vendor/ Add
+                                Profiles</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 pad">
+                        <div id="buttons" (click)="viewBills()">
+                            <a [ngClass]="billstab? 'btn green green_selected': 'btn green'">Pending Bills</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="profilestab" style="margin-top: 20px;" >
+
+                    <table class="table table-bordered table-hover" id="requestTable" *ngIf="requestsTable">
+                        <thead>
+                            <tr>
+                                <th >Request ID</th>
+                                <th >Sponsor</th>
+                                <th >Beneficiary</th>
+
+
+                                <th>Service</th>
+                                <th >
+                                    <select (change)="oncityselect($event)" class="form-select border"
+                                        style="background-color: #ccc" aria-label="Default select example">
+                                        <option value="" style="font-weight:bold;font-size: 16px;" >City</option>
+                                        <option *ngFor="let city of citydata" value="{{city.CityID}}">
+                                            {{city.CityName}}
+                                        </option>
+                                    </select> 
+                                </th>
+                                <th >Created Date</th>
+                                <th >Service Start Date </th>
+                                <th >Support Executive </th>
+                                <th >Assign/ Reassign </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- <tr *ngFor="let partnerAllData of filterdata|filter:term;let i=index"> -->
+                                <tr *ngFor="let partnerAllData of filterdata">
+
+                                <td (click)="requestDetails(partnerAllData.RequestID,partnerAllData.CustRecID,partnerAllData)" >{{partnerAllData.RequestID}}</td>
+                                <td (click)="requestDetails(partnerAllData.RequestID,partnerAllData.CustRecID,partnerAllData)">
+                                    <div>{{partnerAllData.CustomerDetails.Name}}</div>
+                                </td>
+                                <td (click)="requestDetails(partnerAllData.RequestID,partnerAllData.CustRecID,partnerAllData)">
+                                    <div>
+                                        {{partnerAllData.CustomerDetails.BeneficiaryDetails==null?'-':partnerAllData.CustomerDetails.BeneficiaryDetails.Name==null?'-':partnerAllData.CustomerDetails.BeneficiaryDetails.Name}}
+                                    </div>
+                                </td >
+
+                                <td class="details " (click)="requestDetails(partnerAllData.RequestID,partnerAllData.CustRecID,partnerAllData)">
+                                    {{partnerAllData.AliasName}}
+                                </td>
+                                <td class="details size" (click)="requestDetails(partnerAllData.RequestID,partnerAllData.CustRecID,partnerAllData)">
+                                    {{partnerAllData.PackageDetails.ServiceAreaName}}
+                                </td>
+                                <td (click)="requestDetails(partnerAllData.RequestID,partnerAllData.CustRecID,partnerAllData)">  {{partnerAllData.CreatedDate*1000|date:'dd-MMM-YYYY'}}</td>
+
+                                <td (click)="requestDetails(partnerAllData.RequestID,partnerAllData.CustRecID,partnerAllData)"> {{partnerAllData.RequestedDate*1000|date:'dd-MMM-YYYY'}}</td>
+
+
+                                <td class="details" (click)="requestDetails(partnerAllData.RequestID,partnerAllData.CustRecID,partnerAllData)">
+                                    {{partnerAllData.SupportExecutiveDetails ?
+                                    partnerAllData.SupportExecutiveDetails.FirstName + " "
+                                    +partnerAllData.SupportExecutiveDetails.LastName : "-"}}
+                                </td>
+
+                                <td  *ngIf="partnerAllData.PartnerExecutiveID!=null" [hidden]="Assignbtn==true" >
+                                   
+                                        <select 
+                                        (change)="assignVendor(partnerAllData.RequestID,$event)" 
+                                        class="form-select" aria-label="Default select example">
+                                            <option value="none" selected disabled hidden>
+                                                {{partnerAllData.PartnerExecutiveDetails ?
+                                                partnerAllData.PartnerExecutiveDetails.FirstName + " " +
+                                                partnerAllData.PartnerExecutiveDetails.LastName: "Assign"}}
+                                            </option>
+                                            <option *ngFor="let list of teamList" [value]="list.EmployeeID">
+                                                {{list.FirstName }} {{list.LastName}}
+                                            </option>
+                                        </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div *ngIf="NodataTable" style="text-align: center;font-size: x-large;">No Data Found !</div>
+
+
+                </div>
+                <div *ngIf="billstab">
+                    <h2>bills tab</h2>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+    <!-- <div class="card" *ngIf="false">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Assigned To Me</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        Find Vendor / Add Profiles
+                    </div>
+                    <div class="col-md-6">
+                        {{taskcount.assignedRequest}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        Upload Bill
+                    </div>
+                    <div class="col-md-6">
+                        0
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3><u>Pending Assignment</u></h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        Find Vendor / Add Profiles
+                    </div>
+                    <div class="col-md-6">
+                        {{taskcount.unAssignedRequest}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        Upload Bill
+                    </div>
+                    <div class="col-md-6">
+                        0
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="false">
+            <div class="col-md-12">
+                <div class="row" (change)="radiobutton($event)">
+                    <div class="col-md-4">
+                        <input class="form-check-input" value="Assigned" type="radio" name="flexRadioDefault"
+                            id="flexRadioDefault1">
+                        <label class="labelemargin"> Assigned To Me</label>
+
+                    </div>
+                    <div class="col-md-4">
+                        <input class="form-check-input" type="radio" value="Unassigned" name="flexRadioDefault"
+                            id="flexRadioDefault2">
+                        <label class="labelemargin"> Un-assigned</label>
+
+                    </div>
+                    <div class="col-md-4">
+                        <input class="form-check-input" value="All" type="radio" name="flexRadioDefault"
+                            id="flexRadioDefault2" checked>
+                        <label class="labelemargin"> All</label>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="false">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="form-control">
+                        <label>Search:</label>
+                        <input type="text" placeholder="Request Id/BenificearyName" [(ngModel)]="term"
+                            class="form-control" id="search" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="false" style="margin-top: 20px; margin-bottom: 25px;">
+            <div class="row rocolor">
+                <div class="col-md-6 pad">
+                    <div id="buttons" (click)="viewProfileTab()">
+                        <a [ngClass]="profilestab? 'btn green green_selected': 'btn green'">Assign Vendor/ Add
+                            Profiles</a>
+                    </div>
+                </div>
+                <div class="col-md-6 pad">
+                    <div id="buttons" (click)="viewBills()">
+                        <a [ngClass]="billstab? 'btn green green_selected': 'btn green'">Pending Bills</a>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="profilestab" style="margin-top: 20px;">
+                <div class="tablerequest row">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Request ID</th>
+                                    <th scope="col">Sponsor Name</th>
+                                    <th scope="col">Customer Name</th>
+
+
+                                    <th>Service Requested </th>
+                                    <th scope="col"><select (change)="oncityselect($event)" class="form-select border"
+                                            style="background-color: #ccc" aria-label="Default select example">
+                                            <option value="" style="font-size: medium;">City</option>
+                                            <option *ngFor="let city of citydata" value="{{city.CityID}}">
+                                                {{city.CityName}}
+                                            </option>
+                                        </select> </th>
+                                    <th scope="col">Created Date</th>
+                                    <th scope="col">ServiceStart Date </th>
+                                    <th scope="col">Support Executive </th>
+                                    <th scope="col">Assign/ Reassign </th>
+                                </tr>
+                            </thead>
+                            <tbody class="textdata memberTableMaindiv">
+
+                                <tr *ngFor="let partnerAllData of filterdata|filter:term;let i=index"
+                                    (click)="requestDetails(partnerAllData.RequestID,partnerAllData.CustRecID,partnerAllData)">
+
+                                    <td scope="row">{{partnerAllData.RequestID}}</td>
+                                    <td>
+                                        <div></div>
+                                        <div>{{partnerAllData.CustomerDetails.Name}}</div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            {{partnerAllData.CustomerDetails.BeneficiaryDetails.Name==null?'-':partnerAllData.CustomerDetails.BeneficiaryDetails.Name}}
+                                        </div>
+                                    </td>
+
+                                    <td class="details ">
+                                        {{partnerAllData.AliasName}}
+                                    </td>
+                                    <td class="details size">
+                                        {{partnerAllData.PackageDetails.ServiceAreaName}}
+                                    </td>
+                                    <td> {{partnerAllData.CreatedDate*1000|date:'dd/MM/YYYY'}}</td>
+
+                                    <td> {{partnerAllData.RequestedDate*1000|date:'dd/MM/YYYY'}}</td>
+
+
+                                    <td class="details">
+                                        {{partnerAllData.SupportExecutiveDetails ?
+                                        partnerAllData.SupportExecutiveDetails.FirstName + " "
+                                        +partnerAllData.SupportExecutiveDetails.LastName : "-"}}
+                                    </td>
+
+
+                                    <td>
+                                        <button class="btn-primary" *ngIf="partnerAllData.PartnerExecutiveID!=null"
+                                            style="border: 0px;"
+                                            [disabled]="partnerAllData.PartnerExecutiveID != EmployeeID"
+                                            [hidden]="Assignbtn==true">
+                                            <select (change)="assignVendor(partnerAllData.RequestID,$event)">
+                                                <option value="none" selected disabled hidden>
+                                                    {{partnerAllData.PartnerExecutiveDetails ?
+                                                    partnerAllData.PartnerExecutiveDetails.FirstName + " " +
+                                                    partnerAllData.PartnerExecutiveDetails.LastName: "Assign"}}
+                                                </option>
+                                                <option *ngFor="let list of teamList" [value]="list.EmployeeID">
+                                                    {{list.FirstName }}{{list.LastName}}
+                                                </option>
+                                            </select>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div *ngIf="billstab">
+                <h2>bills tab</h2>
+            </div>
+        </div>
+
+    </div> -->
+
+</div>
+<ngx-spinner type="ball-scale-multiple">loading...</ngx-spinner>

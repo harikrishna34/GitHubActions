@@ -1,0 +1,76 @@
+.maindiv {
+    background-color: #ffff;
+
+    margin-top: 90px;
+
+    margin-left: 125px;
+    padding-left: 10px;
+
+}
+
+.box {
+
+    border: 1px solid #a6a6a8;
+    border-radius: 10px;
+    height: 80px;
+    width: 220px;
+    margin: 10px;
+}
+
+.titel-color{
+    color:#a6a6a8
+}
+.dateRange {
+
+    margin-left: 90%;
+
+}
+
+.filterName {
+
+    margin-left: 5%;
+
+}
+
+p{
+    font-size: xx-large;
+    font-weight: 600;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 105%;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  .row{
+    margin-right: calc(0 * var(--bs-gutter-x));
+}
+
+
+.fontclr {
+    font-size: 1.5em;
+    color: purple;
+}
+
+.grab {cursor: -webkit-grab; cursor: grab;}

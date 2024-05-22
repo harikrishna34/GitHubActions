@@ -1,0 +1,88 @@
+<form #loginform="ngForm">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2">
+      </div>
+      <div class="col-sm-8">
+        <div class="imgcontainer">
+          <div><img style="height: 150px;" src="../../assets/images/images.png" /></div>
+        </div>
+        <div class="card border-sucess">
+          <div class="loginfom">
+            <h1>Sign in</h1>
+            <div class="row" *ngIf="!HideMobileNumber">
+              <label for="uname"><b>Mobile Number</b></label>
+              <input type="text" name="UserID" ngModel placeholder="Enter Registered  Mobile Number" required>
+            </div>
+            <div class="row">
+              <span *ngIf="ShowPassword || OTPLogin">{{UserID}} <a href="#" (click)="backtologin()">Change</a></span>
+            </div>
+            <div class="row" *ngIf="OTPLogin">
+              <label for="psw"><b>One-Time-Password</b></label>
+              <input type="password" name="OTPCode" ngModel placeholder="Enter  One-Time-Password" required>
+            </div>
+            <div class="row" *ngIf="ShowPassword && !OTPLogin">
+              <label for="psw"><b>Password</b></label>
+              <input type="password" name="Password" ngModel placeholder="Enter Password" required>
+            </div>
+            <div class="row" *ngIf="!ShowPassword && !OTPLogin">
+              <button (click)="ProceedforPassword(loginform.value)" class="Loignbutton btn btn-cta" type="submit">Continue</button>
+              <!-- <label>
+                <a routerLink="#">forgotPassword?</a>
+              </label> -->
+
+            </div>
+            <div class="row" *ngIf="ShowPassword && !OTPLogin">
+              <button (click)="formSubmit(loginform.value)" class="Loignbutton btn btn-cta" type="submit">Sign in</button>
+              <!-- <label>
+                <a routerLink="#">forgotPassword?</a>
+              </label> -->
+
+            </div>
+            <div class="row" *ngIf="OTPLogin">
+              <button (click)="OTPLoginfn(loginform.value)" class="Loignbutton btn btn-cta" type="submit">Sign in</button>
+              <!-- <label>
+                <a routerLink="#">forgotPassword?</a>
+              </label> -->
+
+            </div>
+            
+
+
+           
+
+          </div>
+
+        </div>
+        
+      </div>
+      <div class="col-sm-2">
+
+      </div>
+
+    </div>
+    <div class="row" *ngIf="loginform.value.UserID && loginform.value.UserID.length ==10">
+      <div class="col-sm-2">
+
+      </div>
+      <div class="col-sm-8">
+        <div class="row">
+          <div class="loginfom" >
+            <hr>
+            <button (click)="RequestForOTP(loginform.value)" class="otpbutton btnotp btn-cta " type="submit">Get a code on your Phone</button>
+
+          </div>
+         
+
+        </div>
+
+      </div>
+      <div class="col-sm-2">
+
+      </div>
+
+    </div>
+
+  </div>
+</form>
+<ngx-spinner type="ball-scale-multiple">loading...</ngx-spinner>

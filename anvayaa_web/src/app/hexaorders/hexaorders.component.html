@@ -1,0 +1,158 @@
+<div class="body-container">
+    <p style="font-size: large;">Hexa Order Details</p>
+    <div class="row col-md-12">
+        <div class="col-md-4">
+            <span style="font-size: larger;">Order ID : <b>{{ViewOrderDetails?.RequestID}}</b></span>
+        </div>
+        <div class="col-md-4">
+            <span style="font-size: larger;">Order Placed: <b>{{ViewOrderDetails?.RequestedDate*1000 |
+                    date:'dd-MMM-yyyy'}}</b></span>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+    </div>
+    <div class="card" style="height: 200px; margin-top: 20px;">
+        <div class="row col-md-12">
+            <div class="col-md-4">
+                <div style="margin-left:10px;">
+                    <span style="font-size: larger;">Shipping Address:
+                    </span>
+                </div>
+                <div style=" margin-top: 10px; margin-left: 10px;">
+                    <b style="font-size:large;">
+                        {{ViewOrderDetails?.Address}}
+                    </b>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div style="margin-right: 10px;">
+                    <span style="font-size: larger; margin-bottom: 10px;">Payment Method: </span>
+                </div>
+                <div style="margin-top: 10px;">
+                    <b style="font-size:large;">
+                        {{ViewOrderDetails?.PaymentDetails?.Payment?.PaymentMode}}
+                    </b>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div style="margin-bottom: 10px;">
+                    <span style="font-size: larger; margin-bottom: 10px;">Order Summary: </span>
+                </div>
+                <div>
+                    <table class="table table-sm">
+                        <tr>
+                            <td>Total Items</td>
+                            <td>Rs {{ViewOrderDetails?.Price}}/-</td>
+                        </tr>
+                        <tr>
+                            <td>GST</td>
+                            <td>Rs {{ViewOrderDetails?.TaxPrice}}/-</td>
+                        </tr>
+                        <tr>
+                            <td><b>Total Payment</b></td>
+                            <td><b>Rs {{ViewOrderDetails?.PaymentDetails?.Payment?.TotalPrice}}/-</b></td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card" style="height: 300px; margin-top: 10px;">
+        <div class="row col-md-12">
+            <div class="col-md-4">
+                <div style="margin-left: 10px;">
+                    <span style="font-size: large;">Ordered</span>
+                </div>
+                <div>
+                    <img [src]="ViewOrderDetails?.OrderedItems?.OtherIconFiles?.iosandweb"
+                        style="height: 200px; width:200px;">{{ViewOrderDetails?.OrderedItems?.AliasName}}
+                </div>
+
+            </div>
+            <div class="col-md-8" style="margin-top: 10px;">
+                <div class="row col-md-12">
+                    <div class="col-md-6">
+                        <div>
+                            <button type="button" class="statusTrack" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal" (click)="viewStatusTrack()">
+                                Track Package
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <form [formGroup]="UpdateStatusForm">
+                            <div style="margin-top: 10px;">
+                                <label style="font-size: large;">Update Order Details</label>
+                                <select class="form-select" aria-label="Default select example"
+                                    formControlName="status">
+                                    <option selected disabled>Update Order Details</option>
+                                    <option value="Ordered">Ordered</option>
+                                    <option value="Confirmed">Confirmed</option>
+                                    <option value="OutForDelivery">Out Of Delivery</option>
+                                    <option value="Delivered">Delivery</option>
+                                    <option value="Cancelled">Cancel</option>
+                                </select>
+                            </div>
+                            <div *ngIf="UpdateStatusForm.controls['status'].status == 'INVALID' && UpdateOrderPress == true"
+                                class="errorColor">*Update Order
+
+                            </div>
+                            <div style="margin-top: 10px;">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Leave a comment here"
+                                        id="floatingTextarea2" style="height: 100px"
+                                        formControlName="Comments"></textarea>
+                                    <label for="floatingTextarea2">Comments</label>
+                                </div>
+                                <div *ngIf="UpdateStatusForm.controls['Comments'].status == 'INVALID' && UpdateOrderPress == true"
+                                    class="errorColor">*Comments Required
+                                </div>
+                            </div>
+                            <div style="margin-top: 10px;">
+                                <button class="anvayaabutton-secondary" (click)="updateOrderDetails()">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mx-auto">Order Status: &nbsp;{{ViewOrderDetails?.RequestID}}</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row col-md-12">
+                        <div class="col-md-4" >
+                            <div *ngFor="let Status of viewStatusTrackDetails" style="margin-bottom: 100px; font-size: medium">
+                                {{Status?.Time*1000 | date: 'dd-MMM-yyyy HH:MM'}}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div style="margin-right: 100px;">
+                                <ol class="container" style="margin-right: 100px;">
+                                    <div  *ngFor="let item of counts;let i = index">
+                                        <div class="circles" [class.active]="i <= activeIndex"></div><br>
+                                        <div class="bar" *ngIf="(i != counts.length-1)"></div>
+                                    </div>
+                                 </ol>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div *ngFor="let item of counts;let i = index" style="margin-bottom: 110px; font-size: large;">
+                                <div class="circle-desc" [class.circle-desc-active]="whiteListStage === item">{{ item }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

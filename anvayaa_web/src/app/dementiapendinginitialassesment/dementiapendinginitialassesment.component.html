@@ -1,0 +1,44 @@
+<div class="maindiv">
+    <div class="body-content">
+        <div class="card" style="margin-left:20px; margin-right: 20px;">
+            <div class="card-header">
+                <div class="row mt-6">
+                    <div class="col-12 mb-4">
+                        <span class="badge bg-pastel-primary text-primary text-uppercase-bold-sm">
+                            <h4>{{Type}}</h4>
+                        </span>
+                    </div>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+
+                                <th scope="col">CUSTOMER ID</th>
+                                <th scope="col">CUSTOMER NAME</th>
+                                <th scope="col">PACKAGE NAME</th>
+                                <th scope="col">CITY</th>
+                                <th scope="col">PACKAGE START DATE</th>
+                                <th scope="col">PACKAGE START DATE</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let lastsevendays of dementiadbpending?.pendingInitialAssessment;">
+                                <td>{{lastsevendays.CustomerDetails.CustRecID}}</td>
+                                <td>{{lastsevendays.CustomerDetails.Name}}</td>
+                                <td>{{lastsevendays.AliasName}}</td>
+                                <td>{{lastsevendays.ServiceAreaName}}</td>
+                                <td>{{lastsevendays.PackageCreatedDate*1000|date:'dd-MM-yyyy'}}</td>
+                                <td>{{lastsevendays.PackageExpiryDate*1000|date:'dd-MM-yyyy'}}</td>
+
+
+                            </tr>
+                                 
+                     
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

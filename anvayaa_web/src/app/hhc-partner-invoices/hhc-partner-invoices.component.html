@@ -1,0 +1,34 @@
+<div class="bodycontent">
+    <div style="text-align: center;">
+        <h2>HHC Patner Invoices</h2>
+    </div>
+    <div>
+        <table class="table table-striped text-start card-body mt-6">
+            <thead class="tablehead">
+                <tr>
+                    <th>Invoice Id </th>
+                    <th>Payment Id</th>
+                    <th>Trasaction Date</th>
+                    <th>Amount</th>
+                    <th>Taxes</th>
+                    <th>Payment Status</th>
+                    <th>Invoice Attachment</th>
+                    <th>Payment Action</th> 
+                </tr>
+            </thead>
+            <tbody *ngFor="let data of viewData">
+                <tr>
+                    <td>{{data?.Payment?.PartnerDetails?.InvoiceID}}</td>
+                    <td>{{data?.Payment?.AnvayaaPaymentID}}</td> 
+                    <td>{{data?.Payment?.PaymentCreatedDate*1000 |date: 'dd-MMM-yyyy'}}</td>
+                    <td>₹ {{data?.Payment?.PartnerDetails?.NetPayable}}</td>
+                    <td>₹ {{data?.Payment?.PartnerDetails?.TDS}}</td>
+                    <td>{{data?.Payment?.PaymentStatus}}</td> 
+                    <td><button class="anvayaabutton" (click)="viewInvoice(data?.Payment?.PartnerDetails?.Bill)">View</button></td>
+                    <td><button class="anvayaabutton" (click)="makePayment(data?.Payment?.AnvayaaPaymentID)">Make Payment</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

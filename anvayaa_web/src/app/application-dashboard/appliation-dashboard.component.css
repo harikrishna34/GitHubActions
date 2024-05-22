@@ -1,0 +1,592 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+body{
+    background-color: #f0f0f0 !important;
+    font-family: 'Roboto Slab', serif;
+  }
+  .hover-color:hover{
+      background-color: darkgrey;
+  }
+  .PriceRangeCalculator {
+    width: auto;
+    height: 150px;
+    border: 1px dashed #6EC778;
+    box-sizing: border-box;
+    text-align: center;
+}
+.PriceRangeCalculator .headline {
+    /* position: absolute; */
+    padding-top: 30px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: #212121;
+}
+.PriceRangeCalculator .price {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 45px;
+    text-align: center;
+    color: #6EC778;
+}
+
+
+ 
+  .bodycontent{
+    margin-top: 0px;
+    margin-left: 142px;
+  }
+.navbar {
+    position: fixed;
+    width:100vw;
+    display: flex;
+    background-color:white;
+    -webkit-box-shadow: 0px 2px 6px 0px #b1b1b1;
+    box-shadow: 0px 2px 6px 0px #b1b1b1;
+  }
+
+  .logoimg{
+    height:64px;
+    width: 100px;
+}
+
+a {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .badge {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    background-color: red; /* Set the background color of the badge */
+    color: white; /* Set the text color of the badge */
+    border-radius: 50%; /* Optional: Makes the badge circular */
+  }
+  
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+  
+    40% {
+      transform: translateY(-20px);
+    }
+  
+    60% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  .badge {
+    /* Your existing badge styles here */
+    animation: bounce 5s; /* Adjust the duration as needed */
+  }
+  
+.leftCol {
+    position: fixed;
+    width: 120px;
+    background-color: white;
+    font-size: 21px;
+    overflow-y: scroll;
+    padding-top: 20px;
+    top: 75px;
+    bottom: 0;
+}
+a,div{
+    cursor:pointer;
+    text-decoration: none;
+    font-size: medium;
+    color:black;
+
+    /* font-weight:bold; */
+}
+.imgheight {
+    height: 24px;
+    width: 24px;
+    text-align: center;
+
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+    scrollbar-width: auto;
+    scrollbar-color: #8f54a0 #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #8f54a0;
+    border-radius: 3px;
+    /* border: 0px solid #c60808; */
+}
+
+
+.cards {
+    width: 200px;
+    height: 200px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.customerData {
+    margin-top: 40px;
+    margin-left: 20px;
+
+}
+
+
+
+.nameBorder{
+    border-bottom: 1px solid #000000;
+
+}
+
+.searchbox {
+    margin-top: 50px;
+}
+
+input {
+    width: 300px;
+    height: 50px;
+}
+
+h6 {
+    color: green
+}
+
+/* h5 {
+    background-color: rgb(173, 216, 230)
+} */
+
+.cmspdetails {
+    margin-top: 20px;
+}
+
+.searchButton {
+    margin-left: 10px;
+    margin-top: 100px;
+    width: 50px;
+}
+
+.city {
+    margin-left: 1200px;
+}
+
+.textarea {
+    width: 320px;
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+}
+
+.radioboxses {
+    margin-left: 200px;
+}
+
+.requestbtn {
+    margin-left: 700px;
+}
+
+.feesAnv {
+    margin-left: 200px;
+}
+
+.reqType {
+    margin-left: 200px;
+    margin-top: 30px;
+    width: 50px;
+    height: 50px;
+}
+
+
+
+
+
+.inputBox input {
+    width: 93%;
+    padding: 0.625rem 10px;
+    font-size: 1rem;
+    letter-spacing: 0.062rem;
+    margin-bottom: 1.875rem;
+    border: 1px solid #ccc;
+    background: transparent;
+    border-radius: 4px;
+
+}
+
+.inputBox label {
+    position: absolute;
+    top: 0;
+    left: 37px;
+    padding: 0.625rem 0;
+    font-size: 1rem;
+    color: grey;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.inputBox input:focus ~ label,
+.inputBox input:valid ~ label,
+.inputBox input:not([value=""]) ~ label {
+    top: -1.125rem;
+    left: 36px;
+    color: #F79122;
+    font-size: 1rem;
+    background-color: white;
+    height: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.inputBox input:focus {
+    outline: none;
+    /* border: 2px solid #1a73e8; */
+}
+
+.textColor {
+    color: #F79122
+}
+
+.sponserdetailsplate {
+    padding: 10px;
+    width: 180px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: rgba(59, 178, 186, 0.83);
+    color: white;
+
+}
+
+.uploadBox {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    width: 182px;
+}
+
+.previosButton {
+    text-align: initial;
+}
+
+.imgSize {
+    width: 45px;
+}
+
+
+
+
+.createReqBtn {
+    background: #914573;
+    padding: 6px 15px;
+    color: white;
+    border-radius: 15px;
+    border: none;
+}
+.closebtn{
+    background-color: red;
+    padding: 6px 15px;
+    color: white;
+    border-radius: 15px;
+    border: none;
+    
+}
+
+#aggreementform {
+    margin-left: 70px;
+    height: 400px;
+    margin-top: 20px;
+    background-color: white;
+    /* width: auto; */
+    width: 900px;
+}
+
+#agreementbtn {
+    margin-left: -32%;
+    margin-top: 0%;
+}
+
+#heading {
+    background-color: aqua;
+    margin-left: 160px;
+}
+
+.formStyle {
+    margin-top: 100px;
+ 
+}
+
+.checkboxstyle {
+    width: 20px;
+    height: 20px;
+}
+
+.dropdown {
+    width: 480px;
+}
+
+.requestType {
+    margin-left: 100px;
+    margin-top: 50px;
+    width: 400px;
+}
+
+.serviceType {
+    margin-top: 50px;
+    width: 400px;
+}
+.serviceSelect{
+    width: 280px;
+}
+.anvayaaCharges{
+    margin-top: 50px;
+}
+
+.titleCreate{
+    margin-left: 400px;
+}
+.nextBtn{
+    margin-top: 200px;
+    margin-left: 200px;
+}
+.support{
+    background-color:#3DEDE2;
+    margin-left: 50px;
+    font-size: 24px;
+    border-radius: 10px;
+    width: 50px;
+
+}
+
+.nxtbtn{
+  
+   margin-top: 150px ;
+   margin-left: 150px;
+}
+
+.selectType{
+    width: 220px;
+    height: 42px;
+}
+/* .border{
+    width: 300px;
+   
+} */
+.NextScreen{
+    margin-top: 20px;
+}
+.selectDays{
+    margin-top: 20px;
+    margin-left: 0px;
+}
+.paymentMode{
+    margin-top: 47px;
+    margin-left: -35px;
+}
+.createRequest{
+    width: 30px;
+    margin-left: 90%;
+    margin-top: 41px;
+}
+
+.planData{
+margin-left: 300px;
+
+}
+.plaDetails{
+    width:10px;
+    font-size: 15px;
+    margin-left: 60px;
+}
+.searchBox{
+    width: 500px;
+   border-radius: 1px solid #F79123;
+}
+.planType{
+  margin-left: 200px;
+}
+.validationNames{
+ /* font-size: 15px; */
+
+font-size: 15px;
+ 
+
+}
+.daysSize{
+    font-size: 15px;
+}
+.selectDayss{
+    margin-top: 31px;
+    margin-left: -81px;
+}
+.sponser{
+    background-color: #D9D9D9;
+    /* border-radius: 1px solid black; */
+}
+
+.header{
+    margin-left: 400px;
+    color: #914573;
+}
+.BACK{
+    margin-left: -680px;
+    background: #914573;
+    padding: 6px 15px;
+    color: white;
+    border-radius: 15px;
+    border: none;
+}
+
+
+.PackageNature{
+    width:10px;
+    font-size: 15px;
+    margin-left: 15px;
+}
+.planDetails{
+    /* width:121px; */
+    font-size: 17px;
+}
+.anvayaaChargeslist{
+    font-size: 25px;
+}
+.coverd{
+    font-size: 14px;
+    color:green
+}
+.notcoverd{
+    font-size: 14px;
+    color:red
+}
+.anvayaaFee{
+    font-size: 18px;
+    /* color: #000000; */
+}
+/* .selectDays{
+    margin-left: 100px;
+} */
+.DaysSel2{
+    margin-left:264px;
+    margin-top: -22px;
+}
+.DaysSel{
+    margin-left: 266px;
+    margin-top: -41px;
+}
+/* .serviceType{
+    margin-left: 10px;
+} */
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+
+  /* switch button */
+
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 90px;
+    height: 34px;
+  }
+  
+  .switch input {display:none;}
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #F79122;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #914573;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(55px);
+    -ms-transform: translateX(55px);
+    transform: translateX(55px);
+  }
+  
+  /*------ ADDED CSS ---------*/
+  .on
+  {
+    display: none;
+  }
+  
+  .on, .off
+  {
+    color: white;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    font-size: 13px;
+    font-family: Verdana, sans-serif;
+  }
+  
+  input:checked+ .slider .on
+  {display: block;}
+  
+  input:checked + .slider .off
+  {display: none;}
+  
+  /*--------- END --------*/
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;}

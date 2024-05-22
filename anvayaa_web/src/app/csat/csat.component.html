@@ -1,0 +1,95 @@
+
+<div class="container" style="margin-top: 150px;">
+    <p>csat works!</p>
+   <form [formGroup]="Csat">
+        <div class="col-md-6" >
+      
+            <div>
+              <span class="csatquestiontype">Select Question Type </span>
+            
+              <select class="form-select" formControlName="QuestionName" placeholder="Select Question Type">
+                <option selected value="" disabled>Select  Question Based On the Service</option>
+                <option value="Blank">
+                  <li><span class="dropdown-item-text">Blank</span></li>
+                </option>
+                <option value="Radio">
+                  <li><span class="dropdown-item-text">Radio</span></li>
+                </option>
+                <option value="CheckBox">
+                  <li><span class="dropdown-item-text">Check Box</span></li>
+                </option>
+             
+              </select>
+            </div>
+         
+    
+    </div>
+        <div class="col-md-6">
+          
+                <div>
+                  <span class="csatquestiontype">Select Question Type</span>
+                
+                  <select class="form-select" formControlName="QuestionType" (change)="options($event)" placeholder="Select Religion">
+                    <option selected value="" disabled>Select  Queestion Type </option>
+                    <option value="Blank">
+                      <li><span class="dropdown-item-text">Blank</span></li>
+                    </option>
+                    <option value="Radio">
+                      <li><span class="dropdown-item-text">Radio</span></li>
+                    </option>
+                    <option value="CheckBox">
+                      <li><span class="dropdown-item-text">Check Box</span></li>
+                    </option>
+                 
+                  </select>
+                </div>
+             
+    
+        </div>
+    
+    <!-- <div class="col-md-4">
+        <div>
+            <span class="csatquestiontype">Select Options</span>
+          
+            <select class="form-select" (change)="answers($event)" formControlName="Options" name="Options" placeholder="Select Options">
+              <option selected value="" disabled>Select  Options</option>
+              <option value="Average">
+                <li><span class="dropdown-item-text">Average</span></li>
+              </option>
+              <option value="Bad">
+                <li><span class="dropdown-item-text">Bad</span></li>
+              </option>
+              <option value="Good">
+                <li><span class="dropdown-item-text">Good</span></li>
+              </option>
+              <option value="Outstanding">
+                <li><span class="dropdown-item-text">Outstanding</span></li>
+              </option>
+           
+            </select>
+          </div>
+       
+    </div> -->
+    <div class="col-md-8">
+        <div>
+            <span>Enter Question</span>
+            <input type="text" formControlName="QuestionText" class="form-control">
+        </div>
+   
+    </div>
+    <div class="col-md-4" *ngIf="optionstab">
+        <!-- *ngIf="Csat.value.QuestionType == 'Radio'" -->
+        <div *ngFor="let phone of getPhonesFormControls(); let i = index">
+            <label>Enter Options {{i+1}} </label>    
+            <input formControlName="phone" type="text">
+            <button class="btn  btn-primary" (click)="remove(i)">Remove </button>    
+          </div>
+          <br>
+          <br>
+            <button class="btn  btn-primary" (click)="addnew()">Add new </button>
+    </div>
+
+</form>
+<br>
+<button class="btn btn-primary" (click)="savecsat()">Save Csat</button>
+</div>

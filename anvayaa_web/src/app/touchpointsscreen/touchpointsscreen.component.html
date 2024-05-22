@@ -1,0 +1,29 @@
+<div class="bodycontent">
+    <div style="text-align: center;">
+        <h2> Touch Points Screen</h2>
+    </div>
+    <div>
+        <table class="table table-striped text-start card-body mt-6">
+            <thead class="tablehead">
+                <tr>
+                    <th>CustRecID </th>
+                    <th>Assigned Start Date</th>
+                    <th>Message</th>
+                    <th>Read Status</th>
+                    <th>Status </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let data of viewData">
+                <tr>
+                    <td>{{data?.CustRecID}}</td>
+                    <td>{{data?.AssinedDateTime*1000 |date: 'dd-MMM-yyyy'}}</td>
+                    <td>{{data?.Message}}</td>
+                    <td>{{data?.ReadStatus}}</td>
+                    <td>{{data?.Status}}</td>
+                    <td><button class="anvayaabutton-primary">Update</button></td> 
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

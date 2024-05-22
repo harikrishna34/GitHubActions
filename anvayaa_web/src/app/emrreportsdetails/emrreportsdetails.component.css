@@ -1,0 +1,161 @@
+.body-container{
+    margin-left: 130px; 
+    margin-top: 100px;  
+}
+.view {
+    -webkit-transition: all 0.0s ease;
+    -moz-transition: all 0.0s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(9, 199, 24, 0.6);
+}
+/* .pharmacy-imagecard { */
+    /* margin-top: 5px;
+    margin-left: 5px;
+    text-align: center;
+    padding: 0px 25px 0px 25px;
+    box-sizing: border-box;
+    background-color: rgba(134, 136, 166, 0.12);
+    border: 2px solid #dce0e3;
+    
+    box-sizing: border-box;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease; */
+/* } */
+.detail-card1 {
+    padding: 15px;
+    background: #FFF;
+    box-shadow: 0px 1px 2px #c3c2c2;
+    min-height: 270px;
+    max-height: 220px;
+}
+.thumb {
+    width: 100%;
+    height: 190px;
+    float: none;
+    position: relative;
+    /*    padding-bottom: 15px;
+*/
+    padding: 5px 5px 5px 5px;
+}
+
+
+
+.norecoerd {
+    width: 75%;
+    text-align: center;
+    font-size: 26px;
+    margin-left: 25px;
+}
+
+.health-image-view {
+    width: 100%;
+    height: 100%;
+    border: 2px solid #B7B7AE;
+}
+.viewimg{
+    width: 100%;
+    height: 90px;
+    float: none;
+    position: relative;
+    padding: 5px 5px 5px 5px;
+            }
+
+            .modal-header {
+                padding: 15px 15px 0;
+                border: 0;
+            }
+            
+            .modal-header.model {
+                background-color: #d94165;
+                font-weight: 300;
+                color: white;
+                border-bottom: 4px solid rgb(128, 128, 128);
+                ;
+            }
+
+            .health-image-view {
+                width: 100%;
+                height: 100%;
+                border: 2px solid #B7B7AE;
+            }
+
+            .health-thumbs {
+                width: 80px;
+                height: 70px;
+                /* padding-left: 15px; */
+                /* padding-right: 8px; */
+                border: 2px solid #B7B7AE;
+            }
+            .anvayaa-btn-lgnew  {
+                font-weight: bold;
+                font-size: 16px;
+                color: #FFF;
+                background: #d94165;
+                height: 46px;
+                padding-left: 20px;
+                padding-right: 20px;
+                border: 0;
+                -moz-transition: all 0.3s ease;
+                -webkit-transition: all 0.3s ease;
+                transition: all 0.3s ease;
+            }
+            .thumb {
+                width: 100%;
+                height: 190px;
+                float: none;
+                position: relative;
+                /*    padding-bottom: 15px;
+            */
+                padding: 5px 5px 5px 5px;
+            }
+            
+ .detail-card{
+    padding: 15px;
+    background: #FFF;
+    box-shadow: 0px 1px 2px #c3c2c2;
+    min-height: 200px;
+    max-height: 270px;
+}
+.pharmacy-imagecard {
+    margin-top: 5px;
+    margin-left: 5px;
+    text-align: center;
+    padding: 0px 25px 0px 25px;
+    box-sizing: border-box;
+    background-color: rgba(134, 136, 166, 0.12);
+    border: 2px solid #dce0e3;
+    /*    height: 229px;*/
+    /*width:255px;*/
+    box-sizing: border-box;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.addhealthbtn{
+    font-weight: bold;
+    font-size: 16px;
+    color: #FFF;
+    background: #d94165;
+    height: 46px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 0;
+    -moz-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+.saveReport{
+    font-weight: bold;
+    font-size: 16px;
+    color: #FFF;
+    background: #d94165;
+    height: 46px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 0;
+    -moz-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}

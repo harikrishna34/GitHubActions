@@ -1,0 +1,18 @@
+<div class="body-container">
+    <div class="row col-md-12" >
+      <div class="col-md-4" *ngFor="let new of ViewHexaDetailProduct">
+        <img [src]="new.OtherIconFiles?.iosandweb" style="height: 300px; width: 300px; cursor: pointer;">
+      </div>
+      <div class="col-md-4" *ngFor="let new of ViewHexaDetailProduct">
+        <span style="font-size: xx-large;"><b>{{new.Name}}</b></span><br>
+        <span>Description: </span> <span>{{new.Description}}</span><br>
+        <span style="font-size: xx-large;"><b>Rs {{new.Price}}/-</b></span><br>
+        <div class="order-container" *ngIf="new.Name !== 'HEXA'">
+            <button id="remove-button"(click)="removeItem()" *ngIf="!new.isHexa">-</button> <span id="quantity">{{ quantity }}</span>
+            <button id="add-button" (click)="addItem()" *ngIf="!new.isHexa">+</button>
+        </div>
+        <button class="anvayaabutton-primary" (click)="navigateToBuynowScreen(ViewHexaDetailProduct)">Buy Now</button>
+      </div>
+    </div>
+  </div>
+  

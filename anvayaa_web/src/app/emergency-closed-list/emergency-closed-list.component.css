@@ -1,0 +1,57 @@
+.tableheader {
+    text-align: center;
+    vertical-align: middle;
+    font-family: 'Poppins', 'sans-serif';
+    font-size: medium;
+    border-top: 1px solid;
+}
+.tablelist {
+    text-align: center;
+    vertical-align: middle;
+    font-family: 'Poppins';
+    font-size: revert;
+    font-weight: '550';
+    border-top: 1px solid;
+}
+#list td {
+
+    text-align: center;
+    vertical-align: middle;
+    word-wrap: break-word;
+    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
+
+}
+.listHead{
+    background-color: #F79122;
+    color: #914572;
+}
+.filters{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.anvayaabutton-primary{
+    margin-top: 18px;
+}
+.pagination .pagination .current {
+    background: red;
+    color: #ffffff !important;
+    background-color: red !important;
+  }
+
+
+.pagination {
+    background-color: #f0f0f0; /* Your desired background color */
+}
+
+/* Override active page background color */
+.pagination .current {
+    background-color: #007bff; /* Your desired active page background color */
+    color: #fff; /* Text color for active page */
+}
+
+/* Override hover background color for pagination buttons */
+.pagination li:hover {
+    background-color: #eaeaea; /* Your desired hover background color */
+}

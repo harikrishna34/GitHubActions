@@ -1,0 +1,97 @@
+<div class="maindiv">
+    <div class="body-content" *ngIf="CompletedFeedBackInLastOneWeeks">
+        <div class="card" style="margin-left:20px; margin-right: 20px;">
+            <div class="card-header">
+                <div class="row mt-6">
+                    <div class="col-12 mb-4">
+                        <span class="badge bg-pastel-primary text-primary text-uppercase-bold-sm">
+                            <h4>{{Type}}</h4>
+                        </span>
+                    </div>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+
+                                <th scope="col">CUSTOMER NAME</th>
+                                <th scope="col">BENEFICIARY NAME</th>
+                                <th scope="col">FEEDBACK ID</th>
+                                <th scope="col">EMPLOYEE ID</th>
+                                <th scope="col">EMPLOYEE NAME</th>
+                                <th scope="col">CREATED DATE/TIME</th>
+                                <th scope="col">PENDING SINCE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let lastsevendaysfeedback of dementiadbfeedback?.completedFeedBackInLast7Days;">
+                                <td>{{lastsevendaysfeedback.CustomerData.Name}}</td>
+                                <td>
+                                    <div *ngFor="let benficiary of lastsevendaysfeedback.CustomerData.Beneficiaries">
+        
+                                        <span *ngIf="lastsevendaysfeedback.CustID == benficiary.CustID">{{benficiary.Name}}</span>
+                                    </div>
+                                    
+                                    </td>
+                                    
+                                <td>{{lastsevendaysfeedback.FeedbackID}}</td>
+                                <td>{{lastsevendaysfeedback.EmployeeID}}</td>
+                                <td>{{lastsevendaysfeedback.EmployeeData.FirstName}} {{lastsevendaysfeedback.EmployeeData.LastName}}</td>
+                                <td>{{lastsevendaysfeedback.CreatedDateTime*1000|date:'dd-MM-yyyy'}}</td>
+                                <td>{{lastsevendaysfeedback.Days + " days"}}</td>
+                              </tr>
+                                 
+                      
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="body-content" *ngIf="Openfeedbacks">
+        <div class="card" style="margin-left:20px; margin-right: 20px;">
+            <div class="card-header">
+                <div class="row mt-6">
+                    <div class="col-12 mb-4">
+                        <span class="badge bg-pastel-primary text-primary text-uppercase-bold-sm">
+                            <h4>{{Type}}</h4>
+                        </span>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+
+                            <th scope="col">CUSTOMER NAME</th>
+                            <th scope="col">BENEFICIARY NAME</th>
+                            <th scope="col">FEEDBACK ID</th>
+                            <th scope="col">EMPLOYEE ID</th>
+                            <th scope="col">EMPLOYEE NAME</th>
+                            <th scope="col">CREATED DATE/TIME</th>
+                            <th scope="col">PENDING SINCE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let lastsevendaysopenfeedback of dementiadbfeedback?.openFeedBacks;">
+                        <td>{{lastsevendaysopenfeedback.CustomerData.Name}}</td>
+                        <td>
+                            <div *ngFor="let benficiary of lastsevendaysopenfeedback.CustomerData.Beneficiaries">
+
+                                <span *ngIf="lastsevendaysopenfeedback.CustID == benficiary.CustID">{{benficiary.Name}}</span>
+                            </div>
+                            
+                            </td>
+                            
+                        <td>{{lastsevendaysopenfeedback.FeedbackID}}</td>
+                        <td>{{lastsevendaysopenfeedback.EmployeeID}}</td>
+                        <td>{{lastsevendaysopenfeedback.EmployeeData.FirstName}} {{lastsevendaysopenfeedback.EmployeeData.LastName}}</td>
+                        <td>{{lastsevendaysopenfeedback.CreatedDateTime*1000|date:'dd-MM-yyyy'}}</td>
+                        <td>{{lastsevendaysopenfeedback.days + " days"}}</td>
+                      </tr>
+                      
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+
+image: node:18.13.0
+
+pipelines: 
+  branches: 
+    master:
+    #angulartesting:
+        - step:
+            name: Install Dependencies
+            script: 
+              - cd anvayaa_web/
+              - npm cache clean --force
+              - npm install @angular/google-maps --force
+              - npm install --legacy-peer-deps
+              - npm install -g @angular/cli
+              - ng build
+            artifacts:
+              - anvayaa_web/dist/**
+        - step:
+            name: Deploy
+            trigger: manual
+            script:
+              
+              - cd anvayaa_web/
+              ##  Testing Environment (html)
+              #- scp -r ./dist/* $USERNAME@$SERVICE_IP:~/
+              #- ssh $USERNAME@$SERVICE_IP sudo cp -Rf /home/ec2-user/anvayaa_web/* /usr/share/nginx/html/
+              
+             ##  Production Deployment (COM) folder 
+              - scp -r ./dist/* $USERNAME@$SERVICE_IP:~/anvayaa_web_com/
+              - ssh $USERNAME@$SERVICE_IP sudo cp -Rf /home/ec2-user/anvayaa_web_com/anvayaa_web/* /usr/share/nginx/COM/
+
+            ###  Versioning
+     #   - step:
+    #        name: Determine Version
+    #        script:
+       #        - chmod +x version_increment.sh
+         #      - source version_increment.sh
+           
+        

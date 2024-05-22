@@ -1,0 +1,191 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+
+.createAmbUser{
+    margin-top: 15px;
+}
+.viewclosedemergency-btn{
+    display: flex;
+    flex-direction: row-reverse;
+    }
+.anvayaaButton{
+    height:40px;
+    margin:10px 10px 0px 0px;
+    background:
+    #914573;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+.pointer {cursor: pointer;}
+.bodycontent{
+    margin-top: 90px;
+    margin-left: 109px;
+  }
+  .vl {
+    border-left: 2px solid #a09e9ef1;
+
+  }
+  .actionImg{
+    /* display: flex; */
+    justify-content:space-around;
+  }
+
+  /* #requestID{
+    cursor: pointer;
+    color: purple;
+    font-weight: bold;
+} */
+/* #requestID:hover{
+    text-decoration: underline;
+} */
+
+#list td {
+
+    text-align: center;
+    vertical-align: middle;
+    word-wrap: break-word;
+    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
+
+}
+
+body {
+    font-family: Poppins;
+}
+
+.accept,
+.ignore {
+    background-color: #F08233;
+}
+
+img {
+    border-radius: 50%;
+}
+
+ .EmergencyTableList {
+    border-collapse: collapse;
+}
+
+
+
+
+.EmergencyTableList-th-td {
+    width: 100px;
+    text-align: center;
+    border: 2px solid rgb(204, 200, 200);
+    border-left: hidden;
+    border-right: hidden;
+}
+
+.gfg {
+    border-collapse: separate;
+    border-spacing: 0 15px;
+}
+
+h1 {
+    color: green;
+}
+
+.wrapper {
+    max-width: min-content;
+
+}
+
+.image--cover {
+    width: 65px;
+    height: 70px;
+    border-radius: 50%;
+    border: 1px solid;
+    object-fit: cover;
+    object-position: center right;
+}
+
+
+.wrapper {
+    display: flex;
+    align-items: stretch;
+}
+
+.tableheader {
+    text-align: center;
+    vertical-align: middle;
+    font-family: 'Poppins', 'sans-serif';
+    font-size: medium;
+    border-top: 1px solid;
+}
+
+.tablelist {
+    text-align: center;
+    vertical-align: middle;
+    font-family: 'Poppins';
+    font-size: revert;
+    font-weight: '550';
+    border-top: 1px solid;
+}
+
+.rightborder {
+    border-right: 1px solid black;
+}
+
+.leftborder {
+    border-left: 1px solid black;
+}
+
+.fontseven {
+    font-weight: 700;
+
+}
+
+.downarrow {
+    position: absolute;
+    margin-top: 48px;
+}
+
+.smallFont {
+    font-size: small;
+    font-weight: 400;
+}
+
+.mediumFont {
+    font-size: medium;
+}
+
+@media (max-width: 481px) {
+    .downarrow {
+        position: unset;
+    }
+}
+.maindiv{
+    margin-top: 111px;
+    margin-left: 140px;
+    margin-right: 40px;
+    overflow-x:auto;
+}
+
+ .listHead{
+    background-color: #F79122;
+    color: #914572;
+}
+
+.blink_me {
+    animation: blinker 1s linear infinite;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    
+    }
+  }
+
+  tr.selected {
+    animation: pulse-border 1s infinite;
+}
+
+@keyframes pulse-border {
+    from, to { box-shadow: 0 0 0 0 black;}
+    50% { box-shadow: 0 0 0 4px black; }
+}

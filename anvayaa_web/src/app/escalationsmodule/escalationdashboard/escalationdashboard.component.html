@@ -1,0 +1,282 @@
+<div class="maindiv">
+    <div class="row">
+        <div class="col-md-8" style="margin: auto;">
+                <h2>Escalation Dashboard</h2>
+
+        </div>
+        <div class="col-md-2" style="margin: auto;">
+            <div>
+                <img src="../../../assets/images/plus (1).png" class="grab" (click)="createesc()">
+            </div>
+        </div>
+        <div class="col-md-2" style="margin: auto;">
+            <div>
+                <img src="../../../assets/images/icons8-settings-50.png" style="width: 25px;" class="grab" (click)="category()">
+
+            </div>
+        </div>
+
+        <div *ngIf="create" style="margin:auto">
+            <div class="card">
+
+                <h3>Create Escalation</h3>
+                <form [formGroup]="creatEscalationForm">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Select Customer</label>
+                            <select class="form-select" formControlName="CustRecID" (change)="servicearea($event)"
+                                required>
+                                <option value="" selected>Select Customer</option>
+                                <option *ngFor="let Customer of CustomersList" value="{{Customer.CustRecID}}">
+                                    {{Customer.Name}}</option>
+
+                            </select>
+                            <span class="text-danger"
+                                *ngIf="creatEscalationForm.controls['CustRecID'].value == ''&& submit==true">*
+                                Required</span>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Select Category</label>
+                            <select class="form-select" (change)="selectedcategory($event)" formControlName="CategoryID"
+                                required>
+                                <option value="" selected>Select Category</option>
+                                <option *ngFor="let cat of CategoriesList" value="{{cat.ID}}">{{cat.Name}}</option>
+                            </select>
+                            <span class="text-danger"
+                                *ngIf="creatEscalationForm.controls['CategoryID'].value == ''&& submit==true">*
+                                Required</span>
+
+                        </div>
+                        <div class="col-md-3">
+                            <label>Select Sub-Category</label>
+                            <select class="form-select" (change)="selectedtat($event)" formControlName="SubCategoryID"
+                                required>
+                                <option value="" selected>Seleect Sub Category</option>
+                                <option *ngFor="let sub of SubCategoriesArray" value="{{sub.ID}}">{{sub.Name}}</option>
+
+                            </select>
+                            <span class="text-danger"
+                                *ngIf="creatEscalationForm.controls['SubCategoryID'].value == ''&& submit==true">*
+                                Required</span>
+
+                        </div>
+                        <div class="col-md-3" *ngIf="escalationstatus">
+                            <label>Status</label>
+                            <select class="form-select" formControlName="Status" required>
+                                <option value="Created">Created</option>
+                                <option value="InProgress">InProgress</option>
+                                <option value="Completed">Completed</option>
+                            </select>
+                            <span class="text-danger"
+                                *ngIf="creatEscalationForm.controls['Status'].value == ''&& submit==true">*
+                                Required</span>
+
+                        </div>
+                        <div class="col-md-3">
+                            <label>Comment</label>
+                            <textarea class="form-control" formControlName="Comments"></textarea>
+                            <span class="text-danger"
+                                *ngIf="creatEscalationForm.controls['Comments'].value == ''&& submit==true">*
+                                Required</span>
+
+                        </div>
+                        <div class="col-md-3" *ngIf="ticketcreated">
+                            <label>Ticket Raised Person</label>
+                            <select class="form-select"  formControlName="Owner" name="Owner" (change)="changeOwner($event)"  
+                            required>
+                            <option value="" selected>Seleect Sub Category</option>
+                            <option *ngFor="let sub of employees" value="{{sub.EmployeeID}}">{{sub.FirstName +" "+sub.LastName}}</option>
+
+                        </select>
+                            <!-- <span class="text-danger"
+                                *ngIf="creatEscalationForm.controls['Comments'].value == ''&& submit==true">*
+                                Required</span> -->
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3"  *ngIf="updateButton" ><button class="btn btn-primary" (click)="UpdateEscalation()">Update</button></div>
+                        <div class="col-md-3" style="margin:auto" *ngIf="createButton"><button class="btn btn-primary"
+                                (click)="creatEscalations()">Create</button></div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+
+              <div   *ngIf="dashboard">
+                      <div class="row">
+                 <div class="col box">
+                    <div>
+                         <span class="titel-color">Total Tickets</span>
+                    </div>
+                    <div class="text-center">
+                        <p>{{totalTicketCount}}</p>
+                    </div>
+                </div>
+                   <div class="col box">
+                    <div>
+                         <span class="titel-color">Created Tickets</span>
+                    </div>
+                    <div class="text-center">
+                        <p>{{dashboarddata?.CreatedCount}}</p>
+                    </div>
+                </div>
+
+                <div class="col box">
+                    <div>
+                         <span class="titel-color">In Progressing </span>
+                    </div>
+                    <div class="text-center">
+                        <p>{{dashboarddata?.InProgressCount}}</p>
+                    </div>
+                </div>
+                <div class="col box">
+                    <div>
+                         <span class="titel-color">Closed Tickets</span>
+                    </div>
+                    <div class="text-center">
+                        <p>{{dashboarddata?.CompletedCount}}</p>
+                    </div>
+                </div>
+                         
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Filter By Status</label>
+                            <select class="form-select" (change)="dashboardData($event)">
+                                <option value="" selected>Select Status</option> 
+                                <option>All</option> 
+                                <option value="Created">Created</option> 
+                                <option value="InProgress">In Progress</option> 
+                                <option value="Completed">Completed</option> 
+
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Filter By City</label>
+                            <select class="form-select" (change)="dashboardData($event)">
+                                <option value="" selected>Select Status</option> 
+                                <option  *ngFor="let area of servicearray"   value="{{area.CityID}}">{{area.CityName}}</option> 
+                                 
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Escalation ID</th>
+                            <th scope="col">Created Person</th>
+                            <th scope="col">Customer Name</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Sub-Category</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">TAT</th>
+                            <th scope="col">Comment</th>
+                            <th scope="col">City</th>
+                            <th scope="col">View</th>
+                            <th scope="col">Edit</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let esc of dashboarddata?.EscalationsList">
+                            <td>{{esc.EscalationID}}</td>
+                            <td>{{esc.CreatedPersonName}}</td>
+                            <td>{{esc.CustomerDetails.Name}}</td>
+                            <td>{{esc.CategoryDetails.Name}}</td>
+                            <td>{{esc.SubCategoryDetails.Name}}</td>
+                            <td>{{esc.Status}}</td>
+                            <td>{{esc.TAT}}</td>
+                            <td>{{esc.Comments}}</td>
+                            <td>{{esc.ServiceAreaDetails.CityName}}</td>
+                            <td><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                    (click)="viewescalationsboard(esc.EscalationID)">View</button></td>
+                            <td><img src="../../../assets/images/edit.png" style="width: 25px;" (click)="updateEscParams(esc)"></td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" style="width: 200%;margin-left: -200px;">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Escalation Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul>
+                                                <li class="list-group-item ">
+                                                      <span><b>Customer Name</b></span> :<span>{{EscalationDetails?.CustomerDetails?.Name}}</span>
+                                                    </li>
+                                            </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul>
+                                                <li class="list-group-item ">
+                                                      <span><b>Status</b></span> : <span>{{EscalationDetails?.Status}}</span>
+                                                    </li>
+                                            </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <ul>
+                                                <li class="list-group-item ">
+                                                      <span><b>Escalation ID</b></span> : <span>{{EscalationDetails?.EscalationID}}</span>
+                                                    </li>
+                                                <li class="list-group-item ">
+                                                     <span><b>Creat Date</b></span> : <span>{{EscalationDetails?.CreatedDate*1000|date:"dd-MM-yyyy"}}</span>
+                                                    </li>
+                                        <li class="list-group-item ">
+                                                         <span><b>Creat Person</b></span> : <span>{{EscalationDetails?.CreatedPersonName}}</span>
+                                                        </li>
+                                               
+                                            </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <ul>
+                                               
+                                                <li class="list-group-item">
+                                                     <span ><b>Category</b></span> :<span>{{EscalationDetails?.CategoryDetails.Name}}</span>
+                                                    </li>
+                                               
+                                            </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <ul>
+                                                <li class="list-group-item ">
+                                                     <span ><b>Sub Category</b></span>:<span>{{EscalationDetails?.SubCategoryDetails.Name}}</span>
+                                                    </li>
+                                            </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

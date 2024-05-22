@@ -1,0 +1,61 @@
+.main{
+    margin-left: 130px;
+    margin-top: 100px;
+    margin-right: 20px;
+    /* overflow-x: hidden; */
+}
+
+/* .table > thead > tr > th {
+    border-bottom: 1px solid #e5eaee;
+    font-size: 11px;
+    font-weight: 700;
+    vertical-align: bottom; */
+    /* text-transform: uppercase; */
+/* } */
+.panel-title {
+    font: 700 20px/24px 'Lato';
+    letter-spacing: 0;
+    padding: 0;
+}
+
+.CustomerID{
+    color: #914573;
+}
+.bckbtn{
+    background-color:#914573;
+    border-radius: 10px;
+    border: none;
+    color:white;
+    margin-top: 10px;
+    margin-left: -18px;
+    width: 17%;
+}
+/* .table > tbody > tr > td {
+    border-bottom: 1px solid #e5eaee;
+    font-size: 13px;
+    font-weight: 400;
+    vertical-align: bottom; */
+    /* text-transform: titlecase; */
+/* } */
+
+/* .options:hover{
+ 
+    box-shadow: 0 0 30px rgba(33,33,33,.3); 
+} */
+
+.textcolor{
+    color: #914573;
+
+}
+
+.finalDetailsCarsMrg{
+   margin-top: 37px;
+}
+
+table{
+    overflow-x:auto !important;
+}
+thead{
+    background-color: #F79122;
+    color: #914572;
+}

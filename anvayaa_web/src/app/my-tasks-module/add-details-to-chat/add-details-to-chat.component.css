@@ -1,0 +1,22 @@
+.bodycontent{
+    margin-top: 100px;
+    margin-left: 120px;
+    margin-right: 12px;
+  }
+  .addInfo{
+    margin:auto;
+    padding-top:30px;
+    width: 60%;
+  }
+  .changeEmp{
+    font-size: large;
+  }
+  #clickChange{
+    font-size: small;
+    cursor: pointer;
+    color: purple;
+  }
+  #clickChange:hover{
+    color:#f79123
+  }
+  

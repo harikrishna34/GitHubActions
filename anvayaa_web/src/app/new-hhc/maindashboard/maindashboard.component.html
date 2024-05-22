@@ -1,0 +1,394 @@
+<div class="mainDiv">
+    <div class="container ">
+        <div class="row row-cols-2 row-cols-lg-3">
+            <div class="col-4 col-lg-2 mt-4" (click)="handleLeadClick()">
+                <div class="card rounded-0 text-center" style="height: 150px;">
+                    <div class="card-title fs-6" style="color: purple;">Leads</div>
+                    <div class="fs-2 mt-3" style="color: #FABA75;">
+                        {{Counts?.Leads}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 col-lg-2 mt-4" (click)="handleOnGoingRequestsClick()">
+                <div class="card rounded-0 text-center" style="height: 150px;">
+                    <div class="card-title fs-6" style="color: purple;">On Going Requests</div>
+                    <div class="fs-2 mt-3" style="color: #FABA75;">
+                        {{Counts?.HHCOpen}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 col-lg-2 mt-4" (click)="handlePaymentToReceiveClick()">
+                <div class="card rounded-0 text-center" style="height: 150px;">
+                    <div class="card-title fs-6" style="color: purple;">Payment To Recive</div>
+                    <div class="fs-2 mt-3" style="color: #FABA75;">
+                        {{Counts?.NotApprovedHHCBills}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 col-lg-2 mt-4">
+                <div class="card rounded-0 text-center" style="height: 150px;">
+                    <div class="card-title fs-6" style="color: purple;">Reconsillation </div>
+                    <div class="fs-2 mt-3" style="color: #FABA75;">
+                        {{Counts?.Leads}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 col-lg-2 mt-4">
+                <div class="card rounded-0 text-center" style="height: 150px;">
+                    <div class="card-title fs-6" style="color: purple;">Processing</div>
+                    <div class="fs-2 mt-3" style="color: #FABA75;">
+                        {{Counts?.Leads}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 col-lg-2 mt-4">
+                <div class="card rounded-0 text-center" style="height: 150px;">
+                    <div class="card-title fs-6" style="color: purple;">Consent From</div>
+                    <div class="fs-2 mt-3" style="color: #FABA75;">
+                        {{Counts?.Leads}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-end">
+        <div class="me-4">
+            <span class="m-2">
+                <img src="../../../assets/images/addsymbole.png" width="30" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">
+            </span>
+            <span class="fs-4 mt-2">Add</span>
+        </div>
+    </div>
+    <!-- <div class="card"> -->
+        <div style="font-size: x-large; color: purple; text-align: center;"><u>{{type}}</u></div>
+        <div class="filters-form">
+            <form [formGroup]="filterConditionForm">
+                <div class="row col-md-12" style="margin-bottom: -50px; margin-top: 10px;">
+                    <div class="col-md-2"><label>Start Date</label> 
+                        <input type="date" class="form-control"
+                            formControlName="StartDate" (change)="onStartDateModified()"></div>
+                    <div class="col-md-2"><label>End Date</label> <input type="date" class="form-control"
+                            formControlName="EndDate" (change)="onEndDateModified()"></div>
+                    <div class="col-md-2" *ngIf="type==='Leads'">
+                        <label>Status</label>
+                        <select class="form-select" aria-label="Default select example" formControlName="Status"
+                            (change)="handleFiltersChange()">
+                            <option selected value="" disabled>Please Select</option>
+                            <option value="Open">Open</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Closed">Closed</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2" [hidden]="type==='Leads'">
+                        <label>Employee</label>
+                        <select class="form-select" aria-label="Default select example" formControlName="EmployeeID"
+                            (change)="handleFiltersChange()">
+                            <option selected value="" disabled>Please Select</option>
+                            <option *ngFor="let empList of allEmployeesData" value="{{empList.EmployeeID}}">{{empList.FirstName}} {{empList.LastName}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2" [hidden]="type==='Leads'">
+                        <label>City</label>
+                        <select class="form-select" aria-label="Default select example" formControlName="CityID"
+                            (change)="handleFiltersChange()">
+                            <option selected value="" disabled>Please Select</option>
+                            <option *ngFor="let city of allServiceAreas" value="{{city.CityID}}">{{city.CityName}}</option>
+
+                        </select>
+                    </div>
+                    <div class="col-md-2"  [hidden]="type==='Leads'">
+                        <label>Service Name</label>
+                        <select class="form-select" aria-label="Default select example" formControlName="SubSubCategoryName"
+                            (change)="handleFiltersChange()">
+                            <option selected value="" disabled>Please Select</option>
+                            <option *ngFor="let subServiceList of allSubSubServices" value="{{subServiceList.SubCategoryID}}">{{subServiceList.AliasName}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2" [hidden]="type==='Leads'" *ngIf="type!=='PaymentToReceive'">
+                        <label>Sub Service Name</label>
+                        <select class="form-select" aria-label="Default select example" formControlName="AliasName"
+                            (change)="handleFiltersChange()">
+                            <option selected value="" disabled>Please Select</option>
+                            <option *ngFor="let servicesList of allServices" value="{{servicesList.ServiceID}}">{{servicesList.AliasName}}</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Closed">Closed</option>
+                        </select>
+                    </div>
+                  
+                </div>
+            </form>
+        </div>
+        <div *ngIf="type==='Leads'">
+            <table class="table table-striped text-start card-body mt-6">
+                <thead class="tablehead">
+                    <tr>
+                        <th>LeadID</th>
+                        <th>Name</th>
+                        <th>E-mail</th>
+                        <th>Mobile Number</th>
+                        <th>Comments</th>
+                        <th>Source</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr 
+                        *ngFor="let viewLeadsTable of viewLeads?.data | paginate :{itemsPerPage:viewLeads?.pages?.perPage,currentPage:viewLeads?.pages?.currentPage,totalItems:viewLeads?.pages?.totalRecords}">
+                        <td style="width: 10px;">{{viewLeadsTable.LeadID}}</td>
+                        <td style="width: 10px;">{{viewLeadsTable.Name}}</td>
+                        <td style="width: 10px;">{{viewLeadsTable.EmailID}}</td>
+                        <td style="width: 10px;">{{viewLeadsTable.MobileNumber}}</td>
+                        <td style="width: 10px;">{{viewLeadsTable.Comments}}</td>
+                        <td style="width: 10px;">{{viewLeadsTable.Source}}</td>
+                        <td style="width: 10px;">{{viewLeadsTable.Type}}</td>
+                        <td style="width: 10px;cursor: pointer;" [ngStyle]="{ 'color': getStatusColor(viewLeadsTable.Status) }" title="Update Lead"
+                      (click)="patchvaluestoupdateleads(viewLeadsTable)"  data-bs-toggle="modal" data-bs-target="#exampleModal"    >{{viewLeadsTable.Status}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-center">
+            <pagination-controls class="pagination" previousLabel="Prev" nextLabel="Next"
+                (pageChange)="onLeadsDataChange($event)">
+            </pagination-controls>
+            </div>
+        </div>
+        <div  *ngIf="type==='OngoingRequests'">
+            <table class="table table-striped text-start card-body mt-6">
+                <thead class="tablehead">
+                    <tr>
+                        <th>RequestID</th>
+                        <th>Sponsor Details</th>
+                        <th>Service Name</th>
+                        <th>Sub Service Name</th>
+                        <th>City</th>
+                        <th>Requested Date</th>
+                        <th>Agent Name</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        *ngFor="let onGoingData of onGoingRequestsData.data | paginate :{itemsPerPage:onGoingRequestsData?.pages?.perPage,currentPage:onGoingRequestsData?.pages?.currentPage,totalItems:onGoingRequestsData?.pages?.totalRecords}">
+                        <td style="width: 10px;">{{onGoingData.RequestID}}</td>
+                        <td style="width: 10px;">{{onGoingData.CustRecID}}<br>{{onGoingData.Name}}</td>
+                        <td style="width: 10px;">{{onGoingData.AliasName}}</td>
+                        <td style="width: 10px;">{{onGoingData.SubSubCategoryName}}</td>
+                        <td style="width: 10px;">{{onGoingData.ServiceAreaName}}</td>
+                        <td style="width: 10px;">{{onGoingData.RequestedDate*1000 | date : 'dd-MMM-YYYY'}}</td>
+                        <td style="width: 10px;">{{onGoingData.AgentName}}</td>
+                        <td style="width: 10px;" [ngStyle]="{ 'color': getStatusColor(onGoingData.Status) }">
+                            {{onGoingData.Status}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-center">
+                <pagination-controls class="pagination" previousLabel="Prev" nextLabel="Next"
+                    (pageChange)="onOnGoingRequestsDataChange($event)">
+                </pagination-controls>
+            </div>
+        </div>
+        <div *ngIf="type==='PaymentToReceive'">
+            <table class="table table-striped text-start card-body mt-6">
+                <thead class="tablehead">
+                    <tr>
+                        <th>Payment ID</th>
+                        <th>Request ID</th>
+                        <th>Sponsor Details</th>
+                        <th>City</th>
+                        <th>Service Name</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Agent Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        *ngFor="let notApprovedBills of paymentToReceiveData.data | paginate :{itemsPerPage:paymentToReceiveData?.pages?.perPage,currentPage:paymentToReceiveData?.pages?.currentPage,totalItems:paymentToReceiveData?.pages?.totalRecords}">
+                        <td style="width: 10px;">{{notApprovedBills.RequestID}}</td>
+                        <td >{{notApprovedBills.PaymentID}}</td> 
+                        <td >{{notApprovedBills.CustRecID}}<br><strong>{{notApprovedBills.CustomerName|titlecase}}</strong></td>
+                        <td >{{notApprovedBills.ServiceAreaName}}</td>
+                        <td >{{notApprovedBills.SubCategoryName}}</td>
+                        <td >{{notApprovedBills.StartDate*1000 | date : 'dd-MMM-YYYY'}}</td>
+                        <td >{{notApprovedBills.EndDate*1000 | date : 'dd-MMM-YYYY'}}</td>
+                        <td >{{notApprovedBills.AgentName}}</td>
+                        <!-- <td style="width: 10px;" [ngStyle]="{ 'color': getStatusColor(notApprovedBills.Status) }">
+                            {{notApprovedBills.Status}}</td> -->
+                    </tr>
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-center">
+                <pagination-controls class="pagination" previousLabel="Prev" nextLabel="Next"
+                    (pageChange)="onPaymentToReceiveDataChange($event)">
+                </pagination-controls>
+            </div>
+        </div>
+    <!-- </div> -->
+</div>
+
+
+<!--modal for add new lead -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Create New Lead</h5>
+                <button #createLeadsClose type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- <form [formGroup]="creatNewLead">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Name</label>
+                    <input class="form-control" type="text" formControlName="Name" placeholder="Name" aria-label="default input example">
+                </div>
+                <div class="col-md-4">
+                    <label>E-mail</label>
+                    <input type="email" class="form-control" formControlName="email" id="exampleFormControlInput1" placeholder="email">
+                </div>
+                <div class="col-md-4">
+                    <label>Mobile</label>
+                    <input class="form-control" type="phone" placeholder="mobile" formControlName="mobile" aria-label="default input example">
+                </div>
+                 
+             <div class="row mt-2">
+                <div class="col-md-4">
+                    <label>Source</label>
+                    <select class="form-select" aria-label="Default select example" formControlName="source">
+                        <option selected>Select Source</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                </div> 
+                <div class="col-md-4">
+                    <label>Type</label>
+                    <select class="form-select" aria-label="Default select example" formControlName="type">
+                        <option selected>Select Type</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                </div>
+             </div>
+
+            </div>
+           </form> -->
+
+                <form [formGroup]="creatNewLead">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Name</label>
+                            <input class="form-control" type="text" formControlName="Name" placeholder="Name"
+                                aria-label="default input example">
+                            <div *ngIf="creatNewLead.controls['Name'].status== 'INVALID'  && craeteLeadsSubmit==true">
+                                <small class="text-danger">Name is required</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label>E-mail</label>
+                            <input type="email" class="form-control" formControlName="EmailID"
+                                id="exampleFormControlInput1" placeholder="Email">
+                            <!-- <div *ngIf="creatNewLead.get('email')?.invalid && creatNewLead.get('email')?.touched">
+                        <small class="text-danger">Invalid email format</small>
+                    </div> -->
+                        </div>
+                        <div class="col-md-4">
+                            <label>Mobile</label>
+                            <input class="form-control" type="tel" placeholder="Mobile" formControlName="MobileNumber"
+                                aria-label="default input example"  minlength="10" maxlength="10" pattern="^[6-9]\d{9}$">
+                            <div
+                                *ngIf="creatNewLead.controls['MobileNumber'].status== 'INVALID'  && craeteLeadsSubmit==true">
+                                <small class="text-danger">Invalid mobile number</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-4">
+                            <label>Source</label>
+                            <select class="form-select" aria-label="Default select example" formControlName="Source">
+                                <option value="" disabled selected>Select Source</option>
+                                <option value="Chat">Chat</option>
+                                <option value="Email">Email</option>
+                                <option value="Reference">Reference</option>
+                                <option value="Phone">Phone</option>
+                                <option value="Kaleyra">Kaleyra</option>
+                            </select>
+                            <div *ngIf="creatNewLead.controls['Source'].status== 'INVALID'  && craeteLeadsSubmit==true">
+                                <small class="text-danger">Source is required</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Type</label>
+                            <select class="form-select" aria-label="Default select example" formControlName="Type">
+                                <option value="" disabled selected>Select Type</option>
+                                <option value="HHC">HHC</option>
+                                <option value="Plan">Plan</option>
+                            </select>
+                            <div *ngIf="creatNewLead.controls['Type'].status== 'INVALID'  && craeteLeadsSubmit==true">
+                                <small class="text-danger">Type is required</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Comments</label>
+                            <div>
+                                <textarea class="form-control" id="exampleFormControlTextarea1"
+                                    formControlName="Comments"></textarea>
+                            </div>
+                            <div
+                                *ngIf="creatNewLead.controls['Comments'].status== 'INVALID'  && craeteLeadsSubmit==true">
+                                <small class="text-danger">Comments required</small>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="anvayaabutton-primary" data-bs-dismiss="modal">Close</button> &nbsp;
+                <button type="button" class="anvayaabutton-secondary" (click)="updateNewLead()">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- update the existing leads -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update Leads</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" #ApproveModalClose aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="updatingform">
+            <div class="row">
+                <div class="col-md-6" >
+                    <label>Status</label>
+                    <select class="form-select" aria-label="Default select example" formControlName="Status" >
+                        <option selected value="" disabled>Please Select</option>
+                        <option value="Open">Open</option>
+                        <option value="Processing">Processing</option>
+                        <option value="Closed">Closed</option>
+                    </select>
+                </div>      
+                <div class="col-md-6" >
+                    <label>Comments</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" formControlName="Comments"></textarea>                
+                </div> 
+            </div>
+        </form>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+          <label type="button" class="btn btn-anvayaafirstcolor" (click)="updateLead()">Save changes</label>
+        </div>
+      </div>
+    </div>
+  </div>

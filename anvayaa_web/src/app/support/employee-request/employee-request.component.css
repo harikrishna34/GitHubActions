@@ -1,0 +1,115 @@
+.bodycontent {
+  margin-top: 100px;
+  margin-left: 109px;
+}
+.tablecur {
+  cursor: pointer;
+}
+
+.reuestHeading {
+  text-align: center;
+  font-weight: 700;
+  font-size: xx-large;
+}
+
+/* table{
+    font-size: smaller;
+    text-align: left;
+} */
+.tablehead {
+  background-color: #914573;
+  color: #fff;
+}
+/* .form-select{
+  line-height: 20px;
+  width: 80%;
+  height: 40%;
+ } */
+
+.icon-circle-lg {
+  width: 4rem;
+  height: 4rem;
+}
+.icon-circle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+}
+
+.mt-6 {
+  margin-top: 4rem !important;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem !important;
+}
+
+.badge {
+  padding: 0.4rem 0.65rem 0.25rem;
+}
+.text-uppercase-bold-sm {
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+  letter-spacing: 2px !important;
+  font-size: 0.85rem !important;
+}
+
+.icon-circle-lg {
+  width: 4rem;
+  height: 4rem;
+}
+.icon-circle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 5.2rem;
+  height: 5.2rem;
+  border-radius: 50%;
+  font-size: 30px;
+}
+.bg-pastel-primary {
+  background-color: #f79122 !important;
+}
+
+.icon-circle[class*="text-"] [fill]:not([fill="none"]),
+.icon-circle[class*="text-"] svg:not([fill="none"]),
+.svg-icon[class*="text-"] [fill]:not([fill="none"]),
+.svg-icon[class*="text-"] svg:not([fill="none"]) {
+  fill: currentColor !important;
+}
+.icon-circle-lg > svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.shadow-sm {
+  box-shadow: 0 0.125rem 0.25rem rgba(35, 38, 45, 0.09) !important;
+}
+
+.header {
+  color: #914572;
+}
+
+.list {
+  max-width: 550px;
+  margin: auto;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+.grab {
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}

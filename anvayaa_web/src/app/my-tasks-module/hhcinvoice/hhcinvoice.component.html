@@ -1,0 +1,161 @@
+<div class="bodycontent">
+    <img class="backArrow" src="../../../assets/images/left-arrow.png" (click)="myTasks()">
+
+    <div class="container">
+        <div class="row HHCInvoiceTable">
+            <!-- Customer Details Start -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center text-center">Partner Details</h2>
+                        <div class="row">
+                            <div class="details">
+                                <div>
+                                    <strong>PartnerID</strong>:<span>
+                                        {{PartnerPaymentDetails?.PaymentForDetails?.HomeHelathServices?.VendorID}}</span>
+                                </div>
+
+                            </div>
+                            <div class="details">
+                                <div>
+                                    <strong>Partner Name</strong>:
+                                    <span>
+                                        {{PartnerPaymentDetails?.PaymentForDetails?.HomeHelathServices?.VendorName}}</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--  Customer Details  End -->
+
+
+        </div>
+
+        <div class="row HHCInvoiceTable" *ngIf="PartnerPayments?.length > 0">
+            <div class="card">
+                <table class="table table-striped table-hover text-center">
+                    <thead>
+                        <tr>
+                            <th>PaymentID</th>
+                            <th>RequestID</th>
+                            <th>Service Name</th>
+                            <th>Amount Received</th>
+                            <th>No of Days</th>
+                            <th>TDS Amount</th>
+                            <th>Net Payable</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let partnerDetailsObj of PartnerPayments">
+                            <th>
+                                <div class="form-check" [formGroup]="ApprovePartnerInvoiceForm">
+                                    <input class="form-check-input" type="checkbox" id="flexCheckDefault"
+                                        (change)="changeDetails(partnerDetailsObj, $event.target)"
+                                        [value]="partnerDetailsObj.Payment.AnvayaaPaymentID">
+
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        {{ partnerDetailsObj.Payment.AnvayaaPaymentID }}
+                                    </label>
+                                </div>
+                            </th>
+                            <td>{{ partnerDetailsObj.PaymentForDetails?.HomeHelathServices.RequestID }}</td>
+                            <td>{{ partnerDetailsObj.PaymentForDetails?.HomeHelathServices.SubCategoryName }}</td>
+                            <td>{{ partnerDetailsObj.Payment?.ReconciliationGSTDetails.TaxableValue | currency:'INR' }}
+                            </td>
+                            <td>{{
+                                partnerDetailsObj.PaymentForDetails?.HomeHelathServices?.ReconsillationData?.ReconsillationFinalDays
+                                }}</td>
+                            <td>{{ partnerDetailsObj.PaymentForDetails?.HomeHelathServices?.ReconsillationData?.Taxes |
+                                currency:'INR' }}</td>
+                            <td>{{
+                                partnerDetailsObj.PaymentForDetails?.HomeHelathServices?.ReconsillationData?.NetPayableVendorCharges
+                                | currency:'INR' }}</td>
+                            <td>{{
+                                (partnerDetailsObj.PaymentForDetails?.HomeHelathServices?.ReconsillationData?.NetPayableVendorCharges
+                                + partnerDetailsObj.PaymentForDetails?.HomeHelathServices?.ReconsillationData?.Taxes) |
+                                currency:'INR' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row col-md-12">
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-3">
+                    <!-- {{paymentArray.length}} -->
+
+                    <button *ngIf="paymentArray.length != 0" class="anvayaabutton-secondary" id="myButton"
+                        value="Reject" type="button" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">Reject</button>&nbsp;
+
+                    <button *ngIf="paymentArray.length != 0" class="anvayaabutton-primary" id="myButton"
+                        value="Approved" (click)="updateInvoicePayment()">Approve</button> &nbsp;
+                </div>
+                <div></div>
+            </div>
+            <div id="mymodal"  class="modal" data-bs-backdrop="static">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Bill Rejection</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"  #cancelPaymentCloseBtn></button>
+                        </div>
+                        <div class="modal-body" [formGroup]="ApprovePartnerInvoiceForm">
+                            <div class="row col-md-12">
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                            id="flexRadioDefault1" value="Vendor" formControlName="AssignTO">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            Assign To Vendor Team  ddss
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                            id="flexRadioDefault2" value="Agent" formControlName="AssignTO">
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            Assign To Agent
+                                        </label>
+                                    </div>
+                                </div>
+                                <div *ngIf="ApprovePartnerInvoiceForm.controls['AssignTO'].status == 'INVALID' && commetsPress == true"
+                                    class="errorColor">*Select One
+                                </div>
+                            </div>
+                            <div class="form-floating" style="margin-top: 10px;">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                                    style="height: 100px" formControlName="Comments"></textarea>
+                                <label for="floatingTextarea2">Comments</label>
+                                <div *ngIf="ApprovePartnerInvoiceForm.controls['Comments'].status == 'INVALID' && commetsPress == true"
+                                    class="errorColor">*Comments Required
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="anvayaabutton-secondary"
+                                (click)="rejectPaymentDeatils()">Reject</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

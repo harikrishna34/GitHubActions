@@ -1,0 +1,1337 @@
+<div class="bodycontent main">
+  <!-- Request Details card Start -->
+  <div class="row request-info">
+    <div class="col-xl-4 col-md-6 mb-3" *ngFor="let data of items">
+      <div class="card h-51">
+        <div class="card-body">
+          <div class="card-heading">
+            <h5 class="card-title">{{data.title}}</h5>
+          </div>
+          <div class="card-content">
+            <div class="person-info" *ngFor="let info of data.details">
+              <img class="card-image" [src]="info.key">&nbsp; : &nbsp;{{info.value|replaceUnderscore}}&nbsp; <span
+                *ngIf="info.key == '../../../assets/images/requestStatus.png'" class="btn btn-primary" type="button"
+                data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Track</span>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+      <h5 id="offcanvasRightLabel">Status Track</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="wrapper">
+        <ol class="StepProgress">
+          <li class="StepProgress-item" *ngFor="let step of requestDetails?.StatusTrack">
+            <strong>{{step?.Status|replaceUnderscore }}</strong>
+            <span>{{ step?.Time*1000 | date : 'dd-MMM-YYYY HH:mm a'}}</span>
+            <br>
+            <span class="text-wrape">{{step?.Note}}</span>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <!-- Request Details card End -->
+  <!--  Buttons Section Starts Here-->
+  <div class="request-action" *ngIf="task==='Update_Requirements'">
+    <div class="request-title">
+      <u>{{requestDetails.AliasName}} Requirements</u>
+    </div>
+    <div class="request-edit-info">
+      <button class="anvayaabutton-secondary" style="width: 50px;" data-bs-toggle="modal"
+        data-bs-target="#editRequest">Edit</button>
+    </div>
+  </div>
+  <!-- Button Group Starts Here-->
+
+
+  <!-- Request Details indetail start -->
+  <div class=" row request-details-info">
+    <div class="col-xl-4 col-md-6 mb-3">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="card-content">
+            <div class="request-details">
+              <!-- <div class="detail">
+                <span class="label">City &nbsp; &nbsp; :</span>
+                <span class="value"> {{requestDetails.CareTaker?.City}}</span>
+              </div> -->
+              <!-- <div class="detail">
+                <span class="label">Mobile Number &nbsp; &nbsp; :</span>
+                <span class="value">{{requestDetails.CareTaker?.MobileNumber}}</span>
+              </div> -->
+              <div class="detail">
+                <span class="label">Staff Gender &nbsp;</span>
+                <span class="columns">:</span>
+                <span class="value" style="margin-left: 10px;">{{requestDetails?.Gender}}</span>
+              </div>
+              <!-- <div class="detail">
+                <span class="label">Area &nbsp; &nbsp; :</span>
+                <span class="value">{{requestDetails.CareTaker?.Area}}</span>
+              </div> -->
+              <div class="detail">
+                <span class="label">Age &nbsp; &nbsp;</span>
+                <span class="columns" style="margin-left: 110px;">:</span>
+                <span class="value" style="margin-left: 10px;">{{requestDetails.CareTaker?.Age}}</span>
+              </div>
+              <div class="detail">
+                <span class="label">Mobility &nbsp; &nbsp; </span>
+                <span class="columns" style="margin-left: 90px;">:</span>
+                <span class="value" style="margin-left: 10px;">{{requestDetails.CareTaker?.Mobility}}</span>
+              </div>
+              <div class="detail">
+                <span class="label">Weight Of The Patient &nbsp;</span>:
+                <!-- <span class="columns">:</span> -->
+                <span class="value" style="margin-left: 10px;">{{requestDetails.CareTaker?.WeightOfThePatient}}</span>
+              </div>
+              <div class="detail">
+                <span class="label">Condition &nbsp; &nbsp; </span>
+                <span class="columns" style="margin-left: 76px;">:</span>
+                <span class="value" style="margin-left: 10px;">{{requestDetails.CareTaker?.WashroomUsage}}</span>
+              </div>
+              <div class="detail">
+                <span class="label">Food In take &nbsp; &nbsp; </span>
+                <span class="columns">:</span>
+                <span class="value" style="margin-left: 10px;">{{requestDetails.CareTaker?.FoodIntake}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-md-6 mb-3">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="card-content">
+            <div class="request-details">
+              <div class="detail">
+                <span class="label">Medication &nbsp; &nbsp; </span>
+                <span class="columns" style="margin-left: 130px;">:</span>
+                <span class="value" style="margin-left: 10px;">{{requestDetails.CareTaker?.Medication}}</span>
+              </div>
+              <div class="detail">
+                <span class="label">Exercise Activity </span>
+                <span class="columns" style="margin-left: 112px;">:</span>
+                <span class="value" style="margin-left: 10px;">{{requestDetails.CareTaker?.ExerciseActivity}}</span>
+              </div>
+              <div class="detail">
+                <span class="label">Medical Equipment Assistance &nbsp; </span>
+                <span>:</span>
+                <span class="value"
+                  style="margin-left: 10px;">{{requestDetails.CareTaker?.MedicalEquipmentAssistance}}</span>
+              </div>
+              <div class="detail">
+                <span class="label">Service Required &nbsp; </span>
+                <span style="margin-left: auto;">:</span>
+                <span class="value"
+                  style="margin-left: 10px;font-size: x-small;">{{requestDetails.CareTaker?.ServiceRequired}}</span>
+              </div>
+              <!-- <div class="detail">
+                <span >Service Required</span>
+                <span class="columns" style="margin-left: 105px;">:</span>
+                <span class="value" style="margin-left: 10px;">{{requestDetails.CareTaker?.ServiceRequired}}</span>
+              </div> -->
+              <div class="detail">
+                <span class="label">Pricing Quoted</span>
+                <span class="columns" style="margin-left: 120px;">:</span>
+                <span class="value" style="margin-left: 10px;">{{requestDetails.CareTaker?.PricingQuoted}}</span>
+              </div>
+              <div class="detail">
+                <span class="label">Price Informed</span>
+                <span class="columns" style="margin-left: 120px;">:</span>
+                <span class="value" style="margin-left: 10px;">{{requestDetails.CareTaker?.PriceInformed}}</span>
+              </div>
+              <div class="detail">
+                <span class="label">Duty Hours</span>
+                <span class="columns" style="margin-left: 145px;">:</span>
+                <span class="value" style="margin-left: 10px;">{{requestDetails.CareTaker?.DutyHours}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-md-6 mb-3">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="card-content">
+            <div class="request-details">
+              <div class="detail">
+                <span class="label">Service Duration Requested &nbsp; </span>
+                <span>:</span>
+                <span class="value"
+                  style="margin-left: 10px;">{{requestDetails.CareTaker?.ServiceDurationRequested}}</span>
+              </div>
+              <div class="detail">
+                <span class="label">Insulin</span>
+                <span class="columns" style="margin-left: 150px;">:</span>
+                <span class="value" style="margin-left: 10px;">{{requestDetails.CareTaker?.Insulin}}</span>
+              </div>
+              <div class="detail">
+                <span class="label">Cook Assistance</span>
+                <span class="columns" style="margin-left: 85px;">:</span>
+                <span class="value" style="margin-left: 10px;">{{requestDetails.CareTaker?.DoYouWantCook}}</span>
+              </div>
+              <div class="detail">
+                <span class="label">Maid Assistance</span>
+                <span class="columns" style="margin-left: 85px;">:</span>
+                <span class="value" style="margin-left: 10px;">{{requestDetails.CareTaker?.DoYouWantMaid}}</span>
+              </div>
+              <div class="detail">
+                <span class="label">Additional Note</span>
+                <span class="columns" style="margin-left: 90px;">:</span>
+                <span class="value" style="margin-left: 10px;">{{requestDetails.CareTaker?.Note}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Request Details indetail End -->
+  <!-- Assign Care Manager  -->
+  <div class="card" *ngIf="task ==='Assign_Care_Manager_For_Placement'">
+    <div class="request-title" style="text-align: center;">
+      <span class="request-type"><u>Confirm Placement With Customer</u></span>
+    </div>
+    <form [formGroup]="assigneCareManager">
+      <div class="row mt-4">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-3">
+          <label>Pick A Date</label>
+          <input type="datetime-local" class="form-control" formControlName="PlacementTime"
+            style="width: 100%;border-radius: 0px;" />
+          <div *ngIf=" assigneCareManager.controls['PlacementTime'].value == '' && press == true" class="errorColor"
+            style="color: #DC3545;">*Required</div>
+
+        </div>
+
+        <div class="col-md-3">
+          <label>Assigned Care Manager</label>
+          <select class="form-select" aria-label="Default select example" formControlName="EmployeeID"
+            style="width: 100%;border-radius: 0px;">
+            <option value="" selected>Select Care Manager</option>
+            <option value="{{cm?.EmployeeID}}" *ngFor="let cm of CareManagerList">{{cm?.FirstName}} {{cm?.LastName}}
+            </option>
+          </select>
+          <div *ngIf=" assigneCareManager.controls['EmployeeID'].value == '' && press == true" class="errorColor"
+            style="color: #DC3545;">*Required</div>
+        </div>
+
+        <div class="col-md-3">
+
+        </div>
+      </div>
+    </form>
+    <div class="text-end">
+      <button class="anvayaabutton-secondary" style="width:5%" (click)="submitCareManager()">
+        Save
+      </button>
+
+    </div>
+  </div>
+  <!-- Assign Care Manager End -->
+
+
+
+  <!-- Add staff form  start -->
+
+
+
+
+
+
+
+  <!-- Add staff form  End -->
+
+  <div *ngIf="task==='Search_Profile'">
+    <app-nesttable></app-nesttable>
+  </div>
+
+  <!-- VerifyBill start -->
+  <div *ngIf="task==='Accepted_Profile'">
+
+    <div class="card">
+      <!-- =================================== screen two table is below -->
+      <div class="head" style="text-align: center;">
+        <!-- style="text-align: center;" -->
+        <h5><u>Accepted Profile/ Accepted Partner</u></h5>
+      </div>
+
+
+      <table class="table">
+        <thead class="tablesforconsent">
+          <tr>
+            <th scope="col">Partner Name</th>
+            <th scope="col">Staff Name</th>
+            <th scope="col">Date of Birth</th>
+            <th scope="col">Age</th>
+            <th scope="col" style="text-align: center;">Experience</th>
+            <th scope="col" style="text-align: center;">Add</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{AcceptedProfile.PartnerDetails?.BusinessInfo?.PartnerName}}</td>
+            <td>{{AcceptedProfile.partnerstaffDetails?.Name}}</td>
+            <td>{{AcceptedProfile.partnerstaffDetails?.DOB *1000 | date : 'dd-MMM-YYYY'}}</td>
+            <td>{{AcceptedProfile.partnerstaffDetails?.Age}}</td>
+            <td style="text-align: center;">{{AcceptedProfile.partnerstaffDetails?.Experience}}</td>
+            <td style="text-align: center;">
+              <label type="button" (click)="AddJob()" class="btn btn-anvayaaaccept" data-bs-toggle="modal"
+                data-bs-target="#addjobdetails" style="margin-right: 15px;">Add Job Details</label>
+            </td>
+
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- VerifyBill start -->
+
+  <!-- VerifyBill start -->
+  <div *ngIf="task==='Verify_bill'">
+    <div class="card">
+
+      <!-- Payment Options Start -->
+      <div class="payment-container-main" style="padding-left: 25px;">
+        <div class="payment-title">
+          <u>Payment from Customer</u>
+        </div>
+
+        <div class="payment-amount-info">
+          <div class="payment-amout">
+            <div class="amount-label">
+              <div><label for="Amount"> Amount To Be Paid</label></div>
+              <div class="payment-amount-text" style="padding-left: 90px;">&#8377;<span>
+                  {{requestDetails.paymentDetails?.Payment?.TotalPrice}}/-</span></div>
+            </div>
+
+          </div>
+          <div class="payment-invoice">
+            <u class="payment-invoice pointer" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+              aria-controls="offcanvasNavbar" aria-label="Toggle navigation">View Invoice</u>
+          </div>
+        </div>
+
+      </div>
+      <!-- Payment Options End -->
+
+      <!-- Payment Optins Start -->
+      <div class="payment-options">
+        <div class="payment-options-main" *ngFor="let paymentOptionObj of paymentOptions; let i = index">
+          <div class="payment-option-image-container"
+            (click)="selectPaymentCard(i);selectPaymentOption(paymentOptionObj)" [class.selected]="selectedIndex === i">
+            <img class="payment-option-image" [src]="paymentOptionObj.url">
+          </div>
+          <div class="payment-option-label">
+            <span>{{paymentOptionObj.label}}</span>
+          </div>
+
+        </div>
+
+      </div>
+      <!-- Payment Options End -->
+
+      <!-- Payment Buttons start -->
+      <div class="buttons-container" *ngIf="task==='Verify_bill'">
+        <div>
+        </div>
+        <div>
+        </div>
+      </div>
+
+      <div class="text-end ">
+        <div *ngIf="SelectedPayment==='Cash'" class="text-end">
+          <input type="text" placeholder="ReceiptNumber" style="width:200px;margin-left: 78%;"
+            [(ngModel)]="ReceiptNumber" class="form-control" />
+        </div>
+      </div>
+      <div class="row mt-3 m-4">
+        <div class="col-md-6"></div>
+        <div class="col-md-2 text-end">
+          <button class="anvayaabutton-secondary m-0" style="width:58%" type="button" data-bs-toggle="modal"
+            data-bs-target="#changePrice">Change Price</button>
+        </div>
+        <div class="col-md-2">
+          <button class="anvayaabutton-primary m-0" style="width:90%" type="button" data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop">Request for Pay Later</button>
+        </div>
+        <div class="col-md-2 ps-0">
+          <button class="anvayaabutton-secondary m-0" style="width:58%" type="button" (click)="MakePayment()">Make
+            Payment</button>
+
+
+
+        </div>
+      </div>
+      <!-- Payment Buttons End -->
+    </div>
+    <!-- <div class="text-end ">
+      <div *ngIf="SelectedPayment==='Cash'" class="text-end">
+        <input type="text" placeholder="ReceiptNumber" style="width:200px;margin-left: 78%;" [(ngModel)]="ReceiptNumber"
+          class="form-control" />
+      </div>
+    </div>
+    <div class="row mt-3 m-4">
+      <div class="col-md-6"></div>
+      <div class="col-md-2 text-end">
+        <button class="anvayaabutton-secondary m-0" style="width:58%" type="button" data-bs-toggle="modal"
+          data-bs-target="#changePrice">Change Price</button>
+      </div>
+      <div class="col-md-2">
+        <button class="anvayaabutton-primary m-0" style="width:90%" type="button" data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop">Request for Pay Later</button>
+      </div>
+      <div class="col-md-2 ps-0">
+        <button class="anvayaabutton-secondary m-0" style="width:58%" type="button" (click)="MakePayment()">Make
+          Payment</button>
+      </div>
+    </div> -->
+    <!-- Payment Buttons End -->
+  </div>
+
+  <!-- VerifyBill start -->
+  <!-- If Task== SearchProfiles code starts -->
+
+  <!-- If Task== SearchProfiles code End -->
+  <!-- if Task = shortlist profiles code start -->
+  <div *ngIf="task==='Shortlist_Profile'">
+    <app-shortlistprofile></app-shortlistprofile>
+  </div>
+  <!-- if Task = shortlist profiles code end -->
+  <!-- Staff Profile Code Start Here-->
+  <div *ngIf="task==='Staff_Details'">
+    <!-- <p>Staff Data Component</p> -->
+    <div class="row col-md-12">
+      <div class="col-md-4">
+        <strong style="font-size: x-large; margin-left: 20px">Staff Profile Photo</strong>
+        <div>
+          <img style="height: 200px; width: 200px; margin-left: 20px"
+            src="{{requestDetails?.partnerstaff?.ProfileImage?.ProfileImg}}">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <strong style="font-size: x-large;">Staff Details</strong>
+        <div>
+          <label style="font-size: large; color: purple;">Name:</label> <span
+            style="font-size: large; margin-left: 10px;">{{requestDetails?.partnerstaff?.Name}}</span>
+        </div>
+        <div>
+          <label style="font-size: large; color: purple;">Job Start Date:</label> <span
+            style="font-size: large; margin-left: 10px;">{{requestDetails?.jobDetails?.StartDate*1000 | date:
+            'dd-MM-YYYY'}}</span>
+        </div>
+        <div>
+          <label style="font-size: large; color: purple;">Job End Date:</label> <span
+            style="font-size: large; margin-left: 10px;">{{requestDetails?.jobDetails?.EndDate*1000 | date:
+            'dd-MM-YYYY'}}</span>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <strong style="font-size: x-large;">Job Extend Or Close</strong>
+        <form [formGroup]="extendOrDropJobs">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" id="flexRadioDefault1" formControlName="Status" value="Extend">
+            <label class="form-check-label" for="flexRadioDefault1">
+              Extend
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" id="flexRadioDefault2" formControlName="Status"
+              value="Complete">
+            <label class="form-check-label" for="flexRadioDefault2">
+              Drop
+            </label>
+          </div>
+          <div *ngIf="extendOrDropJobs.controls['Status'].status == 'INVALID' && formPress == true" class="text-danger">
+            *Required</div>
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
+              formControlName="Comments"></textarea>
+            <label for="floatingTextarea">Comments</label>
+            <div *ngIf="extendOrDropJobs.controls['Comments'].status == 'INVALID' && formPress == true"
+              class="text-danger">*Required</div>
+          </div>
+
+        </form>
+        <div>
+          <button class="anvayaabutton-secondary" style="height: fit-content; width: fit-content; display: flex;"
+            (click)="extendOrDrop()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Staff Profile code end here -->
+  <!-- Partner Price Change Code Start Here -->
+  <div *ngIf="task==='Partner_Price_Change'">
+    <div class="card">
+      <div class="head" style="text-align: center;">
+        <h5><u>Partner Price Change</u></h5>
+      </div>
+      <table class="table">
+        <thead class="tablesforconsent">
+          <tr>
+            <th scope="col">Request ID</th>
+            <th scope="col">Customer Name</th>
+            <th scope="col">Service Name</th>
+            <th scope="col">Price</th>
+            <th scope="col" style="text-align: center;">Price For</th>
+            <th scope="col" style="text-align: center;">Status</th>
+            <th scope="col" style="text-align: center;">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{requestDetails?.jobDetails?.RequestID}}</td>
+            <td>{{requestDetails?.jobDetails?.CustomerName}}</td>
+            <td>{{requestDetails?.jobDetails?.ServiceName}}</td>
+            <td>{{requestDetails?.jobDetails?.ModifiedPrice?.PartnerPrice}}</td>
+            <td>{{requestDetails?.jobDetails?.PriceFor}}</td>
+            <td>{{requestDetails?.jobDetails?.Status}}</td>
+            <td><button type="button" style="height: fit-content; width: fit-content;" class="btn-anvayaaPurple"
+                data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Update
+              </button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Approve Or Reject Partner Price</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="approveOrRejectPartnerPriceForm">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Status" id="flexRadioDefault1"
+                  formControlName="Status" value="Approve">
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Approve
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="Status" id="flexRadioDefault2"
+                  formControlName="Status" value="Reject">
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Reject
+                </label>
+              </div>
+              <div *ngIf="approveOrRejectPartnerPriceForm.controls['Status'].status == 'INVALID' && npress == true"
+                class="errorColor">*Select Any Of Them</div>
+              <div class="form-floating">
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
+                  formControlName="Comments"></textarea>
+                <label for="floatingTextarea">Comments</label>
+                <div *ngIf="approveOrRejectPartnerPriceForm.controls['Comments'].status == 'INVALID' && npress == true"
+                  class="errorColor">*Enter Comment</div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" style="height: fit-content; width: fit-content;" class="btn-anvayaaPurple"
+              (click)="ApproveOrRejectPricePartner()">Update</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- partner price change code end here -->
+  <!--edit request Details form Modal start -->
+  <div class="modal fade" id="editRequest" tabindex="-1" aria-labelledby="editRequestLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="editRequestLabel">Update Requirements</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+            #editDataModalClose></button>
+        </div>
+        <div class="modal-body">
+          <div class="row request-form">
+            <form [formGroup]="requestForm">
+              <div class="row">
+                <!-- <div class="form-group col-md-4 col-xl-3">
+                  <label>Area</label>
+                  <input type="text" formControlName="Area" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['Area'].errors }" />
+                  <div *ngIf="submitted && f['Area'].errors" class="invalid-feedback">
+                    <div *ngIf="f['Area'].errors['required']">Area is required</div>
+                  </div>
+                </div> -->
+                <div class="form-group col-md-4 col-xl-3">
+                  <label>Age</label>
+                  <input type="text" formControlName="Age" class="form-control" type="number"
+                    [ngClass]="{ 'is-invalid': submitted && (f['Age'].errors || isInvalidAge()) }" />
+                  <div *ngIf="submitted && (f['Age'].errors || isInvalidAge())" class="invalid-feedback">
+                    <div *ngIf="f['Age'].errors?.['required']">Age is required</div>
+                    <div *ngIf="isInvalidAge()">Age must be between 18 and 120</div>
+                  </div>
+                </div>
+                <div class="form-group col-md-4 col-xl-3">
+                  <label>Select Gender of Staff</label>
+                  <br>
+                  <label>
+                    <input type="radio" formControlName="Gender" value="Male">
+                    Male
+                  </label>&nbsp;&nbsp;
+                  <label>
+                    <input type="radio" formControlName="Gender" value="Female">
+                    Female
+                  </label>
+                  <div *ngIf="submitted && f['Gender'].errors">
+                    <div *ngIf="f['Gender'].errors['required']"><label style="color:#DC3545;">*Gender is
+                        required</label></div>
+                  </div>
+                </div>
+                <!-- <div class="form-group col-md-4 col-xl-3">
+                  <label>MobileNumber</label>
+                  <input type="text" formControlName="MobileNumber" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['MobileNumber'].errors }" />
+                  <div *ngIf="submitted && f['MobileNumber'].errors" class="invalid-feedback">
+                    <div *ngIf="f['MobileNumber'].errors['required']">MobileNumber is required</div>
+                  </div>
+                </div> -->
+                <div class="form-group col-md-4 col-xl-3">
+                  <label>Mobility</label>
+                  <select class="form-select" formControlName="Mobility" aria-label="Default select example"
+                    [ngClass]="{ 'is-invalid': submitted && f['Mobility'].errors }">
+                    <option selected value="" disabled>Please Select</option>
+                    <option value="walkable">
+                      <li><span class="dropdown-item-text">Walkable</span></li>
+                    </option>
+                    <option value="Walking with support">
+                      <li><span class="dropdown-item-text">Walking with support</span></li>
+                    </option>
+                    <option value="Bedridden">
+                      <li><span class="dropdown-item-text">Bedridden</span></li>
+                    </option>
+                  </select>
+                  <div *ngIf="submitted && f['Mobility'].errors" class="invalid-feedback">
+                    <div *ngIf="f['Mobility'].errors['required']">Mobility is required</div>
+                  </div>
+                </div>
+                <div class="form-group col-md-4 col-xl-3">
+                  <label>Weight Of The Patient</label>
+                  <input type="text" formControlName="WeightOfThePatient" class="form-control" type="number"
+                    [ngClass]="{ 'is-invalid': submitted && f['WeightOfThePatient'].errors }" />
+                  <div *ngIf="submitted && f['WeightOfThePatient'].errors" class="invalid-feedback">
+                    <div *ngIf="f['WeightOfThePatient'].errors['required']">WeightOfThePatient is required</div>
+                  </div>
+                </div>
+                <div class="form-group col-md-4 col-xl-3">
+                  <label>Washroom Usage</label>
+                  <select class="form-select" formControlName="WashroomUsage" aria-label="Default select example"
+                    [ngClass]="{ 'is-invalid': submitted && f['WashroomUsage'].errors }">
+                    <option selected value="" disabled>Please Select</option>
+                    <option value="Going to Washroom">Going to Washroom</option>
+                    <option value="Going to Washroom with support">Going to Washroom with support</option>
+                    <option value="Daiper">Daiper</option>
+                    <option value="Cozy Sheets">Cozy Sheets</option>
+                    <option value="Bed Pan">Bed Pan</option>
+                    <option value="Using Toilet Seat/Commode Wheel Chair">Using Toilet Seat/Commode Wheel Chair</option>
+                  </select>
+                  <!-- <input type="text"  formControlName="WashroomUsage" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['WashroomUsage'].errors }"/> -->
+                  <div *ngIf="submitted && f['WashroomUsage'].errors" class="invalid-feedback">
+                    <div *ngIf="f['WashroomUsage'].errors['required']">WashroomUsage is required</div>
+                  </div>
+                </div>
+                <!-- <div class="form-group col-md-4 col-xl-3">
+                  <label>Food Intake</label>
+                  <select class="form-select" formControlName="FoodIntake" aria-label="Default select example"
+                    [ngClass]="{ 'is-invalid': submitted && f['FoodIntake'].errors }">
+                    <option selected value="" disabled>Please Select </option>
+                    <option value="Self">Self</option>
+                    <option value="Need Assistance">Need Assistance</option>
+                  </select>
+                  <div *ngIf="submitted && f['FoodIntake'].errors" class="invalid-feedback">
+                    <div *ngIf="f['FoodIntake'].errors['required']">FoodIntake is required</div>
+                  </div>
+                </div> -->
+                <div class="form-group col-md-4 col-xl-3">
+                  <label>Food Intake</label>
+                  <br>
+                  <label>
+                    <input type="radio" formControlName="FoodIntake" value="Self">
+                    Self
+                  </label>&nbsp;&nbsp;
+                  <label>
+                    <input type="radio" formControlName="FoodIntake" value="Need Assistance">
+                    Need Assistance
+                  </label>
+                  <div *ngIf="submitted && f['FoodIntake'].errors">
+                    <div *ngIf="f['FoodIntake'].errors['required']"><label style="color:#DC3545;">*Food Intake is
+                        required</label></div>
+                  </div>
+                </div>
+                <!-- <div class="form-group col-md-4 col-xl-3">
+                  <label>Medication</label>
+                  <select class="form-select" formControlName="Medication" aria-label="Default select example"
+                    [ngClass]="{ 'is-invalid': submitted && f['Medication'].errors }">
+                    <option selected disabled value="">Please Select</option>
+                    <option *ngFor='let key of commonOptionsArr' [value]="key">
+                      {{key}}
+                    </option>
+                  </select>
+                  <div *ngIf="submitted && f['Medication'].errors" class="invalid-feedback">
+                    <div *ngIf="f['Medication'].errors['required']">Medication is required</div>
+                  </div>
+                </div> -->
+                <!-- below one is radio form -->
+                <div class="form-group col-md-4 col-xl-3">
+                  <label>Medication</label>
+                  <br>
+                  <label>
+                    <input type="radio" formControlName="Medication" value="Yes">
+                    YES
+                  </label>&nbsp;&nbsp;
+                  <label>
+                    <input type="radio" formControlName="Medication" value="No">
+                    NO
+                  </label>
+                  <div *ngIf="submitted && f['Medication'].errors">
+                    <div *ngIf="f['Medication'].errors['required']"><label style="color:#DC3545;">*Medication is
+                        required</label></div>
+                  </div>
+                </div>
+                <!-- <div class="form-group col-md-4 col-xl-3">
+                  <label>Exercise Activity</label>
+                  <select class="form-select" formControlName="ExerciseActivity" aria-label="Default select example"
+                    [ngClass]="{ 'is-invalid': submitted && f['ExerciseActivity'].errors }">
+                    <option selected disabled value="">Please Select</option>
+                    <option *ngFor='let key of commonOptionsArr' [value]="key">
+                      {{key}}
+                    </option>
+                  </select>
+                  <div *ngIf="submitted && f['ExerciseActivity'].errors" class="invalid-feedback">
+                    <div *ngIf="f['ExerciseActivity'].errors['required']">ExerciseActivity is required</div>
+                  </div>
+                </div> -->
+                <!-- below one is radio form -->
+                <div class="form-group col-md-4 col-xl-3">
+                  <label>Exercise Activity</label>
+                  <br>
+                  <label>
+                    <input type="radio" formControlName="ExerciseActivity" value="Yes">
+                    YES
+                  </label>&nbsp;&nbsp;
+                  <label>
+                    <input type="radio" formControlName="ExerciseActivity" value="No">
+                    NO
+                  </label>
+                  <div *ngIf="submitted && f['ExerciseActivity'].errors">
+                    <div *ngIf="f['ExerciseActivity'].errors['required']"><label style="color:#DC3545;">*Exercise
+                        Activity is
+                        required</label></div>
+                  </div>
+                </div>
+
+                <!-- <div class="form-group col-md-4 col-xl-3">
+                  <label>Medical Assistance</label>
+                  <select class="form-select" formControlName="MedicalEquipmentAssistance"
+                    aria-label="Default select example"
+                    [ngClass]="{ 'is-invalid': submitted && f['MedicalEquipmentAssistance'].errors }">
+                    <option selected disabled value="">Please Select</option>
+                    <option *ngFor='let key of commonOptionsArr' [value]="key">
+                      {{key}}
+                    </option>
+                  </select>
+                  <div *ngIf="submitted && f['MedicalEquipmentAssistance'].errors" class="invalid-feedback">
+                    <div *ngIf="f['MedicalEquipmentAssistance'].errors['required']">MedicalAssistance is required</div>
+                  </div>
+                </div> -->
+                <!-- below one is radio form -->
+                <div class="form-group col-md-4 col-xl-3">
+                  <label>Medical Equipment Assistance</label>
+                  <br>
+                  <label>
+                    <input type="radio" formControlName="MedicalEquipmentAssistance" value="Yes">
+                    YES
+                  </label>&nbsp;&nbsp;
+                  <label>
+                    <input type="radio" formControlName="MedicalEquipmentAssistance" value="No">
+                    NO
+                  </label>
+                  <div *ngIf="submitted && f['MedicalEquipmentAssistance'].errors">
+                    <div *ngIf="f['MedicalEquipmentAssistance'].errors['required']"><label
+                        style="color:#DC3545;">*Medical Equipment Assistance is
+                        required</label></div>
+                  </div>
+                </div>
+                <div class="form-group col-md-4 col-xl-3">
+                  <label>Service Required</label>
+                  <select class="form-select" formControlName="ServiceRequired" aria-label="Default select example"
+                    [ngClass]="{ 'is-invalid': submitted && f['ServiceRequired'].errors }">
+                    <option selected value="" disabled>Select Service Required</option>
+                    <option value="General Care Support Only">General Care Support Only </option>
+                    <option value="General Care Support & Hygiene">General Care Support & Hygiene </option>
+                    <option value="Caretaker Support & Vital Monitoring">Caretaker Support & Vital Monitoring </option>
+                    <option value="Caretaker Support, Hygiene & Vital Monitoring">Caretaker Support, Hygiene & Vital
+                      Monitoring</option>
+                    <option value="Post Operative Care">Post Operative Care</option>
+                    <option value="Companionship">Companionship</option>
+                    <option value="End Of Life Care">End Of Life Care</option>
+                    <option value="Dementia Care">Dementia Care</option>
+                    <option value="Parkinson">Parkinson </option>
+                    <option value="BiPolar">BiPolar</option>
+                  </select>
+                  <div *ngIf="submitted && f['ServiceRequired'].errors" class="invalid-feedback">
+                    <div *ngIf="f['ServiceRequired'].errors['required']">ServiceRequired is required</div>
+                  </div>
+                </div>
+                <!-- <div class="form-group col-md-4 col-xl-3">
+                  <label>Pricing Quoted</label>
+                  <select class="form-select" formControlName="PricingQuoted" aria-label="Default select example"
+                    [ngClass]="{ 'is-invalid': submitted && f['PricingQuoted'].errors }">
+                    <option selected value="" disabled>Select Price Quoted</option>
+                    <option value="Day">Day</option>
+                    <option value="Month">Month</option>
+                  </select>
+                  <div *ngIf="submitted && f['PricingQuoted'].errors" class="invalid-feedback">
+                    <div *ngIf="f['PricingQuoted'].errors['required']">PricingQuoted is required</div>
+                  </div>
+                </div> -->
+                <div class="form-group col-md-4 col-xl-3">
+                  <label>Pricing Quoted</label>
+                  <br>
+                  <label>
+                    <input type="radio" formControlName="PricingQuoted" value="Day">
+                    Day
+                  </label>&nbsp;&nbsp;
+                  <label>
+                    <input type="radio" formControlName="PricingQuoted" value="Month">
+                    Month
+                  </label>
+                  <div *ngIf="submitted && f['PricingQuoted'].errors">
+                    <div *ngIf="f['PricingQuoted'].errors['required']"><label style="color:#DC3545;">*Pricing Quoted is
+                        required</label></div>
+                  </div>
+                </div>
+                <div class="form-group col-md-4 col-xl-3">
+                  <label>Price Informed</label>
+                  <input type="text" formControlName="PriceInformed" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['PriceInformed'].errors }" />
+                  <div *ngIf="submitted && f['PriceInformed'].errors" class="invalid-feedback">
+                    <div *ngIf="f['PriceInformed'].errors['required']">PriceInformed is required</div>
+                  </div>
+                </div>
+                <div class="form-group col-md-4 col-xl-3">
+                  <label>Duty Hours</label>
+                  <select class="form-select" formControlName="DutyHours" aria-label="Default select example"
+                    [ngClass]="{ 'is-invalid': submitted && f['DutyHours'].errors }">
+
+                    <option selected value="" disabled>Select Duty Hours</option>
+                    <option value="24 Hours">24 Hours</option>
+                    <option value="12-hrs Day">12-hrs Day</option>
+                    <option value="12-hrs Night">12-hrs Night </option>
+                    <option value="Single Visit">Single Visit</option>
+                  </select>
+                  <div *ngIf="submitted && f['DutyHours'].errors" class="invalid-feedback">
+                    <div *ngIf="f['DutyHours'].errors['required']">DutyHours is required</div>
+                  </div>
+                </div>
+                <div class="form-group col-md-4 col-xl-3">
+                  <label>Service Duration Requested</label>
+                  <input type="text" formControlName="ServiceDurationRequested" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['ServiceDurationRequested'].errors }" />
+                  <div *ngIf="submitted && f['ServiceDurationRequested'].errors" class="invalid-feedback">
+                    <div *ngIf="f['ServiceDurationRequested'].errors['required']">ServiceDurationRequested is required
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="form-group col-md-4 col-xl-3">
+                  <label>Insulin</label>
+                  <select class="form-select" formControlName="Insulin" aria-label="Default select example"
+                    [ngClass]="{ 'is-invalid': submitted && f['Insulin'].errors }">
+                    <option selected disabled value="">Please Select</option>
+                    <option *ngFor='let key of commonOptionsArr' [value]="key">
+                      {{key}}
+                    </option>
+                  </select>
+                  <div *ngIf="submitted && f['Insulin'].errors" class="invalid-feedback">
+                    <div *ngIf="f['Insulin'].errors['required']">Insulin is required</div>
+                  </div>
+                </div> -->
+                <div class="form-group col-md-4 col-xl-3">
+                  <label>Insulin</label>
+                  <br>
+                  <label>
+                    <input type="radio" formControlName="Insulin" value="Yes">
+                    YES
+                  </label>&nbsp;&nbsp;
+                  <label>
+                    <input type="radio" formControlName="Insulin" value="No">
+                    NO
+                  </label>
+                  <div *ngIf="submitted && f['Insulin'].errors">
+                    <div *ngIf="f['Insulin'].errors['required']"><label style="color:#DC3545;">*Insulin is
+                        required</label></div>
+                  </div>
+                </div>
+                <!-- <div class="form-group col-md-4 col-xl-3">
+                  <label>Cook Assistance Required</label>
+                  <select class="form-select" formControlName="DoYouWantCook" aria-label="Default select example"
+                    [ngClass]="{ 'is-invalid': submitted && f['DoYouWantCook'].errors }">
+                    <option selected disabled value="">Please Select</option>
+                    <option *ngFor='let key of commonOptionsArr' [value]="key">
+                      {{key}}
+                    </option>
+                  </select>
+                  <div *ngIf="submitted && f['DoYouWantCook'].errors" class="invalid-feedback">
+                    <div *ngIf="f['DoYouWantCook'].errors['required']">Cook Assistance is required</div>
+                  </div>
+                </div> -->
+                <div class="form-group col-md-4 col-xl-3">
+                  <label>Cook Assistance Required</label>
+                  <br>
+                  <label>
+                    <input type="radio" formControlName="DoYouWantCook" value="Yes">
+                    YES
+                  </label>&nbsp;&nbsp;
+                  <label>
+                    <input type="radio" formControlName="DoYouWantCook" value="No">
+                    NO
+                  </label>
+                  <div *ngIf="submitted && f['DoYouWantCook'].errors">
+                    <div *ngIf="f['DoYouWantCook'].errors['required']"><label style="color:#DC3545;">*Cook Assistance
+                        Required is
+                        required</label></div>
+                  </div>
+                </div>
+                <!-- <div class="form-group col-md-4 col-xl-3">
+                  <label>Maid Assistance Require ?</label>
+                  <select class="form-select" formControlName="DoYouWantMaid" aria-label="Default select example"
+                    [ngClass]="{ 'is-invalid': submitted && f['DoYouWantMaid'].errors }">
+                    <option selected disabled value="">Please Select</option>
+                    <option *ngFor='let key of commonOptionsArr' [value]="key">
+                      {{key}}
+                    </option>
+                  </select>
+                  <div *ngIf="submitted && f['DoYouWantMaid'].errors" class="invalid-feedback">
+                    <div *ngIf="f['DoYouWantMaid'].errors['required']">Maid is required</div>
+                  </div>
+                </div> -->
+                <div class="form-group col-md-4 col-xl-3">
+                  <label>Maid Assistance Require ?</label>
+                  <br>
+                  <label>
+                    <input type="radio" formControlName="DoYouWantMaid" value="Yes">
+                    YES
+                  </label>&nbsp;&nbsp;
+                  <label>
+                    <input type="radio" formControlName="DoYouWantMaid" value="No">
+                    NO
+                  </label>
+                  <div *ngIf="submitted && f['DoYouWantMaid'].errors">
+                    <div *ngIf="f['DoYouWantMaid'].errors['required']"><label style="color:#DC3545;">*Maid Assistance
+                        Required is
+                        required</label></div>
+                  </div>
+                </div>
+                <div class="form-group col-md-4 col-xl-3">
+                  <label>Note</label>
+                  <textarea type="text" formControlName="Note" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['Note'].errors }"></textarea>
+                  <div *ngIf="submitted && f['Note'].errors" class="invalid-feedback">
+                    <div *ngIf="f['Note'].errors['required']">Note is required</div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="footer-btn">
+          <button type="button" class="anvayaabutton-primary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="anvayaabutton-secondary" (click)="onEditSubmit()">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--edit request Details form Modal End -->
+
+  <!--edit request Details form Modal start -->
+  <div class="modal fade" id="addjobdetails" tabindex="-1" aria-labelledby="addjobdetails" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="editRequestLabel">Add Job Details</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+            #editDataModalClose></button>
+        </div>
+        <div class="modal-body">
+          <div class="row request-form">
+
+            <form [formGroup]="JobForm">
+              <div class="row">
+
+                <div class="col-md-6">
+                  <label>Start Date</label>
+                  <input type="date" class="form-control" formControlName="StartDate" required>
+                  <span
+                    *ngIf="JobForm.controls['StartDate']?.status == 'INVALID'&& JobForm.controls['StartDate']?.value==''&& SubmitJobDetails"
+                    class="text-danger">Required</span>
+
+                </div>
+                <div class="col-md-6">
+                  <label>End Date</label>
+                  <input type="date" class="form-control" formControlName="EndDate">
+                  <span
+                    *ngIf="JobForm.controls['EndDate']?.status == 'INVALID'&& JobForm.controls['EndDate']?.value==''&& SubmitJobDetails"
+                    class="text-danger">Required</span>
+
+                </div>
+
+                <div class="col-md-6">
+                  <label>Select Tarrif</label>
+                  <select class="form-select" aria-label="Default select example" formControlName="TarrifType"
+                    style="border-radius: 0px;">
+                    <option value="" disabled selected>Select Tarrif Type </option>
+                    <option value="{{tariff?.TarrifType}}" *ngFor="let tariff of Tarrifs">{{tariff?.MinimumPrice |
+                      currency:'INR'}} &nbsp;-- &nbsp;{{tariff?.TarrifType}}&nbsp;
+                    </option>
+                  </select>
+                  <span *ngIf="JobForm.controls['TarrifType']?.status == 'INVALID'&&SubmitJobDetails"
+                    class="text-danger">Required</span>
+
+
+                </div>
+
+                <!-- <table class="table table-border table-striped" *ngIf="Tarrifs && Tarrifs.length>0">
+                  <thead style="background-color: #914573;color: #fff;">
+                      <tr>
+                          <th scope="col">Tariff Type</th>
+                          <th scope="col">Final  Price</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let tariff of Tarrifs">
+                          <th scope="row">{{tariff?.TarrifType}}</th>
+                          <td>{{tariff?.MinimumPrice | currency:'INR'}}</td>
+                      </tr>
+                  </tbody>
+              </table> -->
+
+              </div>
+              <div class="footer-btn">
+                <button type="button" class="anvayaabutton-primary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="anvayaabutton-secondary" (click)="SubmitTarrif()">Update</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!--edit request Details form Modal End -->
+
+  <!-- View Invoice Modal  Start-->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="viewInvoiceLabel">Invoice</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="ratio ratio-16x9">
+        <iframe [src]="paymentDetails.PaymentForDetails?.HomeHelathServices?.ProfromaInvoiceBill | safe"
+          title="YouTube video" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+  <!-- View Invoice Modal  End-->
+  <!-- consent form start -->
+
+  <div class="card consentform" *ngIf="task==='Consent_Form_Uploaded'">
+    <!-- =================================== screen two table is below -->
+    <div class="head" style="text-align: center;">
+      <h5><u>Consent Form Uploaded</u></h5>
+    </div>
+    <table class="table ">
+      <thead class="tablesforconsent">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Care Manger Name</th>
+          <th scope="col">Uploaded Time</th>
+          <th scope="col">View</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>{{requestDetails?.employeeDetails?.FirstName}} {{requestDetails?.employeeDetails?.LastName}}</td>
+          <td>{{requestDetails?.UpdatedDate*1000|date:"dd.MMM.yyyy"}}</td>
+          <td type="button" data-bs-toggle="offcanvas" data-bs-target="#consentoffcanvasNavbar"
+            aria-controls="offcanvasNavbar" aria-label="Toggle navigation"><u>View Consent</u></td>
+          <td>
+            <div class="row  col-md-12" style="display: flex;">
+              <div class="col-2" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdroppop"
+                title="Approve">
+                <img src="../../../assets/images/check-mark.png" height="20px" width="20px">
+              </div>
+              <div class="col-2" type="button" data-bs-toggle="modal" data-bs-target="#closeStaticBackdrop"
+                title="Reject"><img src="../../../assets/images/decline.png" height="20px" width="20px">
+              </div>
+            </div>
+          </td>
+
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="task=='VerifyJobDetails'">
+    <div class="row">
+      <div class="col-md-4">
+
+      </div>
+      <div class="col-md-6">
+        <label class="rqDetails"><u>
+            <h5>Verify Job Details with Customer</h5>
+          </u></label>
+      </div>
+      <div class="col-md-2">
+
+      </div>
+    </div>
+
+
+    <div class="card" *ngIf="requestDetails?.paymentDetails">
+
+      <div class="card-header">
+        <b>Reconsillation Details:</b>
+      </div>
+
+      <div class="card-body">
+
+        <form>
+          <table class="table" style="margin-top:10px;">
+            <thead class="thead-dark">
+              <tr style="background-color:#914573;color: white;">
+                <th scope="col">StartDate</th>
+                <th scope="col">End Date</th>
+                <th scope="col">No Of Working days</th>
+                <th scope="col">Update</th>
+                <th scope="col"></th>
+
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  {{requestDetails?.paymentDetails?.PaymentForDetails?.HomeHelathServices?.ReconsillationData?.StartDate
+                  *1000 |
+                  date:"dd-MM-yyyy"}}</td>
+                <td>{{requestDetails?.paymentDetails?.PaymentForDetails?.HomeHelathServices?.ReconsillationData?.EndDate
+                  *1000 |
+                  date:"dd-MM-yyyy"}}</td>
+                <td> <input type="number" style="width:65px" (change)="workingDays($event)"
+                    value="{{requestDetails?.paymentDetails?.PaymentForDetails?.HomeHelathServices?.ReconsillationData?.ReconsillationFinalDays}}">
+                </td>
+                <td><label type="button" class="btn btn-anvayaaaccept"
+                    (click)="UpdateWorkingDays(requestDetails?.paymentDetails?.PaymentForDetails,'Update')">Update</label>
+                </td>
+                <td>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+          <!-- (change)="workingDays($event)" -->
+          <!-- (click)="UpdateWorkingDays(requestDetailsObj.ReconsillationDetials,'Update')" -->
+          <!-- (click)="ApproveWorkingDays(requestDetailsObj.ReconsillationDetials,'Approve')" -->
+          <!-- <button style="margin-left:80%;border-radius: 30%;" class="btn-anvayaaaccept" (click)="ApproveWorkingDays(requestDetails?.paymentDetails?.PaymentForDetails,'Approve')">Approve</button> -->
+          <label type="button" (click)="ApproveWorkingDays(requestDetails?.paymentDetails?.PaymentForDetails,'Approve')"
+            class="btn btn-anvayaaaccept" style="margin-left:80%;">Approve</label>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="staticBackdroppop" data-bs-backdrop="static" tabindex="-1" data-bs-keyboard="false"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal content here -->
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Approve Consent Form</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" #ApproveModalClose
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="myForm">
+            <label>Comments</label>
+            <textarea class="form-control" formControlName="Comments"></textarea>
+            <div *ngIf="myForm.controls['Comments'].value == '' && arpress" class="text-danger">*Required</div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-modalpopup" (click)="Approve('Approve')">Save & Approve</button>
+        </div>
+        <!-- Additional details here -->
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="closeStaticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Reject Consent Form</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" #rejectModalClose aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="myForm">
+            <label>Comments</label>
+            <textarea class="form-control" formControlName="Comments"></textarea>
+            <div *ngIf="myForm.controls['Comments'].value == '' && arpress" class="text-danger">*Required</div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-modalpopup" (click)="Reject('Reject')">Save & Reject</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- consent form end -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="consentoffcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="viewInvoiceLabel">Consent Form</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="offcanvas-body">
+        <div class="consentiframe">
+          <!-- <iframe [src]="IframImgConsentForm | safe" title="Consent Form"  scrolling="no" style="overflow: hidden;" ></iframe> -->
+          <img [src]="IframImgConsentForm" height="600px" width="500px">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Consent_Form_Uploaded -->
+
+  <!--PayLater Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Pay Later</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="PayLaterForm">
+            <div>
+              <label>
+                Payment Date
+              </label>
+              <input type="date" class="form-control" formControlName="Date" name="Date" />
+              <div
+                *ngIf="PayLaterForm.controls['Date']?.status == 'INVALID'&&PayLaterForm.controls['Date']?.value ==''&&submitPaylater"
+                class="text-danger">* Payment Date Required </div>
+            </div>
+            <div class="mt-3">
+              <label>Comments</label>
+              <div class="form-floating">
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
+                  formControlName="Comments"></textarea>
+                <label for="floatingTextarea">Comments</label>
+                <div
+                  *ngIf="PayLaterForm.controls['Comments']?.status == 'INVALID'&&PayLaterForm.controls['Comments']?.value ==''&&submitPaylater"
+                  class="text-danger">* Required </div>
+
+              </div>
+            </div>
+          </form>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="anvayaabutton-primary m-0" style="width: 88px;"
+            data-bs-dismiss="modal">Close</button>
+          <button type="button" class="anvayaabutton-secondary m-0" style="width: 88px;"
+            (click)="submitPayLater()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Change Price Model -->
+  <div class="modal fade" id="changePrice" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Change Price</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="changePriceForm">
+            <div>
+              <label>Price</label>
+              <input class="form-control" type="text" placeholder="Enter Price" formControlName="PartnerPrice" />
+              <div
+                *ngIf="changePriceForm.controls['PartnerPrice'].status == 'INVALID'&&changePriceForm.controls['PartnerPrice'].value ==''&&changePriceSubmit"
+                class="text-danger">*Price Required</div>
+            </div>
+            <div class="mt-2">
+              <label>Select Tariff Type</label>
+              <select class="form-select" formControlName="TariffType">
+                <option value="" disabled selected>Select Tariff Type </option>
+                <option value="Daily">Daily</option>
+                <option value="Weakley">Weakley</option>
+                <option value="Hourly">Hourly</option>
+                <option value="Monthly">Monthly</option>
+              </select>
+              <div
+                *ngIf="changePriceForm.controls['TariffType'].status == 'INVALID'&&changePriceForm.controls['TariffType'].value ==''&&changePriceSubmit"
+                class="text-danger">*Required</div>
+
+            </div>
+            <div class="mt-2">
+              <label>Commission Type</label>
+              <select class="form-select" formControlName="CommissionType" required>
+                <option value="" disabled selected>Commission Type </option>
+                <option value="Referal_Percentage">Referal Percentage</option>
+                <option value="Referral_Fee">Referral Fee</option>
+              </select>
+              <div
+                *ngIf="changePriceForm.controls['CommissionType'].status == 'INVALID'&&changePriceForm.controls['CommissionType'].value ==''&& changePriceSubmit"
+                class="text-danger">*Required</div>
+            </div>
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="anvayaabutton-primary m-0" style="width: 88px;"
+            data-bs-dismiss="modal">Close</button>
+          <button type="button" class="anvayaabutton-secondary m-0" style="width: 88px;"
+            (click)="submitChangePrice()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-spinner type="ball-scale-multiple">loading...</ngx-spinner>

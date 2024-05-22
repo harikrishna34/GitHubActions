@@ -1,0 +1,48 @@
+
+ 
+ <form *ngFor="let data of anchorsLocationDetails"   #userlogin = "ngForm" (ngSubmit)="updateachors()" id="anchorsdata" [formGroup]="anchorsdata">
+    <div  class="previosButton" (click)="dashboard()"><img src="../../../assets/images/previous.png"></div>
+    <div class="col-md-10 container">
+        <div>
+            <button class="button justify-content-md-center sponserdetailsplate" >LocationDetails</button>
+        </div>
+        <br>
+        <div class="row">
+        
+   
+            <div class="form-group col-md-4 inputBox" >
+                <input type="text" name="Name" formControlName="CityID" required onkeyup="this.setAttribute('value', this.value);" value=""  ngModel="{{data.CityID}}">
+              
+                <label>CityID</label>
+             
+            </div>
+            
+   
+        </div>
+        <div class="row">
+        
+   
+           <div class="form-group col-md-4 inputBox" >
+               <input type="text" name="Name" formControlName="CityName" required onkeyup="this.setAttribute('value', this.value);" value=""  ngModel="{{data.CityName}}">
+             
+               <label>CityName</label>
+            
+           </div>
+           
+   
+       </div>
+        <br>
+        
+        <br>
+       
+        <br>
+         <div class="row"> 
+   
+            
+            <input type = "submit" value = "submit">
+        </div> 
+        <br>
+        
+   
+    </div>
+    </form>

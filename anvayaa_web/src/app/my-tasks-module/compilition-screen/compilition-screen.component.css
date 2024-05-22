@@ -1,0 +1,636 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+.bodycontent{
+    margin-top: 100px;
+    margin-left: 120px;
+    margin-right: 12px;
+    background-color: white;
+  height: 1206px;
+  /* width: fit-content; */
+  }
+.backArrow{
+  cursor: pointer;
+}
+
+.card{
+  margin: 10px !important;
+}
+
+.table{
+  margin: 10px !important;            
+}
+.row{
+  padding: 10px !important;
+}
+.anvayaaButtonYellow{
+  background-color: #F79122;
+  /* font-weight: bold; */
+  color: purple;
+}
+.anvayaaButton{
+  background-color: purple;
+  font-weight: bold;
+  color: aliceblue;
+}
+  .titleButtonsCss{
+    height: 75px;
+    /* padding: 26px; */
+    /* width: 285px; */
+    text-align: center;
+    background-color: #ececec;
+    border-bottom: 1px solid black;
+    color: purple;
+    /* margin-top: 30px; */
+    cursor: pointer;
+    
+  }
+.tasks{
+  margin-top: 20px;
+}
+   .textDecration{
+    text-decoration-thickness: 1px;
+    margin-left: 10%;
+   }
+  td{
+    padding:10px;
+  }
+  .buttonwidth{
+    width: 20%;
+    text-align: center;
+    background-color: #ECECEC;
+    height:50px;
+    border: 1px solid white;
+    padding: 30px ;
+  }
+
+  .DetailsTitle{
+  
+    margin-top: 15px;
+   
+    height: 78px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 39px;   
+    color: #000000;
+  }
+    
+  
+  .chargesSpan{
+    background-color: #ECECEC;
+    
+    border-radius: 4px;
+    border: 1px solid black;
+  }
+  .executiveTable{
+    border: 1px solid black;
+    margin-top: 50px;
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+
+  .rightBorder{
+    border-right: 1px solid black;
+    background-color: #F0F0F0;;
+    /* color: #F1F1F1; */
+  }
+ .underline{
+  background-color: #3DEDE2;
+ }
+
+ .topmargin{
+   margin-top: 10px;
+   margin-left: 30px;
+ }
+
+
+
+ .servicesDropdown{
+  font-family: 'Inter';
+  font-style: normal;
+      width: 100%;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 39px;
+    color: #000000;
+  
+ }
+ .servicesdropdown{
+  font-family: 'Inter';
+  font-style: normal;
+      width: 100%;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 39px;
+    color: #000000;
+  
+ }
+ /* .reqDetails{ */
+   /* align-items: center; */
+   /* margin-left: 350px; */
+ /* } */
+
+ .weekdayscss{
+  font-family: 'Poppins';
+  font-style: normal;
+  /* font-weight: 500; */
+  line-height: 135%;
+  /* or 32px */
+  
+  letter-spacing: -0.01em;
+ }
+
+
+
+ .paymentCss{
+
+
+  width: 244px;
+height: 27px;
+left: 726px;
+top: 947px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 22px;
+line-height: 29px;
+
+color: #000000;
+ }
+
+ .servicesDivCss{
+  background-color: #F0F0F0;;
+    border: none;
+    width: 216px;
+    height: 34px;
+  font-size: 18px;
+  color: #000000;
+  font-family: 'Inter';
+ }
+ .servicesDivCssBene{
+  background-color: #F0F0F0;;
+  /* border: none; */
+  width: 216px;
+  height: 39px;
+font-size: 18px;
+color: #000000;
+font-family: 'Inter';
+ }
+
+ /* l */
+ .serviceType{
+   margin-top: 10px;
+ }
+ .tabs{
+   margin-left: 10px;
+   margin-right: 10px;
+   width: 98%;
+ }
+ .ServiceDates{
+   margin-top: 10px;
+ }
+ .DaysSelect{
+  width: 52px;  
+  font-family: 'inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 135%;
+  /* or 32px */
+  
+  /* letter-spacing: -0.01em; */
+  
+  color: #000000;
+ }
+ .payment{
+   margin-top: 10px;
+ }
+ .startDate{
+  border: 2px solid #F79122;
+ }
+ .paymentMode{
+   margin-top: 10px;
+ }
+
+ .customerDetails{
+  width: 278px;
+  height: 43px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 135%;
+  /* or 43px */
+  letter-spacing: -0.01em;
+  color: #000000;
+  margin-left: 30%;
+  margin-top: 20px;
+  
+ }
+ .sponserDetails{
+  /* margin-left: 119px; */
+  background-color: #3DEDE2;
+  color: #000000;
+  width: 190px;
+  text-align: center;
+  height: 36px;
+  font-size: 24px; 
+ border: none;
+ border-radius: 10px;
+  margin-top: 10px;
+  margin-left: 90px;
+ }
+ .supportStyle{
+  background-color: #3DEDE2;
+  color: #000000;
+  width: 220px;
+  text-align: center;
+  height: 36px;
+  font-size: 24px; 
+ border: none;
+ border-radius: 10px;
+  margin-top: 10px;
+  margin-left: 90px;
+ }
+ .backupcm{
+  background-color: #3DEDE2;
+  color: #000000;
+  width: 303px;
+  text-align: center;
+  height: 36px;
+  font-size: 24px; 
+ border: none;
+ border-radius: 10px;
+  margin-top: 10px;
+  /* margin-left: 90px; */
+ }
+ .BeneficiaryDetails{
+  margin-left: 119px;
+  background-color: #3DEDE2;
+  color: #000000;
+  width: 271px;
+  text-align: center;
+  height: 36px;
+  font-size: 24px; 
+ border: none;
+ border-radius: 10px;
+  margin-top: 10px;
+  margin-left: 90px;
+ }
+
+
+ .beneficiaryDetailsstyle{
+  border: 1px solid black;
+  margin-left: 118px;
+  width: 455px;
+  height: 214px;
+  box-sizing: border-box;
+  background: #F1F1F1;
+ }
+ .sponserDetailsTable{
+  width:30%;
+  height: 214px;
+  left: 47px;
+  top: 617px;
+  
+  background: #edecec;
+  border: 1px solid #000000;
+ }
+ .customerTitles{
+  
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  line-height: 135%;
+  color: #0b0b0b;
+  /* or 32px */
+  
+  letter-spacing: -0.01em;
+ 
+}
+.detailsspcm{
+  margin-top: 50px;
+}
+.sponserDetailsStyle{
+  border: 1px solid black;
+  margin-left: 18px;
+  width: 455px;
+  height: 214px;
+  box-sizing: border-box;
+  background: #F1F1F1;
+}
+.headingStyle {
+  margin-left: 119px;
+  background-color: #3DEDE2;
+  color: #000000;
+  width: 271px;
+  text-align: center;
+  height: 36px;
+  font-size: 24px; 
+ border: none;
+ border-radius: 10px;
+  margin-top: 10px;
+  margin-left: 90px;
+}
+.phNo {
+  font-weight: 200;
+  font-size: 18px;
+  color: #000000;
+}
+.titleButtonsCss:hover {
+  background-color: #F79122;
+}
+.requestDetails{
+  margin-left: 20px;
+}
+.startdate{
+  width: 20%;
+  border: 2px solid #F79122;
+}
+.date{
+  width: 40%;
+}
+.serviceName{
+  margin-top: 30px;
+  /* margin-left: 5px; */
+}
+.serviceDetails{
+  margin-left: 5px;
+}
+.serviceStartDate{
+  width: 100%;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 39px;
+  
+color: #000000;
+}
+.charges{
+  width: 261px;
+height: 27px;
+left: 688px;
+top: 642px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 29px;
+
+color: #000000;
+}
+.serviceNames{
+  width: 80px;
+height: 29px;
+left: 401px;
+top: 192px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 29px;
+/* identical to box height */
+
+
+color: #000000;
+}
+.rqDetails{
+/* height: 43px;
+left: 562px;
+top: 524px; */
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 600;
+font-size: 32px;
+line-height: 135%;
+/* or 43px */
+
+letter-spacing: -0.01em;
+
+color: #000000;
+}
+.serviceNameNew{
+  /* width: 206px; */
+height: 29px;
+left: 261px;
+top: 642px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 29px;
+/* identical to box height */
+
+
+
+}
+
+.fontstyle{
+  font-family: 'Poppins';
+  font-weight: 600;
+  
+}
+
+.infovendorButn{
+  margin-left: 80%;
+  margin-top: 30px;
+}
+.SponserName{
+ 
+  /* font-family: 'Poppins'; */
+  /* font-style: normal; */
+  /* font-weight: 500; */
+  line-height: 135%;
+  font-size: 16px;
+  color:#522652;
+  /* or 32px */
+  
+  /* letter-spacing: -0.01em; */
+
+
+}
+
+
+.supportexcutivetitle{
+  text-align: center;
+    padding: 16px;
+}
+
+.rate {
+  float: left;
+  height: 46px;
+  padding: 0 10px;
+}
+.rate:not(:checked) > input {
+  position:absolute;
+  top:-9999px;
+}
+.rate:not(:checked) > label {
+  float:right;
+  width:1em;
+  overflow:hidden;
+  white-space:nowrap;
+  cursor:pointer;
+  font-size:30px;
+  color:#ccc;
+}
+.rate:not(:checked) > label:before {
+  content: '★ ';
+}
+.rate > input:checked ~ label {
+  color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+  color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+  color: #c59b08;
+}
+
+.pad10px{
+  padding: 10px;
+}
+
+
+.previousRating_tab{
+  border: 1px solid #FBFBFB;
+    width: 90%;
+    margin-top: 2%;
+    margin-left: auto;
+    background-color: #FBFBFB;
+    padding: 15px;
+}
+
+.ratingResoningTab{
+  padding: 10px;
+  padding-bottom: 1px;
+}
+
+
+.nestedRatingTab{
+  border:1px solid black;
+  height: 150px
+}
+
+.sponseDetailsbox{
+  width: 70%;border: 1px solid black; margin-top: 50px;background-color:#ECECEC;
+}
+
+.benficiaryDetailsbox{
+  width: 70%;border: 1px solid black; margin-top: 80px;background-color:#ECECEC;
+
+}
+.AcceptBtn{
+  background:green;
+  padding: 6px 15px;
+  color: white;
+  border-radius: 10px;
+  border: none;
+}
+.rejectBtn{
+  padding: 6px 15px;
+  color: white;
+  background:red;
+  border-radius: 10px;
+  border: none;
+  /* cursor: pointer; */
+}
+.dateee{
+  width:100px
+}
+.date{
+  width:200px
+}
+.titlevendor{
+  margin-left: 250px;
+  /* background-color: #914573; */
+  }
+  .addProfile{
+    background-color : #f89e3d;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border-radius: 5px;
+    color: black;
+    border: none;
+  }
+  .addProfile:hover{
+    background:green;
+  }
+  /* .deleteBtn{
+    background-color: red;
+    color: white;
+    border: none;
+  } */
+
+  .ComleteRequestDetails{
+    color: red;
+  }
+  .SponserName{
+    width: 100px;
+  }
+
+  .backbtn{
+    border-radius: 10px;
+    background-color: #914573;
+    border: none;
+    color: white;
+  }
+  .closeBtn{
+    border-radius: 10px;
+    border: none;
+    background-color: red;
+    color: white;
+  }
+  .btnColor{
+    background-color: darkgray;
+
+  }
+  .inputbox{
+    width: 100%;
+  }
+
+  .price{
+    width: 100%;
+    height: 36px;
+  }
+
+  .errorColor{
+    color:red
+  }
+  .formdetails {
+    width: 100%;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 10px;
+    /* text-align: center; */
+    color: #000000;
+    /* margin-top: 20px; */
+}
+.changePrice{
+  padding-left: 10px;
+  color: #F79123;
+  cursor: pointer;
+}
+.radioBtns{
+  
+}
+.my-custom-scrollbar {
+  position: relative;
+  height: 300px;
+  overflow: auto;
+  }
+  .table-wrapper-scroll-y {
+  display: block;
+  }

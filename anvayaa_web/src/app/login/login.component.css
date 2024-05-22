@@ -1,0 +1,125 @@
+
+
+
+
+form {
+  padding-left: 28%;
+  padding-right: 28%;
+  height: 100vh;
+}
+
+input[type=text],
+input[type=password] {
+  width: 100%;
+  padding:  12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 1px 2px #ccc;
+
+}
+ label {
+  font-weight: 400;
+  font-size: 14px;
+  color: #914573;
+}
+.loginfom{
+  padding: 35px;
+}
+
+.Loignbutton {
+  background-color: #f79122;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width:100%;
+  height: 50px;
+  border-radius: 10px;
+}
+.otpbutton {
+  background-color: #fff;
+  color: #000;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width:100%;
+  height: 50px;
+
+  border-radius: 10px;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 10px 0 10px 0;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+.btn {
+  border-radius: 50px;
+}
+.btn.btn-cta {
+  background: #F79122;
+  border-color: #F79122;
+  color: #fff;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 6px 0;
+  margin-left: -3px;
+}
+.btnotp {
+  border-radius: 50px;
+}
+.btnotp.btn-cta {
+  background: #F79122;
+  border-color: #F79122;
+  color: #fff;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 6px 0;
+  margin-left: -3px;
+}
+
+hr {
+  border: none;
+  border-top: 3px solid #333;
+  color: #000;
+  overflow: visible;
+  text-align: center;
+  height: 8px;
+}
+
+hr:after {
+  background: #fff;
+  content: 'or';
+  padding: 0 4px;
+  position: relative;
+  top: -13px;
+}

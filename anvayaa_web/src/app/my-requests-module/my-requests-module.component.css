@@ -1,0 +1,28 @@
+.bodycontent{
+    margin-top: 100px;
+    margin-left: 109px;
+  }
+  .tablecur{
+    cursor: pointer;
+  }
+
+  .reuestHeading{
+    text-align: center;
+    font-weight: 700;
+    font-size: xx-large;
+  }
+
+  /* table{
+    font-size: smaller;
+    text-align: left;
+} */
+.tablehead{
+  background-color: #914573;
+  color: #fff;
+}
+ .form-select{
+  line-height: 20px;
+  width: 80%;
+  height: 40%;
+ }
+  

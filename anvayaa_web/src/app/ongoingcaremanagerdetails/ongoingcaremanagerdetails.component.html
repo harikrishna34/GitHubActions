@@ -1,0 +1,86 @@
+<div class="bodycontent">
+    <div style="text-align: center;">
+        <h2>Care Manager Visits</h2>
+    </div>
+    <div>
+        <table class="table table-striped text-start card-body mt-6">
+            <thead class="tablehead">
+                <tr>
+                    <th>Request Details</th>
+                    <th >Customer Details </th>
+                    <!-- <th (click)="sortData('CreatedPersonName')">Requested Name </th> -->
+                    <th>Agent Name </th>
+                    <th>Created Date </th>
+                    <th>Requested Date </th>
+                    <th>Updated Date </th>
+                    <th>Status </th>
+                    <th>Status Track</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let data of ViewCCdbArray">
+                <tr>
+                    <td>
+                        <div>
+                          {{data?.AliasName |titlecase}}
+                        </div><b>{{data?.RequestID}}</b>
+                              
+                        <div style="color:#914572">{{data?.CustomerType}}</div>
+                      </td>
+                    <td>{{data?.Name}}
+                        <div>
+                            <b>{{data?.CustRecID}}</b>
+                        </div>
+                    </td>
+                    <!-- <td>{{data?.}}</td> -->
+                    <td>{{data?.EmployeeDetails?.FirstName}} {{data?.EmployeeDetails?.LastName}}</td>
+                    <td>{{data?.CreatedDate*1000 |date: 'dd-MMM-yyyy'}}</td>
+                    <td>{{data?.RequestedDate*1000 |date: 'dd-MMM-yyyy'}}</td>
+                    <td>{{data?.UpdatedDate*1000 |date: 'dd-MMM-yyyy'}}</td>
+                    <td>{{data?.Status}}</td>
+                    <td>
+                        <button type="button" class="anvayaabutton-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="showStatusTrack(data)">
+                          View
+                        </button>
+                      </td>                      
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Status Track</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped text-start card-body mt-6">
+                    <thead class="tablehead">
+                        <tr>
+                            <th>Name</th>
+                            <th>Time</th>
+                            <th>Status Message</th>
+                            <th>Note</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let statustrack of selectedData?.StatusTrack">
+                            <td>{{statustrack?.CreatedPersonName}}</td>
+                            <td>{{statustrack?.Time*1000| date: 'dd-MMM-yyyy HH:MM'}}</td>
+                            <td>{{statustrack?.StatusMessage}}</td>
+                            <td>{{statustrack?.Note}}</td>
+                            <td>{{statustrack?.Status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+

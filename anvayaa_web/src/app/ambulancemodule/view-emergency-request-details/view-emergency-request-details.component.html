@@ -1,0 +1,486 @@
+<div class="bodycontent">
+  <div class="content">
+    <div class="row">
+      <div>
+        <span></span>
+      </div>
+    </div>
+    <div class="row">
+     
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Create Ambulance User</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #closebutton></button>
+            </div>
+            <!-- Create Ambulance User Form start --> 
+            <div class="modal-body">
+              <form [formGroup]="ambulanceUserDetailsForm">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="full_name">Full Name </label>
+                    <input type="text" id="full_name" name="full_name" formControlName="full_name" class="form-control">
+
+                    <span class="text-danger"
+                      *ngIf="!ambulanceUserDetailsForm.controls['full_name'].valid && (ambulanceUserDetailsForm.controls['full_name']?.dirty ||ambulanceUserDetailsForm.controls['full_name']?.touched)">
+                      Please Enter Full Name
+                    </span>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="mobile_no">Mobile No </label>
+                    <input type="text" id="mobile_no" name="mobile_no" formControlName="mobile_no" class="form-control">
+                    <span class="text-danger"
+                      *ngIf="!ambulanceUserDetailsForm.controls['mobile_no'].valid && (ambulanceUserDetailsForm.controls['mobile_no']?.dirty ||ambulanceUserDetailsForm.controls['mobile_no']?.touched)">
+                      Please Enter Mobile Number
+                    </span>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="email_id">Email ID </label>
+                    <input type="text" id="email_id" name="email_id" formControlName="email_id" class="form-control">
+                    <span class="text-danger"
+                      *ngIf="!ambulanceUserDetailsForm.controls['email_id'].valid && (ambulanceUserDetailsForm.controls['email_id']?.dirty ||ambulanceUserDetailsForm.controls['email_id']?.touched)">
+                      Please Enter Email ID
+                    </span>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="facility_start">Facility Start </label>
+                    <input type="date" formControlName="facility_start" class="form-control">
+                    <span class="text-danger"
+                      *ngIf="!ambulanceUserDetailsForm.controls['facility_start'].valid && (ambulanceUserDetailsForm.controls['facility_start']?.dirty ||ambulanceUserDetailsForm.controls['facility_start']?.touched)">
+                      Please Select Start Date
+                    </span>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="facility_end">Facility End </label>
+                    <input type="date" formControlName="facility_end" class="form-control">
+                    <span class="text-danger"
+                      *ngIf="!ambulanceUserDetailsForm.controls['facility_end'].valid && (ambulanceUserDetailsForm.controls['facility_end']?.dirty ||ambulanceUserDetailsForm.controls['facility_end']?.touched)">
+                      Please Select End Date
+                    </span>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+
+            <!-- Create Ambulance User Form End -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn anvayaaButton" (click)="onSubmitAmbulanceUser()">Send
+                message</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="informationContent">
+      <div class="row">
+        <!-- Customer Details Start -->
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Customer Details</h4>
+              <div class="row">
+                <div class="details">
+                  <div>
+                    <label>CustRecID</label>
+                  </div>
+                  <div>
+                    <span>{{RequestDetails?.CustomerDetails?.CustRecID}}</span>
+                  </div>
+                </div>
+                <div class="details">
+                  <div>
+                    <label>CustomerName</label>
+                  </div>
+                  <div>
+                    <span>{{RequestDetails?.CustomerDetails?.Name}}</span>
+                  </div>
+                </div>
+                <div class="details">
+                  <div>
+                    <label>BeneficiaryName</label>
+                  </div>
+                  <div>
+                    <div>
+                      <span>{{RequestDetails?.BeneficiaryData?.Name}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="details">
+                  <div>
+                    <label>ContactNo</label>
+                  </div>
+                  <div>
+                    <div>
+                      <span>{{RequestDetails?.BeneficiaryData?.MobileNumber}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="details">
+                  <div>
+                    <label>Age</label>
+                  </div>
+                  <div>
+                    <div>
+                      <span>{{RequestDetails?.BeneficiaryData?.Age}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="details">
+                  <div>
+                    <label>Gender</label>
+                  </div>
+                  <div>
+                    <div>
+                      <span>{{RequestDetails?.BeneficiaryData?.Gender}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- CareManagerDetails End -->
+
+        <!--Request Details Start -->
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Request & Care Manager Details</h4>
+              <div class="row">
+                <div class="details">
+                  <div>
+                    <label>RequestID</label>
+                  </div>
+                  <div>
+                    <span>{{RequestDetails?.RequestID}}</span>
+                  </div>
+                </div>
+                <div class="details">
+                  <div>
+                    <label>Emergency Time</label>
+                  </div>
+                  <div>
+                    <span>{{RequestDetails.CreatedDate *1000|date : 'dd-MMM-yyyy hh:mm a'}}</span>
+                  </div>
+                </div>
+                <div class="details">
+                  <div>
+                    <label>ServiceName</label>
+                  </div>
+                  <div>
+                    <!-- {{myRequestsObj["AliasName"]|replaceUnderscore |titlecase}} -->
+                    <span>{{RequestDetails?.SubCategoryName|replaceUnderscore |titlecase}}</span>
+                  </div>
+                </div>
+                <div class="details">
+                  <div>
+                    <label>Status</label>
+                  </div>
+                  <div>
+                    <div>
+                      <span>{{RequestDetails?.Status}}</span>
+                    </div>
+                  </div>
+                </div>
+
+              
+                <div class="details">
+                  <div>
+                    <label>ContactNumber</label>
+                  </div>
+                  <div>
+                    <div>
+                      <span>{{RequestDetails?.CareManagerDetails?.ContactNumber}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Request Details End -->
+
+
+        <!-- CareManagerDetails Start -->
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Address</h4>
+              <div class="row">
+                <div class="details">
+                  <div>
+                    <label>Address </label>
+                  </div>
+                  <div>
+                    <span>{{RequestDetails?.CustomerDetails.BenificiarysAddress[0].StreetAddress}},{{RequestDetails?.CustomerDetails.BenificiarysAddress[0].Colony}}
+                     </span>
+                  </div>
+                </div>
+                <div class="details">
+                  <div>
+                    <label>PinCode </label>
+                  </div>
+                  <div>
+                    <span>
+                      {{RequestDetails?.CustomerDetails.BenificiarysAddress[0].PinCode}}
+                     </span>
+                  </div>
+                </div>
+                <div class="details">
+                  <div>
+                    <label>LandMark </label>
+                  </div>
+                  <div>
+                    <span>{{RequestDetails?.CustomerDetails.BenificiarysAddress[0].Landmark}}
+                     </span>
+                  </div>
+                </div>
+                <div class="details">
+                  <div>
+                    <label>City </label>
+                  </div>
+                  <div>
+                    <span>{{RequestDetails?.CustomerDetails.BenificiarysAddress[0].City}}
+                     </span>
+                  </div>
+                </div> <div class="details">
+                  <div>
+                    <label>State </label>
+                  </div>
+                  <div>
+                    <span>{{RequestDetails?.CustomerDetails.BenificiarysAddress[0].State}}
+                     </span>
+                  </div>
+                </div>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="row" style="margin-top: 10px;">
+        <!-- CareManagerDetails End -->
+
+        <!-- ambulance Start -->
+        <div class="col-md-6" *ngIf="!RequestDetails?.AmbulanceRequestID">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Ambulance Details</h4>
+              <div class="row">
+                <form [formGroup]="ambulanceCreateForm">
+                  <div class="details">
+                    <div>
+                      <label>Select Ambulance Type</label>
+                    </div>
+                    <div>
+                      <select class="form-select" aria-label="Default select example" formControlName="ambulance_type"
+                        (change)="onAmbulanceChange($event)">
+                        <option selected disabled value="">Select Ambulance Type</option>
+                        <option *ngFor="let amblist of ambulanceList" value="{{amblist.type}}">
+                          {{amblist.type}}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="details">
+                    <div>
+                      <label>Equipment Required</label>
+                    </div>
+
+                      <div>
+                        <ng-multiselect-dropdown class="form-control" [settings]="equipmentDropdownSettings"
+                          [data]="equipementlist" formControlName="equipment" style="width: 240px;" (change)="onAmbulanceChange($event)"></ng-multiselect-dropdown>
+                      </div>
+                  </div>
+                  <div class="details">
+                    <div>
+                      <label></label>
+                    </div>
+                  </div>
+                  <div class="details">
+                    <div>
+                      <label></label>
+                    </div>
+
+                      <div>
+                        <button type="button" class="btn btn-primary cancelBtn anvayaaButton" style="background: #F79122;" (click)="handleSubmit()"
+                        >Create Ambulance Request</button>
+                      </div>
+                  </div>
+
+                 
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6" >
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Update Request </h4>
+              <div class="row">
+                <form [formGroup]="StatusForm">
+                  <div class="details">
+                    <div>
+                      <label>Select Status</label>
+                    </div>
+                    <div>
+                      <select class="form-select" aria-label="Default select example" formControlName="Status">
+                        <option selected disabled value="">Select Status</option>
+                        <option value="EmergencyTrigger">Emergency Trigger</option>
+                            <option value="CareManagerAccepted">CareManager Accepted</option>
+                            <option value="AmbulanceConfirmed">Ambulance Confirmed</option>
+                            <option value="PatientPicked">Patient Picked</option>
+                            <option value="PatientDropped">Patient Dropped</option>
+                            <option value="RideCompleted">Ride Completed</option>
+
+                      </select>
+                    </div>
+                  </div>
+                  <div class="details">
+                    <div>
+                      <label>Comments</label>
+                    </div>
+
+                      <div>
+                        <textarea formControlName="Comments" class="form-control" placeholder="Comment"></textarea>
+                      </div>
+                  </div>
+                  <div class="details">
+                    <div>
+                      <label></label>
+                    </div>
+                  </div>
+                  <div class="details">
+                    <div>
+                      <label></label>
+                    </div>
+
+                      <div>
+                        <button type="button" class="btn btn-primary cancelBtn anvayaaButton" style="background: #F79122;" (click)="StatusSubmit()"
+                        >Update Request Details</button>
+                      </div>
+                  </div>
+
+                 
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ambulance End -->
+
+        <div class="col-md-6" *ngIf="RequestDetails?.AmbulanceRequestID && !RequestDetails?.DriverName">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Driver Details</h4>
+              <div class="row">
+                <form [formGroup]="DriverCreateForm">
+                  <div class="details">
+                    <div>
+                      <label>Driver Name</label>
+                    </div>
+                    <div>
+                      
+                      <input type="text" formControlName="DriverName" placeholder="Driver Name" class="form-control">
+                    </div>
+                  </div>
+
+                  <div class="details">
+                    <div>
+                      <label>Vehicle No</label>
+                    </div>
+
+                      <div>
+                        <input type="text" formControlName="VehicleNo" placeholder="Vehicle No" class="form-control">
+                      </div>
+                  </div>
+                  <div class="details">
+                    <div>
+                      <label>Driver Contact</label>
+                    </div>
+
+                    <div>
+                      <input type="text" formControlName="DriverContact" placeholder="Driver Contact" class="form-control">
+                    </div>
+                  </div>
+                  
+                  <div class="details">
+                    <div>
+                      <label></label>
+                    </div>
+
+                      <div>
+                        <button type="button" class="btn btn-primary cancelBtn anvayaaButton" style="background: #F79122;" (click)="DriverSubmit()"
+                        >Save Driver Details</button>
+                      </div>
+                  </div>
+
+                 
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Ambulance Driver Details Start -->
+        <div class="col-md-6" *ngIf="RequestDetails?.AmbulanceRequestID">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Ambulance Driver Details</h4>
+              <div class="row">
+                <div class="details">
+                  <div>
+                    <label>Ambulance RequestID</label>
+                  </div>
+                  <div>
+                    <span>{{RequestDetails?.AmbulanceRequestID}}</span>
+                  </div>
+                </div>
+                <div class="details">
+                  <div>
+                    <label>Driver Name</label>
+                  </div>
+                  <div>
+                    <span>{{RequestDetails?.DriverName}}</span>
+                  </div>
+                </div>
+                <div class="details">
+                  <div>
+                    <label>Vehicle No</label>
+                  </div>
+                  <div>
+                    <span>{{RequestDetails?.VehicleNo}}</span>
+                  </div>
+                </div>
+                <div class="details">
+                  <div>
+                    <label>Contact Number</label>
+                  </div>
+                  <div>
+                    <div>
+                      <span>{{RequestDetails?.DriverContact}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Ambulance Driver Details End -->
+
+      </div>
+    </div>
+
+
+  </div>
+</div>
+<ngx-spinner type="ball-scale-multiple">loading...</ngx-spinner>

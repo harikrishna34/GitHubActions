@@ -1,0 +1,37 @@
+
+  body{
+    background-color: #f0f0f0 !important;
+      font-family: 'Poppins' !important;
+      font-size: 16px;
+
+  }
+
+  .bodycontent {
+    margin-top: 100px;
+    margin-left: 120px;
+    font-size: 20px;
+    font-family: 'Poppins' !important;
+  
+  }
+  .alertBox{
+    position: absolute;
+    z-index: 2;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 13%;
+    background-color: white;
+}
+.anvayaa{
+   background-color: #f79122; 
+
+}
+.anvayaaButtonYellow{
+  background-color: #F79122;
+  /* font-weight: bold; */
+  color: purple;
+}
+.anvayaaButton{
+  background-color: purple;
+  font-weight: bold;
+  color: aliceblue;
+}

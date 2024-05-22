@@ -1,0 +1,27 @@
+.dashboard-cards{
+    text-align: center;
+
+    padding: 2rem; 
+    /* font-size: x-large; */
+}
+.tab-list{
+    display: flex;
+    justify-content: space-around;
+    border-bottom-style: groove;
+}
+.tab{
+    border-radius: 30px;
+    height: 40px;
+    width: 150px;
+    align-items: center;
+    cursor: pointer;
+}
+.tab:active{
+    background-color: blue;
+}
+.active{
+    background-color: red;
+}
+.tab-item{
+    align-items: center;
+}

@@ -1,0 +1,315 @@
+<div class="card" style="margin-left: 10px;">
+
+  <div class="card m-2"  *ngIf="Addstaffshow">
+    <div class="row">
+      <div class="col-md-3">
+        <div>
+         <h4 class="">Add Staff</h4>
+        </div>
+
+        <div class="image-container m-auto">
+          <label class="hoverable" for="fileInput">
+            <img class="profile-Img" [src]="url ? url : 'https://www.w3schools.com/howto/img_avatar.png'" />
+            <div class="hover-text">Choose file</div>
+            <div class="background"></div>
+          </label>
+          <br />
+          <input
+            id="fileInput"
+            type="file"
+            [(ngModel)]="url"
+            class="select-profile-picture"
+            (change)="onSelectFile($event)"
+          />
+          <span class="message">Tap here to select/change your profile picture</span>
+        </div>
+  
+      </div>
+      <div class="col-md-9">
+        <form [formGroup]="addStaffForm">
+        <div class="row row-cols-4  m-2  text-start">
+          <div class="col">
+            <label> <span class="text-danger">*</span> Name </label>
+            <input class="form-control" type="text" placeholder="Name" formControlName="Name"  name="Name" (keypress)="onlyAlphabets($event)"   />
+            <div *ngIf="addStaffForm.controls['Name'].status=='INVALID'&&addStaffForm.controls['Name'].value == ''&&staffSubmit" class="text-danger">* Name Required</div>
+          </div>
+          <div class="col">
+            <label><span class="text-danger">*</span>Date Of Birth </label>
+            <input class="form-control" type="date" placeholder="Name" formControlName="DOB" name="DOB" />
+            <div *ngIf="addStaffForm.controls['DOB'].status=='INVALID'&&addStaffForm.controls['DOB'].value == ''&&staffSubmit" class="text-danger">* Date of Birth Required</div>
+  
+          </div>
+          <div class="col">
+            <label><span class="text-danger">*</span>Education</label>
+            <input class="form-control" type="text" placeholder="Education" formControlName="Education"  name="Education"   />
+            <div *ngIf="addStaffForm.controls['Education'].status=='INVALID'&&addStaffForm.controls['Education'].value == ''&&staffSubmit" class="text-danger">* Education Required</div>
+  
+          </div>
+          <div class="col">
+            <label><span class="text-danger">*</span>Select Gender</label>
+            <div class="mt-2">
+              <label class="radio-inline">
+                <input type="radio" name="optradio" value="Male" formControlName="Gender"   >Male
+              </label>
+              <label class="radio-inline ms-2">
+                <input type="radio" name="optradio" value="Female" formControlName="Gender"  >Female
+              </label>
+            </div>
+            <div *ngIf="addStaffForm.controls['Gender'].status=='INVALID'&&addStaffForm.controls['Gender'].value == ''&&staffSubmit" class="text-danger">* Gender Required</div>
+  
+          </div>
+        </div>
+        <div class="row row-cols-4  m-2 mt-3 text-start">
+          <div class="col">
+            <label> <span class="text-danger">*</span> Aadhaar Number </label>
+            <input class="form-control" type="text" placeholder="Aadhaar Number"  formControlName="AadhaarNo" name="AadhaarNo"  (keypress)="onlyNumber($event)"    />
+            <div *ngIf="addStaffForm.controls['AadhaarNo'].status=='INVALID'&&addStaffForm.controls['AadhaarNo'].value == ''&&staffSubmit" class="text-danger">* Aadhaar Number Required</div>
+            <div *ngIf="addStaffForm.get('AadhaarNo')?.errors?.['minlength']" class="text-danger">Aadhaar Number must be at least 12 characters long.</div>
+            <div *ngIf="addStaffForm.get('AadhaarNo')?.errors?.['maxlength']" class="text-danger">Aadhaar Number cannot exceed 12 characters.</div>
+          </div>
+          <div class="col">
+            <label><span class="text-danger">*</span>Phone </label>
+            <input class="form-control" type="tel" placeholder="Phone Number" formControlName="MobileNumber" name="MobileNumber" (keypress)="onlyNumber($event)"  />
+            <div *ngIf="addStaffForm.controls['MobileNumber'].status=='INVALID'&&addStaffForm.controls['MobileNumber'].value == ''&&staffSubmit" class="text-danger">* Mobile Number Required</div>
+            <div *ngIf="addStaffForm.get('MobileNumber')?.errors?.['minlength']" class="text-danger">Mobile Number must be at least 10 characters long.</div>
+            <div *ngIf="addStaffForm.get('MobileNumber')?.errors?.['maxlength']" class="text-danger">Mobile Number cannot exceed 10 characters.</div>
+          </div>
+          <div class="col">
+            <label><span class="text-danger">*</span>Select Religion</label>
+            <select class="form-select" formControlName="Religion" name="Religion">
+              <option value="" disabled selected>Select Religion</option>
+              <option *ngFor="let religion of ReligionList" value="{{religion}}">{{religion}}</option>
+            </select>
+            <div *ngIf="addStaffForm.controls['Religion'].status=='INVALID'&&addStaffForm.controls['Religion'].value == ''&&staffSubmit" class="text-danger">*Religion Required</div>
+  
+          </div>
+
+        </div>
+        <div class="row row-cols-4  m-2 mt-3 text-start">
+          <div class="col">
+            <label> <span class="text-danger">*</span> Address </label>
+            <input class="form-control" type="text" placeholder="Address"  formControlName="Address" name="Address" />
+            <div *ngIf="addStaffForm.controls['Address'].status=='INVALID'&&addStaffForm.controls['Address'].value == ''&&staffSubmit" class="text-danger">*Address Required</div>
+          </div>
+          <div class="col">
+            <label><span class="text-danger">*</span>Languages Spoken</label>
+            <div id='Status'>
+              <ng-multiselect-dropdown value="dropdownList" formControlName="Languages" name="Languages" class="formDetails" 
+                [placeholder]="'select Languages'" [settings]="dropdownSettings" [data]="dropdownList"
+                >
+              </ng-multiselect-dropdown>
+            <div *ngIf="addStaffForm.controls['Languages'].status=='INVALID'&&addStaffForm.controls['Languages'].value == ''&&staffSubmit" class="text-danger">*Language Required</div>
+  
+            </div>
+          </div>
+          <div class="col">
+            <label><span class="text-danger">*</span>Experience</label>
+            <input class="form-control" type="number" placeholder="Experience" formControlName="Experience" name="Experience" (keypress)="onlyNumber($event)" />
+            <div *ngIf="addStaffForm.controls['Experience'].status=='INVALID'&&addStaffForm.controls['Experience'].value == ''&&staffSubmit" class="text-danger">*Experience Required</div>
+            
+          </div>
+
+        </div>
+        <div class="row row-cols-4  m-2 mt-3 text-start">
+          <div class="col" *ngIf="showQualification" >
+            <label><span class="text-danger">*</span>Select Nurse Qualification</label>
+            <select class="form-select"  formControlName="NurseQualification" name="NurseQualification"   >
+              <option value="" disabled selected>Select Qualification</option>
+              <option value="ANM">ANM</option>
+              <option value="GNM">GNM</option>
+              <option value="BSC">BSC</option>
+            </select>
+          </div>
+          <div class="col" *ngIf="GDAinput">
+            <label><span class="text-danger">*</span>GDA Certified</label>
+            <div class="mt-2">
+              <label class="radio-inline">
+                <input type="radio" name="optradio" formControlName="GDACertified" value="Yes">Yes
+              </label>
+              <label class="radio-inline ms-2">
+                <input type="radio" name="optradio"  formControlName="GDACertified"  value="No">No
+              </label>
+            </div>
+          </div>
+         
+        </div>
+        <div class="row row-cols-4  m-2 mt-3 text-start">
+          <div class="col">
+            <label><span class="text-danger">*</span>Upload Aadhaar</label>
+            <input class="form-control" type="file"  formControlName="AdharCardDoc"   accept=".png, .jpg, .jpeg"  (change)="onFileSelected($event)"  >
+            <div *ngIf="addStaffForm.controls['AdharCardDoc'].status=='INVALID'&&addStaffForm.controls['AdharCardDoc'].value == ''&&staffSubmit" class="text-danger">*Adhaar Document Required</div>
+          </div>
+          <div class="col" *ngIf="GDAdocInput">
+            <label><span class="text-danger">*</span> Upload GDA</label>
+            <input class="form-control"  type="file" id="formFileMultiple"      (change)="GDAattachmentFile($event)"   >
+          </div>
+          <div class="col"  *ngIf="NurseDocInput">
+            <label><span class="text-danger" >*</span>Upload Nurse  Documents</label>
+            <input class="form-control" type="file" id="formFileMultiple"   (change)="NurseattachmentFile($event)"   >
+          </div>
+         
+        </div>
+        <div class="text-end">
+          <button class="anvayaabutton-secondary" style="width:30%" (click)="submitAddStaff()">Submit</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+
+
+
+    <h4><u>Search Profile/Search Partner</u></h4>
+    <div class="table table-striped table-hover">
+        <div class="table-header table-row">
+            <div class="td">Select</div>
+            <div class="td">Partner ID</div>
+            <div class="td">Partner Name</div>
+            <div class="td">City</div>
+            <div class="td">Rating</div>
+            <div class="td">View</div>
+            <div class="td"></div>
+            <!-- Other header cells go here -->
+        </div>
+
+        <div class="table-row" *ngFor="let row of VendorsList; let rowIndex = index">
+            <div [class.clickable]="isRowClickable(rowIndex)">
+
+                <div class="td">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" checked
+                            disabled>
+                        <label class="form-check-label" for="flexCheckCheckedDisabled"></label>
+                    </div>
+                </div>
+                <div class="td">{{row._id}}</div>
+                <div class="td">{{row.partnerData.BusinessInfo.PartnerName|titlecase}}</div>
+                <div class="td">{{row.partnerData.BusinessInfo.City |titlecase}}</div>
+                <div class="td"> {{ row.partnerData.BusinessInfo.Rating ? row.partnerData.BusinessInfo.Rating : '---' }}
+                </div>
+                <!-- <div class="td" (click)="expanded[row.id] = !expanded[row.id]"><i class="fa fa-eye"></i></div>-->
+
+                <div class="td">
+                    <div *ngIf="!expandedRows[rowIndex]">
+                        <!-- <button class="btn" title="profiles" (click)="toggleRowExpansion(rowIndex)">
+                      <div><img src="../../../assets/images/viewinfo.png" height="30px" width="30px"><div class="lengthstaffdata" style="color: red;"><strong>{{ row.staffData.length }}</strong></div></div>
+                    </button> -->
+                        <button class="btn" title="profiles" (click)="toggleRowExpansion(rowIndex)">
+                            <div style="position: relative;">
+                                <img src="../../../assets/images/viewinfo.png" height="30px" width="30px">
+                                <div class="lengthstaffdata"
+                                    style="position: absolute; top: -5px; right: -5px; background-color: #f79123; color: white; border-radius: 50%; padding: 2px 5px;">
+                                    <strong>{{ row.staffData.length }}</strong>
+                                </div>
+                            </div>
+                        </button>
+
+                    </div>
+                    <div *ngIf="expandedRows[rowIndex]"><button class="btn" title="profiles close"
+                            (click)="toggleRowExpansion(rowIndex)">-</button></div>
+                </div>
+                <div class="td">
+                  <button class="anvayaabutton-primary" *ngIf="row?.staffData?.length == 0 "  (click)="addStaffForPartner(row)"  style="width:75px" >Add Profile</button>
+                </div>
+
+                <div style="padding:0px" [@detailExpand]="expandedRows[rowIndex] ? 'expanded' : 'collapsed'">
+                    <!-- <div class="nested-table-container"> -->
+                    <div class="table table-striped" style="margin-left: 130px;">
+                        <div class="nodata" style="text-align: center;"
+                            *ngIf="row.staffData && row.staffData.length <= 0">
+                            <div class="nostaff" style="color: red;">
+                            <h4> ***No Staff Profiles </h4>
+                            </div>
+                        </div>
+                        <div class="table-headers table-row" *ngIf="row.staffData && row.staffData.length > 0">
+                            <div class="td">Profile</div>
+                            <!-- <div class="td">Profile ID</div> -->
+                            <div class="td">Name</div>
+                            <div class="td">Date of Birth</div>
+                            <div class="td">Age</div>
+                            <div class="td">Experience</div>
+                        </div>
+                        <tbody>
+                            <div class="table-row" *ngFor="let childrow of row.staffData">
+                                <div class="td">
+                                    <img [src]="childrow?.ProfileImage?.ProfileImg" class="profile-photo" (click)="viewprofiles(childrow)" data-bs-toggle="modal" data-bs-target="#profileinfostaticBackdrop" title="View Profile Info">
+                                </div>
+                                <!-- <div class="td">{{childrow.ProfileID}}</div> -->
+                                <div class="td">{{childrow.Name}}</div>
+                                <div class="td">{{childrow.DOB*1000 | date : 'dd-MMM-YYYY'}}</div>
+                                <div class="td" style="margin-left: 5px;">{{childrow.Age}}</div>
+                                <div class="td" style="margin-left: 30px;">{{childrow.Experience}}</div>
+                            </div>
+                        </tbody>
+                    </div>
+
+                    <!-- </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-end">
+        <button class="anvayaabutton-secondary" (click)="submitprofilesofpartners()">Submit</button>
+    </div>
+    <!-- <ngx-spinner type="ball-scale-multiple">loading...</ngx-spinner> -->
+</div>
+
+<!-- Modal for viewing profile -->
+<div class="modal fade" id="profileinfostaticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Profile Info...</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div >
+                      <img [src]="profilestoviewindetail?.ProfileImage?.ProfileImg"  alt="Profile Picture" class="profile-image">
+                  </div>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="profile-header">
+                      <!-- <h2>{{selectedProfileforimage?.partnerstaffDetails?.Name}}</h2> -->
+                      <p><span style="font-weight: bold; color: #914573;">ProfileID :</span> <strong>{{profilestoviewindetail?.ProfileID}}</strong></p>
+                  </div>
+                  </div>
+                </div>
+              </div>
+             <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p><span style="font-weight: bold; color: #914573;">Partner Name:</span> <strong>{{profilestoviewindetail?.Name}}</strong></p>
+                      <p><span style="font-weight: bold; color: #914573;">DOB:</span> <strong>{{profilestoviewindetail?.DOB*1000 | date : 'dd-MMM-YYYY'}}</strong></p>
+                      <p><span style="font-weight: bold; color: #914573;">Age:</span> <strong>{{profilestoviewindetail?.Age}}</strong></p>
+                      <p><span style="font-weight: bold; color: #914573;">Gender:</span> <strong>{{profilestoviewindetail?.Gender}}</strong></p>
+                      <p><span style="font-weight: bold; color: #914573;">City:</span> <strong>{{profilestoviewindetail?.ServiceAreaName}}</strong></p>
+                      <p><span style="font-weight: bold; color: #914573;">Address:</span> <strong>{{profilestoviewindetail?.Address}}</strong></p>
+                      <p><span style="font-weight: bold; color: #914573;">Languages:</span> <strong>
+                        <span *ngFor="let language of profilestoviewindetail?.Languages;let lastLanguage = last">
+                          {{ language }}
+                          <span *ngIf="!lastLanguage">, </span>
+                        </span>
+                      </strong></p>
+                    </div>
+                    <div class="col-md-6">
+                      <p><span style="font-weight: bold; color: #914573;">Service:</span> <strong>{{profilestoviewindetail?.SubcategoryName}}</strong></p>
+                      <p><span style="font-weight: bold; color: #914573;">Experience:</span> <strong>{{profilestoviewindetail?.Experience}}</strong></p>
+                      <p><span style="font-weight: bold; color: #914573;">Education:</span> <strong>{{profilestoviewindetail?.Education}}</strong></p>
+                      <p><span style="font-weight: bold; color: #914573;">Mobile Number:</span> <strong>{{profilestoviewindetail?.MobileNumber}}</strong></p>
+                      <p><span style="font-weight: bold; color: #914573;">AadhaarNo:</span> <strong>{{profilestoviewindetail?.AadhaarNo}}</strong></p>
+                      <p><span style="font-weight: bold; color: #914573;">Religion:</span> <strong>{{profilestoviewindetail?.Religion}}</strong></p>
+                    </div>
+                  </div> 
+                </div>        </div>
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+  <ngx-spinner type="ball-scale-multiple">loading...</ngx-spinner>

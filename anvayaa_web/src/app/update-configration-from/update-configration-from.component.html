@@ -1,0 +1,425 @@
+<button type="button" class="btn-close" (click)="asersdashboard()" aria-label="Close"
+    style="margin-left: 94%;"></button>
+
+<body class="maindiv" style="background-color: #F5F5F5;">
+    <div id="content" class="card">
+        <section>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="container">
+                        <div class="hex-layer-6">
+                            <div class="hex" (click)="regitationTab()">
+                                <h6 class="hexa1"> RegisterDetails</h6>
+                            </div>
+                        </div>
+                        <div class="hex-layer-5">
+                            <div class="hex" style="margin-left: -99px;
+                                margin-top: -146px;" (click)="thresholdTab()">
+                                <h6 class="hexa2">
+                                    Thresholds
+                                </h6>
+                            </div>
+                            <div class="hex" style="margin-left: -34px;" (click)="OtherTab()">
+                                <h6 class="hexa4">
+                                    Others</h6>
+                            </div>
+                        </div>
+                        <div class="hex-layer-4">
+                            <div class="hex" style="margin-right: 256px; margin-top: -73px;" (click)="whitlistTab()">
+                                <h6>
+                                    WhiteList
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div *ngIf="RegistrationForm">
+                        <div class="text-center">
+                            <div class="registration-title">Registration</div>
+                            <form [formGroup]="configurationForm">
+
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="customerSelect  ng-autocomplete" style="width: 258px;">
+                                            <ng-autocomplete [data]="CustomersList" [searchKeyword]="keyword"
+                                                placeholder="Search Customer" (selected)='selectEvent($event)'
+                                                (inputChanged)='onChangeSearch($event)'
+                                                (inputCleared)='onFocused($event)' [itemTemplate]="itemTemplate"
+                                                [notFoundTemplate]="notFoundTemplate">
+                                            </ng-autocomplete>
+                                            <ng-template #itemTemplate let-item>
+                                                <a [innerHTML]="item.Name"> </a>
+                                            </ng-template>
+                                            <ng-template #notFoundTemplate let-notFound>
+                                                <div [innerHTML]="notFound"></div>
+                                            </ng-template>
+                                        </div>
+                                        <span *ngIf="Submit==true && CustRecID==''"></span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <select class="form-select" formControlName="CustomerID"
+                                            (change)="customerDetails($event,'benficiary')">
+                                            <option disabled selected value="">Select Benificiary</option>
+                                            <option *ngFor="let ben of benficiaryarray" value="{{ben.CustID}}">
+                                                {{ben.Name}}</option>
+                                        </select>
+                                        <!-- <span class="text-danger"
+                                            *ngIf="configurationForm.controls['CustomerID'].value==''&& Submit == true">
+                                            *Benificiary Required</span> -->
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div>
+                                            <select class="form-select" formControlName="DeviceID"
+                                                [disabled]="configurationForm.controls['DeviceID'].value!=''"
+                                                (change)="selectedModel($event)">
+                                                <option value="" selected>Select Device</option>
+                                                <option *ngFor="let device of Devices" value="{{device.DeviceID}}">
+                                                    {{device.Model}}</option>
+                                            </select>
+                                            <span class="text-danger"
+                                                *ngIf="configurationForm.controls['DeviceID'].value==''&& Submit == true">
+                                                * Device Required</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5 inputBox">
+                                        <input type="text" class="form-control" formControlName="IMEINumber"
+                                            [maxLength]="15" onkeyup="this.setAttribute('value', this.value);"
+                                            (keypress)="($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57"
+                                            onkeyup="this.setAttribute('value', this.value);"
+                                            onkeyup="this.setAttribute('value', this.value);" value="" required>
+                                        <label>IMEI Number
+                                        </label>
+                                        <span class="text-danger"
+                                            *ngIf="configurationForm.controls['IMEINumber'].value==''&& Submit == true">
+                                            *IMEI Number Required</span>
+                                        <div
+                                            *ngIf="configurationForm.controls['IMEINumber'].dirty||configurationForm.controls['IMEINumber'].touched ">
+                                            <div *ngIf="configurationForm.controls['IMEINumber'].errors?.['minlength']"
+                                                class="text-danger">
+                                                * IMEI Number Requird Minimum 15 digits.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 inputBox">
+                                        <input type="text" class="form-control" formControlName="SIMNumber"
+                                            [maxlength]="10"
+                                            (keypress)="($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57"
+                                            onkeyup="this.setAttribute('value', this.value);"
+                                            onkeyup="this.setAttribute('value', this.value);" value="" required>
+                                        <label>Sim Number
+                                        </label>
+                                        <span class="text-danger"
+                                            *ngIf="configurationForm.controls['SIMNumber'].value==''&& Submit == true">
+                                            *Sim Number Required</span>
+                                        <div
+                                            *ngIf="configurationForm.controls['SIMNumber'].dirty||configurationForm.controls['SIMNumber'].touched ">
+                                            <div *ngIf="configurationForm.controls['SIMNumber'].errors?.['minlength']"
+                                                class="text-danger">
+                                                *Number Requird Minimum 10 digits.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5 inputBox">
+                                        <input type="text" class="form-control"
+                                            formControlName="EmergencyPointOfContactNumber" [maxlength]="10"
+                                            (keypress)="($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57"
+                                            onkeyup="this.setAttribute('value', this.value);"
+                                            onkeyup="this.setAttribute('value', this.value);" maxlength="100"
+                                            minlength="3" value="" required>
+                                        <label>Emergency Contact Number
+                                        </label>
+                                        <span class="text-danger"
+                                            *ngIf="configurationForm.controls['EmergencyPointOfContactNumber'].value==''&& Submit == true">
+                                            *Emergency Contact Required</span>
+                                        <div
+                                            *ngIf="configurationForm.controls['EmergencyPointOfContactNumber'].dirty||configurationForm.controls['EmergencyPointOfContactNumber'].touched ">
+                                            <div *ngIf="configurationForm.controls['EmergencyPointOfContactNumber'].errors?.['minlength']"
+                                                class="text-danger">
+                                                *Number Requird Minimum 10 digits.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 inputBox">
+                                        <input type="date" class="form-control" [max]="maxdate|date:'yyyy-MM-dd'"
+                                            formControlName="DOB" onkeyup="this.setAttribute('value', this.value);"
+                                            maxlength="100" minlength="3" value="">
+                                        <label>Date of Birth
+                                        </label>
+                                        <span class="text-danger"
+                                            *ngIf="configurationForm.controls['DOB'].value==''&& Submit == true"> *Date
+                                            of Birth Required</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 ">
+                                        <span>Is Geo-fence Required ?</span>
+                                        <input type="checkbox" id="html" style="margin:10px"
+                                            (change)="$any($event.target).checked ? (geoKey = true) : geoKey = false;geoFields(geoKey)"
+                                            formControlName="IsDementia" vlaue="true" checked>
+                                    </div>
+                                </div>
+                                <div class="row" *ngIf="geoInputFieldsTab">
+                                    <div class="col-md-3 ">
+                                        <label>latitude</label>
+                                        <input class="form-control" type="text" formControlName="GeofenceLatitude">
+                                    </div>
+                                    <div class="col-md-3 ">
+                                        <label>longitude</label>
+                                        <input class="form-control" type="text" formControlName="GeofenceLongitude">
+                                    </div>
+                                    <div class="col-md-3 ">
+                                        <label>Radius</label>
+                                        <input class="form-control" type="text" formControlName="GeofenceRadius">
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary"
+                                    (click)="AsersConfiguration('RegisterDevice')">Configure</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div *ngIf="thresholdformtab">
+                        <div class="text-center">
+                            <div class="threshold-titels">Threshold Limits</div>
+                            <form [formGroup]="thresholdForm">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <select class="form-select" formControlName="VitalType" style="height: 48px;" 
+                                           (change)="selectedVitalValidation($event)"
+                                            required>
+                                            <option disabled value="" selected>Select VitalType</option>
+                                            <option *ngFor="let vital of VitalType"
+                                                value="{{vital.Feature}}" >{{vital.Feature}}</option>
+                                        </select>
+                                        <span *ngIf="thresholdForm.controls['VitalType'].value ==''&& addVitals == true"
+                                            class="text-danger">* Select Vital Type</span>
+                                    </div>
+                                    <div class="col-md-3 inputBox">
+                                        <input type="text" class="form-control" formControlName="MinValue"
+                                            onkeyup="this.setAttribute('value', this.value);"
+                                            (change)="validateThreshold()"
+                                            (keypress)="($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57"
+                                            value="" [maxlength]="3" required>
+                                        <label>Minimum Value
+                                        </label>
+                                        <span *ngIf="thresholdForm.controls['MinValue'].value ==''&& addVitals == true"
+                                            class="text-danger">* Select Vital Type</span>
+                                    </div>
+                                    <div class="col-md-3 inputBox">
+                                        <input type="text" class="form-control" formControlName="MaxValue"
+                                            (keypress)="($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57;"
+                                            onkeyup="this.setAttribute('value', this.value);" value="" [maxlength]="4"
+                                            (change)="validateThreshold()" >
+                                        <label>Maximum Value
+                                        </label>
+                                       
+                                        <span *ngIf="thresholdForm.controls['MaxValue'].value ==''&& addVitals == true"
+                                            class="text-danger">* Select Vital Type</span>
+                                        <span class="text-danger"
+                                            *ngIf="this.thresholdForm.get('MaxValue')?.errors?.['minIsGreaterThanMax']">MaxValue
+                                            is greater than MinValue</span>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-primary" style="margin-left:0px;"
+                                            [disabled]="thresholdForm.status=='INVALID'" (click)="thresholdDataAdd()">
+                                            Add Vital</button>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 30px;"> 
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Vital Type</th>
+                                                <th scope="col">Minimum </th>
+                                                <th scope="col">Maximum</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let vital of thresholdarray">
+                                                <td>{{vital.VitalType}}</td>
+                                                <td>{{vital.MinValue}}</td>
+                                                <td>{{vital.MaxValue}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary" [hidden]="thresholdarray.length == ''"
+                                        (click)="SubmitThresholdValues('ThresholdLimits')"> Submit Vitals</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div *ngIf="whiteListFormTab">
+                        <div class="threshold-titels">Whitelist Contacts</div>
+                        <form [formGroup]="ContactsForm">
+                            <div class="row">
+                                <div class="col-md-4 inputBox">
+                                    <input type="text" class="form-control" formControlName="Name"
+                                    (keypress)="($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 65 && $event.charCode <= 90 ||  $event.charCode >= 97 && $event.charCode <= 122"
+                                        onkeyup="this.setAttribute('value', this.value);" value="" required>
+                                    <label>Name
+                                    </label>
+                                    <span class="text-danger"
+                                        *ngIf="ContactsForm.controls['Name'].value==''&& submitContact == true">* Name
+                                        Required</span>
+                                </div>
+                                <div class="col-md-6 inputBox">
+                                    <input type="tel" class="form-control" formControlName="ContactNumber"
+                                        [maxlength]="10" pattern="^[6-9]\d{9}$" [minlength]="10"
+                                        (keypress)="($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57"
+                                        onkeyup="this.setAttribute('value', this.value);" value="" required>
+                                    <label>Contact Number
+                                    </label>
+                                    <span>(*Mobile number starting with 6,7,8,9 only to be Enter )</span>
+                                    <span class="text-danger"
+                                        *ngIf="ContactsForm.controls['ContactNumber'].value==''&& submitContact == true">*
+                                        Number Required</span>
+                                    <div
+                                        *ngIf="ContactsForm.controls['ContactNumber'].dirty||ContactsForm.controls['ContactNumber'].touched ">
+                                        <div *ngIf="ContactsForm.controls['ContactNumber'].errors?.['minlength']"
+                                            class="text-danger">
+                                            * Mobile Number Requird Minimum 10 digits.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-primary" style="margin-left: 0px;" (click)="addContact()">Add
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <div>
+                            <table class="table" class="text-center">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Number</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let contact of contactsArray; let i = index">
+                                        <!-- <td>{{i+1}}</td> -->
+                                        <td>{{contact.Name}}</td>
+                                        <td>{{contact.ContactNumber}}</td>
+                                        <td><img src="../../assets/images/delete.png" style="width:25px"
+                                                (click)="deleteContact(i)"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary" [hidden]="contactsArray.length==''"
+                                (click)="WhiteListedConfiguration('WhitelistContacts')">Submit WhiteList</button>
+                        </div>
+                    </div>
+                    <div *ngIf="OthersFormTab">
+                        <div>
+                            <div class="others-titel">Others</div>
+                        </div>
+                        <form [formGroup]="NotificationRequired">
+                            <div class="mt-5">
+                                <label>
+                                    Is Notification Required ?
+                                    <input type="checkbox" value="true">
+                                </label>
+                            </div>
+                        </form>
+
+                        <form [formGroup]="othersForm">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Goal Type </label>
+                                    <select class="form-select" formControlName="GoalType" (change)="selectedGoal($event)" required>
+                                        <option value='' selected>Select</option>
+                                        <option *ngFor="let vital of VitalType"
+                                            value="{{vital.Feature}}">{{vital?.Feature}}</option>
+                                    </select>
+                                    <span
+                                        *ngIf="othersForm.controls['GoalType'].status=='INVALID'&&submitOthers == true" class="text-danger">
+                                        Required
+                                    </span>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Goal Time Frame </label>
+                                    <select class="form-select" formControlName="GoalTimeframe" required>
+                                        <option value='' selected>Select</option>
+                                        <option value="Daily">Daily</option>
+                                        <option value="Weekly">Weekly</option>
+                                        <option value="Monthly">Monthly</option>
+
+                                    </select>
+                                    <span
+                                        *ngIf="othersForm.controls['GoalTimeframe'].status=='INVALID'&&submitOthers == true" class="text-danger">
+                                        Required
+                                    </span>
+                                </div>
+                                <div class="col-md-3">
+                                    <label [hidden]="bpSelected">Goal Value</label><label *ngIf="bpSelected">Hypertension</label>
+                                    <input type="text" class="form-control" formControlName="GoalValue" 
+                                    (keypress)="($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57"
+                                    required>
+                                    <span
+                                    class="text-danger" *ngIf="othersForm.controls['GoalValue'].status=='INVALID'&&submitOthers == true">
+                                        Required
+                                    </span>
+                                </div>
+                                <!-- <div class="col-md-3" *ngIf="bpSelected">
+                                    <label>Hypotension</label>
+                                    <input type="text" class="form-control" formControlName="Hypotension" >
+                                    <span class="text-danger">Must be Greater than Hypertension</span>
+                                </div> -->
+                                <div class="col-md-3 mt-3">
+                                    <button class="btn btn-primary ms-0" *ngIf="addGoalsBtn" (click)="AddGoals()"
+                                        [disabled]="othersForm.status == 'INVALID'">Add Goals </button>
+                                    <button class="btn btn-primary ms-0" *ngIf="updateGoalBtn"
+                                        (click)="updateGoalsData()" [disabled]="othersForm.status == 'INVALID'">Update
+                                        Goals </button>
+                                </div>
+                            </div>
+
+                        </form>
+
+
+                        <div class="mt-5">
+                            <table class="table">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th scope="col">S.No</th>
+                                        <th scope="col">Goal Type</th>
+                                        <th scope="col">Goal Time Frame</th>
+                                        <th scope="col">Goal</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-start">
+                                    <tr *ngFor="let goal of goals;let i = index ">
+                                        <th>{{i+1}}</th>
+                                        <td>{{goal.GoalType}}</td>
+                                        <td>{{goal.GoalTimeframe}}</td>
+                                        <td>{{goal.GoalValue}}</td>
+                                        <td><button class="btn btn-danger ms-0"
+                                                (click)="editGoals(goal,i)">Edit</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <div>
+                                <button class="btn btn-primary" (click)="SubmitOthers('Others')"
+                                    [disabled]="goals?.length== 0 ">Submit Data</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>

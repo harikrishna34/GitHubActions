@@ -1,0 +1,20 @@
+thead{
+    
+    color: #914572;
+}
+.heading{
+    margin-top: 10px;
+    display: flex;
+    justify-content:space-around
+}
+h3{
+    color:#914572;
+    font-weight: bolder;
+}
+.paymentMode{
+    display: flex;
+    gap: 20px;
+}
+.addMoneyForm{
+    gap:20px
+}

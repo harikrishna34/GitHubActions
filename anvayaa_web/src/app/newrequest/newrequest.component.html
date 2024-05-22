@@ -1,0 +1,312 @@
+<div class="mainDiv">
+    <div class="card rounded-0">
+        <form [formGroup]="creatRequest">
+            <div class="tiles-clr">
+                <div class="align-left">
+                    <div class="row">
+                        <div class="col-md-3 align-items-left  m-auto">
+                            <span class="fs-3">Create Request</span>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-center">
+                            <div class="customerSelect ng-autocomplete mt-2" style="width: 60%;">
+                                <ng-autocomplete placeholder="Search Customer" [data]="userList"
+                                    [searchKeyword]="keyword" (selected)='selectEvent($event)'
+                                    (inputCleared)='onFocused()' [itemTemplate]="itemTemplate"
+                                    (inputChanged)='onChangeSearch($event)' [notFoundTemplate]="notFoundTemplate">
+                                </ng-autocomplete>
+                                <ng-template #itemTemplate let-item>
+                                    <a [innerHTML]="item.Name"></a>
+                                </ng-template>
+                                <ng-template #notFoundTemplate let-notFound>
+                                    <div [innerHTML]="notFound"></div>
+                                </ng-template>
+                            </div>
+                        </div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-1">
+                            <img src="../../assets/images/close.png" class="pointer" style="width: 50px;"
+                                (click)="closerequestscreen()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Customer details Tiles  -->
+            <div class="mt-1" *ngIf="cutomertile_serviceInput">
+                <div class="row">
+                    <div class="col-md-3 mt-2">
+                        <div class="customer-tiles">
+                            <div class="text-center">
+                                <span class="fs-5">Sponsor</span>
+                            </div>
+                            <ul class="list-group mt-1 ">
+                                <li class="list-group-item">
+                                    <span class="badge"><img src="../../assets/images/user (2).png"
+                                            width="25px"></span>{{sponserDetils?.Name}}
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge"><img src="../../assets/images/telephone-call.png"
+                                            width="25px"></span>{{sponserDetils?.MobileNumber}}
+                                </li>
+                                <li class="list-group-item ">
+                                    <span class="badge"><img src="../../assets/images/mail (1).png"
+                                            width="25px"></span>{{sponserDetils?.EmailID}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mt-2">
+                        <div class="customer-tiles">
+                            <div class="text-center">
+                                <span class="fs-5">Beneficiary 1</span>
+                            </div>
+                            <ul class="list-group mt-1 ">
+                                <li class="list-group-item">
+                                    <span class="badge"><img src="../../assets/images/user (2).png"
+                                            width="25px"></span>{{benficiaries[0]?.Name}}
+
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge"><img src="../../assets/images/telephone-call.png"
+                                            width="25px"></span>{{benficiaries[0]?.MobileNumber}}
+
+                                </li>
+                                <li class="list-group-item ">
+                                    <span class="badge"><img src="../../assets/images/mail (1).png"
+                                            width="25px"></span>{{benficiaries[0]?.EmailID}}
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mt-2">
+                        <div class="customer-tiles">
+                            <div class="text-center">
+                                <span class="fs-5">Benficiary 2</span>
+                                <div class="badge badge-danger ms-10" *ngIf="benficiaries.length > 2"
+                                    style="background-color: #F79123; margin-left: 100px; font-size: small; border-radius: 50%; cursor: pointer;"
+                                    title="View More benficiaries" data-bs-toggle="offcanvas"
+                                    data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">+
+                                    {{benficiaries?.length}}</div>
+                            </div>
+                            <ul class="list-group mt-1 ">
+                                <li class="list-group-item">
+                                    <span class="badge"><img src="../../assets/images/user (2).png"
+                                            width="25px"></span>{{benficiaries[1]?.Name}}
+
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge"><img src="../../assets/images/telephone-call.png"
+                                            width="25px"></span>{{benficiaries[1]?.MobileNumber}}
+
+                                </li>
+                                <li class="list-group-item ">
+                                    <span class="badge"><img src="../../assets/images/mail (1).png"
+                                            width="25px"></span>{{benficiaries[1]?.EmailID}}
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+                        aria-labelledby="offcanvasRightLabel">
+                        <div class="offcanvas-header">
+                            <h5 id="offcanvasRightLabel">Beneficiaries</h5>
+                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <table class="table table-hover">
+                                <thead class="emrtablehead" style="background-color:#914573;color: white;">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Ph.No</th>
+                                        <th>EmailID</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngFor="let ben of benficiaries">
+                                    <tr>
+                                        <td>{{ben?.Name}}</td>
+                                        <td>{{ben?.MobileNumber}}</td>
+                                        <td>{{ben?.EmailID}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- city selection when package is not found  -->
+            <div class="col-md-4" *ngIf="citySelect">
+                <label> Select City</label>
+                <select class="form-select customerSelect" aria-label="Default select example"
+                    style="width: 100%; background-color: #ffff;" (change)="selectedCity($event)">
+                    <option selected value="" disabled> Select City </option>
+                    <option *ngFor="let city of allCities" value="{{city.CityID}}">{{city.CityName}}</option>
+                </select>
+            </div>
+
+
+            <!-- service selection input ,comment section, note in this -->
+            <div class="mt-2" *ngIf="servicetile">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 d-flex align-items-center">
+                        <div class="customerSelect ng-autocomplete mt-2 ">
+                            <ng-autocomplete [data]="categaryDetails" [searchKeyword]="keyword1"
+                                (selected)='selectedCategory($event)' (inputCleared)='clearSubCategory()'
+                                placeholder="Select Service" [itemTemplate]="itemTemplate"
+                                [notFoundTemplate]="notFoundTemplate">
+                            </ng-autocomplete>
+                            <ng-template #itemTemplate let-item>
+                                <a [innerHTML]="item.AliasName"></a>
+                            </ng-template>
+                            <ng-template #notFoundTemplate let-notFound>
+                                <div [innerHTML]="notFound"></div>
+                            </ng-template>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 d-flex align-items-center"
+                        *ngIf="SubSub_Category.length>0">
+                        <div class="customerSelect ng-autocomplete mt-2" style="width: 100%;">
+                            <ng-autocomplete placeholder="Select Sub-Category For Service" [data]="SubSub_Category"
+                                [searchKeyword]="keyword1" (selected)='tariffDetailsBySubCategory($event)'
+                                [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+                            </ng-autocomplete>
+                            <ng-template #itemTemplate let-item>
+                                <a [innerHTML]="item.AliasName"></a>
+                            </ng-template>
+                            <ng-template #notFoundTemplate let-notFound>
+                                <div [innerHTML]="notFound"></div>
+                            </ng-template>
+                        </div>
+
+
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12  align-items-center ps-1 pe-2">
+
+                        <select class="form-select customerSelect" style="width:100%;background-color: #ffff;"
+                            aria-label="Default select example" formControlName="CustID" name="CustID">
+                            <option value="" disabled selected>Select Beneficiary</option>
+                            <option *ngFor="let ben of activeBeneficiaries" value="{{ben.CustID}}">{{ben.Name}}</option>
+                            </select>
+                        
+                            
+                    <div *ngIf="creatRequest.controls['CustID']?.status == 'INVALID'&& creatRequest.controls['CustID']?.value==''&& submit" class="text-danger">Required</div>
+                     
+                
+                    </div>
+
+                </div>
+            </div>
+            <!-- <div class="row" *ngIf="OtherInputBoxes">
+                <div class="col-md-5">
+                 <div class="m-2 fs-6">{{ServiceAvailabilityMessage}}</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="m-2">
+                        <span class="fs-6">Anvayaa Charges</span>
+                        <span class="fs-6">:</span>
+                        <span class="fs-6">{{totalChargesForService | currency:'INR'}}</span>
+                    </div>
+                    
+                </div>
+            </div> -->
+            <div class="mt-2" *ngIf="OtherInputBoxes">
+                <div class="row">
+                    <div class="col-md-3">
+                        <span class="formDetails fs-6">Service Start Date</span>
+                        <div class=" input-group date">
+                            <input formControlName="RequestedDate" type='date' [min]="minDate"
+                                style="background-color: #ffff;" class="startdate form-control customerSelect"
+                                placeholder="Select  Placement Time" required>
+                            <!-- <div *ngIf="creatRequest.get('RequestedDate')?.invalid && creatRequest.get('RequestedDate')?.value == ''|| submit == true" class="invalid-feedback">
+                                    Service Start Date is required
+                                </div> -->
+                            <span
+                                *ngIf="creatRequest.controls['RequestedDate']?.status == 'INVALID'&&creatRequest.controls['RequestedDate']?.value==''&& submit"
+                                class="text-danger">Required</span>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <span class="formDetails fs-6">Placement Time:</span>
+                        <div class=" input-group date">
+                            <input formControlName="PlacementTime" type='datetime-local' [min]="PlcamentMinDate"
+                                style="background-color: #ffff;" class="startdate form-control customerSelect"
+                                placeholder="Select  Placement Time">
+                            <span
+                                *ngIf="creatRequest.controls['PlacementTime']?.status == 'INVALID'&&creatRequest.controls['PlacementTime']?.value==''&& submit"
+                                class="text-danger">Required</span>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3" *ngIf="ServiceAvailabilityMessage!='Service available in your package'">
+                        <label class="fs-6">Select Payment Mode</label>
+                        <select class="form-select customerSelect" style="background-color: #ffff;height: 37%;"
+                            aria-label="Default select example" formControlName="PaymentMode" name="CustID">
+                            <option value="" selected>Select Payment Mode</option>
+                            <option value="Cash">Cash</option>
+                            <option value="PMS">PMS</option>
+                            <option value="Cheque">Cheque</option>
+                            <option value="WireTransfer">Wire Transfer</option>
+                        </select>
+
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="fs-6">Note</label>
+
+                            <input formControlName="Note" name="Note" type='text' style="background-color: #ffff;"
+                                class="startdate form-control customerSelect" placeholder="Note" required>
+                            <span
+                                *ngIf="creatRequest.controls['Note']?.status == 'INVALID'&&creatRequest.controls['Note']?.value==''&& submit"
+                                class="text-danger">Required</span>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="mt-2">
+                <div class="row">
+
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 d-flex  ms-4">
+                        <table class="table table-border table-striped" *ngIf="tariffDetails.length>0">
+                            <thead style="background-color: #914573;color: #fff;">
+                                <tr>
+                                    <th scope="col">Tariff Type</th>
+                                    <th scope="col">Minimum Price</th>
+                                    <th scope="col">Maximum Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let tariff of tariffDetails">
+                                    <th scope="row">{{tariff?.Tariff}}</th>
+                                    <td>{{tariff?.MinValue | currency:'INR'}}</td>
+                                    <td>{{tariff?.MaxValue | currency:'INR'}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <div class="col-lg-6 col-md-6 ms-4 text-end">
+                        <div class="text-end" *ngIf="OtherInputBoxes">
+                            <button class="anvayaabutton-primary  me-4 mb-4" (click)="resetComponen()">
+                                Cancel
+                            </button>
+                            <button class="anvayaabutton-secondary me-4 mb-4" (click)="SubmitRequestDetails()">
+                                Create
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <ngx-spinner type="ball-scale-multiple">loading...</ngx-spinner>
+
+</div>

@@ -1,0 +1,114 @@
+<div class="bodycomponenet">
+  <div class="card">
+
+    <div class="container mt-3">
+      <h2>List of Configuration Questions</h2>
+
+      <div class="row">
+        <form [formGroup]="ConfigurationForm" (ngSubmit)="onSubmit(ConfigurationForm)">
+
+          <div class="row">
+
+            <div class="col-md-3">
+              <label for="exampleInputEmail1" class="form-label">SubCategory</label>
+              <input type="text" class="form-control" formControlName="ServiceCategoryID" id="exampleInputEmail1"
+                aria-describedby="emailHelp" placeholder="Select Subcategory">
+              <div id="emailHelp" class="form-text"></div>
+            </div>
+
+            <div class="col-md-3">
+              <label for="exampleInputEmail1" class="form-label">QuestionName</label>
+              <input type="text" class="form-control" formControlName="QuestionName" name id="exampleInputEmail1"
+                aria-describedby="emailHelp" placeholder="Enter Question">
+              <div id="emailHelp" class="form-text"></div>
+            </div>
+            <div class="col-md-2">
+              <label for="exampleInputEmail1" class="form-label">QuestionType</label>
+              <select class="form-select" aria-label="Default select example" formControlName="QuestionType">
+                <option value="" disabled>Question Type</option>
+                <option value="Radio">Radio</option>
+                <option value="CheckBox">CheckBox</option>
+                <option value="List">List</option>
+                <option value="Range">Range</option>
+              </select>
+            </div>
+            <div class="col-md-4" *ngIf="(ConfigurationForm.value.QuestionType =='Range')">
+              <div formGroupName="Range" class="row">
+                <div class="col-md-6">
+                  <label for="exampleInputEmail1" class="form-label">StartRange</label>
+                  <input type="text" class="form-control" formControlName="StartRange" name id="exampleInputEmail1"
+                    aria-describedby="emailHelp" placeholder="Enter Question">
+                  <div id="emailHelp" class="form-text"></div>
+                </div>
+                <div class="col-md-6">
+                  <label for="exampleInputEmail1" class="form-label">EndRange</label>
+                  <input type="text" class="form-control" formControlName="EndRange" name id="exampleInputEmail1"
+                    aria-describedby="emailHelp" placeholder="Enter Question">
+                  <div id="emailHelp" class="form-text"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div formArrayName="Options" *ngIf="(ConfigurationForm.value.QuestionType == 'List' || ConfigurationForm.value.QuestionType == 'Radio' || ConfigurationForm.value.QuestionType == 'CheckBox')">
+            <div class="row">
+              <span  *ngFor="let Option of Options.controls;let i = index" [formGroupName]="i">
+
+                <div class="col-md-3">
+                  <input type="text" class="form-control" placeholder="Answer" formControlName="Answer">
+                </div>
+  
+              </span>
+
+            </div>
+            
+
+            
+
+          </div>
+
+
+          <button type="submit" class="col-sm-2 btn btn-primary">Send</button>
+
+        </form>
+
+
+      </div>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Question</th>
+            <th>ServiceDetails</th>
+            <th>Type</th>
+            <th>Range</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let configurationdetails of ConfigurationData;let j=index">
+            <td width="2%">{{j+1}}</td>
+            <td width="15%">{{configurationdetails.QuestionName}}</td>
+
+            <td width="15%">{{configurationdetails.ServiceDetails ? configurationdetails.ServiceDetails.AliasName :
+              "-"}}</td>
+            <td width="10%">{{configurationdetails.QuestionType}}</td>
+            <td width="10%">{{configurationdetails.Range ? configurationdetails.Range.StartRange :"NA"}}
+              {{configurationdetails.Range ? configurationdetails.Range.EndRange :""}}</td>
+            <td width="20%"
+              *ngIf="(configurationdetails.QuestionType =='Radio' || configurationdetails.QuestionType =='List') && configurationdetails.Options.length>0">
+              <span *ngFor="let Option of configurationdetails.Options; let i=index">{{Option.Answer}} {{i ===
+                configurationdetails.Options.length - 1 ? '' : ', '}}</span>
+            </td>
+            <td *ngIf="configurationdetails.QuestionType =='Text'">
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+</div>
+<!-- <ngx-spinner></ngx-spinner> -->

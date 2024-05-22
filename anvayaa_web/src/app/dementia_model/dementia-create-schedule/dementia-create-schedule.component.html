@@ -1,0 +1,54 @@
+<div class="bodycontent">
+    <div class="row">
+        <div class="col-md-1">
+            <button class="btn anvayaaButton" (click)="onBackBtnClick()">Back</button>
+        </div>
+        <div class="col-md-11"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="card col-md-6">
+            <div class="card-header">
+                <h1>Schedule Intake</h1>
+            </div>
+            <div class="card-body body-section">
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between">Customer Name
+                        <span id="customerName">{{CustomerDetails.Name}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">CustomerID
+                        <span id="customerID">{{CustomerDetails.CustRecID}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between"> Schedule Date&Time
+                        <input type="datetime-local" min="{{minDate | date:'yyyy-MM-dd HH:MM'}}"
+                            (change)="onDatePick($event)">
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">Select Beneficiary
+                        <select (change)="onBeneficiarySelection($event)">
+                            <option value="">--Select--</option>
+                            <option value="" *ngFor="let beneficiries of CustomerDetails.Beneficiaries"
+                                value={{beneficiries.CustID}}>{{beneficiries.Name}}</option>
+                        </select>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">Care Specialist
+                        <select (change)="onCareSpecialistSelection($event)" style="text-align: center;">
+                            <option value="">-----Select-----</option>
+                            <option value="" *ngFor="let cs of careSpecialists" value={{cs.EmployeeID}}>{{cs.FirstName}}
+                                {{cs.LastName}}</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <button type="submit" class="btn anvayaaButton" (click)="onScheduleSubmit()">Save</button>
+                </div>
+                <div class="col-md-10"></div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+
+
+<ngx-spinner type="ball-scale-multiple">loading...</ngx-spinner>

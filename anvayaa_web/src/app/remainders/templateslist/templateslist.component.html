@@ -1,0 +1,57 @@
+<div class="body content" style="margin-top: 7%;margin-left: 10%;">
+  <div class="row">
+        <div class="col-md-6">
+          <h2>List Of Templates</h2>
+        </div>
+        <div class="col-md-6" >
+            <button type="button" (click)="templatecreation()" class="btn btn-primary" style="margin-top: 2%;margin-left: 70%;" >
+                + Create Template
+              </button>
+        </div>
+    </div>
+    <div class="container mt-3">
+      <table class="table table-hover">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Template ID</th>
+              <th scope="col">Template Name</th>
+              <th scope="col">Message</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let list of templatelistarray; let i = index">
+              <td>{{list.TemplateID}}</td>
+              <td>{{list.TemplateName}}</td>
+              <td>{{list.Message}}</td>
+              <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="permissionremove(list.TemplateID)">
+                Remove
+              </button></td>
+              <td><div class="modal" id="exampleModal" tabindex="0" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title"></h5> 
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Do You Want to Remove this Particular Record {{permremove}}?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="removetempbtn(permremove)">Yes</button>
+                    </div>
+                  </div>
+                </div>
+              </div></td>
+              <!-- <td><button class="btn btn-primary" (click)="removetempbtn(list.TemplateID)">Remove</button></td> -->
+            </tr>
+          </tbody>
+        </table>
+        <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+
+      </div>
+</div>

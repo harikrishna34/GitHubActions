@@ -1,0 +1,2738 @@
+<div class="bodycontent">
+  <div [hidden]="allTasksdata?allTasksdata.Complete_Requests_Details=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate()" data-bs-toggle="collapse" data-bs-target=".multi-collapse"
+        aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Complete Request Details</span>
+          </div>
+          <div class="col-md-1 blacktext">({{completeRequestDetails.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse pointer" id="multiCollapseExample1"
+          *ngFor="let data of completeRequestDetails" (click)='complitionScreen(data,"completeRequestDetails")'>
+          <div class="card card-body ">
+            <table>
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Requested Service</th>
+                  <th>Requested City</th>
+                  <th>Requested Date</th>
+                  <th>Time scince requested</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{data.RequestID}}</td>
+                  <td style="font-size: smaller;" style="width:10%">{{data.SubCategoryName|replaceUnderscore |
+                    titlecase}}</td>
+                  <td style="width:10%">{{data.ServiceAreaName| titlecase}}</td>
+                  <td style="width:10%">{{data.RequestedDate*1000|date:'dd-MM-yyyy'}}</td>
+                  <td style="width:10%">{{data.days + " days"}}</td>
+                </tr>
+                <div style="height:10px"></div>
+                <tr>
+                  <th>SponsorName</th>
+                  <th>Benificiary Name</th>
+                </tr>
+                <tr>
+                  <td style="width:10%">{{data.CustomerName| titlecase}}</td>
+                  <td style="width:10%">{{data.BeneficiaryDetails?.Name?(data.BeneficiaryDetails?.Name|titlecase):'-'}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div [hidden]="allTasksdata?allTasksdata.Assign_Vendor_Executive=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate1()" data-bs-toggle="collapse"
+        data-bs-target=".multi-collapse2" aria-expanded="false"
+        aria-controls="multiCollapseExample3,multiCollapseExample4">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Assign Vendor Executive</span>
+          </div>
+          <div class="col-md-1 blacktext">({{AssignVendorExecutive?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state1' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse2 pointer" id="multiCollapseExample3"
+          *ngFor="let data of AssignVendorExecutive" (click)='complitionScreen(data,"assignVendorExecutive")'>
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Requested Service</th>
+                  <th>Requested City</th>
+                  <th>Requested Date</th>
+                  <th>Time scince requested</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{data.RequestID}}</td>
+                  <td style="font-size: smaller;">{{data.SubCategoryName|replaceUnderscore | titlecase}}</td>
+                  <td style="width:10%">{{data.ServiceAreaName | titlecase}}<br>
+                    <h6 style="color:purple; font-weight: bold;">{{data.CustomerType}}</h6>
+                  </td>
+                  <td style="width:10%">{{(data.RequestedDate)*1000|date:'dd MMM yyyy'}}</td>
+                  <td style="width:10%">{{data.Executivedate + " days"}}</td>
+                </tr>
+                <div style="height:10px"></div>
+                <tr>
+                  <th>SponsorName</th>
+                  <th>Benificiary Name</th>
+                </tr>
+                <tr>
+                  <td style="width:10%">{{data.CustomerName| titlecase}}</td>
+                  <td style="width:10%">{{data?.BeneficiaryDetails?.Name?(data.BeneficiaryDetails.Name| titlecase):'-'}}
+                  </td>
+                  <td style="width:10%"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div> 
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!-- Discounted Price Request Details start Here  -->
+  <div [hidden]="allTasksdata?allTasksdata.discountedPriceRequests=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate40()" data-bs-toggle="collapse"
+        data-bs-target=".discountedPrice" aria-expanded="false" aria-controls="discountPriceRequestsCollapse">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Discounted Price Requests</span>
+          </div>
+          <div class="col-md-1 blacktext">({{discountedPriceRequests.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state40' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse discountedPrice pointer" id="discountPriceRequestsCollapse"
+          *ngFor="let data of discountedPriceRequests" (click)='complitionScreen(data,"discountprice")'>
+          <div class="card card-body ">
+            <table>
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Sponsor Name</th>
+                  <th>Requested Service</th>
+                </tr>
+                <!-- <tr>
+                  <th>Vendor Name</th>
+                  <th>Actual Minimum Price</th>
+                  <th>Discounted Price</th>
+                </tr> -->
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{data.RequestID}}</td>
+                  <td style="width:10%">{{data.CustomerDetails.Name| titlecase}}</td>
+
+                  <td style="font-size: smaller;" style="width:10%">{{data.SubCategoryName|replaceUnderscore |
+                    titlecase}}</td>
+                </tr>
+                <div style="height:10px"></div>
+                <!-- <tr>
+                    <td></td>
+                </tr> -->
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Discounted Price Request Details End Here  -->
+  <div [hidden]="allTasksdata?allTasksdata.Add_Job_Details=='':''" (click)="rotate10()" data-bs-toggle="collapse"
+    data-bs-target=".multi-collapse23" aria-expanded="false" aria-controls="multiCollapseExample17">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Add Job Details</span>
+          </div>
+          <div class="col-md-1 blacktext">({{AddJobDetails.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state10' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse23" id="multiCollapseExample17" *ngFor="let data of AddJobDetails"
+          (click)='complitionScreen(data,"AddJobDetails")'>
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Requested Service</th>
+                  <th>Requested City</th>
+                  <th>Time scince requested</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{data.RequestID}}</td>
+                  <td style="font-size: smaller;" style="width:10%">{{data.SubCategoryName| replaceUnderscore|
+                    titlecase}}</td>
+                  <td style="width:10%">{{data.ServiceAreaName| titlecase}}</td>
+                  <!-- <td style="width:10%">{{data.RequestedDate*1000|date:'dd-MM-yyyy'}}</td> -->
+                  <td style="width:10%">{{data.jobDate + " days"}}</td>
+                </tr>
+                <div style="height:10px"></div>
+                <tr>
+                  <th>SponsorName</th>
+                  <th>Benificiary Name</th>
+                </tr>
+                <tr>
+                  <td style="width:10%">{{data.CustomerName| titlecase}}</td>
+                  <td style="width:10%">{{data.BeneficiaryDetails.Name?(data.BeneficiaryDetails.Name| titlecase):'-'}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <div [hidden]="allTasksdata?allTasksdata.Inform_Vendor_Of_New_Job=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate2()" data-bs-toggle="collapse"
+        data-bs-target=".multi-collapse3" aria-expanded="false"
+        aria-controls="multiCollapseExample5,multiCollapseExample6">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Inform Vendor of New Job</span>
+          </div>
+          <div class="col-md-1 blacktext">({{infomVendorNewJob.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state2' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse3 pointer" id="multiCollapseExample5" *ngFor="let new of infomVendorNewJob "
+          (click)='complitionScreen(new,"informVendorOfNewJob")'>
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Requested Service</th>
+                  <th>Requested City</th>
+                  <th>Requested Date</th>
+                  <th>Time scince requested</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{new.RequestID}}</td>
+                  <td style="font-size: smaller;" style="width:10%">{{new.SubCategoryName|replaceUnderscore |
+                    titlecase}}</td>
+                  <td style="width:10%">{{new.ServiceAreaName| titlecase}}<br>
+                    <h6 style="color:purple; font-weight: bold;">{{new.CustomerType}}</h6>
+                  </td>
+                  <td style="width:10%">{{(new.RequestedDate)*1000|date:'dd MMM yyyy'}}</td>
+                  <td>{{new.newJobDate + " days"}}</td>
+                </tr>
+                <div style="height:10px"></div>
+                <tr>
+                  <th>SponsorName</th>
+                  <th>Benificiary Name</th>
+                </tr>
+                <tr>
+                  <td style="width:10%">{{new.CustomerName| titlecase}}</td>
+                  <td style="width:10%">{{new.BeneficiaryDetails.Name?(new.BeneficiaryDetails.Name| titlecase):'-'}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <div [hidden]="allTasksdata?allTasksdata.Confirm_If_Job_Started=='':'' ">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate3()" data-bs-toggle="collapse"
+        data-bs-target=".multi-collapse4" aria-expanded="false"
+        aria-controls="multiCollapseExample7,multiCollapseExample8">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Confirm if Job Start</span>
+          </div>
+          <div class="col-md-1 blacktext">({{confirmIfJobStart.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state3' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse4 pointer" id="multiCollapseExample7" *ngFor="let new of confirmIfJobStart"
+          (click)='complitionScreen(new,"confirmIfJobStart")'>
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Requested Service</th>
+                  <th>Requested City</th>
+                  <th>Requested Date</th>
+                  <th>Time scince requested</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{new.RequestID}}</td>
+                  <td style="font-size: smaller;" style="width:10%">{{new.SubCategoryName|replaceUnderscore| titlecase}}
+                  </td>
+                  <td style="width:10%">{{new.ServiceAreaName | titlecase}}</td>
+                  <td style="width:10%">{{(new.RequestedDate)*1000|date:'dd-MM-yyyy'}}</td>
+                  <td style="width:10%">{{new.confirmJobdate + " days"}}</td>
+                </tr>
+                <div style="height:10px"></div>
+                <tr>
+                  <th>SponsorName</th>
+                  <th>Benificiary Name</th>
+                </tr>
+                <tr>
+                  <td style="width:10%">{{new.CustomerName | titlecase}}</td>
+                  <td style="width:10%">{{new.BeneficiaryDetails.Name?(new.BeneficiaryDetails.Name| titlecase):'-'}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <div [hidden]="allTasksdata?allTasksdata.Verify_Bill=='':'' ">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate11()" data-bs-toggle="collapse"
+        data-bs-target=".multi-collapse11" aria-expanded="false" aria-controls="multiCollapseExample11">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Verify Bill</span>
+          </div>
+          <div class="col-md-1 blacktext">({{VerifyBill.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state11' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse11 pointer" id="multiCollapseExample11" *ngFor="let bill of VerifyBill"
+          (click)='complitionScreen(bill,"VerifyBill")'>
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Requested Service</th>
+                  <th>Requested City</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{bill.PaymentForDetails.HomeHelathServices.RequestID}}</td>
+                  <td style="font-size: smaller;" style="width:10%">
+                    {{bill.PaymentForDetails.HomeHelathServices.SubCategoryName|replaceUnderscore}}</td>
+                  <td style="width:10%">{{bill.ServiceAreaName | titlecase}}</td>
+                  <td style="width:10%">&#8377; {{bill.Payment.Price}}</td>
+                </tr>
+                <div style="height:10px"></div>
+                <tr>
+                  <th>SponsorName</th>
+                  <th>Benificiary Name</th>
+                </tr>
+                <tr>
+                  <td style="width:10%">{{bill.CustomerData.Name | titlecase}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!-- verify refund started -->
+  <div [hidden]="allTasksdata?allTasksdata.Verify_Refund=='':'' ">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate22()" data-bs-toggle="collapse"
+        data-bs-target=".multi-collapse22" aria-expanded="false" aria-controls="multiCollapseExample22">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Verify Refund</span>
+          </div>
+          <div class="col-md-1 blacktext">({{Verify_Refund?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state22' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse22 pointer" id="multiCollapseExample22"
+          (click)='complitionScreen(verifyrefund,"Verifyrefund")' *ngFor="let verifyrefund of Verify_Refund">
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Requested Service</th>
+                  <th>Requested City</th>
+                  <th>No Of Working Days</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{verifyrefund.PaymentForDetails.HomeHelathServices.RequestID}}</td>
+                  <td style="font-size: smaller;" style="width:10%">
+                    {{verifyrefund.PaymentForDetails.HomeHelathServices.SubCategoryName}}</td>
+                  <td style="width:10%">{{verifyrefund.ServiceAreaName | titlecase}}</td>
+                  <td style="width:10%">
+                    {{verifyrefund?.PaymentForDetails?.HomeHelathServices?.ReconsillationData?.ReconsillationFinalDays}}
+                  </td>
+                </tr>
+                <div style="height:10px"></div>
+                <tr>
+                  <th>SponsorName</th>
+                </tr>
+                <tr>
+                  <td style="width:10%">{{verifyrefund.CustomerData.Name | titlecase}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!-- verify refund ended -->
+  <!-- Approve refund Started -->
+  <div [hidden]="allTasksdata?allTasksdata.Approve_Refund=='':'' ">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate23()" data-bs-toggle="collapse"
+        data-bs-target=".multi-collapse23" aria-expanded="false" aria-controls="multiCollapseExample23">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Approve Refund</span>
+          </div>
+          <div class="col-md-1 blacktext">({{Approve_Refund?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state23' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse23 pointer" id="multiCollapseExample23"
+          (click)='complitionScreen(approverefund,"Approverefund")' *ngFor="let approverefund of Approve_Refund">
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Requested Service</th>
+                  <th>Requested City</th>
+                  <th>No Of Working Days</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{approverefund.PaymentForDetails.HomeHelathServices.RequestID}}</td>
+                  <td style="font-size: smaller;" style="width:10%">
+                    {{approverefund.PaymentForDetails.HomeHelathServices.SubCategoryName}}</td>
+                  <td style="width:10%">{{approverefund.ServiceAreaName | titlecase}}</td>
+                  <td style="width:10%">
+                    {{approverefund?.PaymentForDetails?.HomeHelathServices?.ReconsillationData?.ReconsillationFinalDays}}
+                  </td>
+                </tr>
+                <div style="height:10px"></div>
+                <tr>
+                  <th>SponsorName</th>
+                </tr>
+                <tr>
+                  <td style="width:10%">{{approverefund.CustomerData.Name | titlecase}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!-- Approve refund ended -->
+  <!-- Process refund Started -->
+  <div [hidden]="allTasksdata?allTasksdata.Process_Refund=='':'' ">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate24()" data-bs-toggle="collapse"
+        data-bs-target=".multi-collapse24" aria-expanded="false" aria-controls="multiCollapseExample24">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Process Refund</span>
+          </div>
+          <div class="col-md-1 blacktext">({{Process_Refund?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state24' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse24 pointer" id="multiCollapseExample24"
+          (click)='complitionScreen(processrefund,"Processrefund")' *ngFor="let processrefund of Process_Refund">
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Requested Service</th>
+                  <th>Requested City</th>
+                  <th>No Of Working Days</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{processrefund.PaymentForDetails.HomeHelathServices.RequestID}}</td>
+                  <td style="font-size: smaller;" style="width:10%">
+                    {{processrefund.PaymentForDetails.HomeHelathServices.SubCategoryName}}</td>
+                  <td style="width:10%">{{processrefund.ServiceAreaName | titlecase}}</td>
+                  <td style="width:10%">
+                    {{processrefund?.PaymentForDetails?.HomeHelathServices?.ReconsillationData?.ReconsillationFinalDays}}
+                  </td>
+                </tr>
+                <div style="height:10px"></div>
+                <tr>
+                  <th>SponsorName</th>
+                </tr>
+                <tr>
+                  <td style="width:10%">{{processrefund.CustomerData.Name | titlecase}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!-- Process refund Ended -->
+  <!--Approve Bill End date Started-->
+  <div [hidden]="allTasksdata?allTasksdata.Approve_Bill_Date=='':'' ">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate25()" data-bs-toggle="collapse"
+        data-bs-target=".multi-collapse24" aria-expanded="false" aria-controls="multiCollapseExample25">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Approve Bill Adjustment Amount</span>
+          </div>
+          <div class="col-md-1 blacktext">({{Approve_Bill_Date?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state24' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse24 pointer" id="multiCollapseExample25"
+          (click)='complitionScreen(Approvebilladjustment,"Approvebilladjustment")'
+          *ngFor="let Approvebilladjustment of Approve_Bill_Date">
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Requested Service</th>
+                  <th>Requested City</th>
+                  <th>Invoice Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{Approvebilladjustment.PaymentForDetails.HomeHelathServices.RequestID}}</td>
+                  <td style="font-size: smaller;" style="width:10%">
+                    {{Approvebilladjustment.PaymentForDetails.HomeHelathServices.SubCategoryName}}</td>
+                  <td style="width:10%">{{Approvebilladjustment.ServiceAreaName | titlecase}}</td>
+                  <td style="width:10%">
+                    &#8377; {{Approvebilladjustment.PaymentForDetails.HomeHelathServices.AnvayaaPrice}}
+                  </td>
+                </tr>
+                <div style="height:10px"></div>
+                <tr>
+                  <th>Adjusted Amount Requested</th>
+                  <th>SponsorName</th>
+                </tr>
+                <tr>
+                  <td style="width:10%">&#8377;
+                    {{Approvebilladjustment.PaymentForDetails.HomeHelathServices.AdjustmentAmount }}</td>
+                  <td style="width:10%">{{Approvebilladjustment.CustomerData.Name | titlecase}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!--Approve Bill End date Ended-->
+  <div [hidden]="allTasksdata?allTasksdata.Verify_Job_Details_with_Customer=='':'' ">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate12()" data-bs-toggle="collapse"
+        data-bs-target=".multi-collapse12" aria-expanded="false" aria-controls="multiCollapseExample12">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Verify Job Details With Customer</span>
+          </div>
+          <div class="col-md-1 blacktext">({{VerifyJobDetailswithCustomer?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state11' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse12 pointer" id="multiCollapseExample12"
+          *ngFor="let VerifyJobDetails of VerifyJobDetailswithCustomer"
+          (click)='complitionScreen(VerifyJobDetails,"VerifyJobDetails")'>
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Requested Service</th>
+                  <th>Requested City</th>
+                  <th>No Of Working Days</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{VerifyJobDetails.PaymentForDetails.HomeHelathServices.RequestID}}</td>
+                  <td style="font-size: smaller;" style="width:10%">
+                    {{VerifyJobDetails.PaymentForDetails.HomeHelathServices.SubCategoryName}}</td>
+                  <td style="width:10%">{{VerifyJobDetails.ServiceAreaName | titlecase}}</td>
+                  <td style="width:10%">
+                    {{VerifyJobDetails?.PaymentForDetails?.HomeHelathServices?.ReconsillationData?.ReconsillationFinalDays}}
+                  </td>
+                </tr>
+                <div style="height:10px"></div>
+                <tr>
+                  <th>SponsorName</th>
+                  <th>Benificiary Name</th>
+                </tr>
+                <tr>
+                  <td style="width:10%">{{VerifyJobDetails.CustomerData.Name | titlecase}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <div [hidden]="allTasksdata?allTasksdata.Create_Emergency_Plan=='':'' ">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate13()" data-bs-toggle="collapse"
+        data-bs-target=".multi-collapse13" aria-expanded="false" aria-controls="completeemergencyplan">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Complete Emergency Plans</span>
+          </div>
+          <div class="col-md-1 blacktext">({{Create_Emergency_Plan?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state11' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse13 pointer" id="completeemergencyplan"
+          *ngFor="let GetEmergencyPlanTask of Create_Emergency_Plan"
+          (click)='complitionScreen(GetEmergencyPlanTask,"completeemergencyplan")'>
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Customer ID</th>
+                  <th>City</th>
+                  <th>Sponsor Name </th>
+                  <th>Beneficiary Name</th>
+                  <th>Plan Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{GetEmergencyPlanTask.CustRecID}}</td>
+                  <td style="font-size: smaller;" style="width:10%">
+                    {{GetEmergencyPlanTask.PackageDetails?.ServiceAreaName | titlecase}}</td>
+                  <td style="width:10%">{{GetEmergencyPlanTask.Name | titlecase}}</td>
+                  <td style="width:10%">{{GetEmergencyPlanTask.BeneficiaryDetails?.Name| titlecase}}</td>
+                  <td style="width:10%">{{GetEmergencyPlanTask.PackageDetails.AliasName | titlecase}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <div [hidden]="allTasksdata?allTasksdata.Inform_Vendor_Of_Scheduled_Job =='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate4()" data-bs-toggle="collapse"
+        data-bs-target=".multi-collapse5" aria-expanded="false"
+        aria-controls="multiCollapseExample9,multiCollapseExample10">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Inform Vendor of Scheduled Job</span>
+          </div>
+          <div class="col-md-1 blacktext">({{informVendorScheduleJob.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state4' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse5 pointer" id="multiCollapseExample9"
+          *ngFor="let new of informVendorScheduleJob" (click)='complitionScreen(new,"informVendorOfScheduledJob")'>
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Requested Service</th>
+                  <th>Requested City</th>
+                  <th>Requested Date</th>
+                  <th>Time scince requested</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{new.RequestID}}</td>
+                  <td style="font-size: smaller;" style="width:10%">{{new.SubCategoryName|replaceUnderscore| titlecase}}
+                  </td>
+                  <td style="width:10%">{{new.ServiceAreaName| titlecase}}</td>
+                  <td style="width:10%">{{new.RequestedDate*1000|date:'dd-MM-yyyy'}}</td>
+                  <td style="width:10%">{{new.scheduleJobdate + " days"}}</td>
+                </tr>
+                <div style="height:10px"></div>
+                <tr>
+                  <th>SponsorName</th>
+                  <th>Benificiary Name</th>
+                </tr>
+                <tr>
+                  <td style="width:10%">{{new.CustomerName| titlecase}}</td>
+                  <td style="width:10%">{{new.BeneficiaryDetails.Name?(new.BeneficiaryDetails.Name| titlecase):'-'}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <div [hidden]="allTasksdata?allTasksdata.Check_On_CompletedJobs=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate5()" data-bs-toggle="collapse"
+        data-bs-target=".multi-collapse6" aria-expanded="false"
+        aria-controls="multiCollapseExample11,multiCollapseExample12">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Check on Completed Jobs</span>
+          </div>
+          <div class="col-md-1 blacktext">({{completedJob.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state5' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse6 pointer" id="multiCollapseExample11" *ngFor="let new of completedJob"
+          (click)='complitionScreen(new,"checkOnCompletedJobs")'>
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Requested Service</th>
+                  <th>Requested City</th>
+                  <th>Requested Date</th>
+                  <th>Time scince requested</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 10%;">{{new.RequestID}}</td>
+                  <td style="font-size: smaller;width: 10%;">{{new.SubCategoryName|replaceUnderscore| titlecase}}</td>
+                  <td style="width: 10%;">{{new.ServiceAreaName| titlecase}}</td>
+                  <td style="width: 10%;">{{new.RequestedDate*1000|date:'dd-MM-yyyy'}}</td>
+                  <td style="width: 10%;">{{new.completetdJobdate + " days"}}</td>
+                </tr>
+                <div style="height:10px"></div>
+                <tr>
+                  <th>SponsorName</th>
+                  <th>Benificiary Name</th>
+                </tr>
+                <tr>
+                  <td>{{new.CustomerName| titlecase}}</td>
+                  <td>{{new.BeneficiaryDetails.Name ? (new.BeneficiaryDetails.Name| titlecase):'-'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <div [hidden]="allTasksdata?allTasksdata.Schedule_A_New_Job=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate7()" data-bs-toggle="collapse"
+        data-bs-target=".multi-collapse8" aria-expanded="false" aria-controls="multiCollapseExample14">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Schedule New Job</span>
+          </div>
+          <div class="col-md-1 blacktext">({{scheduleNewJob.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state7' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse8" id="multiCollapseExample14" *ngFor="let new of scheduleNewJob"
+          (click)='complitionScreen(new,"scheduleANewJob")'>
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Requested Service</th>
+                  <th>Requested City</th>
+                  <th>Requested Date</th>
+                  <th>Time scince requested</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{new.RequestID}}</td>
+                  <td style="font-size: smaller;">{{new.SubCategoryName|replaceUnderscore| titlecase}}</td>
+                  <td style="width:10%">{{new.ServiceAreaName| titlecase}}</td>
+                  <td style="width:10%">{{new.RequestedDate*1000|date:'dd-MM-yyyy'}}</td>
+                  <td style="width:10%">{{new.newJobdate + " days"}}</td>
+                </tr>
+                <div style="height:10px"></div>
+                <tr>
+                  <th>SponsorName</th>
+                  <th>Benificiary Name</th>
+                </tr>
+                <tr>
+                  <td style="width:10%">{{new.CustomerName| titlecase}}</td>
+                  <td style="width:10%">{{new.BeneficiaryDetails?.Name?(new.BeneficiaryDetails?.Name| titlecase):'-'}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <div [hidden]="allTasksdata?allTasksdata.Assign_Vendor_Add_Specialist=='':''" (click)="rotate9()"
+    data-bs-toggle="collapse" data-bs-target=".multi-collapse17" aria-expanded="false"
+    aria-controls="multiCollapseExample17">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Assign Vendor/Add Specialist</span>
+          </div>
+          <div class="col-md-1 blacktext">({{addVendorSpecialist.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state9' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse17" id="multiCollapseExample17" *ngFor="let data of addVendorSpecialist"
+          (click)='complitionScreen(data,"AssignVendorAddSpecialist")'>
+          <div class="card card-body ">
+            <table>
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Requested Service</th>
+                  <th>Requested City</th>
+                  <th>Requested Date</th>
+                  <th>Time scince requested</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{data.RequestID}}</td>
+                  <td style="font-size: smaller;" style="width:10%">{{data.SubCategoryName| replaceUnderscore|
+                    titlecase}}</td>
+                  <td style="width:10%">{{data.ServiceAreaName| titlecase}}<br>
+                    <h6 style="color:purple; font-weight: bold;">{{data.CustomerType}}</h6>
+                  </td>
+                  <td style="width:10%">{{data.RequestedDate*1000|date:'dd-MM-yyyy'}}</td>
+                  <td style="width:10%">{{data.starteddate + " days"}}</td>
+                </tr>
+                <div style="height:10px"></div>
+                <tr>
+                  <th>SponsorName</th>
+                  <th>Benificiary Name</th>
+                </tr>
+                <tr>
+                  <td style="width:10%">{{data.CustomerName| titlecase}}</td>
+                  <td style="width:10%">{{data.BeneficiaryDetails?.Name?(data.BeneficiaryDetails.Name| titlecase):'-'}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <div [hidden]="allTasksdata?allTasksdata.Assign_Support_Executive=='':''" (click)="rotate8()"
+    data-bs-toggle="collapse" data-bs-target=".multi-collapse21" aria-expanded="false"
+    aria-controls="multiCollapseExample16">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">AssignSupportExecutive</span>
+          </div>
+          <div class="col-md-1 blacktext">({{AssignSupportExecutive.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state8' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse21" id="multiCollapseExample16" *ngFor="let data of AssignSupportExecutive"
+          (click)='complitionScreen(data,"AssignSupportExecutive")'>
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Requested Service</th>
+                  <th>Requested City</th>
+                  <th>RequestedDate</th>
+                  <th>Time scince requested</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{data.RequestID}}</td>
+                  <td style="font-size: smaller;" style="width:10%">{{data.SubCategoryName}}</td>
+                  <td style="width:10%">{{data.ServiceAreaName}}<br>
+                    <h6 style="color:purple; font-weight: bold;">{{data.CustomerType}}</h6>
+                  </td>
+                  <td style="width:10%">{{data.RequestedDate*1000|date:'dd-MM-yyyy'}}</td>
+                  <td style="width:10%">{{data.daysdiff + " days"}}</td>
+                </tr>
+                <div style="height:10px"></div>
+                <tr>
+                  <th>SponsorName</th>
+                  <th>Benificiary Name</th>
+                </tr>
+                <tr>
+                  <td style="width:10%">{{data.CustomerName}}</td>
+                  <td style="width:10%">{{data.BeneficiaryDetails?.Name?data.BeneficiaryDetails?.Name:'-'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!-- <div [hidden]="allTasksdata?allTasksdata.Upload_Vendor_Bill=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate6()" data-bs-toggle="collapse"
+        data-bs-target=".multi-collapse7" aria-expanded="false"
+        aria-controls="multiCollapseExample13,multiCollapseExample14">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Upload Vendor Bill</span>
+          </div>
+          <div class="col-md-1 blacktext">({{uploadBills.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state6' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse7 pointer" id="multiCollapseExample13" *ngFor="let new of uploadBills"
+          (click)='complitionScreen(new,"uploadVendorBills")'>
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Requested Service</th>
+                  <th>Requested City</th>
+                  <th>Time scince requested</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{new?.PaymentForDetails.HomeHelathServices.RequestID}}</td>
+                  <td style="font-size: smaller;">{{new.PaymentForDetails.HomeHelathServices.SubCategoryName|replaceUnderscore| titlecase}}</td>
+                  <td>{{new.ServiceAreaName| titlecase}}</td>
+                  <td>{{new.billdate + " days"}}</td>
+                </tr>
+                <div style="height:10px"></div>
+                <tr>
+                  <th>SponsorName</th>
+                </tr>
+                <tr>
+                  <td>{{new.CustomerData.Name| titlecase}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div> -->
+  <div [hidden]="allTasksdata?allTasksdata.Add_Care_Manager=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate14()" data-bs-toggle="collapse"
+        data-bs-target=".multi-collapse25" aria-expanded="false"
+        aria-controls="multiCollapseExample25, multiCollapseExample25">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Add Care Manager for Customer's</span>
+          </div>
+          <div class="col-md-1 blacktext">({{Add_Care_Manager?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state14' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse25" id="multiCollapseExample25" *ngFor="let new of Add_Care_Manager"
+          (click)='viewcustomer(new,"AddCareManager")'>
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sponsor ID</th>
+                  <th>Sponsor Name</th>
+                  <th>Package Start Date</th>
+                  <th>Plan</th>
+                  <th>City</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{new.CustRecID}}</td>
+                  <td style="font-size: smaller;" style="width:10%">{{new?.CustomerDetails?.Name}}</td>
+                  <td style="width:10%">{{new.PackageCreatedDate*1000|date:'dd-MM-yyyy'}}</td>
+                  <td style="width:10%">{{new.AliasName}}</td>
+                  <td style="width:10%">{{new.ServiceAreaName }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!-- <div [hidden]="allTasksdata?allTasksdata.Add_BackUp_Care_Manager=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate15()" data-bs-toggle="collapse"
+        data-bs-target="multi-collapse15" aria-expanded="false"
+        aria-controls="multiCollapseExample15,multiCollapseExample15">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Assign BackUp Care Manager</span>
+          </div>
+          <div class="col-md-1 blacktext">({{Add_BackUp_Care_Manager?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state15' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse15" id="multiCollapseExample15" *ngFor="let new of Add_BackUp_Care_Manager"
+          (click)='viewcustomer(new,"AddBackCareManager")'>
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sponsor ID</th>
+                  <th>Sponsor Name</th>
+                  <th>Package Start Date</th>
+                  <th>Plan</th>
+                  <th>City</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{new.CustRecID}}</td>
+                  <td style="font-size: smaller;" style="width:10%">{{new?.CustomerDetails?.Name}}</td>
+                  <td style="width:10%">{{new.PackageCreatedDate*1000|date:'dd-MM-yyyy'}}</td>
+                  <td style="width:10%">{{new.AliasName}}</td>
+                  <td style="width:10%">{{new.ServiceAreaName }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div> -->
+  <div [hidden]="allTasksdata?allTasksdata.Add_BackUp_Care_Manager=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate31()" data-bs-toggle="collapse"
+        data-bs-target=".multi-collapse27" aria-expanded="false"
+        aria-controls="multiCollapseExample27, multiCollapseExample27">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Assign Backup Care Manager </span>
+          </div>
+          <div class="col-md-1 blacktext">({{Add_BackUp_Care_Manager?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state31' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse27" id="multiCollapseExample27" *ngFor="let new of Add_BackUp_Care_Manager"
+          (click)='viewcustomer(new,"Add_Care_Coordinator")'>
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sponsor ID</th>
+                  <th>Sponsor Name</th>
+                  <th>Package Start Date</th>
+                  <th>Plan</th>
+                  <th>City</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{new.CustRecID}}</td>
+                  <td style="font-size: smaller;" style="width:10%">{{new?.CustomerDetails?.Name}}</td>
+                  <td style="width:10%">{{new.PackageCreatedDate*1000|date:'dd-MM-yyyy'}}</td>
+                  <td style="width:10%">{{new.AliasName}}</td>
+                  <td style="width:10%">{{new.ServiceAreaName }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <div [hidden]="allTasksdata?allTasksdata.Add_Care_Coordinator=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate16()" data-bs-toggle="collapse"
+        data-bs-target=".multi-collapse27" aria-expanded="false"
+        aria-controls="multiCollapseExample27, multiCollapseExample27">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Assign Care Coordinator </span>
+          </div>
+          <div class="col-md-1 blacktext">({{Add_Care_Coordinator?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state16' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse27" id="multiCollapseExample27" *ngFor="let new of Add_Care_Coordinator"
+          (click)='viewcustomer(new,"Add_Care_Coordinator")'>
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sponsor ID</th>
+                  <th>Sponsor Name</th>
+                  <th>Package Start Date</th>
+                  <th>Plan</th>
+                  <th>City</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{new.CustRecID}}</td>
+                  <td style="font-size: smaller;" style="width:10%">{{new?.CustomerDetails?.Name}}</td>
+                  <td style="width:10%">{{new.PackageCreatedDate*1000|date:'dd-MM-yyyy'}}</td>
+                  <td style="width:10%">{{new.AliasName}}</td>
+                  <td style="width:10%">{{new.ServiceAreaName }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <div [hidden]="allTasksdata?allTasksdata.Add_Beneficiary=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate17()" data-bs-toggle="collapse"
+        data-bs-target=".multi-collapse28" aria-expanded="false"
+        aria-controls="multiCollapseExample28, multiCollapseExample28">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Add Beneficiary</span>
+          </div>
+          <div class="col-md-1 blacktext">({{Add_Beneficiary?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state17' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse28" id="multiCollapseExample28" *ngFor="let new of Add_Beneficiary"
+          (click)='viewcustomer(new,"AddBeneficiary")'>
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sponsor ID</th>
+                  <th>Sponsor Name</th>
+                  <th>Package Start Date</th>
+                  <th>Plan</th>
+                  <th>City</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{new.CustRecID}}</td>
+                  <td style="font-size: smaller;" style="width:10%">{{new?.CustomerDetails?.Name}}</td>
+                  <td style="width:10%">{{new.PackageCreatedDate*1000|date:'dd-MM-yyyy'}}</td>
+                  <td style="width:10%">{{new.AliasName}}</td>
+                  <td style="width:10%">{{new.ServiceAreaName }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <div [hidden]="allTasksdata?allTasksdata.Add_Customer_Requirements=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate18()" data-bs-toggle="collapse"
+        data-bs-target=".multi-collapse29" aria-expanded="false"
+        aria-controls="multiCollapseExample29, multiCollapseExample29">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Add Customer Requirements</span>
+          </div>
+          <div class="col-md-1 blacktext">({{Add_Customer_Requirements?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state18' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse29" id="multiCollapseExample29" *ngFor="let new of Add_Customer_Requirements"
+          (click)='viewcustomer(new,"AddCustomerRequirements")'>
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sponsor ID</th>
+                  <th>Sponsor Name</th>
+                  <th>Package Start Date</th>
+                  <th>Plan</th>
+                  <th>City</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{new.CustRecID}}</td>
+                  <td style="font-size: smaller;" style="width:10%">{{new?.CustomerDetails?.Name}}</td>
+                  <td style="width:10%">{{new.PackageCreatedDate*1000|date:'dd-MM-yyyy'}}</td>
+                  <td style="width:10%">{{new.AliasName}}</td>
+                  <td style="width:10%">{{new.ServiceAreaName }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <div [hidden]="allTasksdata?allTasksdata.Schedule_Member_On_Boarding=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate19()" data-bs-toggle="collapse"
+        data-bs-target=".multi-collapse30" aria-expanded="false"
+        aria-controls="multiCollapseExample30, multiCollapseExample30">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Schedule Member On Boarding</span>
+          </div>
+          <div class="col-md-1 blacktext">({{Schedule_Member_On_Boarding?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state19' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse30" id="multiCollapseExample30"
+          *ngFor="let new of Schedule_Member_On_Boarding" (click)='viewcustomer(new,"ScheduleMemberOnBoarding")'>
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sponsor ID</th>
+                  <th>Sponsor Name</th>
+                  <th>Package Start Date</th>
+                  <th>Plan</th>
+                  <th>City</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{new.CustRecID}}</td>
+                  <td style="font-size: smaller;" style="width:10%">{{new?.CustomerDetails?.Name}}</td>
+                  <td style="width:10%">{{new.PackageCreatedDate*1000|date:'dd-MM-yyyy'}}</td>
+                  <td style="width:10%">{{new.AliasName}}</td>
+                  <td style="width:10%">{{new.ServiceAreaName }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!-- Cancel Requests Data Support Start -->
+  <div [hidden]="allTasksdata?allTasksdata.Cancelled_Requests=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate20()" data-bs-toggle="collapse"
+        data-bs-target=".cancelRequestCollapse" aria-expanded="false" aria-controls="cancelRequestList">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Cancel Requests</span>
+          </div>
+          <div class="col-md-1 blacktext">({{Cancelled_Requests?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state20' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse cancelRequestCollapse pointer" id="cancelRequestList"
+          *ngFor="let data of Cancelled_Requests" (click)='complitionScreen(data,"cancelRequests")'>
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Requested Service</th>
+                  <th>Requested City</th>
+                  <th>Requested Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{data.RequestID}}</td>
+                  <td style="font-size: smaller;">{{data.SubCategoryName|replaceUnderscore | titlecase}}</td>
+                  <td style="width:10%">{{data.ServiceAreaName | titlecase}}<br>
+                    <h6 style="color:purple; font-weight: bold;">{{data.CustomerType}}</h6>
+                  </td>
+                  <td style="width:10%">{{(data.RequestedDate)*1000|date:'dd MMM yyyy'}}</td>
+                </tr>
+                <div style="height:10px"></div>
+                <tr>
+                  <th>SponsorName</th>
+                  <!-- <th>Benificiary Name</th> -->
+                </tr>
+                <tr>
+                  <td style="width:10%">{{data.CustomerDetails?.Name| titlecase}}</td>
+                  <!-- <td style="width:10%">{{data.BeneficiaryDetails.Name?(data.BeneficiaryDetails.Name| titlecase):'-'}}
+                  </td> -->
+                  <td style="width:10%"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!-- Cancel Requests Support End -->
+  <!-- Cancel Requests Data OTM Start -->
+  <div [hidden]="allTasksdata?allTasksdata.OTMCancelled_Requests=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate21()" data-bs-toggle="collapse"
+        data-bs-target=".cancelRequestOTMCollapse" aria-expanded="false" aria-controls="cancelRequestOTMList">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Cancel Requests</span>
+          </div>
+          <div class="col-md-1 blacktext">({{OTMCancelled_Requests?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state21' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse cancelRequestOTMCollapse pointer" id="cancelRequestOTMList"
+          *ngFor="let data of OTMCancelled_Requests" (click)='complitionScreen(data,"cancelRequests")'>
+          <div class="card card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Requested Service</th>
+                  <th>Requested City</th>
+                  <th>Requested Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{data.RequestID}}</td>
+                  <td style="font-size: smaller;">{{data.SubCategoryName|replaceUnderscore | titlecase}}</td>
+                  <td style="width:10%">{{data.ServiceAreaName | titlecase}}<br>
+                    <h6 style="color:purple; font-weight: bold;">{{data.CustomerType}}</h6>
+                  </td>
+                  <td style="width:10%">{{(data.RequestedDate)*1000|date:'dd MMM yyyy'}}</td>
+                </tr>
+                <div style="height:10px"></div>
+                <tr>
+                  <th>SponsorName</th>
+                </tr>
+                <tr>
+                  <td style="width:10%">{{data.CustomerDetails?.Name| titlecase}}</td>
+                  <td style="width:10%"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!-- Cancel Requests OTM End -->
+  <!-- Group Chat Initiation  Start-->
+  <div [hidden]="allTasksdata?allTasksdata.Create_Chat_Group =='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate26()" data-bs-toggle="collapse"
+        data-bs-target=".multi-collapse26" aria-expanded="false" aria-controls="multiCollapseExample26">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Create Group Chat</span>
+          </div>
+          <div class="col-md-1 blacktext">({{createChatGroup.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state26' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse multi-collapse26 pointer" id="multiCollapseExample26"
+          *ngFor="let createChat of createChatGroup">
+          <div class="card card-body">
+            <table (click)="addmissingDetails(createChat,'manager')">
+              <thead>
+                <tr>
+                  <th>Customer ID</th>
+                  <th>Customer Name </th>
+                  <th>Plan Type</th>
+                  <th>City</th>
+                  <th>Plan Start Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 10%"> {{createChat.CustRecID}}</td>
+                  <td style="width: 10%"> {{createChat.CustomerDetails.Name}}</td>
+                  <td style="width: 10%"> {{createChat.AliasName}}</td>
+                  <td style="width: 10%"> {{createChat.ServiceAreaName}}</td>
+                  <td style="width: 10%"> {{createChat.PackageCreatedDate*1000|date:'dd-MM-yyyy'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!-- Group Chat Initiation  End-->
+  <!-- Add Care Manager  Start-->
+  <div [hidden]="allTasksdata?allTasksdata.Add_CM_Chat_Group=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate27()" data-bs-toggle="collapse"
+        data-bs-target=".addCareManagerForChat" aria-expanded="false" aria-controls="addCareManagerForChat">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Add Care Manager To Chat Group</span>
+          </div>
+          <div class="col-md-1 blacktext">({{addCMChatGroup.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state27' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse addCareManagerForChat pointer" id="addCareManagerForChat"
+          *ngFor="let addCM of addCMChatGroup">
+          <div class="card card-body">
+            <table (click)="addmissingDetails(addCM,'caremanager')">
+              <thead>
+                <tr>
+                  <th>Customer ID</th>
+                  <th>Customer Name </th>
+                  <th>Plan Type</th>
+                  <th>City</th>
+                  <th>Plan Start Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 10%"> {{addCM.CustRecID}}</td>
+                  <td style="width: 10%"> {{addCM.CustomerDetails?.Name}}</td>
+                  <td style="width: 10%"> {{addCM.PackageDetails?.AliasName}}</td>
+                  <td style="width: 10%"> {{addCM.PackageDetails?.ServiceAreaName}}</td>
+                  <td style="width: 10%"> {{addCM.PackageDetails?.PackageCreatedDate*1000|date:'dd-MM-yyyy'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!-- Add Care Manager  End-->
+  <!-- Add Support Executive  Start-->
+  <div [hidden]="allTasksdata?allTasksdata.Add_SE_Chat_Group=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate28()" data-bs-toggle="collapse"
+        data-bs-target=".addSupportExecutiveForChat" aria-expanded="false" aria-controls="addSupportExecutiveForChat">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Add Support Executive To Chat Group</span>
+          </div>
+          <div class="col-md-1 blacktext">({{addSEChatGroup.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state28' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse addSupportExecutiveForChat pointer" id="addSupportExecutiveForChat"
+          *ngFor="let addSEObj of addSEChatGroup">
+          <div class="card card-body">
+            <table (click)="addmissingDetails(addSEObj,'supportexecutive')">
+              <thead>
+                <tr>
+                  <th>Customer ID</th>
+                  <th>Customer Name </th>
+                  <th>Plan Type</th>
+                  <th>City</th>
+                  <th>Plan Start Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 10%"> {{addSEObj.CustRecID}}</td>
+                  <td style="width: 10%"> {{addSEObj.name}}</td>
+                  <td style="width: 10%"> {{addSEObj.PackageDetails?.AliasName}}</td>
+                  <td style="width: 10%"> {{addSEObj.PackageDetails?.ServiceAreaName}}</td>
+                  <td style="width: 10%"> {{addSEObj.PackageDetails?.PackageCreatedDate*1000|date:'dd-MM-yyyy'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!-- Add Support Executive  End-->
+  <!-- Search Profile  Start-->
+  <div [hidden]="allTasksdata?allTasksdata.Search_Profile=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate29()" data-bs-toggle="collapse"
+        data-bs-target=".searchProfile" aria-expanded="false" aria-controls="searchProfile">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Search Profiles / Add Requirements</span>
+          </div>
+          <div class="col-md-1 blacktext">({{searchProfiles?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state29' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse searchProfile pointer" id="searchProfile" *ngFor="let serachProfilesObj of searchProfiles">
+          <div class="card card-body">
+            <table (click)="handleSearchProfileClick(serachProfilesObj)">
+              <thead>
+                <tr>
+                  <th>RequestID</th>
+                  <th>Request Name </th>
+                  <th>Customer Name</th>
+                  <th>City</th>
+                  <th>Requested Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 10%"> {{serachProfilesObj.RequestID}}</td>
+                  <td style="width: 10%"> {{serachProfilesObj.SubCategoryName|replaceUnderscore |titlecase}}</td>
+                  <td style="width: 10%"> {{serachProfilesObj.CustomerDetails?.Name}}</td>
+                  <td style="width: 10%"> {{serachProfilesObj.ServiceAreaName}}</td>
+                  <td style="width: 10%"> {{serachProfilesObj.RequestedDate*1000|date:'dd-MM-yyyy'}}</td>
+                  <td style="width: 10%"> {{serachProfilesObj.Status |replaceUnderscore |titlecase}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!-- Search Profile  End-->
+  <!-- RollBacks -->
+  <div [hidden]="allTasksdata?allTasksdata.RollBack_Requests_Details=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate29()" data-bs-toggle="collapse" data-bs-target=".RollBack"
+        aria-expanded="false" aria-controls="RollBack">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">RollBack Details</span>
+          </div>
+          <div class="col-md-1 blacktext">({{allTasksdata?.RollBack_Requests_Details.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state29' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse RollBack pointer" id="RollBack"
+          *ngFor="let addSEObj of allTasksdata?.RollBack_Requests_Details">
+          <div class="card card-body">
+            <table (click)="rollbackcomponent(addSEObj)">
+              <thead>
+                <tr>
+                  <th>Payment ID</th>
+                  <th>Customer Name </th>
+                  <th>City</th>
+                  <th>Amount</th>
+                  <th>Payment for</th>
+                  <th>Revised Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 10%">{{addSEObj.Payment.AnvayaaPaymentID}}</td>
+                  <td style="width: 10%">{{addSEObj.CustomerData.Name}}</td>
+                  <td style="width: 10%">{{addSEObj.ServiceAreaName}}</td>
+                  <td style="width: 10%">{{addSEObj.Payment.TotalPrice+' '+addSEObj.Payment.CurrencyType}}</td>
+                  <td style="width: 10%">{{addSEObj.PaymentForDetails.PaymentFor}}</td>
+                  <td style="width: 10%"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!--  RollBacks End -->
+  <!-- HHCinvoice Start -->
+  <div [hidden]="allTasksdata?allTasksdata.HHC_Invoices=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate30()" data-bs-toggle="collapse"
+        data-bs-target=".hhcinvoiceCollapse" aria-expanded="false" aria-controls="hhcinvoiceCollapseList">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">HHC Invoices</span>
+          </div>
+          <div class="col-md-1 blacktext">({{hhcinvoice?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state30' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse hhcinvoiceCollapse pointer" id="hhcinvoiceCollapseList" *ngFor="let Invoice of hhcinvoice">
+          <div class="card card-body">
+            <table (click)="ViewInvoice(Invoice)">
+              <thead>
+                <tr>
+                  <th>Partner ID</th>
+                  <th>Partner Name</th>
+                  <th>Invoice Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <td style="width:10%">{{Invoice._id.VendorID}}</td>
+                <td style="width:10%">{{Invoice._id.VendorName}}</td>
+                <td style="width:10% ;color:purple; font-weight: bold;">{{Invoice.NetPayableVendorCharges |
+                  currency:'INR'}}</td>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!--HHCinvoice End -->
+  <!-- Assign_ASERS_Requests Start -->
+  <div [hidden]="allTasksdata?allTasksdata.Assign_ASERS_Requests=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate33()" data-bs-toggle="collapse"
+        data-bs-target=".asersrequestsCollapse" aria-expanded="false" aria-controls="asersrequestsCollapseList">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Assign ASERS Requests</span>
+          </div>
+          <div class="col-md-1 blacktext">({{asersRequests?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state33' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse asersrequestsCollapse" id="asersrequestsCollapseList" *ngFor="let new of asersRequests">
+          <div class="card card-body">
+            <table (click)="ViewAserRequest(new)">
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Requested Service</th>
+                  <th>Requested Date</th>
+                  <th>Time scince requested</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{new.RequestID}}</td>
+                  <td style="font-size: smaller;">{{new.SubCategoryName|replaceUnderscore| titlecase}}</td>
+                  <td style="width:10%">{{new.RequestedDate*1000|date:'dd-MM-yyyy'}}</td>
+                  <td style="width:10%">{{new.newJobdate + " days"}}</td>
+                </tr>
+                <div style="height:10px"></div>
+                <tr>
+                  <th>Sponsor Name</th>
+                  <th>Benificiary Name</th>
+                </tr>
+                <tr>
+                  <td style="width:10%">{{new.Name| titlecase}}</td>
+                  <td style="width:10%">{{new.BeneficiaryDetails?.Name?(new.BeneficiaryDetails?.Name| titlecase):'-'}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!--Assign_ASERS_Requests End -->
+  <!-- add backup CM to chartStart -->
+  <div [hidden]="allTasksdata?allTasksdata.Add_BCM_Chat_Group=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate31()" data-bs-toggle="collapse"
+        data-bs-target=".addbackupcmtochatCollapse" aria-expanded="false" aria-controls="addbackupcmtochatCollapseList">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Add Backup Care Manager to Chat</span>
+          </div>
+          <div class="col-md-1 blacktext">({{addbackupcmtochat?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state31' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse addbackupcmtochatCollapse pointer" id="addbackupcmtochatCollapseList"
+          *ngFor="let backupcmchat of addbackupcmtochat">
+          <div class="card card-body">
+            <table (click)="backupcaremanagerDetails(backupcmchat,'backupcaremanager')">
+              <thead>
+                <tr>
+                  <th>Customer ID</th>
+                  <th>Customer Name </th>
+                  <th>Plan Type</th>
+                  <th>City</th>
+                  <th>Plan Start Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <td style="width: 10%"> {{backupcmchat.CustRecID}}</td>
+                <td style="width: 10%"> {{backupcmchat.CustomerDetails.Name}}</td>
+                <td style="width: 10%"> {{backupcmchat.PackageDetails.AliasName}}</td>
+                <td style="width: 10%"> {{backupcmchat.PackageDetails.ServiceAreaName}}</td>
+                <td style="width: 10%"> {{backupcmchat.PackageDetails.PackageCreatedDate*1000|date:'dd-MM-yyyy'}}</td>
+                <!-- <td style="width: 10%"> {{data?.uid | uppercase}}</td>
+                <td style="width: 10%"> {{data?.name}}</td>
+                <td style="width: 10%"> {{data?.type}}</td>
+                <td style="width: 10%"> {{data?.ServiceAreaName}}</td>
+                <td style="width: 10%"> {{data?.createdAt*1000|date:'dd-MM-yyyy'}}</td> -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!--add backup CM to chart End -->
+  <!-- Start Back Dated Requests -->
+  <div [hidden]="allTasksdata?allTasksdata.Backdated_Requests=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate32()" data-bs-toggle="collapse"
+        data-bs-target=".Backdated_RequestsCollapse" aria-expanded="false" aria-controls="Backdated_Requests">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Approve Back Dated Requests</span>
+          </div>
+          <div class="col-md-1 blacktext">({{Backdated_Requests?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state31' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse Backdated_RequestsCollapse pointer" id="Backdated_Requests"
+          *ngFor="let Backdated_Request of Backdated_Requests">
+          <div class="card card-body">
+            <table (click)="complitionScreen(Backdated_Request,'Backdated_Request')">
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Request Name </th>
+                  <th>Customer Name</th>
+                  <th>City</th>
+                  <th>Service Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <td style="width: 10%"> {{Backdated_Request.RequestID}}</td>
+                <td style="width: 10%"> {{Backdated_Request.SubCategoryName |replaceUnderscore |
+                  titlecase}}</td>
+                <td style="width: 10%"> {{Backdated_Request?.CustomerDetails?.Name}}</td>
+                <td style="width: 10%"> {{Backdated_Request.ServiceAreaName|titlecase}}</td>
+                <td style="width: 10%"> {{Backdated_Request.RequestedDate*1000|date:'dd-MMM-yyyy'}}</td>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!--End Back Dated Requests -->
+  <!-- //customer escalations starts -->
+  <div [hidden]="allTasksdata?allTasksdata.Employee_Customer_Experience  =='':''">
+    <div class="rows p-3 mb-2  text-white" (click)="ToEscalation()">
+      <div class="panel-heading col-md-12" (click)="rotate34()" data-bs-toggle="collapse"
+        data-bs-target=".Backdated_RequestsCollapse" aria-expanded="false" aria-controls="Backdated_Requests">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Service Requests</span>
+          </div>
+          <div class="col-md-1 blacktext">({{complaintLength?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state34' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="row">
+      <div>
+        <div class="collapse Backdated_RequestsCollapse pointer" id="Backdated_Requests"
+          *ngFor="let Customer_Escalations of Customer_Escalations">
+          <div class="card card-body">
+            <table (click)="customerEscalation(Customer_Escalations.RequestID,Customer_Escalations.CustRecID)">
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Customer Name</th>
+                  <th>City</th>
+                  <th>Service Date</th>
+                  <th>Note</th>
+                  <th>Issue</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <td style="width: 10%"> {{Customer_Escalations.RequestID}}</td>
+                <td style="width: 10%"> {{Customer_Escalations?.Name}}</td>
+                <td style="width: 10%"> {{Customer_Escalations.ServiceAreaName|titlecase}}</td>
+                <td style="width: 10%"> {{Customer_Escalations.RequestedDate*1000|date:'dd-MMM-yyyy'}}</td>
+                <td style="width: 10%"> {{Customer_Escalations?.Note}}</td>
+                <td style="width: 10%"> {{Customer_Escalations?.AliasName}}</td>
+                <td style="width: 10%">
+                  {{Customer_Escalations?.Status==="In_Progress"?"InProgress":Customer_Escalations?.Status}}</td>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div> -->
+    <div [hidden]="allTasksdata?allTasksdata.Comprehensive_Customers=='':''">
+      <div class="rows p-3 mb-2  text-white">
+        <div class="panel-heading col-md-12" (click)="rotate35()" data-bs-toggle="collapse"
+          data-bs-target=".Backdated_RequestsCollapse" aria-expanded="false" aria-controls="Backdated_Requests">
+          <div class="row">
+            <div class="col-md-9">
+              <span class="blacktext">Touch Points Settings</span>
+            </div>
+            <div class="col-md-1 blacktext">({{Comprehensive_Customers?.length}})</div>
+            <div class="col-md-2 arrowposition">
+              <img [@rotatedState]='state35' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="collapse Backdated_RequestsCollapse pointer" id="Backdated_Requests"
+            *ngFor=" let Comprehensive_Customers of allTasksdata?.Comprehensive_Customers ">
+            <div class="card card-body">
+              <table>
+                <thead>
+                  <tr>
+                    <th>CustRecID</th>
+                    <th>Customer Name</th>
+                    <th>Frequency</th>
+                    <th>CallOption</th>
+                    <th>Message</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <td style="width: 10%">{{Comprehensive_Customers?.CustRecID}}</td>
+                  <td style="width: 10%">{{Comprehensive_Customers?.CreatedPersonName}}</td>
+                  <td style="width: 10%">{{Comprehensive_Customers?.Frequency}}</td>
+                  <td style="width: 10%">{{Comprehensive_Customers?.CallOption}}</td>
+                  <td style="width: 10%">{{Comprehensive_Customers?.Message}}</td>
+                  <td style="width: 10%">{{Comprehensive_Customers?.Status}}</td>
+                  <td style="width: 10%;"><button type="button" class="anvayaabutton-primary" data-bs-toggle="modal"
+                      data-bs-target="#exampleModal" (click)="Comprihensivedata(Comprehensive_Customers)">
+                      Approve
+                    </button></td>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Do you want to Aprrove?</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="anvayaabutton-primary" data-bs-dismiss="modal"
+                    (click)="navigateToTouchPointsScreen()">Approve</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="spacingDiv"></div>
+      </div>
+    </div>
+  </div>
+  <div [hidden]="allTasksdata?allTasksdata.Employee_Customer_Experience =='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate36()" data-bs-toggle="collapse"
+        data-bs-target=".touchpointCalls" aria-expanded="false" aria-controls="touchpointCalls">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Touch Point Calls</span>
+          </div>
+          <div class="col-md-1 blacktext">({{EmpCustomerExperiance?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state36' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse touchpointCalls" id="touchpointCalls " *ngFor="let new of EmpCustomerExperiance">
+          <div class="card card-body">
+            <table (click)="ViewTouchPointsdata(new)">
+              <thead>
+                <tr>
+                  <th>Customer ID</th>
+                  <th>Customer Experiance ID</th>
+                  <th>Cutomer Name</th>
+                  <th>Status</th>
+                  <th>Assigned Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{new.CustRecID}}</td>
+                  <td style="font-size: smaller;">{{new.EmpCusExperienceId}}</td>
+                  <td style="width:10%">{{new.CustomerName}}</td>
+                  <td style="width:10%">{{new.status}}</td>
+                  <td style="width:10%">{{new.AssinedDateTime *1000|date:'dd-MM-yyyy'}}</td>
+                </tr>
+                <div style="height:10px"></div>
+                <tr>
+                  <th>Feedback Status</th>
+                </tr>
+                <tr>
+                  <td style="width:10%">{{new.FeedBackStatus| titlecase}}</td>
+                  <td style="width:10%"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+
+  <!-- Start assign care manager -->
+  <div [hidden]="allTasksdata?allTasksdata.Assign_Care_Manager=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate39()" data-bs-toggle="collapse"
+        data-bs-target=".Assign_Care_ManagerCollapse" aria-expanded="false" aria-controls="Assign_Care_Manager">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Assign Care Manager For Requests</span>
+          </div>
+          <div class="col-md-1 blacktext">({{Assign_Care_Manager?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state31' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse Assign_Care_ManagerCollapse pointer" id="Assign_Care_Manager"
+          *ngFor="let Assign_Care_Manager of Assign_Care_Manager">
+          <div class="card card-body">
+            <table (click)="assigncaremanager(Assign_Care_Manager)">
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Requested Service</th>
+                  <th>Requested City</th>
+                  <th>Requested Date</th>
+                  <!-- <th>Time scince requested</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{Assign_Care_Manager.RequestID}}</td>
+                  <td style="font-size: smaller;" style="width:10%">{{Assign_Care_Manager.SubCategoryName}}</td>
+                  <td style="width:10%">{{Assign_Care_Manager.ServiceAreaName}}<br>
+                    <h6 style="color:purple; font-weight: bold;">{{Assign_Care_Manager.CustomerType}}</h6>
+                  </td>
+                  <td style="width:10%">{{Assign_Care_Manager.RequestedDate*1000|date:'dd-MM-yyyy'}}</td>
+                  <!-- <td style="width:10%">{{Assign_Care_Manager.daysdiff + " days"}}</td> -->
+                </tr>
+                <div style="height:10px"></div>
+                <tr>
+                  <th>SponsorName</th>
+                  <th>Benificiary Name</th>
+                </tr>
+                <tr>
+                  <td style="width:10%">{{Assign_Care_Manager.CustomerName}}</td>
+                  <td style="width:10%">{{Assign_Care_Manager.BeneficiaryDetails?.Name}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!--End assign care manager -->
+  <div [hidden]="allTasksdata?allTasksdata.UpdateHealthPlanDetails=='':''">
+    <div class="rows p-3 mb-2  text-white">
+
+      <div>
+        <!-- <div class="rows p-3 mb-2  text-white">
+<div [hidden]="allTasksdata?allTasksdata.UpdateHealthPlanDetails=='':''">
+  <div class="rows p-3 mb-2  text-white">
+
+    <div class="panel-heading col-md-12" (click)="rotate37()" data-bs-toggle="collapse"
+       aria-expanded="false" data-bs-target=".UpdateHealthPlanDetailsCollapse" aria-expanded="false" aria-controls="UpdateHealthPlanDetails">
+      <div class="row">
+        <div class="col-md-9">
+          <span class="blacktext">Update Health Plan</span>
+        </div>
+        <div class="col-md-1 blacktext">({{UpdateHealthPlanDetails?.length}})</div>
+        <div class="col-md-2 arrowposition">
+          <img [@rotatedState]='state31' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div>
+      <div class="collapse UpdateHealthPlanDetailsCollapse pointer" id="Assign_Care_Manager"
+      *ngFor="let UpdateHealthPlanDetails of UpdateHealthPlanDetails"> 
+        <div class="card card-body" >
+          <table (click)='updateHealthPlanDetails(UpdateHealthPlanDetails,"completeemergencyplan")'>
+            <thead>
+              <tr>
+                <th>CustRecID</th>
+                <th>Benificiary Name</th>
+                <th>Cust ID</th>
+                <th>Package Created Date</th>
+                <th>Package Expiry Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="width:10%">{{UpdateHealthPlanDetails?.CustRecID}}</td>
+                <td style="width:10%">{{UpdateHealthPlanDetails?.Name}}</td>
+                <td style="width:10%;" >{{UpdateHealthPlanDetails?.BeneficiaryDetails?.CustID}}</td>
+                <td style="width:10%;">{{UpdateHealthPlanDetails?.PackageDetails?.PackageCreatedDate*1000|date:'dd-MM-yyyy' }}</td>
+                <td style="width:10%;">{{UpdateHealthPlanDetails?.PackageDetails?.PackageExpiryDate*1000|date:'dd-MM-yyyy' }}</td>
+                <td style="width:10%">{{UpdateHealthPlanDetails?.Status}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="spacingDiv"></div>
+  </div> -->
+      </div>
+    </div>
+  </div>
+  <!-- Hexa Orders-->
+  <div [hidden]="allTasksdata?allTasksdata.HexaOrders=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate37()" data-bs-toggle="collapse"
+        data-bs-target=".HexaOrdersCollapse" aria-controls="HexaOrders" aria-expanded="false" aria-expanded="false">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Hexa Orders</span>
+          </div>
+          <div class="col-md-1 blacktext">({{HexaOrders?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state37' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse HexaOrdersCollapse pointer" id="Hexa_Orders" *ngFor="let HexaOrders of HexaOrders">
+          <div class="card card-body">
+            <table (click)="viewHexaOrderDetails(HexaOrders)">
+              <thead>
+                <tr>
+                  <th>Order Id</th>
+                  <th>Customer Name</th>
+                  <th>Order</th>
+                  <th>Order Area</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{HexaOrders?.RequestID}}</td>
+                  <td>{{HexaOrders?.Name}}</td>
+                  <td>{{HexaOrders?.AliasName}}</td>
+                  <td>{{HexaOrders?.ServiceAreaID}}</td>
+                </tr>
+                <div style="height:10px"></div>
+                <tr>
+                  <th>Order Date</th>
+                  <th>Status</th>
+                </tr>
+                <tr>
+                  <td>{{HexaOrders?.RequestedDate*1000 |date:'dd-MM-yyyy'}}</td>
+                  <td>{{HexaOrders?.Status}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!-- HHc Partner Invoices-->
+  <div [hidden]="allTasksdata?allTasksdata.PartnerApprovedInvoices=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate37()" data-bs-toggle="collapse"
+        data-bs-target=".partnerApprovedInvoicesCollapse" aria-controls="partnerApprovedInvoices" aria-expanded="false"
+        aria-expanded="false">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">HHC Partner Invoice</span>
+          </div>
+          <div class="col-md-1 blacktext">({{PartnerApprovedInvoices?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state37' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse partnerApprovedInvoicesCollapse pointer" id="PartnerApprovedInvoices"
+          *ngFor="let PartnerApprovedInvoices of PartnerApprovedInvoices">
+          <div class="card card-body">
+            <table (click)="viewHHcPartnerInvoices(PartnerApprovedInvoices)">
+              <thead>
+                <tr>
+                  <th>Partner Id</th>
+                  <th>Partner Name</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{PartnerApprovedInvoices?._id.PartnerID}}</td>
+                  <td style="width:10%">{{PartnerApprovedInvoices?._id.PartnerName}}</td>
+                  <td style="width:10%">{{PartnerApprovedInvoices?.NetPayablePartnerCharges}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!-- Disputed Amount -->
+  <div [hidden]="allTasksdata?allTasksdata.DisputedPayments=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate37()" data-bs-toggle="collapse"
+        data-bs-target=".DisputedPaymentsCollapse" aria-controls="partnerApprovedInvoices" aria-expanded="false"
+        aria-expanded="false">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Disputed Amount</span>
+          </div>
+          <div class="col-md-1 blacktext">({{DisputedPayments?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state37' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse DisputedPaymentsCollapse pointer" id="DisputedPayments"
+          *ngFor="let DisputedPayments of DisputedPayments">
+          <div class="card card-body">
+            <table (click)="viewHHcPartnerInvoices(DisputedPayments)">
+              <thead>
+                <tr>
+                  <th>Payment Id</th>
+                  <th>Customer Name</th>
+                  <th>Service</th>
+                  <th>Vendor Name</th>
+                  <th>Message</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{DisputedPayments?.paymentId}}</td>
+                  <td>{{DisputedPayments?.customerName}}</td>
+                  <td>{{DisputedPayments?.serviceName}}</td>
+                  <td>{{DisputedPayments?.vendorName}}</td>
+                  <td>{{ DisputedPayments?.message.length > 15 ? (DisputedPayments?.message.slice(0, 15) + '...') :
+                    DisputedPayments?.message }}</td>
+                  <td><button class="anvayaabutton-primary">View More</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!-- Submited profile list start -->
+  <!-- SubmitedProfilesList -->
+  <div [hidden]="allTasksdata?allTasksdata.SubmitedProfilesList=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate41()" data-bs-toggle="collapse"
+        data-bs-target=".SubmitedProfilesListCollapse" aria-controls="partnerApprovedInvoices" aria-expanded="false"
+        aria-expanded="false">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Submited Profiles List</span>
+          </div>
+          <div class="col-md-1 blacktext">({{SubmitedProfilesList?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state41' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse SubmitedProfilesListCollapse pointer" id="SubmitedProfilesList"
+          *ngFor="let SubmitedProfilesList of SubmitedProfilesList">
+          
+          <div class="card card-body ">
+            <table (click)="submittedprofiles(SubmitedProfilesList)">
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Request Name</th>
+                  <th>Service Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{SubmitedProfilesList?._id?.RequestID}}</td>
+                  <td style="font-size: smaller;" style="width:10%">{{SubmitedProfilesList?._id?.SubCategoryName}}</td>
+                  <td style="width:10%">{{SubmitedProfilesList?._id?.SubSubCategoryName}}</td>
+                </tr>
+                <div style="height:10px"></div>
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!-- submited profile list end -->
+
+  <!-- Assign_Care_Manager_For_Placement -->
+  <div [hidden]="allTasksdata?allTasksdata.Assign_Care_Manager_For_Placement=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate45()" data-bs-toggle="collapse"
+        data-bs-target=".Assign_Care_Manager_For_PlacementColapse" aria-controls="Assign_Care_Manager_For_Placement" aria-expanded="false"
+        aria-expanded="false">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Assign Care Manager For Placement / Approve Consent Form</span>
+          </div>
+          <div class="col-md-1 blacktext">({{Assign_Care_Manager_For_Placement?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state45' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse Assign_Care_Manager_For_PlacementColapse pointer" id="Assign_Care_Manager_For_Placement"
+          *ngFor="let Placementrequest of Assign_Care_Manager_For_Placement">
+          
+          <div class="card card-body ">
+            <table (click)="PlacementRequests(Placementrequest)">
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Customer</th>
+                  <th>Request Name</th>
+                 
+                  <th>Service Name</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width:10%">{{Placementrequest?.RequestID}}</td>
+                  <td style="width:10%">{{Placementrequest?.Name |replaceUnderscore |
+                    titlecase}}</td>
+                  <td style="font-size: smaller;" style="width:10%">{{Placementrequest?.SubCategoryName |replaceUnderscore |
+                    titlecase}}</td>
+                    
+                  <td style="width:10%">{{Placementrequest?.SubSubCategoryName |replaceUnderscore |
+                    titlecase}}</td>
+                  <td style="width:10%">{{Placementrequest?.Status |replaceUnderscore |
+                    titlecase}}</td>
+
+                </tr>
+                <div style="height:10px"></div>
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+  <!-- Assign_Care_Manager_For_Placement list end -->
+
+    <!-- SubmitedProfilesList -->
+    <div [hidden]="allTasksdata?allTasksdata.Accepeted_Profiles=='':''">
+      <div class="rows p-3 mb-2  text-white">
+        <div class="panel-heading col-md-12" (click)="rotate44()" data-bs-toggle="collapse"
+          data-bs-target=".Accepeted_ProfilesColapse" aria-controls="Accepeted_Profiles" aria-expanded="false"
+          aria-expanded="false">
+          <div class="row">
+            <div class="col-md-9">
+              <span class="blacktext">Accepeted Profiles List</span>
+            </div>
+            <div class="col-md-1 blacktext">({{Accepeted_Profiles?.length}})</div>
+            <div class="col-md-2 arrowposition">
+              <img [@rotatedState]='state44' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="collapse Accepeted_ProfilesColapse pointer" id="Accepeted_Profiles"
+            *ngFor="let Accepeted_Profile of Accepeted_Profiles">
+            
+            <div class="card card-body ">
+              <table (click)="AcceptedProfiles(Accepeted_Profile)">
+                <thead>
+                  <tr>
+                    <th>Request ID</th>
+                    <th>Request Name</th>
+                    <th>Service Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="width:10%">{{Accepeted_Profile?.RequestID}}</td>
+                    <td style="font-size: smaller;" style="width:10%">{{Accepeted_Profile?.SubCategoryName}}</td>
+                    <td style="width:10%">{{Accepeted_Profile?.SubSubCategoryName}}</td>
+                  </tr>
+                  <div style="height:10px"></div>
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="spacingDiv"></div>
+      </div>
+    </div>
+    <!-- submited profile list end -->
+  <!-- FeedBack drop  -->
+  <div [hidden]="allTasksdata?allTasksdata.FeedBack_Requests=='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate43()" data-bs-toggle="collapse"
+        data-bs-target=".SubmitedProfilesListCollapse" aria-controls="partnerApprovedInvoices" aria-expanded="false"
+        aria-expanded="false">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">FeedBack </span>
+          </div>
+          <div class="col-md-1 blacktext">({{allTasksdata?.FeedBack_Requests?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state43' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse SubmitedProfilesListCollapse pointer" id="SubmitedProfilesList"
+          *ngFor="let feedback of allTasksdata?.FeedBack_Requests">
+          <div class="card card-body">
+            <table (click)="feedbacknavigation(feedback)">
+              <thead>
+                <tr>
+                  <th>Request Id</th>
+                  <th>Request Name</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr >
+                  <td>{{feedback?.RequestID}}</td>
+                  <td>{{feedback?.RequestName}}</td>
+                  <td>{{feedback?.Status}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+
+  <!-- Reconsillation For AssignVendor   -->
+  <div [hidden]="allTasksdata?allTasksdata?.Reconsillation_For_Assign_venders  =='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate46()" data-bs-toggle="collapse"
+        data-bs-target=".SubmitedProfilesListCollapse" aria-controls="partnerApprovedInvoices" aria-expanded="false"
+        aria-expanded="false">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Reconsillation For Assign Vendor </span>
+          </div>
+          <div class="col-md-1 blacktext">({{allTasksdata?.Reconsillation_For_Assign_venders?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state46' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse SubmitedProfilesListCollapse pointer" id="SubmitedProfilesList"
+          *ngFor="let feedback of allTasksdata?.Reconsillation_For_Assign_venders">
+          <div class="card card-body">
+            <table (click)="feedbacknavigation(feedback)">
+              <thead>
+                <tr>
+                  <th>Request Id</th>
+                  <th>CustomerName</th>
+                  <th>ServiceName</th>
+                  <th>PriceFor</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr >
+                  <td>{{feedback?.RequestID}}</td>
+                  <td>{{feedback?.CustomerName}}</td>
+                  <td>{{feedback?.ServiceName}}</td>
+                  <td>{{feedback?.PriceFor}}</td>
+                  <td>{{feedback?.Price +"/-"}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+
+  <!-- Partner Price For Change -->
+  <div [hidden]="allTasksdata?allTasksdata?.Partner_Price_Change =='':''">
+    <div class="rows p-3 mb-2  text-white">
+      <div class="panel-heading col-md-12" (click)="rotate47()" data-bs-toggle="collapse"
+        data-bs-target=".PartnerPrice" aria-controls="partnerApprovedInvoices" aria-expanded="false"
+        aria-expanded="false">
+        <div class="row">
+          <div class="col-md-9">
+            <span class="blacktext">Partner Price Change</span>
+          </div>
+          <div class="col-md-1 blacktext">({{allTasksdata?.Partner_Price_Change?.length}})</div>
+          <div class="col-md-2 arrowposition">
+            <img [@rotatedState]='state47' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="collapse PartnerPrice pointer" id="SubmitedProfilesList"
+          *ngFor="let feedback of allTasksdata?.Partner_Price_Change">
+          <div class="card card-body">
+            <table (click)="partnerPriceChange(feedback)">
+              <thead>
+                <tr>
+                  <th>Request Id</th>
+                  <th>CustomerName</th>
+                  <th>ServiceName</th>
+                  <th>PriceFor</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr >
+                  <td>{{feedback?.RequestID}}</td>
+                  <td>{{feedback?.CustomerName}}</td>
+                  <td>{{feedback?.ServiceName}}</td>
+                  <td>{{feedback?.PriceFor}}</td>
+                  <td>{{feedback?.Price +"/-"}}</td>
+                  <td>{{feedback?.Status}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="spacingDiv"></div>
+    </div>
+  </div>
+<!-- Leads start -->
+
+<div [hidden]="allTasksdata?allTasksdata.Leads=='':''">
+  <div class="rows p-3 mb-2  text-white">
+    <div class="panel-heading col-md-12" (click)="rotate48()" data-bs-toggle="collapse"
+      data-bs-target=".LeadsColapse" aria-controls="Leads" aria-expanded="false"
+      aria-expanded="false">
+      <div class="row">
+        <div class="col-md-9">
+          <span class="blacktext">Leads List</span>
+        </div>
+        <div class="col-md-1 blacktext">({{Leads?.length}})</div>
+        <div class="col-md-2 arrowposition">
+          <img [@rotatedState]='state48' class="imgss" type="button" src="../../assets/images/next.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div>
+      <div class="collapse LeadsColapse pointer" id="Leads"
+        *ngFor="let Leads of Leads">
+        
+        <div class="card card-body ">
+          <table >
+            <thead>
+              <tr>
+                <th>Lead ID</th>
+                <th>Name</th>
+                <th>Created Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="width:10%">{{Leads?.LeadID}}</td>
+                <td style="font-size: smaller;" style="width:10%">{{Leads?.Name}}</td>
+                <td style="width:10%">{{Leads?.CreatedDate*1000 | date : 'dd-MMM-YYYY'}}</td>
+              </tr>
+              <div style="height:10px"></div>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="spacingDiv"></div>
+  </div>
+</div>
+<!-- Leads end -->

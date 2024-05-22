@@ -1,0 +1,29 @@
+
+<div class="row mainDiv">
+    
+    <table class="table table-bordered table-striped table-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>ActivityName</th>
+                <th>TaskName</th>
+                <th>Comments</th>
+                <th>Rating</th>
+                <th>Media</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+          
+            <tr *ngFor="let Task of Request.Tasks">
+                <td style="width: 10%;">{{Task.ActivityName}}</td>
+                <td style="width: 30%;">{{Task.TaskName}}</td>
+                <td style="width: 30%;">{{Task.Comments ?? "-"}}</td>
+
+                
+                <th style="width: 10%;">{{Task.Rating}}</th>
+                <td *ngFor="let Mf of Task.MediaFiles"> <p  *ngFor="let URL of Mf?.MediaURLS" style="width: 25%;"><img style="width:100px;height: 100px;" src="{{URL.Path}}" /></p></td>
+              
+            </tr>
+        </tbody>
+    </table>
+</div>>

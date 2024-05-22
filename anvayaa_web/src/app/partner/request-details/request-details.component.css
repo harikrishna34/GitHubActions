@@ -1,0 +1,79 @@
+.bodycontent {
+    margin-top: 100px;
+    margin-left: 120px;
+    font-size: 16px;
+    font-family: 'Poppins' !important;
+    
+  
+  }
+.RequestData{
+    width: 100px;
+}
+.backbtn{
+    margin-left: -240px;
+}
+.custmerData{
+    margin-left: 20px;
+}
+
+
+.errorColor{
+    color:red
+}
+
+.fontbold{
+    font-weight: 800;
+
+}
+.card-body-mini {
+    padding: 1px;
+    font-size: 16px;
+
+}
+button{
+    background-color : #f89e3d;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border-radius: 5px;
+    color: black;
+  
+  }
+
+
+
+  .list-side-by-side {
+    width: 100%;
+  }
+
+    dt {
+      float: left;
+      margin-right: 10%;
+      max-width: 40%;
+      font-weight: bold;
+      border-top: 3px solid #bbb;
+    }
+    
+    dd {
+      color: grey;
+      margin-left: 50%;
+      margin-bottom: .5em;
+      border-top: 3px solid #bbb;
+    }
+    
+    dd::after {
+      content: " ";
+      display: block;
+      clear: left;
+    }  
+
+    label.inputtext{
+        font-size: 16px;
+        font-weight: 500;
+      }
+  h5{
+    font-weight: 900;
+    text-align: center;
+  }
+

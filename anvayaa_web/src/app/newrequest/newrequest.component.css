@@ -1,0 +1,51 @@
+.mainDiv{
+    background-color: #ffff;
+    padding: 20px;
+}
+
+.customerSelect {
+    left: 0px;
+    background-color: #F0F0F0;
+    border: 2px solid #b383a0;
+    border-radius: 0px;
+    width: 100%;
+    height: 86%;
+    margin-top: 6px;
+}
+
+.tiles-clr {
+    height: 60px;
+    background-color: #EBEBEB;
+  }
+  
+  @media (max-width: 768px) {
+    .tiles-clr {
+      height: 70px; /* Adjust height for smaller screens */
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .tiles-clr {
+      height: 90px; /* Adjust height for even smaller screens */
+    }
+  }
+
+
+  .row {
+    margin-left: calc(-.0* var(--bs-gutter-x));
+}
+
+.list-group-item {
+    background-color:#EBEBEB!important  ; 
+     border: 0px !important;
+     padding: 0px;
+}
+
+.customer-tiles{
+    background-color: #EBEBEB;
+    height: 60%;
+}
+
+.serviceInput{
+    background-color: #EBEBEB !important; 
+}
